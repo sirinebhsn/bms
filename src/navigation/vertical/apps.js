@@ -46,6 +46,8 @@ export default [
         id: 'viewOwner',
         title: 'Add Owner',
         icon: <PlusCircle size={14} />,
+        navLink: '/apps/user/view'
+
       }
     ]
   },

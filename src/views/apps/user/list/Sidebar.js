@@ -7,7 +7,6 @@ import Sidebar from '@components/sidebar'
 // ** Reactstrap Imports
 import { Button, Label, Form, Row, Col } from 'reactstrap'
 import PhoneInput from 'react-phone-number-input'
-import { useHistory } from 'react-router-dom'
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
   const [name, setName] = useState("");
@@ -44,7 +43,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     <Sidebar
       size='lg'
       open={open}
-      title='New Owner'
+      title='Add New Owner'
       headerClassName='mb-1'
       contentClassName='pt-0'
       toggleSidebar={toggleSidebar}

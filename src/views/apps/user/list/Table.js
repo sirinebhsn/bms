@@ -50,7 +50,9 @@ const UsersList = () => {
     console.warn(result)
 
   }
-  async function handleShowModalEdit() {
+  async function handleShowModalEdit(id) {
+    setSelectedUser(id)
+
     setShowModal(true)
  
   

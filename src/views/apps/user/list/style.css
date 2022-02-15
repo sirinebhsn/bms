@@ -1,6 +1,8 @@
 .center{
+    border-radius:50%;
+    }
+.owner-picture{
     display:flex; 
     Align-Items: center;
     Justify-Content: center;
-    border-radius:50%;
-    }
+}
