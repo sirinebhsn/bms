@@ -1,0 +1,6 @@
+.center{
+    display:flex; 
+    Align-Items: center;
+    Justify-Content: center;
+    border-radius:50%;
+    }
