@@ -12,17 +12,27 @@ import { Home, UserCheck } from 'react-feather'
 
 // ** Styles
 import '@styles/react/apps/app-users.scss'
+import { useEffect, useState } from 'react'
 
 const FloorList = () => {
+  const [unit, setUnit] = useState([]);
+  useEffect(() => {
+    getUnits();
+  }, [])
+  async function getUnits() {
+    let result = await fetch("http://localhost:8000/api/countUnit");
+    result = await result.json();
+    setUnit(result)
+  }
   return (
     <div className='app-floor-list'>
       <Row>
         <Col lg='6' sm='6'>
           <StatsHorizontal
             color='primary'
-            statTitle='Total Floors'
+            statTitle='Total Units'
             icon={<Home size={20} />}
-            renderStats={<h3 className='fw-bolder mb-75'>21,459</h3>}
+            renderStats={<h3 className='fw-bolder mb-75'>{unit}</h3>}
           />
         </Col>
        

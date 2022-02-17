@@ -3,8 +3,8 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'Vuexy',
-    appLogoImage: require('@src/assets/images/logo/logo.svg').default
+    appName: 'STAR NOW',
+    appLogoImage: require('@src/assets/images/logo/logo-startnow.jpg').default
   },
   layout: {
     isRTL: false,

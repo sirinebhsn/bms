@@ -12,8 +12,18 @@ import { Home, UserCheck } from 'react-feather'
 
 // ** Styles
 import '@styles/react/apps/app-users.scss'
+import { useEffect, useState } from 'react'
 
 const FloorList = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getFloors();
+  }, [])
+  async function getFloors() {
+    let result = await fetch("http://localhost:8000/api/countFloors");
+    result = await result.json();
+    setData(result)
+  }
   return (
     <div className='app-floor-list'>
       <Row>
@@ -22,7 +32,7 @@ const FloorList = () => {
             color='primary'
             statTitle='Total Floors'
             icon={<Home size={20} />}
-            renderStats={<h3 className='fw-bolder mb-75'>21,459</h3>}
+            renderStats={<h3 className='fw-bolder mb-75'>{data}</h3>}
           />
         </Col>
        

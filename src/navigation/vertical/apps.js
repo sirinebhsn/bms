@@ -52,6 +52,27 @@ export default [
     ]
   },
   {
+    id: 'employess',
+    title: 'Employees Informations',
+    icon: <User size={48} color="blue" />,
+    children: [
+      {
+        id: 'liste',
+        title: 'List Employees',
+        icon: <List size={14} />,
+        navLink: '/apps/employee/list'
+
+      },
+      {
+        id: 'viewOwner',
+        title: 'Add Employee',
+        icon: <PlusCircle size={14} />,
+        navLink: '/apps/user/view'
+
+      }
+    ]
+  },
+  {
     id: 'tenants',
     title: 'Tenant Informations',
     icon: <Users size={48} color="blue" />,

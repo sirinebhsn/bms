@@ -6,18 +6,18 @@ import Sidebar from '@components/sidebar'
 
 // ** Reactstrap Imports
 import { Button, Label, Form, Row, Col } from 'reactstrap'
+import axios from 'axios';
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
-  
-  const [data, setData] = useState([]);
+  const [floorList, setFloorList] = useState([]);
   useEffect(() => {
-    getData();
+    axios.get(`http://localhost:8000/api/listFloor`).then(res => {
+
+      setFloorList(res.data);
+    });
   }, [])
-  async function getData() {
-    let result = await fetch("http://localhost:8000/api/listUnit");
-    result = await result.json();
-    setData(result)
-  }
+
+
   const [unit_no, setUnitno] = useState("");
   const [description_unit, setDescriptionUnit] = useState("");
   const [floor, setFloor] = useState("");
@@ -55,7 +55,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     >
       <Form className='mt-2 pt-50'>
         <Row>
-          <Col sm='6' className='mb-1'>
+          <Col sm='12' className='mb-1'>
 
             <Label className='form-label' for='name'>
               UNIT NO <span className='text-danger'>*</span>
@@ -69,7 +69,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
         </Row> 
         <Row>
-          <Col sm='6' className='mb-1'>
+          <Col sm='12' className='mb-1'>
 
             <Label className='form-label' for='name'>
               Description Unit <span className='text-danger'>*</span>
@@ -82,7 +82,23 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           </Col>
 
         </Row> 
- 
+        <Row>
+          
+          <Col sm='12' className='mb-1'>
+            <Label className='form-label' for='unit'>Select Floor</Label>
+            <select id='floor'  className='form-control' onChange={(e) => setFloor(e.target.value)}
+            >
+
+              <option>Select Unit</option>
+              {floorList.map((item) => {
+                return (<option value={item.floor}>{item.floor_no}&nbsp;{item.dispo_ascenseur} </option>
+                )
+
+              })
+              }
+            </select>
+          </Col>
+        </Row>
         <Button onClick={addUnit} className='me-1' color='primary'>
           Submit
         </Button>

@@ -84,6 +84,8 @@ const FloorList = () => {
             <tr>
               <th> ID </th>
               <th> FLOOR NO </th>
+              <th> Stair Length </th>
+              <th> Elevator Availability</th>
               <th>Actions </th>
               
             </tr>
@@ -95,6 +97,9 @@ const FloorList = () => {
               <tr>
               <td> <Lock size={14} color=" #273746 " />  {item.id} </td>
               <td> {item.floor_no}</td>
+              <td> {item.long_escalier}</td>
+              <td> {item.dispo_ascenseur}</td>
+
                 <td>
                   <span onClick={() => deleteOperation(item.id)}>
                     <Trash size={20} color="red" />
