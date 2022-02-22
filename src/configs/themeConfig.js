@@ -3,11 +3,11 @@
 //Template config options
 const themeConfig = {
   app: {
-    appName: 'STAR NOW',
+    appName: 'START NOW',
     appLogoImage: require('@src/assets/images/logo/logo-startnow.jpg').default
   },
   layout: {
-    isRTL: false,
+    isRTL: true,
     skin: 'light', // light, dark, bordered, semi-dark
     routerTransition: 'fadeIn', // fadeIn, fadeInLeft, zoomIn, none or check this for more transition https://animate.style/
     type: 'vertical', // vertical, horizontal
@@ -27,6 +27,7 @@ const themeConfig = {
     customizer: false,
     scrollTop: true // Enable scroll to top button
   }
+
 }
 
 export default themeConfig

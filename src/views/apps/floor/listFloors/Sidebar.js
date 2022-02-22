@@ -34,7 +34,10 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
         new Swal("All Fields are mandetory", "", "error");
         setError(res.data.errors);
       }
-
+      else if(res.data.status == 400) {
+        new Swal("This Floor already existed", "", "error");
+        setError(res.data.errors);
+      }
     });
 
 

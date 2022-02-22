@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, CardBody, Col, Form, Input, Label, Row } from "reactstrap";
 import './style.css'
 
-const EditModal = ({ id }) => {
+const EditModal  = async (e) => {
+  e.preventDefault();
+
     const [owner, setOwner] = useState()
     useEffect(async () => {
       if (id) {

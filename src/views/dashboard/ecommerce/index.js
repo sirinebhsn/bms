@@ -1,5 +1,5 @@
 // ** React Imports
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 // ** Icons Imports
 import { AlertCircle, ArrowRight, Award, DollarSign, Eye, Heart, Home, List, MessageSquare, Monitor, Settings, ShoppingBag, Truck, User, UserCheck, UserPlus, Users } from 'react-feather'
@@ -30,6 +30,38 @@ import '@styles/base/pages/dashboard-ecommerce.scss'
 const EcommerceDashboard = () => {
   const { colors } = useContext(ThemeColors)
   const trackBgColor = '#e9ecef'
+  const [owner, setOwner] = useState([]);
+  const [floor, setFloor] = useState([]);
+  const [unit, setUnit] = useState([]);
+  const [employee, setEmployee] = useState([]);
+
+  useEffect(() => {
+    getOwners();
+    getFloors();
+    getUnits();
+    getEmployees();
+  }, [])
+  async function getOwners() {
+    let result = await fetch("http://localhost:8000/api/countOwners");
+    result = await result.json();
+    setOwner(result)
+  }
+  async function getFloors() {
+    let result = await fetch("http://localhost:8000/api/countFloors");
+    result = await result.json();
+    setFloor(result)
+  }
+  async function getUnits() {
+    let result = await fetch("http://localhost:8000/api/countUnit");
+    result = await result.json();
+    setUnit(result)
+  }
+  async function getEmployees() {
+    let result = await fetch("http://localhost:8000/api/countEmployees");
+    result = await result.json();
+    setEmployee(result)
+  }
+
 
   return (
     <div id='dashboard-analytics'>
@@ -41,26 +73,26 @@ const EcommerceDashboard = () => {
       <Row>
         {/* Stats With Icons */}
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Home size={24} color='red' />} color='info' stats='36.9k'
+          <StatsVertical icon={<Home size={24} color='red' />} color='info' stats={floor}
             statTitle='Total Floor' >
           </StatsVertical>
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Monitor size={24} />} color='warning' stats='12k'
+          <StatsVertical icon={<Monitor size={24} />} color='warning' stats={unit}
             statTitle='Total Units' />
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<User size={24} />} color='danger' stats='97.8k' statTitle='Total Owner' />
+          <StatsVertical icon={<User size={24} />} color='danger' stats={owner} statTitle='Total Owner' />
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Users size={24} />} color='primary' stats='26.8' statTitle='Total Tenant' />
+          <StatsVertical icon={<Users size={24} />} color='primary' stats='0' statTitle='Total Tenant' />
         </Col>
 
         {/* Stats With Icons */}
       </Row>
       <Row>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Users size={24} />} color='success' stats='689' statTitle='Total Employees' />
+          <StatsVertical icon={<Users size={24} />} color='success' stats={employee} statTitle='Total Employees' />
         </Col>
         <Col xl='3' md='4' sm='6'>
           <StatsVertical icon={<Users size={24} />} color='danger' stats='2.1k' statTitle='Total Committee' />

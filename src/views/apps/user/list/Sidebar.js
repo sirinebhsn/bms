@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 // ** Custom Components
 import Sidebar from '@components/sidebar'
 import './style.css'
-import validator from 'validator'
 
 // ** Reactstrap Imports
 import { Button, Label, Form, Row, Col, Input } from 'reactstrap'
@@ -70,12 +69,24 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         new Swal("Success", res.data.message, "success");
         setError([]);
         window.location.reload(false);
-
       }
       else if (res.data.status == 422) {
         new Swal("All Fields are mandetory", "", "error");
         setError(res.data.errors);
       }
+      else if (res.data.status == 400) {
+        new Swal("An Owner with this Email Address Aready Exist", "", "error");
+        setError(res.data.errors);
+      }
+      else if (res.data.status == 401) {
+        new Swal("This NID IS Already Attached to another Owner !", "", "error");
+        setError(res.data.errors);
+      }
+      else if (res.data.status == 402) {
+        new Swal("This PHONE NUMBER IS Already Attached to another Owner !", "", "error");
+        setError(res.data.errors);
+      }
+     
 
     });
 
@@ -190,10 +201,12 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         <div className='d-flex'>
           <div className='d-flex align-items-end mt-75 ms-1'>
             <div>
-                <input id="file" onKeyDown={handleEnter}  type="file" onChange={onChangePicture} />
                 <div className="previewProfilePic">
                 <img className="owner-picture" style={{ width: 150, height: 150 }}  src={imgData} />
               </div>
+              <br/>
+              <input id="file" onKeyDown={handleEnter}  type="file" onChange={onChangePicture} />
+
               <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
             </div>
           </div>

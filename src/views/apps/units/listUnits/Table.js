@@ -92,7 +92,7 @@ const UnitList = () => {
               <tr>
               <td> <Lock size={14} color=" #273746 " />  {item.id} </td>
               <td> {item.unit_no}</td>
-              <td> {item.description_no}</td>
+              <td> {item.description_unit}</td>
               <td> {item.floor}</td>
 
                 <td>
