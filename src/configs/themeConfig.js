@@ -7,7 +7,7 @@ const themeConfig = {
     appLogoImage: require('@src/assets/images/logo/logo-startnow.jpg').default
   },
   layout: {
-    isRTL: true,
+    isRTL: false,
     skin: 'light', // light, dark, bordered, semi-dark
     routerTransition: 'fadeIn', // fadeIn, fadeInLeft, zoomIn, none or check this for more transition https://animate.style/
     type: 'vertical', // vertical, horizontal
