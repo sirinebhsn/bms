@@ -66,7 +66,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('salary_per_month', salary_per_month);
 
 
-    axios.post(`http://localhost:8000/api/addEmployee`, formData).then(res => {
+    axios.post(`https://bmsback.herokuapp.com/api/addEmployee`, formData).then(res => {
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);

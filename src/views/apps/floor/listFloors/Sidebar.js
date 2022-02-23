@@ -23,7 +23,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
     formData.append('long_escalier', long_escalier);
     formData.append('dispo_ascenseur', dispo_ascenseur);
 
-    axios.post(`http://localhost:8000/api/addFloor`, formData).then(res => {
+    axios.post(`https://bmsback.herokuapp.com/api/addFloor`, formData).then(res => {
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);

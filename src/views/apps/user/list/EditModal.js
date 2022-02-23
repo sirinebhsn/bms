@@ -8,7 +8,7 @@ const EditModal  = async (e) => {
     const [owner, setOwner] = useState()
     useEffect(async () => {
       if (id) {
-        let result = await fetch("http://localhost:8000/api/getOwner/" + id);
+        let result = await fetch("https://bmsback.herokuapp.com/api/getOwner/" + id);
         const response = await result.json();
         setOwner(response)
   
@@ -35,7 +35,7 @@ const EditModal  = async (e) => {
     formData.append('permenantAdress', permenantAdress);
     formData.append('file', file);
    console.log(formData)
-   let result = await fetch("http://localhost:8000/api/updateOwner/"+id,{
+   let result = await fetch("https://bmsback.herokuapp.com/api/updateOwner/"+id,{
       method: 'PUT',
       body: formData
     });

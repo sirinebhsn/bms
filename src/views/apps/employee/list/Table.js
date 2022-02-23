@@ -45,7 +45,7 @@ const UsersList = () => {
     setSelectedUser(id)
     setShow(true)
     console.warn(id)
-    let result = await fetch("http://localhost:8000/api/getOwner/" + id);
+    let result = await fetch("https://bmsback.herokuapp.com/api/getOwner/" + id);
     result = await result.json();
     console.warn(result)
 
@@ -66,13 +66,13 @@ const UsersList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("http://localhost:8000/api/listOwner");
+    let result = await fetch("https://bmsback.herokuapp.com/api/listOwner");
     result = await result.json();
     setData(result)
   }
 
   async function deleteOperation(id) {
-    let result = await fetch("http://localhost:8000/api/delete/" + id, {
+    let result = await fetch("https://bmsback.herokuapp.com/api/delete/" + id, {
       method: "DELETE"
 
     });

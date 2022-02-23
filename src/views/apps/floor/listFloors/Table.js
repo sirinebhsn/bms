@@ -42,13 +42,13 @@ const FloorList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("http://localhost:8000/api/listFloor");
+    let result = await fetch("https://bmsback.herokuapp.com/api/listFloor");
     result = await result.json();
     setData(result)
   }
 
   async function deleteOperation(id) {
-    let result = await fetch("http://localhost:8000/api/deleteFloor/" + id, {
+    let result = await fetch("https://bmsback.herokuapp.com/api/deleteFloor/" + id, {
       method: "DELETE"
 
     });
@@ -57,7 +57,7 @@ const FloorList = () => {
   }
   async function search(key) {
     console.warn(key)
-    let result = await fetch("http://localhost:8000/api/searchFloor/" + key);
+    let result = await fetch("https://bmsback.herokuapp.com/api/searchFloor/" + key);
     result = await result.json();
     console.warn(result)
     setData(result)

@@ -20,7 +20,7 @@ const FloorList = () => {
     getFloors();
   }, [])
   async function getFloors() {
-    let result = await fetch("http://localhost:8000/api/countFloors");
+    let result = await fetch("https://bmsback.herokuapp.com/api/countFloors");
     result = await result.json();
     setData(result)
   }

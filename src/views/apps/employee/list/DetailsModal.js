@@ -6,7 +6,7 @@ const LoginForm = ({ id }) => {
   const [owner, setOwner] = useState()
   useEffect(async () => {
     if (id) {
-      let result = await fetch("http://localhost:8000/api/getOwner/" + id);
+      let result = await fetch("https://bmsback.herokuapp.com/api/getOwner/" + id);
       const response = await result.json();
       setOwner(response)
 
@@ -21,7 +21,7 @@ const LoginForm = ({ id }) => {
       <CardBody>
       <div className='d-flex'>
             <div className='me-25'>
-             <img  className="center" style={{ width: 150, height: 150 }} src={"http://localhost:8000/" + owner?.file_path} /><br />
+             <img  className="center" style={{ width: 150, height: 150 }} src={"https://bmsback.herokuapp.com/" + owner?.file_path} /><br />
        </div>
        </div> 
        <br/>

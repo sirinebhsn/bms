@@ -11,7 +11,7 @@ import axios from 'axios';
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [floorList, setFloorList] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/listFloor`).then(res => {
+    axios.get(`https://bmsback.herokuapp.com/api/listFloor`).then(res => {
 
       setFloorList(res.data);
     });
@@ -34,7 +34,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
 
    console.log(formData)
-   let result = await fetch("http://localhost:8000/api/addUnit", {
+   let result = await fetch("https://bmsback.herokuapp.com/api/addUnit", {
       method: 'POST',
       body: formData
     });
