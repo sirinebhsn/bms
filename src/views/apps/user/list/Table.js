@@ -146,7 +146,7 @@ const UsersList = () => {
           {data.map((item) =>
             <tbody>
               <tr>
-                <td> <img style={{ width: 50, height: 50 }} src={"http://localhost:8000/" + item.file_path} /> </td>
+                <td> <img style={{ width: 50, height: 50 }} src={"https://bmsfrontend.herokuapp.com/" + item.file_path} /> </td>
 
                 <td> <User size={14} />&nbsp;{item.name}</td>
                 <td> <Mail size={14} /> &nbsp;{item.email} </td>
