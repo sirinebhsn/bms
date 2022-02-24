@@ -120,7 +120,7 @@ const EditModal  = async (e) => {
       <Label className='form-label' for='file'>
         Owner Picture<span className='text-danger'>*</span>
           </Label>
-      <img className="owner-picture" style={{ width: 150, height: 150 }} src={"http://localhost:8000/" + owner?.file_path} /><br /> 
+      <img className="owner-picture" style={{ width: 150, height: 150 }} src={"https://bmsback.herokuapp.com/" + owner?.file_path} /><br /> 
           <input type='file' className="form-control"
             placeholder="file" onChange={(e) => setFile(e.target.files[0])}
             /><br />
