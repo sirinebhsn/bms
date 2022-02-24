@@ -4,7 +4,7 @@
 const themeConfig = {
   app: {
     appName: 'START NOW',
-    appLogoImage: require('@src/assets/images/logo/logo-startnow.jpg').default
+    appLogoImage: require('@src/assets/images/logo/logo-startnow.png').default
   },
   layout: {
     isRTL: false,
