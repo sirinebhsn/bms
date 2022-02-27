@@ -45,7 +45,7 @@ const UsersList = () => {
     setSelectedUser(id)
     setShow(true)
     console.warn(id)
-    let result = await fetch("https://bmsback.herokuapp.com/api/getOwner/" + id);
+    let result = await fetch("http://localhost:8000/api/getOwner/" + id);
     result = await result.json();
     console.warn(result)
 
@@ -68,13 +68,13 @@ const UsersList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/listOwner");
+    let result = await fetch("http://localhost:8000/api/listOwner");
     result = await result.json();
     setData(result)
   }
 
   async function deleteOperation(id) {
-    let result = await fetch("https://bmsback.herokuapp.com/api/delete/" + id, {
+    let result = await fetch("http://localhost:8000/api/delete/" + id, {
       method: "DELETE"
 
     });
@@ -105,7 +105,7 @@ const UsersList = () => {
   async function search(key) {
     if(key){
     console.warn(key)
-    let result = await fetch("https://bmsback.herokuapp.com/api/search/" + key);
+    let result = await fetch("http://localhost:8000/api/search/" + key);
     result = await result.json();
     console.warn(result)
     setData(result)
@@ -146,7 +146,7 @@ const UsersList = () => {
           {data.map((item) =>
             <tbody>
               <tr>
-                <td> <img style={{ width: 50, height: 50 }} src={"https://bmsfrontend.herokuapp.com/" + item.file_path} /> </td>
+                <td> <img style={{ width: 50, height: 50 }} src={"http://localhost:8000/" + item.file_path} /> </td>
 
                 <td> <User size={14} />&nbsp;{item.name}</td>
                 <td> <Mail size={14} /> &nbsp;{item.email} </td>

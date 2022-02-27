@@ -27,13 +27,12 @@ export default [
     id: 'units',
     title: 'Units Informations',
     icon: <img height={30} width={30} src='https://cdn-icons-png.flaticon.com/512/1973/1973300.png'/>,
-
     children: [
       {
         id: 'list',
         title: 'Units List',
         icon: <List size={12} />,
-        navLink: '/apps/units/listUnits'
+        navLink: '/apps/units/listUnits',
 
       },
       {

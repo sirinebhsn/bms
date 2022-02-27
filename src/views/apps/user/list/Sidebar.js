@@ -25,7 +25,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [unit, setUnit] = useState("");
 
   useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/listUnit`).then(res => {
+    axios.get(`http://localhost:8000/api/listUnit`).then(res => {
 
       setUnitList(res.data);
     });
@@ -64,7 +64,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('permenantAdress', permenantAdress);
     formData.append('file', file);
     formData.append('unit', unit);
-    axios.post(`https://bmsback.herokuapp.com/api/addOwner`, formData).then(res => {
+    axios.post(`http://localhost:8000/api/addOwner`, formData).then(res => {
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);
