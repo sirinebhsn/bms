@@ -12,7 +12,7 @@ const VerticalLayout = props => {
 
   // For ServerSide navigation
    useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com//api/showMenu`).then(response => setMenuData(response.data))
+    axios.get(`http://localhost:8000/api/showMenu`).then(response => setMenuData(response.data))
   }, [menuData])
 
 

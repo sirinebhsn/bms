@@ -70,8 +70,8 @@ const VerticalNavMenuLink = ({
           }
         }}
       >
-        <img height={30} width={30} src={item.menu_icon}/>
-        <span className='menu-item text-truncate'>{t(item.menu_name)}</span>
+        <img src={t(item.menu_icon)}/>
+        <span className='menu-item text-truncate' >{t(item.menu_name)}</span>
 
         {item.badge && item.badgeText ? (
           <Badge className='ms-auto me-1' color={item.badge} pill>
