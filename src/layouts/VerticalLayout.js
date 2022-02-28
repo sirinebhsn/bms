@@ -8,12 +8,21 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 const VerticalLayout = props => {
-   const [menuData, setMenuData] = useState([])
+  const [menuData, setMenuData] = useState([])
+  const [children, setChildren] = useState([])
 
   // For ServerSide navigation
    useEffect(() => {
-    axios.get(`http://localhost:8000/api/showMenu`).then(response => setMenuData(response.data))
+    axios.get(`http://localhost:8000/api/showMenuById`).then(response =>
+     setMenuData(response.data)
+     )
+     axios.get(`http://localhost:8000/api/showMenu`).then(res =>
+     setChildren(res.data)
+     )
+   
   }, [])
+  console.log(menuData)
+  console.log(children)
 
 
   return (
@@ -21,7 +30,7 @@ const VerticalLayout = props => {
 
     <Layout menuData={menuData} {...props}>
 
-      {props.children}
+     {children.props}
     </Layout>
   )
 }
