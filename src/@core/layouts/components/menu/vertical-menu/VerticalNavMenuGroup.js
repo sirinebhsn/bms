@@ -45,21 +45,21 @@ const VerticalNavMenuGroup = ({
     const activeGroup = groupActive
 
     // ** If Group is already open and clicked, close the group
-    if (openGroup.includes(item.id)) {
-      openGroup.splice(openGroup.indexOf(item.id), 1)
+    if (openGroup.includes(item.menu_id)) {
+      openGroup.splice(openGroup.indexOf(item.menu_id), 1)
 
       // ** If clicked Group has open group children, Also remove those children to close those groups
       if (item.children) {
         removeChildren(item.children, openGroup, groupActive)
       }
-    } else if (activeGroup.includes(item.id) || currentActiveGroup.includes(item.id)) {
+    } else if (activeGroup.includes(item.menu_id) || currentActiveGroup.includes(item.menu_id)) {
       // ** If Group clicked is Active Group
 
       // ** If Active group is closed and clicked again, we should open active group else close active group
-      if (!activeGroup.includes(item.id) && currentActiveGroup.includes(item.id)) {
-        activeGroup.push(item.id)
+      if (!activeGroup.includes(item.menu_id) && currentActiveGroup.includes(item.menu_id)) {
+        activeGroup.push(item.menu_id)
       } else {
-        activeGroup.splice(activeGroup.indexOf(item.id), 1)
+        activeGroup.splice(activeGroup.indexOf(item.menu_id), 1)
       }
 
       // ** Update Active Group
@@ -71,8 +71,8 @@ const VerticalNavMenuGroup = ({
       }
 
       // ** After removing all the open groups under that parent, add the clicked group to open group array
-      if (!openGroup.includes(item.id)) {
-        openGroup.push(item.id)
+      if (!openGroup.includes(item.menu_id)) {
+        openGroup.push(item.menu_id)
       }
     } else {
       // ** If clicked on another group that is not active or open, create openGroup array from scratch
@@ -81,8 +81,8 @@ const VerticalNavMenuGroup = ({
       openGroup = []
 
       // ** Push current clicked group item to Open Group array
-      if (!openGroup.includes(item.id)) {
-        openGroup.push(item.id)
+      if (!openGroup.includes(item.menu_id)) {
+        openGroup.push(item.menu_id)
       }
     }
     setGroupOpen([...openGroup])
@@ -98,9 +98,9 @@ const VerticalNavMenuGroup = ({
   // ** Checks url & updates active item
   useEffect(() => {
     if (hasActiveChild(item, currentURL)) {
-      if (!groupActive.includes(item.id)) groupActive.push(item.id)
+      if (!groupActive.includes(item.menu_parentid)) groupActive.push(item.menu_id)
     } else {
-      const index = groupActive.indexOf(item.id)
+      const index = groupActive.indexOf(item.menu_parentid)
       if (index > -1) groupActive.splice(index, 1)
     }
     setGroupActive([...groupActive])
@@ -124,14 +124,14 @@ const VerticalNavMenuGroup = ({
   return (
     <li
       className={classnames('nav-item has-sub', {
-        open: openClassCondition(item.id),
-        'menu-collapsed-open': groupActive.includes(item.id),
+        open: openClassCondition(item.menu_id),
+        'menu-collapsed-open': groupActive.includes(item.menu_id),
         'sidebar-group-active':
-          groupActive.includes(item.id) || groupOpen.includes(item.id) || currentActiveGroup.includes(item.id)
+          groupActive.includes(item.menu_id) || groupOpen.includes(item.menu_id) || currentActiveGroup.includes(item.menu_id)
       })}
     >
       <Link className='d-flex align-items-center' to='/' onClick={e => onCollapseClick(e, item)}>
-        {item.menu_description}
+      <img height={20} width={20} src={item.menu_icon}/>
         <span className='menu-title text-truncate'>{t(item.menu_name)}</span>
 
         {item.badge && item.badgeText ? (
@@ -143,7 +143,7 @@ const VerticalNavMenuGroup = ({
 
       {/* Render Child Recursively Through VerticalNavMenuItems Component */}
       <ul className='menu-content'>
-        <Collapse isOpen={(groupActive && groupActive.includes(item.id)) || (groupOpen && groupOpen.includes(item.id))}>
+        <Collapse isOpen={(groupActive && groupActive.includes(item.menu_id)) || (groupOpen && groupOpen.includes(item.menu_id))}>
           <VerticalNavMenuItems
             {...rest}
             items={item.children}

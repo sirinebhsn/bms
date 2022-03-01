@@ -1,5 +1,5 @@
 // ** Icons Import
-import {
+/*import {
   Box,
   Mail,
   User,
@@ -172,3 +172,4 @@ export default [
     ]
   }
 ]
+*/

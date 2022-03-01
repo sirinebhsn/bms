@@ -1,5 +1,5 @@
 // ** Icons Import
-import { Mail, Users, MessageSquare, CheckSquare, Calendar, FileText, Circle, ShoppingCart, User, Shield, Home, PlusCircle, List } from 'react-feather'
+/*import { Mail, Users, MessageSquare, CheckSquare, Calendar, FileText, Circle, ShoppingCart, User, Shield, Home, PlusCircle, List } from 'react-feather'
 
 export default [
  
@@ -210,3 +210,4 @@ export default [
  
  
 ]
+*/

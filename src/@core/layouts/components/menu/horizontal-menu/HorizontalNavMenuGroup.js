@@ -41,9 +41,9 @@ const HorizontalNavMenuGroup = props => {
 
   useEffect(() => {
     if (hasActiveChild(item, currentURL)) {
-      if (!groupActive.includes(item.id)) groupActive.push(item.id)
+      if (!groupActive.includes(item.menu_id)) groupActive.push(item.menu_id)
     } else {
-      const index = groupActive.indexOf(item.id)
+      const index = groupActive.indexOf(item.menu_id)
       if (index > -1) groupActive.splice(index, 1)
     }
     setGroupActive([...groupActive])
@@ -90,11 +90,11 @@ const HorizontalNavMenuGroup = props => {
       className={classnames({
         'nav-item': submenu === false,
         'dropdown-submenu': submenu === true,
-        'sidebar-group-active active': groupActive.includes(item.id)
+        'sidebar-group-active active': groupActive.includes(item.menu_id)
       })}
-      isOpen={openDropdown.includes(item.id)}
-      onMouseEnter={() => onMouseEnter(item.id)}
-      onMouseLeave={() => onMouseLeave(item.id)}
+      isOpen={openDropdown.includes(item.menu_id)}
+      onMouseEnter={() => onMouseEnter(item.menu_id)}
+      onMouseLeave={() => onMouseLeave(item.menu_id)}
     >
       <DropdownToggle
         to='/'

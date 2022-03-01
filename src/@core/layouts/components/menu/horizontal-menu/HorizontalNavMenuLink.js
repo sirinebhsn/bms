@@ -57,8 +57,8 @@ const HorizontalNavMenuLink = ({ item, isChild, activeItem, setActiveItem, setOp
             })}
         /*eslint-enable */
       >
-        {item.icon}
-        <span>{t(item.title)}</span>
+       <img height={20} width={20} src={item.menu_icon}/>
+        <span>{t(item.menu_name)}</span>
       </LinkTag>
     </li>
   )

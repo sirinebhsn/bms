@@ -8,7 +8,7 @@ import uiElements from './ui-elements'
 import formsAndTables from './forms-tables'
 
 // ** Merge & Export
-export default [...dashboards, ...apps, ...uiElements, ...formsAndTables, ...pages, ...charts, ...others]
+export default [...dashboards, ...uiElements, ...formsAndTables, ...pages, ...charts, ...others]
 
 
 
