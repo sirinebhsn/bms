@@ -57,7 +57,7 @@ const FloorList = () => {
   }
   async function search(key) {
     console.warn(key)
-    let result = await fetch("https://bmsback.herokuapp.com/api/searchFloor/" + key);
+    let result = await fetch("http://localhost:8000/api/searchFloor/" + key);
     result = await result.json();
     console.warn(result)
     setData(result)
