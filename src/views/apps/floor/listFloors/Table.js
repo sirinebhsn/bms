@@ -82,10 +82,12 @@ const FloorList = () => {
         <Table>
           <thead>
             <tr>
-              <th> ID </th>
-              <th> FLOOR NO </th>
-              <th> Stair Length </th>
-              <th> Elevator Availability</th>
+              <th> FLOOR NUM </th>
+              <th> FLOOR Name </th>
+              <th> FLOOR ELEVATOR </th>
+              <th> FLOOR AREA </th>
+              <th> FLOOR BUILDING </th>
+              <th> FLOOR ADDED DATE</th>
               <th>Actions </th>
               
             </tr>
@@ -95,12 +97,13 @@ const FloorList = () => {
 
             <tbody>
               <tr>
-              <td> <Lock size={14} color=" #273746 " />  {item.id} </td>
-              <td> {item.floor_no}</td>
-              <td> {item.long_escalier}</td>
-              <td> {item.dispo_ascenseur}</td>
-
-                <td>
+              <td> {item.floor_num}</td>
+              <td> {item.floor_name}</td>     
+              <td> {item.floor_elevator}</td>
+              <td> {item.floor_area}</td>
+              <td> {item.building_name}</td>
+              <td> {item.floor_added_date}</td>
+          <td>
                   <span onClick={() => deleteOperation(item.id)}>
                     <Trash size={20} color="red" />
                   </span>

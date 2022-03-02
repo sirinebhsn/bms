@@ -8,20 +8,34 @@ import Sidebar from '@components/sidebar'
 import { Button, Label, Form, Row, Col } from 'reactstrap'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import DateTimePicker from 'react-datetime-picker';
 
 const SidebarNewFloor = ({ open, toggleSidebar }) => {
+  const [listBuilding, setBuildingList]=useState([]);
 
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/listBuildings`).then(res => {
+
+      setBuildingList(res.data);
+    });
+  }, [])
   const [errorList, setError] = useState([]);
-  const [floor_no, setFloorno] = useState("");
-  const [long_escalier, setLongEscalier] = useState("");
-  const [dispo_ascenseur, setAscenseur] = useState("");
-
+  const [floor_num, setFloornum] = useState("");
+  const [floor_name, setFloorName] = useState("");
+  const [floor_added_date, setDate] = useState("");
+  const [floor_area, setFloorArea] = useState("");
+  const [building_id, setBuildingid] = useState("");
+  const [floor_elevator, setFloorElevator] = useState("");
+ 
    const addFloor = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('floor_no', floor_no);
-    formData.append('long_escalier', long_escalier);
-    formData.append('dispo_ascenseur', dispo_ascenseur);
+    formData.append('floor_name', floor_name);
+    formData.append('floor_num', floor_num);
+    formData.append('floor_elevator', floor_elevator);
+    formData.append('floor_area', floor_area);
+    formData.append('floor_added_date', floor_added_date);
+    formData.append('building_id', building_id);
 
     axios.post(`https://bmsback.herokuapp.com/api/addFloor`, formData).then(res => {
       if (res.data.status == 200) {
@@ -56,64 +70,91 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
         <Row>
           <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='name'>
+            <Label className='form-label' for='floor_num'>
               Floor Number <span className='text-danger'>*</span>
             </Label>
-            <select id='floor_no' className='form-control' onChange={(e) => setFloorno(e.target.value)}>
-             <option value=''> Select Floor </option>
-             <option value='Ground Floor'> Ground Floor </option>
+            <input type='number' id='floor_num' className='form-control' onChange={(e) => setFloornum(e.target.value)}/>
+           
 
-              <option value='First floor'> First Floor </option>
-              <option value='Second Floor'> Second Floor </option>
-              <option value='Third Floor'> Third Floor </option>
-              <option value='Fourth Floor'> Fourth Floor </option>
-              <option value='Fifth Floor'> Fifth Floor </option>
-
-
-            </select>
-            <small className='text-danger'>{errorList.floor_no}</small>
+            <small className='text-danger'>{errorList.floor_num}</small>
             <br />
           </Col>
 
         </Row>
-        {floor_no == 'Ground Floor' || floor_no!== '' && 
-<>
+        <Row>
+          <Col sm='12' className='mb-1'>
+
+            <Label className='form-label' for='floor_name'>
+              Floor Name <span className='text-danger'>*</span>
+            </Label>
+            <input type='text' id='floor_name' className='form-control' onChange={(e) => setFloorName(e.target.value)}/>
+           
+
+            <small className='text-danger'>{errorList.floor_name}</small>
+            <br />
+          </Col>
+
+        </Row>
+
         <Row>
           <Col sm='12' className='mb-1'>
         
 
 
-            <Label className='form-label' for='long_escalier'>
-              Stair Length <span className='text-danger'>*</span>
+            <Label className='form-label' for='floor_elevator'>
+              Floor Elevator <span className='text-danger'>*</span>
             </Label>
-            <input type='text' className="form-control"
+            <select className="form-control"
               onChange={(e) =>
-                setLongEscalier(e.target.value)
-              }
-              placeholder="0.00 m" />
-            <small className='text-danger'>{errorList.long_escalier}</small>
+                setFloorElevator(e.target.value)
+              }>
+                
+              <option value='1'>Disponible</option>
+              <option value='0'>Non Disponible</option>
+
+             </select>
+           
+            <small className='text-danger'>{errorList.floor_elevator}</small>
             <br/>
           </Col>
         </Row>
-            
+        <Row>
         <Row>
           <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='dispo_ascenseur'>
-              Elevator availability
-              <span className='text-danger'>*</span>
+            <Label className='form-label' for='name'>
+              Floor Area <span className='text-danger'>*</span>
             </Label>
-            <select id='dispo_ascenseur' className='form-control' onChange={(e) => setAscenseur(e.target.value)}>
-              <option value=''> Select Elevator availability </option>
+            <input type='number' id='floor_area' className='form-control' onChange={(e) => setFloorArea(e.target.value)}/>
+           
 
-              <option value='With Elevator'> Disponible </option>
-              <option value='Without Elevator'> Non Disponible </option>
+            <small className='text-danger'>{errorList.floor_area}</small>
+            <br />
+          </Col>
+
+        </Row>
+        <Row>
+        <Col sm='12' className='mb-1'>
+        <Label className='form-label' for='floor_added_date'>Select Date </Label>
+
+           <input type="date" onChange={(e) => setDate(e.target.value)} value={floor_added_date} format="y-MM-dd h:mm:ss a" />
+          </Col>
+         </Row>
+
+          <Col sm='12' className='mb-1'>
+            <Label className='form-label' for='floor'>Select Building</Label>
+            <select id='building_id'  className='form-control' onChange={(e) => setBuildingid(e.target.value)}
+            >
+           <option>Select BUILDING</option>
+              {listBuilding.map((item) => {
+                return (<option value={item.building_id}>{item.building_name}</option>
+                )
+
+              })
+              }
             </select>
-            <small className='text-danger'>{errorList.dispo_ascenseur}</small>
-            <br/>
           </Col>
         </Row>
-</>}
         <Button onClick={addFloor} className='me-1' color='primary'>
           Submit
         </Button>
@@ -126,4 +167,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
 }
 
 export default SidebarNewFloor
-
+/*{floor_num == 'Ground Floor' || floor_num!== '' && 
+<>
+</>}
+*/
