@@ -42,22 +42,22 @@ const EcommerceDashboard = () => {
     getEmployees();
   }, [])
   async function getOwners() {
-    let result = await fetch("http://localhost:8000/api/countOwners");
+    let result = await fetch("https://bmsback.herokuapp.com/api/countOwners");
     result = await result.json();
     setOwner(result)
   }
   async function getFloors() {
-    let result = await fetch("http://localhost:8000/api/countFloors");
+    let result = await fetch("https://bmsback.herokuapp.com/api/countFloors");
     result = await result.json();
     setFloor(result)
   }
   async function getUnits() {
-    let result = await fetch("http://localhost:8000/api/countUnit");
+    let result = await fetch("https://bmsback.herokuapp.com/api/countUnit");
     result = await result.json();
     setUnit(result)
   }
   async function getEmployees() {
-    let result = await fetch("http://localhost:8000/api/countEmployees");
+    let result = await fetch("https://bmsback.herokuapp.com/api/countEmployees");
     result = await result.json();
     setEmployee(result)
   }
