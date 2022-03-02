@@ -37,7 +37,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
     formData.append('floor_added_date', floor_added_date);
     formData.append('building_id', building_id);
 
-    axios.post(`https://bmsback.herokuapp.com/api/addFloor`, formData).then(res => {
+    axios.post(`http://localhost:8000/api/addFloor`, formData).then(res => {
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);
