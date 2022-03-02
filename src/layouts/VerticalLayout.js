@@ -18,7 +18,7 @@ const VerticalLayout = props => {
      )
    
    
-  }, )
+  }, [])
   console.log(menuData)
 
 

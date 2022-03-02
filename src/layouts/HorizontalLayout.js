@@ -15,7 +15,7 @@ const HorizontalLayout = props => {
      )
    
    
-  }, )
+  }, [])
   console.log(menuData)
 
   return (
