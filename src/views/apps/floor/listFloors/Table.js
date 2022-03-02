@@ -47,7 +47,7 @@ const FloorList = () => {
     setData(result)
   }
 
-  async function deleteOperation(id) {
+  /*async function deleteOperation(id) {
     let result = await fetch("https://bmsback.herokuapp.com/api/deleteFloor/" + id, {
       method: "DELETE"
 
@@ -62,7 +62,7 @@ const FloorList = () => {
     console.warn(result)
     setData(result)
 
-  }
+  }*/
 
 
   return (
