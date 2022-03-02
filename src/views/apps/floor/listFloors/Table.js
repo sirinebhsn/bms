@@ -47,14 +47,14 @@ const FloorList = () => {
     setData(result)
   }
 
-  async function deleteOperation(id) {
+  /*async function deleteOperation(id) {
     let result = await fetch("https://bmsback.herokuapp.com/api/deleteFloor/" + id, {
       method: "DELETE"
 
     });
     result = await result.json()
 
-  }
+  }*/
   async function search(key) {
     console.warn(key)
     let result = await fetch("https://bmsback.herokuapp.com/api/searchFloor/" + key);
@@ -104,7 +104,7 @@ const FloorList = () => {
               <td> {item.building_id}</td>
               <td> {item.floor_added_date}</td>
           <td>
-                  <span onClick={() => deleteOperation(item.id_floor)}>
+                  <span >
                     <Trash size={20} color="red" />
                   </span>
                   &nbsp;&nbsp;
