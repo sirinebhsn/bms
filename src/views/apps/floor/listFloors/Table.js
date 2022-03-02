@@ -42,7 +42,7 @@ const FloorList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("http://localhost:8000/api/listFloor");
+    let result = await fetch("https://bmsback.herokuapp.com/api/listFloor");
     result = await result.json();
     setData(result)
   }
