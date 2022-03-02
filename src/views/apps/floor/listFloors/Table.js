@@ -42,7 +42,7 @@ const FloorList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/listFloor");
+    let result = await fetch("http://localhost:8000/api/listFloor");
     result = await result.json();
     setData(result)
   }
@@ -101,7 +101,7 @@ const FloorList = () => {
               <td> {item.floor_name}</td>     
               <td> {item.floor_elevator}</td>
               <td> {item.floor_area}</td>
-              <td> {item.building_name}</td>
+              <td> {item.building_id}</td>
               <td> {item.floor_added_date}</td>
           <td>
                   <span onClick={() => deleteOperation(item.id)}>
