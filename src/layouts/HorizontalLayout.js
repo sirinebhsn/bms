@@ -10,7 +10,7 @@ const HorizontalLayout = props => {
 
   // For ServerSide navigation
   useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/all`).then(response =>
+    axios.get(`https://bmsbackendapp.herokuapp.com/api/all`).then(response =>
      setMenuData(response.data)
      )
    
