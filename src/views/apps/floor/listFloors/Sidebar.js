@@ -76,7 +76,6 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
             <input type='number' id='floor_num' className='form-control' onChange={(e) => setFloornum(e.target.value)}/>
            
 
-            <small className='text-danger'>{errorList.floor_num}</small>
             <br />
           </Col>
 
