@@ -47,31 +47,13 @@ const FloorList = () => {
     setData(result)
   }
 
-  /*async function deleteOperation(id) {
-    let result = await fetch("https://bmsback.herokuapp.com/api/deleteFloor/" + id, {
-      method: "DELETE"
-
-    });
-    result = await result.json()
-
-  }*/
-  async function search(key) {
-    console.warn(key)
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/searchFloor/" + key);
-    result = await result.json();
-    console.warn(result)
-    setData(result)
-
-  }
-
-
   return (
     <Fragment>
       <Card>
         <CardHeader>
           <CardTitle tag='h4'>Floors List</CardTitle>
           <div className="col-sm-3">
-            <input type="text" onChange={(e) => search(e.target.value)} className="form-control" placeholder="Search Floor" />
+            <input type="text" onChange="" className="form-control" placeholder="Search Floor" />
 
           </div>
           <Button className='add-new-floor' color='primary' onClick={toggleSidebar}>
