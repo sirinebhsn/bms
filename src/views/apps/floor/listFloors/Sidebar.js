@@ -89,7 +89,6 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
             <input type='text' id='floor_name' className='form-control' onChange={(e) => setFloorName(e.target.value)}/>
            
 
-            <small className='text-danger'>{errorList.floor_name}</small>
             <br />
           </Col>
 
@@ -113,7 +112,6 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
 
              </select>
            
-            <small className='text-danger'>{errorList.floor_elevator}</small>
             <br/>
           </Col>
         </Row>
@@ -127,7 +125,6 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
             <input type='number' id='floor_area' className='form-control' onChange={(e) => setFloorArea(e.target.value)}/>
            
 
-            <small className='text-danger'>{errorList.floor_area}</small>
             <br />
           </Col>
 
