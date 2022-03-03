@@ -79,12 +79,12 @@ const FloorList = () => {
 
             <tbody>
               <tr>
-              <td> {item?.floor_num}</td>
-              <td> {item?.floor_name}</td>     
-              <td> {item?.floor_elevator}</td>
-              <td> {item?.floor_area}</td>
-              <td> {item?.building_id}</td>
-              <td> {item?.floor_added_date}</td>
+              <td> {item.floor_num}</td>
+              <td> {item.floor_name}</td>     
+              <td> {item.floor_elevator}</td>
+              <td> {item.floor_area}</td>
+              <td> {item.building_id}</td>
+              <td> {item.floor_added_date}</td>
           <td>
                   <span >
                     <Trash size={20} color="red" />
