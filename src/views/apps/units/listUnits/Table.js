@@ -37,13 +37,13 @@ const UnitList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/listUnit");
+    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/listUnit");
     result = await result.json();
     setData(result)
   }
 
   async function deleteOperation(id) {
-    let result = await fetch("https://bmsback.herokuapp.com/api/deleteUnit/" + id, {
+    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/deleteUnit/" + id, {
       method: "DELETE"
 
     });
@@ -52,7 +52,7 @@ const UnitList = () => {
   }
   async function search(key) {
     console.warn(key)
-    let result = await fetch("https://bmsback.herokuapp.com/api/Unit/" + key);
+    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/Unit/" + key);
     result = await result.json();
     console.warn(result)
     setData(result)

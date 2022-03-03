@@ -20,7 +20,7 @@ const FloorList = () => {
     getUnits();
   }, [])
   async function getUnits() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/countUnit");
+    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/countUnit");
     result = await result.json();
     setUnit(result)
   }
