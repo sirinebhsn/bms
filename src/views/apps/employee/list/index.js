@@ -23,7 +23,7 @@ const UsersList = () => {
     getOwners();
   }, [])
   async function getOwners() {
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/countOwners");
+    let result = await fetch("https://bmsback.herokuapp.com/api/countOwners");
     result = await result.json();
     setData(result)
   }

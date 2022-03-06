@@ -7,7 +7,7 @@ const LoginForm = ({ id }) => {
   const [owner, setOwner] = useState()
   useEffect(async () => {
     if (id) {
-      let result = await fetch("https://bmsbackendapp.herokuapp.com/api/getOwner/" + id);
+      let result = await fetch("https://bmsback.herokuapp.com/api/getOwner/" + id);
       const response = await result.json();
       setOwner(response)
 

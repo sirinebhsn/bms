@@ -8,13 +8,12 @@ import Sidebar from '@components/sidebar'
 import { Button, Label, Form, Row, Col } from 'reactstrap'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import DateTimePicker from 'react-datetime-picker';
 
 const SidebarNewFloor = ({ open, toggleSidebar }) => {
   const [listBuilding, setBuildingList]=useState([]);
 
   useEffect(() => {
-    axios.get(`https://bmsbackendapp.herokuapp.com/api/listBuildings`).then(res => {
+    axios.get(`https://bmsback.herokuapp.com/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     });
@@ -37,7 +36,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
     formData.append('floor_added_date', floor_added_date);
     formData.append('building_id', building_id);
 
-    axios.post(`https://bmsbackendapp.herokuapp.com/api/addFloor`, formData).then(res => {
+    axios.post(`https://bmsback.herokuapp.com/api/addFloor`, formData).then(res => {
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);

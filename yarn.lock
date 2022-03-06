@@ -10064,6 +10064,13 @@ react-datetime-picker@^3.5.0:
     react-fit "^1.4.0"
     react-time-picker "^4.5.0"
 
+react-datetime@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-datetime/-/react-datetime-3.1.1.tgz#adc346efda47653cfff9259c979f03f56106e48c"
+  integrity sha512-gHCTjAniCcMb6jdXpz+MpVe/uCeaHNDOofg+l41nLlJI3uBLBMV40CQbGB2TCTUpCzGT1mCs4vQzKGMjXO/WWQ==
+  dependencies:
+    prop-types "^15.5.7"
+
 react-dev-utils@^11.0.3:
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.4.tgz#a7ccb60257a1ca2e0efe7a83e38e6700d17aa37a"
@@ -10185,6 +10192,11 @@ react-is@^17.0.1, react-is@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+
+react-lang-dropdown@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-lang-dropdown/-/react-lang-dropdown-1.0.4.tgz#3020e090822414352d9129d5748154fb3c2a8dbd"
+  integrity sha512-R+sFm3YNysdi+Y+AWgkHgHpfXWxXqTHBPuBeZk0mEaX4+7C4p1AQqkqafHq1DDk9mVeObU7HgBwqmtekq2o4Fg==
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"

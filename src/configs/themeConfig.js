@@ -16,6 +16,7 @@ const themeConfig = {
       isHidden: false,
       isCollapsed: false
     },
+ 
     navbar: {
       // ? For horizontal menu, navbar type will work for navMenu type
       type: 'floating', // static , sticky , floating, hidden
@@ -27,6 +28,7 @@ const themeConfig = {
     customizer: false,
     scrollTop: true // Enable scroll to top button
   }
+
 
 }
 

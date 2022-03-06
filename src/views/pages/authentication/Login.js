@@ -51,14 +51,14 @@ const Login = () => {
       formData.append('email', email);
       formData.append('password', password);
     axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() =>{
-          axios.post(`http://127.0.0.1:8000/api/auth/login`, formData).then(res => {
+          axios.post(`https://bmsback.herokuapp.com/api/auth/login`, formData).then(res => {
             if (res.data.status == 401) {
               new Swal("All Fields are mandetory", "", "error");
             }
             else{
               new Swal("Success", res.data.message, "success");
   
-              navigate.push('/dashboard/ecommerce');    
+              navigate.push('../dashboard/ecommerce');    
             }
   
             });})

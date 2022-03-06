@@ -41,17 +41,17 @@ const UsersList = () => {
   const handleClose = () => setShow(false);
   const handleCloseEditModal = () => setShowModal(false);
 
-  async function handleShow(id) {
-    setSelectedUser(id)
+  async function handleShow(user_id) {
+    setSelectedUser(user_id)
     setShow(true)
-    console.warn(id)
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/getOwner/" + id);
+    console.warn(user_id)
+    let result = await fetch("http://localhost:8000/api/getUser/" + user_id);
     result = await result.json();
     console.warn(result)
 
   }
-  async function handleShowModalEdit(id) {
-    setSelectedUser(id)
+  async function handleShowModalEdit(user_id) {
+    setSelectedUser(user_id)
 
     setShowModal(true)
  
@@ -68,7 +68,7 @@ const UsersList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/listOwner");
+    let result = await fetch("http://localhost:8000/api/listUser");
     result = await result.json();
     setData(result)
   }
@@ -102,10 +102,10 @@ const UsersList = () => {
     })
 
   }
-  async function search(key) {
+  async function searchUser(key) {
     if(key){
     console.warn(key)
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/search/" + key);
+    let result = await fetch("http://localhost:8000/api/searchUser/" + key);
     result = await result.json();
     console.warn(result)
     setData(result)
@@ -119,13 +119,13 @@ const UsersList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Owners List</CardTitle>
+          <CardTitle tag='h4'>Users List</CardTitle>
           <div className="col-sm-3">
-            <input type="text" onChange={(e) => search(e.target.value)} className="form-control" placeholder="Search Owner" />
+            <input type="text" onChange={(e) => searchUser(e.target.value)} className="form-control" placeholder="Search User" />
 
           </div>
           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New Owner
+            Add New User
           </Button>
           
         </CardHeader>
@@ -146,12 +146,12 @@ const UsersList = () => {
           {data.map((item) =>
             <tbody>
               <tr>
-                <td> <img style={{ width: 50, height: 50 }} src={"https://bmsback.herokuapp.com/" + item.file_path} /> </td>
+                <td> <img style={{ width: 50, height: 50 }} src={"http://localhost:8000/" + item.user_image} /> </td>
 
-                <td> <User size={14} />&nbsp;{item.name}</td>
-                <td> <Mail size={14} /> &nbsp;{item.email} </td>
-                <td> <Lock size={14} color=" #273746 " /> &nbsp; {item.password}</td>
-                <td> <Phone size={14} color="green" />&nbsp; {item.telephone} </td>
+                <td> <User size={14} />&nbsp;{item.user_name}</td>
+                <td> <Mail size={14} /> &nbsp;{item.user_email} </td>
+                <td> <Lock size={14} color=" #273746 " /> &nbsp; {item.user_password}</td>
+                <td> <Phone size={14} color="green" />&nbsp; {item.user_tel} </td>
 
                 <td>
                   <span onClick={() => deleteOperation(item.id)}>
@@ -163,7 +163,7 @@ const UsersList = () => {
                   <Edit size={20} color="#F5CBA7" />
                   </span>
                   &nbsp;&nbsp;
-                  <span onClick={() => handleShow(item.id)}>
+                  <span onClick={() => handleShow(item.user_id)}>
                     <Eye size={17}></Eye>
                   </span>
                 </td>
@@ -177,7 +177,7 @@ const UsersList = () => {
 
       <Modal isOpen={show}>
         <ModalHeader>
-          <h1>Owner Details</h1>
+          <h1>User Details</h1>
         </ModalHeader>
         <ModalBody>
           <LoginForm id={selectedUser} />
@@ -190,7 +190,7 @@ const UsersList = () => {
       </Modal>
       <Modal isOpen={showModal}>
         <ModalHeader>
-          <h1>Edit Owner </h1>
+          <h1>Edit User </h1>
         </ModalHeader>
         <ModalBody>
           <EditModal id={selectedUser} />

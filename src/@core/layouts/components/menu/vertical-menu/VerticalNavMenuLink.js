@@ -70,7 +70,7 @@ const VerticalNavMenuLink = ({
           }
         }}
       >
-       <img height={20} width={20} src={item.menu_icon}/>
+       <img height={20} width={20} src={item.menu_icon}/>&nbsp;
         <span className='menu-item text-truncate' >{t(item.menu_name)}</span>
 
         {item.badge && item.badgeText ? (

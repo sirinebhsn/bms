@@ -3,6 +3,8 @@ import i18n from 'i18next'
 import Backend from 'i18next-xhr-backend'
 import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
+import React, { Suspense } from 'react'
+import App from '../../App'
 
 i18n
 
@@ -15,6 +17,8 @@ i18n
   // Enables the hook initialization module
   .use(initReactI18next)
   .init({
+    supportedLngs:['en','fr','ly','pt'],
+  
     lng: 'en',
     backend: {
       /* translation file path */
@@ -33,4 +37,5 @@ i18n
 
   })
 
+ 
 export default i18n
