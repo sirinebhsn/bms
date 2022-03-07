@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 // ** Reactstrap Imports
 import { Badge } from 'reactstrap'
+import Icon from 'react-remixicon'
 
 const VerticalNavMenuLink = ({
   item,
@@ -70,7 +71,7 @@ const VerticalNavMenuLink = ({
           }
         }}
       >
-       <img height={20} width={20} src={item.menu_icon}/>&nbsp;
+        <Icon name={item.menu_icon} type={item.menu_icon_type}/>
         <span className='menu-item text-truncate' >{t(item.menu_name)}</span>
 
         {item.badge && item.badgeText ? (

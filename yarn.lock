@@ -10101,6 +10101,16 @@ react-dev-utils@^11.0.3:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
+react-dom@^16.8.6:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
+  integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.19.1"
+
 react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
@@ -10156,6 +10166,13 @@ react-fit@^1.4.0:
     prop-types "^15.6.0"
     tiny-warning "^1.0.0"
 
+react-flags-select@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-flags-select/-/react-flags-select-2.1.2.tgz#ba2593b6ce6285a3b9844a6df522c60bc3fe8c23"
+  integrity sha512-nx/6mY/nKVJB9sVZOylJoSI6idTYZfu0dtUQ0N1L+cD8VAPNl5c/lxL7yyi9vtn66hDRFy6Sr16GzsBj3aoZfQ==
+  dependencies:
+    classnames "^2.2.6"
+
 react-flatpickr@^3.9.1:
   version "3.10.7"
   resolved "https://registry.yarnpkg.com/react-flatpickr/-/react-flatpickr-3.10.7.tgz#bca6da2a1ccf23bb884881e2a1723073f0bfb391"
@@ -10178,6 +10195,11 @@ react-i18next@^11.13.0:
     html-escaper "^2.0.2"
     html-parse-stringify "^3.0.1"
 
+react-icons@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"
+  integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
+
 react-image-resizer@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/react-image-resizer/-/react-image-resizer-1.3.0.tgz#99e25bb94ab2fe888c26538c5d764abd2b4e2a93"
@@ -10197,6 +10219,13 @@ react-lang-dropdown@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/react-lang-dropdown/-/react-lang-dropdown-1.0.4.tgz#3020e090822414352d9129d5748154fb3c2a8dbd"
   integrity sha512-R+sFm3YNysdi+Y+AWgkHgHpfXWxXqTHBPuBeZk0mEaX4+7C4p1AQqkqafHq1DDk9mVeObU7HgBwqmtekq2o4Fg==
+
+react-languages-select@^1.0.20:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/react-languages-select/-/react-languages-select-1.0.20.tgz#a3697afab5fab140049f0c58caf966e306ef527b"
+  integrity sha512-JsnfSL1jCfGnC9VV5TvZ+R4rLCrA93u/0aybodHMbOQjPuRrUQhMOhFB/SiF+7LEZl+IIhF3sU0dEu4/9giFgA==
+  dependencies:
+    prop-types "^15.5.8"
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
@@ -10272,6 +10301,15 @@ react-refresh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
+
+react-remixicon@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-remixicon/-/react-remixicon-1.0.3.tgz#210d128afbd1b7d224617ae04b3c3c0bb87a7578"
+  integrity sha512-Zw5AYm0zs2Z9PTm6bL0BCr7TdAgzxd6xeFk4/93KAxA2A2S6FrJjd1SSdJ5X3xFS2R43NboktEjJ1d+ka0jYfg==
+  dependencies:
+    react "^16.8.6"
+    react-dom "^16.8.6"
+    remixicon "^1.3.1"
 
 react-resize-detector@^6.6.3:
   version "6.7.8"
@@ -10461,6 +10499,15 @@ react-transition-group@^4.3.0, react-transition-group@^4.4.2:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react@^16.8.6:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
     prop-types "^15.6.2"
 
 react@^17.0.2:
@@ -10682,6 +10729,11 @@ relateurl@^0.2.7:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
   integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
+
+remixicon@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/remixicon/-/remixicon-1.3.1.tgz#61c76bcc84353510e2a3f3dfc22dd96df5b712f0"
+  integrity sha512-493KVYMZ2V/kdlgg7OndZhf/pSAhgKimVfuCdvsrf4WxkiFOp3SJyU6WmYOJ9m3lxAv8ef7EUC0nOrmNr/TWFA==
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
@@ -11026,6 +11078,14 @@ saxes@^5.0.1:
   integrity sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==
   dependencies:
     xmlchars "^2.2.0"
+
+scheduler@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
+  integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 scheduler@^0.20.2:
   version "0.20.2"

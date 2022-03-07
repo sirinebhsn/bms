@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 // ** Third Party Components
@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 // ** Reactstrap Imports
 import { Collapse, Badge } from 'reactstrap'
+import  Icon  from 'react-remixicon';
 
 // ** Vertical Menu Items Component
 import VerticalNavMenuItems from './VerticalNavMenuItems'
@@ -131,14 +132,14 @@ const VerticalNavMenuGroup = ({
       })}
     >
       <Link className='d-flex align-items-center' to='/' onClick={e => onCollapseClick(e, item)}>
-      <img height={20} width={20} src={item.menu_icon}/>
-        <span className='menu-title text-truncate'>{t(item.menu_name)}</span>
+      <Icon name={item.menu_icon} type={item.menu_icon_type}/>
+          <span className='menu-title text-truncate'>{t(item.menu_name)}</span>
 
-        {item.badge && item.badgeText ? (
-          <Badge className='ms-auto me-1' color={item.badge} pill>
-            {item.badgeText}
-          </Badge>
-        ) : null}
+          {item.badge && item.badgeText ? (
+            <Badge className='ms-auto me-1' color={item.badge} pill>
+              {item.badgeText}
+            </Badge>
+          ) : null}
       </Link>
 
       {/* Render Child Recursively Through VerticalNavMenuItems Component */}

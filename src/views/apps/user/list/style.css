@@ -6,3 +6,19 @@
     Align-Items: center;
     Justify-Content: center;
 }
+.phone-input{
+
+    font-family: 'Lato', sans-serif;
+    width: 100%;
+    height: 40px;
+    background: none;
+    border: 1px solid rgb(65, 65, 65);
+    outline: none;
+    margin: 1rem;
+    font-size: 1rem;
+    padding-left: 1.5rem;
+    color: gray;
+    font-weight: thick;
+    border-radius: 5px;
+
+}
