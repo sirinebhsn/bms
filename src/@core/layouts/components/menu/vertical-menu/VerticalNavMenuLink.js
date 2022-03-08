@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 // ** Third Party Components
@@ -22,7 +22,6 @@ const VerticalNavMenuLink = ({
   // ** Hooks
   const { t } = useTranslation()
   const location = useLocation()
-
   useEffect(() => {
     if (currentActiveItem !== null) {
       setActiveItem(currentActiveItem)
@@ -72,6 +71,14 @@ const VerticalNavMenuLink = ({
         }}
       >
         <Icon name={item.menu_icon} type={item.menu_icon_type}/>
+        {item.menu_icon=='' && item.menu_icon_type=='' &&
+        <>
+        
+        <Icon name='home-3' type='line'></Icon>
+
+        </>
+
+        }
         <span className='menu-item text-truncate' >{t(item.menu_name)}</span>
 
         {item.badge && item.badgeText ? (

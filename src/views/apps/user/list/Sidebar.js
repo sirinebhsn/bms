@@ -6,18 +6,23 @@ import Sidebar from '@components/sidebar'
 import './style.css'
 
 // ** Reactstrap Imports
-import { Button, Label, Form, Row, Col, Input } from 'reactstrap'
+import { Button, Label, Form, Row, Col, Input, DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle } from 'reactstrap'
 import PhoneInput from 'react-phone-number-input'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import "react-datetime/css/react-datetime.css";
 import Datetime from 'react-datetime';
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
+import ReactCountryFlag from 'react-country-flag'
 
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const { t } = useTranslation()
 
+  const history = useHistory();
   const [buildingList, setBuildingList] = useState([]);
   const [errorList, setError] = useState([]);
   const [user_name, setName] = useState("");
@@ -35,19 +40,18 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [user_designation, setDesignation] = useState("");
   const [user_currlang, setLang] = useState("");
   const [user_member_type, setMembertype] = useState("");
-  const [user_ending_date, setEndingDate] = useState("");
-  const [user_date_creation, setCreationDate] = useState("");
+  const [user_ending_date, setEndingDate] = useState(new Date());
+  const [user_date_creation, setCreationDate] = useState(new Date());
 
-  // const current = new Date();
-  //const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/listBuildings`).then(res => {
+    axios.get(`https://bmsback.herokuapp.com/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     });
   }, [])
-  const [imgData, setImgData] = useState('https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png');
+
+  const [imgData, setImgData] = useState('https://cdn1.iconfinder.com/data/icons/avatar-3/512/Manager-512.png');
   const onChangePicture = e => {
     if (e.target.files[0]) {
       console.log("picture: ", e.target.files);
@@ -67,7 +71,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
       event.preventDefault();
     }
   }
-
 
   const addUser = (e) => {
     e.preventDefault();
@@ -92,25 +95,20 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('building_id', building_id);
 
 
-    axios.post(`http://localhost:8000/api/addUser`, formData).then(res => {
+    axios.post(`https://bmsback.herokuapp.com/api/addUser`, formData).then(res => {
+      console.log(res.data)
+
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);
-        window.location.reload(false);
-      }
-      else if (res.data.status == 422) {
-        (new Swal("All Fields are required", "", "error"));
-        setError(res.data.errors);
-      }
-      else if (res.data.status == 400) {
-        new Swal("This User Already Existed", "", "error");
-        setError(res.data.errors);
-      }
+        history.push('/apps/user/list');
 
-
+      }
+   
 
 
     });
+
   }
 
   return (
@@ -140,7 +138,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <>
               <Col sm='6' className='mb-1'>
 
-                <Label className='form-label' for='floor'>Select Building</Label>
+                <Label className='form-label' for='building_id'>Select Building</Label>
                 <select disabled id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                 >
 
@@ -160,7 +158,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <>
               <Col sm='6' className='mb-1'>
 
-                <Label className='form-label' for='floor'>Select Building</Label>
+                <Label className='form-label' for='building_id'>Select Building</Label>
                 <select id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                 >
 
@@ -181,42 +179,38 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         <Row>
           <Col sm='6' className='mb-1'>
 
-            <Label className='form-label' for='user_pre_address'>
+            <Label className='form-label' for='user_name'>
               User Name <span className='text-danger'>*</span>
             </Label>
-            <input type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setName(e.target.value)}
+            <input id='user_name' type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setName(e.target.value)}
               placeholder="User Name" /><br />
-            <small className='text-danger'>{errorList.user_name}</small>
           </Col>
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='user_email'>
               Email <span className='text-danger'>*</span>
             </Label>
-            <input type='email' onKeyDown={handleEnter} className="form-control"
+            <input type='email' id='user_email' onKeyDown={handleEnter} className="form-control"
               onChange={(e) => setEmail(e.target.value)} placeholder="Email" /><br />
-            <small className='text-danger'>{errorList.USER8email}</small>
 
           </Col>
         </Row>
         <Row>
           <Col sm='6' className='mb-1'>
 
-            <Label className='form-label' for='user_name'>
+            <Label className='form-label' for='user_password'>
               User Password <span className='text-danger'>*</span>
             </Label>
-            <input type='password' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPassword(e.target.value)}
+            <input type='password' id='user_password' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPassword(e.target.value)}
               placeholder="User Password" /><br />
-            <small className='text-danger'>{errorList.user_password}</small>
           </Col>
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='user_nid'>
-              User Nid <span classNambe='text-danger'>*</span>
+              User Nid <span className='text-danger'>*</span>
             </Label>
-            <input type='text' onKeyDown={handleEnter} className="form-control"
+            <input type='text' id='user_nid' onKeyDown={handleEnter} className="form-control"
               onChange={(e) => setNid(e.target.value)} placeholder="Type user NID here" /><br />
-            <small className='text-danger'>{errorList.user_nid}</small>
 
           </Col>
         </Row>
@@ -227,18 +221,16 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='user_pre_address'>
               Present Address <span className='text-danger'>*</span>
             </Label>
-            <input type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPresentAdress(e.target.value)}
+            <input type='text' id='user_pre_address' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPresentAdress(e.target.value)}
               placeholder="Present Address" /><br />
-            <small className='text-danger'>{errorList.user_pre_address}</small>
           </Col>
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='user_per_address'>
               Permenant Address <span className='text-danger'>*</span>
             </Label>
-            <input type='text' onKeyDown={handleEnter} className="form-control"
+            <input type='text' id='user_per_address' onKeyDown={handleEnter} className="form-control"
               onChange={(e) => setPermenantAdress(e.target.value)} placeholder="Permenant Address" /><br />
-            <small className='text-danger'>{errorList.user_per_address}</small>
 
           </Col>
         </Row>
@@ -251,32 +243,42 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='user_date_creation'>
               User Starting Date <span className='text-danger'>*</span>
             </Label>
-            <Datetime onKeyDown={handleEnter}
+            <input type="date" className='form-control' id='user_date_creation'
 
-              value={user_date_creation} onChange={setCreationDate} />
+              onChange={(e) => setCreationDate(e.target.value)}
+         
+              dateFormat="yyyy-MM-dd"
+            
+              
+            />
           </Col>
 
-          <small className='text-danger'>{errorList.user_date_creation}</small>
         </Row>
         <Row>
+   
           <Col sm='12' className='mb-1'>
             <Label className='form-label' for='user_ending_date'>
               User Ending Date <span className='text-danger'>*</span>
             </Label>
-            <Datetime onKeyDown={handleEnter}
+            <input type='date' className='form-control'
+              id='user_ending_date' 
+              onChange={(e) => setEndingDate(e.target.value)}
+            
+              dateFormat="yyyy-MM-dd"
 
-              value={user_ending_date} onChange={setEndingDate} />
+            
+            />
           </Col>
-          <small className='text-danger'>{errorList.user_ending_date}</small>
         </Row>
 
         <Row>
           <Label className='form-label' for='user_tel'>
             User Phone Number <span className='text-danger'>*</span>
           </Label>
-          <PhoneInput onKeyDown={handleEnter} placeholder="enter phone number"
+          <PhoneInput 
+            id='user_tel'
+            onKeyDown={handleEnter} placeholder="enter phone number"
             value={user_tel} onChange={setTelephone} />
-          <small className='text-danger'>{errorList.user_tel}</small>
         </Row> <br />
         <Row>
           <Col sm='6' className='mb-1'>
@@ -290,17 +292,23 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               <option value="2"> Leave </option>
 
             </select>
-            <small className='text-danger'>{errorList.user_status}</small>
 
           </Col>
           <Col>
-
             <Label className='form-label' for='user_currlang'>
-              Currant Language <span className='text-danger'>*</span>
-            </Label>
-            <input type='text' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setLang(e.target.value)} placeholder="Current Language" /><br />
-            <small className='text-danger'>{errorList.user_currlang}</small>
+            Currant Language <span className='text-danger'>*</span>
+            </Label> 
+            <select id='user_curr_lang' className='form-control' onChange={(e) => setLang(e.target.value)}
+            >
+              <option>Select Language</option>
+              <option value="English"> English </option>
+              <option value="French"> French </option>
+              <option value="German"> German </option>
+              <option value="Arabic"> Arabic </option>
+
+              
+
+            </select>
 
 
           </Col>
@@ -312,9 +320,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='user_designation'>
               User Designation<span className='text-danger'>*</span>
             </Label>
-            <input type='text' onKeyDown={handleEnter} className="form-control"
+            <textarea type='text' id='user_designation' onKeyDown={handleEnter} className="form-control"
               onChange={(e) => setDesignation(e.target.value)} placeholder="Designation" /><br />
-            <small className='text-danger'>{errorList.user_designation}</small>
 
 
           </Col>
@@ -327,7 +334,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 <Label className='form-label' for='user_salary'>
                   User salary <span className='text-danger'>*</span>
                 </Label>
-                <input disabled type='number' onKeyDown={handleEnter} className="form-control"
+                <input disabled type='number' id='user_salary' onKeyDown={handleEnter} className="form-control"
                   onChange={(e) => setSalary(e.target.value)} placeholder="Emlployee salary" /><br />
 
               </Col>
@@ -336,10 +343,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <>
               <Col sm='6' className='mb-1'>
 
-                <Label className='form-label' for='user_per_address'>
+                <Label className='form-label' for='user_salary'>
                   User salary <span className='text-danger'>*</span>
                 </Label>
-                <input type='number' onKeyDown={handleEnter} className="form-control"
+                <input type='number' id='user_salary' onKeyDown={handleEnter} className="form-control"
                   onChange={(e) => setSalary(e.target.value)} placeholder="Emlployee salary" /><br />
 
               </Col>
@@ -350,10 +357,18 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='user_member_type'>
               User Member Type <span className='text-danger'>*</span>
             </Label>
-            <input type='text' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setMembertype(e.target.value)} placeholder="User Member Type" /><br />
+            <select id='user_member_type' className='form-control' onChange={(e) => setMembertype(e.target.value)}
+            >
+              <option>Select User</option>
+              <option value="admin"> Admin </option>
+              <option value="worker"> Worker </option>
+              <option value="security guard"> Security guard </option>
+              <option value="guard"> Guard </option>
+            </select>
 
-          </Col>                </Row>
+          </Col>
+        </Row>
+   
         <div className='d-flex'>
           <div className='d-flex align-items-end mt-75 ms-1'>
             <div>
@@ -368,7 +383,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           </div>
         </div>
         <br />
-        <small className='text-danger'>{errorList.user_image}</small>
 
         <Button onClick={addUser} className='me-1' color='primary'>
           Submit

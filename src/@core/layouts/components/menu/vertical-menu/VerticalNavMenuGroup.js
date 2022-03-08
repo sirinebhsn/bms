@@ -133,6 +133,14 @@ const VerticalNavMenuGroup = ({
     >
       <Link className='d-flex align-items-center' to='/' onClick={e => onCollapseClick(e, item)}>
       <Icon name={item.menu_icon} type={item.menu_icon_type}/>
+      {item.menu_icon=='' && item.menu_icon_type=='' &&
+        <>
+        
+        <Icon name='home-3' type='line'></Icon>
+
+        </>
+
+        }
           <span className='menu-title text-truncate'>{t(item.menu_name)}</span>
 
           {item.badge && item.badgeText ? (

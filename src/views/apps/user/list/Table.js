@@ -52,14 +52,15 @@ const UsersList = () => {
   }
   async function handleShowModalEdit(user_id) {
     setSelectedUser(user_id)
-
     setShowModal(true)
- 
+    console.warn(user_id)
+    let result = await fetch("https://bmsback.herokuapp.com/api/getUser/" + user_id);
+    result = await result.json();
+    console.warn(result) 
   
   }
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [password, setShowPassword] = useState(false)
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
@@ -158,7 +159,7 @@ const UsersList = () => {
                     <Trash size={20} color="red" />
                   </span>
                   &nbsp;&nbsp;
-                  <span onClick={() => handleShowModalEdit(item.id)}>
+                  <span onClick={() => handleShowModalEdit(item.user_id)}>
 
                   <Edit size={20} color="#F5CBA7" />
                   </span>
@@ -180,7 +181,7 @@ const UsersList = () => {
           <h1>User Details</h1>
         </ModalHeader>
         <ModalBody>
-          <LoginForm id={selectedUser} />
+          <LoginForm user_id={selectedUser} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleClose}>
@@ -193,7 +194,7 @@ const UsersList = () => {
           <h1>Edit User </h1>
         </ModalHeader>
         <ModalBody>
-          <EditModal id={selectedUser} />
+          <EditModal user_id={selectedUser} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleCloseEditModal}>

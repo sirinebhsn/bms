@@ -20,10 +20,10 @@ const UsersList = () => {
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    getOwners();
+    getUsers();
   }, [])
-  async function getOwners() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/countOwners");
+  async function getUsers() {
+    let result = await fetch("http://localhost:8000/api/countUsers");
     result = await result.json();
     setData(result)
   }

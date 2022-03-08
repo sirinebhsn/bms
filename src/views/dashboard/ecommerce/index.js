@@ -12,7 +12,7 @@ import { AlertCircle, ArrowRight, Award, DollarSign, Eye, Heart, Home, List, Mes
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 
 // ** Reactstrap Imports
-import { Row, Col} from 'reactstrap'
+import { Row, Col, Button} from 'reactstrap'
 
 // ** Demo Components
 import CardCongratulations from '@src/views/ui-elements/cards/advance/CardCongratulations'
@@ -30,21 +30,24 @@ import '@styles/base/pages/dashboard-ecommerce.scss'
 const EcommerceDashboard = () => {
   const { colors } = useContext(ThemeColors)
   const trackBgColor = '#e9ecef'
-  const [owner, setOwner] = useState([]);
+  const [user, setUser] = useState([]);
   const [floor, setFloor] = useState([]);
   const [unit, setUnit] = useState([]);
   const [employee, setEmployee] = useState([]);
 
   useEffect(() => {
-    getOwners();
+    getUsers();
     getFloors();
     getUnits();
     getEmployees();
   }, [])
-  async function getOwners() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/countOwners");
+  useEffect(() => {
+    getUsers();
+  }, [])
+  async function getUsers() {
+    let result = await fetch("http://localhost:8000/api/countUsers");
     result = await result.json();
-    setOwner(result)
+    setUser(result)
   }
   async function getFloors() {
     let result = await fetch("https://bmsback.herokuapp.com/api/countFloors");
@@ -82,7 +85,10 @@ const EcommerceDashboard = () => {
             statTitle='Total Units' />
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<User size={24} />} color='danger' stats={owner} statTitle='Total Owner' />
+          <StatsVertical icon={<User size={24} />} color='danger' stats={user} statTitle='Total Users' >
+            
+            </StatsVertical>
+            
         </Col>
         <Col xl='3' md='4' sm='6'>
           <StatsVertical icon={<Users size={24} />} color='primary' stats='0' statTitle='Total Tenant' />
