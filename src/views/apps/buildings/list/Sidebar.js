@@ -17,7 +17,6 @@ import { useHistory } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import ReactCountryFlag from 'react-country-flag'
-import Cleave from 'cleave.js/react'
 
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
@@ -46,7 +45,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
 
   useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/listBuildings`).then(res => {
+    axios.get(`http://localhost:8000/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     });
@@ -96,7 +95,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('building_id', building_id);
 
 
-    axios.post(`https://bmsback.herokuapp.com/api/auth/addUser`, formData).then(res => {
+    axios.post(`http://localhost:8000/api/auth/addUser`, formData).then(res => {
       console.log(res.data)
 
       if (res.data.status == 200) {
@@ -105,6 +104,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         history.push('/apps/user/list');
 
       }
+   
+
 
     });
 
@@ -160,6 +161,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 <Label className='form-label' for='building_id'>Select Building</Label>
                 <select id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                 >
+
+
                   <option  >Select BUILDING</option>
                   {buildingList.map((item) => {
                     return (<option value={item.building_id}>{item.building_name}</option>
@@ -240,30 +243,30 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='user_date_creation'>
               User Starting Date <span className='text-danger'>*</span>
             </Label>
-            <input type="date"  className='form-control' id='user_date_creation'
+            <input type="date" className='form-control' id='user_date_creation'
 
               onChange={(e) => setCreationDate(e.target.value)}
-
+         
               dateFormat="yyyy-MM-dd"
-
-
+            
+              
             />
           </Col>
 
         </Row>
         <Row>
-
+   
           <Col sm='12' className='mb-1'>
             <Label className='form-label' for='user_ending_date'>
               User Ending Date <span className='text-danger'>*</span>
             </Label>
             <input type='date' className='form-control'
-              id='user_ending_date'
+              id='user_ending_date' 
               onChange={(e) => setEndingDate(e.target.value)}
-
+            
               dateFormat="yyyy-MM-dd"
 
-
+            
             />
           </Col>
         </Row>
@@ -272,7 +275,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Label className='form-label' for='user_tel'>
             User Phone Number <span className='text-danger'>*</span>
           </Label>
-          <PhoneInput
+          <PhoneInput 
             id='user_tel'
             onKeyDown={handleEnter} placeholder="enter phone number"
             value={user_tel} onChange={setTelephone} />
@@ -293,8 +296,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           </Col>
           <Col>
             <Label className='form-label' for='user_currlang'>
-              Currant Language <span className='text-danger'>*</span>
-            </Label>
+            Currant Language <span className='text-danger'>*</span>
+            </Label> 
             <select id='user_curr_lang' className='form-control' onChange={(e) => setLang(e.target.value)}
             >
               <option>Select Language</option>
@@ -303,7 +306,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               <option value="German"> German </option>
               <option value="Arabic"> Arabic </option>
 
-
+              
 
             </select>
 
@@ -365,7 +368,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
           </Col>
         </Row>
-
+   
         <div className='d-flex'>
           <div className='d-flex align-items-end mt-75 ms-1'>
             <div>

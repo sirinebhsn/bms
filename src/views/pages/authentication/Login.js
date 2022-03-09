@@ -39,33 +39,40 @@ const Login = () => {
 
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
 
-  source = require(`@src/assets/images/pages/${illustration}`).default
+    source = require(`@src/assets/images/pages/${illustration}`).default
 
-  const[email, setEmail]=useState("");
-  const[password, setPassword]=useState("");  
- const  navigate= useHistory()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let  navigate = useHistory()
   const login = (e) => {
     // ** Hooks
-      e.preventDefault();
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('password', password);
-    axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() =>{
-          axios.post(`https://bmsback.herokuapp.com/api/auth/login`, formData).then(res => {
-            if (res.data.status == 401) {
-              new Swal("All Fields are mandetory", "", "error");
-            }
-            else{
-              new Swal("Success", res.data.message, "success");
-  
-              navigate.push('../dashboard/ecommerce');    
-            }
-  
-            });})
-      
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
+      axios.post(`http://localhost:8000/api/auth/login`, formData).then(res => { 
+     
+    
+        if (res.data.status == 200) {
+          new Swal("Success", res.data.message, "success");
 
-          }
-             
+          navigate.push('/dashboard/ecommerce');
+          console.log(res.data)
+        }
+      //  else {
+         // new Swal("Success", res.data.message, "success");
+
+          //navigate.push('/dashboard/ecommerce');
+       // }
+
+
+      },[res.data,navigate]);
+    })
+
+
+  };
+
   return (
     <div className='auth-wrapper auth-cover'>
       <Row className='auth-inner m-0'>
@@ -160,8 +167,8 @@ const Login = () => {
                 <Label className='form-label' for='email'>
                   Email
                 </Label>
-                <input type='email'   className="form-control"
-              onChange={(e) => setEmail(e.target.value)} placeholder="Email" /><br />
+                <input id='email' type='email' className="form-control"
+                  onChange={(e) => setEmail(e.target.value)} placeholder="Email" /><br />
               </div>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
@@ -172,8 +179,8 @@ const Login = () => {
                     <small>Forgot Password?</small>
                   </Link>
                 </div>
-                <input type='password'   className="form-control"
-              onChange={(e) => setPassword(e.target.value)} placeholder="Email" /><br />
+                <input type='password' id='password' className="form-control"
+                  onChange={(e) => setPassword(e.target.value)} placeholder="Email" /><br />
               </div>
               <div className='form-check mb-1'>
                 <Input type='checkbox' id='remember-me' />
@@ -213,5 +220,5 @@ const Login = () => {
       </Row>
     </div>
   )
-                  }                  
+}
 export default Login

@@ -21,6 +21,7 @@ const HorizontalLayout = props => {
   return (
     <Layout menuData={menuData} {...props} >
             {props.children}
+            {props.thirdChild}
 
     </Layout>
   )
