@@ -90,14 +90,21 @@ const VerticalLayout = props => {
   //** This function will detect the Route Change and will hide the menu on menu item click
   useEffect(() => {
     if (menuVisibility && windowWidth < 1200) {
+      return () => { 
+
       setMenuVisibility(false)
+      }
     }
   }, [location])
 
   //** Sets Window Size & Layout Props
   useEffect(() => {
+
     if (window !== undefined) {
+      return () => { 
+
       window.addEventListener('resize', handleWindowWidth)
+      }
     }
   }, [windowWidth])
 

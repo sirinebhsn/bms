@@ -33,7 +33,32 @@ import '@styles/react/pages/page-authentication.scss'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
+const ToastContent = ({ user_name, user_type }) => (
+  <Fragment>
+    <div className='toastify-header'>
+      <div className='title-wrapper'>
+        <Avatar size='sm' color='success' icon={<Coffee size={12} />} />
+        <h6 className='toast-title fw-bold'>Welcome, {user_name}</h6>
+      </div>
+    </div>
+    <div className='toastify-body'>
+      {
+        user_type=='S' && 
+        <>
+        <span>You have successfully logged in as  Super admin user to BMS. </span>
 
+        </>
+      }
+      {
+        user_type=='a' && 
+        <>
+        <span>You have successfully logged in as an Admin user to BMS. </span>
+
+        </>
+      }
+    </div>
+  </Fragment>
+)
 const Login = () => {
   const { skin } = useSkin()
 
@@ -43,35 +68,40 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  let  navigate = useHistory()
+  const navigate = useHistory()
+
   const login = (e) => {
     // ** Hooks
     e.preventDefault();
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
+
     axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
-      axios.post(`http://localhost:8000/api/auth/login`, formData).then(res => { 
-     
+      axios.post(`http://localhost:8000/api/auth/login`, formData).then(response => { 
     
-        if (res.data.status == 200) {
-          new Swal("Success", res.data.message, "success");
-
-          navigate.push('/dashboard/ecommerce');
-          console.log(res.data)
+        if (response.data.status == 200) {
+          localStorage.setItem("accessToken", response.data.accessToken)
+          localStorage.setItem("email", response.data.email)
+          localStorage.setItem("password", response.data.password)
+          localStorage.setItem("user_name", response.data.user_name)
+        
+        
+          navigate.push(getHomeRouteForLoggedInUser(response.data.user_type));
+          toast.success(
+            <ToastContent user_name={response.data.user_name || 'John Doe'} user_type={response.data.user_type || 'admin'} />,
+            { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }
+          )
+        // console.log(response.data)
         }
-      //  else {
-         // new Swal("Success", res.data.message, "success");
+   
 
-          //navigate.push('/dashboard/ecommerce');
-       // }
-
-
-      },[res.data,navigate]);
+      });
     })
 
 
   };
+
 
   return (
     <div className='auth-wrapper auth-cover'>
@@ -180,7 +210,7 @@ const Login = () => {
                   </Link>
                 </div>
                 <input type='password' id='password' className="form-control"
-                  onChange={(e) => setPassword(e.target.value)} placeholder="Email" /><br />
+                  onChange={(e) => setPassword(e.target.value)} placeholder="Password" /><br />
               </div>
               <div className='form-check mb-1'>
                 <Input type='checkbox' id='remember-me' />

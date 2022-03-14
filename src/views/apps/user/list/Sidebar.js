@@ -18,6 +18,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import ReactCountryFlag from 'react-country-flag'
 import Cleave from 'cleave.js/react'
+import moment from "moment";
 
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
@@ -43,10 +44,13 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [user_member_type, setMembertype] = useState("");
   const [user_ending_date, setEndingDate] = useState(new Date());
   const [user_date_creation, setCreationDate] = useState(new Date());
+  
+  const current = new Date();
+  //const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
-
+  const date=`${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`
   useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/listBuildings`).then(res => {
+    axios.get(`http://localhost:8000/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     });
@@ -101,8 +105,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
-        setError([]);
-        history.push('/apps/user/list');
+        history.push('./apps/user/list');
 
       }
 
@@ -240,8 +243,9 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='user_date_creation'>
               User Starting Date <span className='text-danger'>*</span>
             </Label>
-            <input type="date"  className='form-control' id='user_date_creation'
+            <input type="date" className='form-control' id='user_date_creation'
 
+              defaultValue={new Date().toISOString().slice(0,10)}
               onChange={(e) => setCreationDate(e.target.value)}
 
               dateFormat="yyyy-MM-dd"
@@ -260,7 +264,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <input type='date' className='form-control'
               id='user_ending_date'
               onChange={(e) => setEndingDate(e.target.value)}
-
+              defaultValue={new Date().toISOString().slice(0,10)}
               dateFormat="yyyy-MM-dd"
 
 

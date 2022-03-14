@@ -27,7 +27,10 @@ const NavbarSearch = () => {
   // ** ComponentDidMount
   useEffect(() => {
     axios.get('/api/main-search/data').then(({ data }) => {
+      return () => { 
+
       setSuggestions(data.searchArr)
+      }
     })
   }, [])
 

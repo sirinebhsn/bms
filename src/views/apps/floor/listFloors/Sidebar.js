@@ -5,19 +5,18 @@ import { useEffect, useState } from 'react'
 import Sidebar from '@components/sidebar'
 
 // ** Reactstrap Imports
-import { Button, Label, Form, Row, Col } from 'reactstrap'
+import { Button, Label, Form, Row, Col, Input } from 'reactstrap'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
 const SidebarNewFloor = ({ open, toggleSidebar }) => {
-  const [listBuilding, setBuildingList]=useState([]);
+  const [userData, setUserData]=useState([]);
 
   useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/listBuildings`).then(res => {
-
-      setBuildingList(res.data);
-    });
-  }, [])
+      axios.get(`http://localhost:8000/api/auth/user`).then(response => {
+        setUserData(response.data)
+      })
+  }, [userData])
   const [errorList, setError] = useState([]);
   const [floor_num, setFloornum] = useState("");
   const [floor_name, setFloorName] = useState("");
@@ -36,7 +35,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
     formData.append('floor_added_date', floor_added_date);
     formData.append('building_id', building_id);
 
-    axios.post(`https://bmsback.herokuapp.com/api/addFloor`, formData).then(res => {
+    axios.post(`http://localhost:8000/api/addFloor`, formData).then(res => {
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);
@@ -137,17 +136,9 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
          </Row>
 
           <Col sm='12' className='mb-1'>
-            <Label className='form-label' for='floor'>Select Building</Label>
-            <select id='building_id'  className='form-control' onChange={(e) => setBuildingid(e.target.value)}
-            >
-           <option>Select BUILDING</option>
-              {listBuilding.map((item) => {
-                return (<option value={item.building_id}>{item.building_name}</option>
-                )
-
-              })
-              }
-            </select>
+            <Label className='form-label' for='building_id'>Building</Label>
+            <Input type='text' onChange={(e) => setBuildingid(e.target.value)}  id='building_id' defaultValue={(userData && userData?.buildings?.building_id)}/>
+           
           </Col>
         </Row>
         <Button onClick={addFloor} className='me-1' color='primary'>

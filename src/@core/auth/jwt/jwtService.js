@@ -29,7 +29,6 @@ export default class JwtService {
       },
       error => Promise.reject(error)
     )
-
     // ** Add request/response interceptor
     axios.interceptors.response.use(
       response => response,
@@ -62,12 +61,11 @@ export default class JwtService {
             })
           })
           return retryOriginalRequest
-        }
+        }1
         return Promise.reject(error)
       }
     )
   }
-
   onAccessTokenFetched(accessToken) {
     this.subscribers = this.subscribers.filter(callback => callback(accessToken))
   }

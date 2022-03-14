@@ -95,22 +95,21 @@ mock.onPost('/jwt/login').reply(request => {
 
 mock.onPost('/jwt/register').reply(request => {
   if (request.data.length > 0) {
-    const { email, password, username } = JSON.parse(request.data)
+    const { email, password, user_name } = JSON.parse(request.data)
     const isEmailAlreadyInUse = data.users.find(user => user.email === email)
-    const isUsernameAlreadyInUse = data.users.find(user => user.username === username)
+    const isUsernameAlreadyInUse = data.users.find(user => user.user_name === user_name)
     const error = {
       email: isEmailAlreadyInUse ? 'This email is already in use.' : null,
-      username: isUsernameAlreadyInUse ? 'This username is already in use.' : null
+      user_name: isUsernameAlreadyInUse ? 'This username is already in use.' : null
     }
 
-    if (!error.username && !error.email) {
+    if (!error.user_name && !error.email) {
       const userData = {
         email,
         password,
-        username,
-        fullName: '',
+        user_name,
         avatar: null,
-        role: 'admin',
+        user_type: 'S',
         ability: [
           {
             action: 'manage',

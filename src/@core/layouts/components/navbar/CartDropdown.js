@@ -27,7 +27,10 @@ const CartDropdown = () => {
 
   // ** ComponentDidMount
   useEffect(() => {
+    return () => { 
+
     dispatch(getCartItems())
+    }
   }, [])
 
   // ** Function to toggle Dropdown

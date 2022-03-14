@@ -34,6 +34,7 @@ import LoginForm from './DetailsModal'
 import UserInfoEdit from './UserInfoEdit'
 import EditModal from './EditModal'
 
+
 // ** Table Header
 const UsersList = () => {
   const [selectedUser, setSelectedUser] = useState();
@@ -46,7 +47,7 @@ const UsersList = () => {
     setSelectedUser(user_id)
     setShow(true)
     console.warn(user_id)
-    let result = await fetch("https://bmsback.herokuapp.com/api/getUser/" + user_id);
+    let result = await fetch("http://localhost:8000/api/auth/getUser/" + user_id);
     result = await result.json();
     console.warn(result)
 
@@ -56,11 +57,12 @@ const UsersList = () => {
     setSelectedUser(user_id)
     setShowModal(true)
     console.warn(user_id)
-    let result = await fetch("https://bmsback.herokuapp.com/api/getUser/" + user_id);
+    let result = await fetch("http://localhost:8000/api/auth/getUser/" + user_id);
     result = await result.json();
     console.warn(result) 
   
   }
+var CryptoJS = require("crypto-js");
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -71,13 +73,13 @@ const UsersList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/listUser");
+    let result = await fetch("http://localhost:8000/api/auth/listUser");
     result = await result.json();
     setData(result)
   }
 
   async function deleteOperation(user_id) {
-    let result = await fetch("https://bmsback.herokuapp.com/api/deleteUser/" + user_id, {
+    let result = await fetch("http://localhost:8000/api/deleteUser/" + user_id, {
       method: "DELETE"
 
     });
@@ -108,7 +110,7 @@ const UsersList = () => {
   async function searchUser(key) {
     if(key){
     console.warn(key)
-    let result = await fetch("https://bmsback.herokuapp.com/api/searchUser/" + key);
+    let result = await fetch("http://localhost:8000/api/searchUser/" + key);
     result = await result.json();
     console.warn(result)
     setData(result)
@@ -120,6 +122,7 @@ const UsersList = () => {
 
   return (
     <Fragment>
+
       <Card>
         <CardHeader>
           <CardTitle tag='h4'>Users List</CardTitle>
@@ -149,11 +152,17 @@ const UsersList = () => {
           {data.map((item) =>
             <tbody>
               <tr>
-                <td> <img style={{ width: 50, height: 50 }} src={"https://bmsback.herokuapp.com/" + item.user_image} /> </td>
+                <td> <img style={{ width: 50, height: 50 }} src={item.user_image} /> </td>
 
                 <td> <User size={14} />&nbsp;{item.user_name}</td>
                 <td> <Mail size={14} /> &nbsp;{item.email} </td>
-                <td> <Lock size={14} color=" #273746 " /> &nbsp; {item.password}</td>
+                <td> &nbsp;{item.password.replace(item.password, "**********")}
+                &nbsp;<Eye size={12} ></Eye>
+
+
+
+
+</td>
                 <td> <Phone size={14} color="green" />&nbsp; {item.user_tel} </td>
 
                 <td>

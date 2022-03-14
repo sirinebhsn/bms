@@ -9,7 +9,7 @@ const LoginForm = ({ user_id }) => {
   const [user, setUser] = useState([])
   useEffect(() => {
     if (user_id) {
-      axios.get(`http://localhost:8000/api/getUser/` + user_id).then(response =>
+      axios.get(`http://localhost:8000/api/auth/getUser/` + user_id).then(response =>
         setUser(response.data)
       )
     }
@@ -26,14 +26,14 @@ const LoginForm = ({ user_id }) => {
           <div className='me-25'>
             <Row>
               <Col sm='4'>
-                <img className="center" style={{ width: 150, height: 150 }} src={"http://localhost:8000/" + user.user_image} /><br />
+                <img className="center" style={{ width: 150, height: 150 }} src={user.user_image} /><br />
               </Col>
 
               <Col sm='6'>
                 <br /><br />
-                <h3>&nbsp;&nbsp;{user?.user_name}</h3><br />
-                <h4 color="red"> {user?.user_designation}&nbsp;&nbsp;<Smile color="blue" size={20} />
-                </h4>
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;{user?.user_name}</h3><br />
+                <h5 color="red">&nbsp;&nbsp;{user?.user_designation}
+                </h5>
 
               </Col>
 
@@ -49,7 +49,7 @@ const LoginForm = ({ user_id }) => {
         <hr />
         <p><h4> &nbsp;&nbsp; Phone number :  &nbsp;&nbsp;<Phone size={17} color="green" /> {user?.user_tel}</h4></p>
         <hr />
-        <p><h4> &nbsp;&nbsp;Password : &nbsp;&nbsp; <Lock color="grey" size={17} />{user?.password}</h4></p>
+        <p><h4> &nbsp;&nbsp;Password : &nbsp;&nbsp; <Lock color="grey" size={17} />{user?.password.replace(user.password, "**********")}</h4></p>
         <hr />
         <p><h4> &nbsp;&nbsp;NID : &nbsp;&nbsp; <Lock color="BlueViolet" size={17} /> {user?.user_nid}</h4></p>
         <hr />
@@ -57,7 +57,7 @@ const LoginForm = ({ user_id }) => {
         <hr />
         <p><h4> &nbsp;&nbsp;Permenant Address : &nbsp;&nbsp; <MapPin size={17} color='CadetBlue' />   {user?.user_per_address}</h4></p>
         <hr />
-        <p><h4> &nbsp;&nbsp;Building :  &nbsp;&nbsp;  <Home size={17} color='BlueViolet' /> {user?.building_id}</h4></p>
+        <p><h4> &nbsp;&nbsp;Building :  &nbsp;&nbsp;  <Home size={17} color='BlueViolet' />{user?.build?.building_name}</h4></p>
         <hr />
 
         <p><h4> &nbsp;&nbsp;Starting Date : &nbsp; <Calendar color="blue" size={17} />  {user?.user_date_creation}</h4></p>

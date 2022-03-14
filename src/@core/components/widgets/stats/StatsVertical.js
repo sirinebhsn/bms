@@ -1,5 +1,6 @@
 // ** Third Party Components
 import PropTypes from 'prop-types'
+import { Nav, NavItem, NavLink } from 'reactstrap'
 
 // ** Reactstrap Imports
 import { Card, CardBody } from 'reactstrap'
@@ -13,6 +14,13 @@ const StatsVertical = ({ icon, color, stats, statTitle, className }) => {
         </div>
         <h2 className='fw-bolder'>{stats}</h2>
         <p className='card-text line-ellipsis'>{statTitle}</p>
+        <Nav>
+          <NavItem>
+            <NavLink href='/' active>
+              Active
+            </NavLink>
+          </NavItem>
+        </Nav>
       </CardBody>
     </Card>
   )
@@ -26,5 +34,6 @@ StatsVertical.propTypes = {
   icon: PropTypes.element.isRequired,
   color: PropTypes.string.isRequired,
   stats: PropTypes.string.isRequired,
-  statTitle: PropTypes.string.isRequired
+  statTitle: PropTypes.string.isRequired,
+
 }

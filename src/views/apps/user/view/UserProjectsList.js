@@ -10,6 +10,7 @@ import { Row, Col, Form, Card, Input, Label, Button, CardBody, CardTitle, CardHe
 import PhoneInput from 'react-phone-number-input'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import "../list/style.css"
 import { useHistory } from 'react-router-dom'
 
 const UserProjectsList = () => {
@@ -18,8 +19,8 @@ const UserProjectsList = () => {
   const [buildingList, setBuildingList] = useState([]);
   const [errorList, setError] = useState([]);
   const [user_name, setName] = useState("");
-  const [user_email, setEmail] = useState("");
-  const [user_password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [user_tel, setTelephone] = useState("");
   const [user_nid, setNid] = useState("");
   const [user_pre_address, setPresentAdress] = useState("");
@@ -35,9 +36,8 @@ const UserProjectsList = () => {
   const [user_ending_date, setEndingDate] = useState(new Date());
   const [user_date_creation, setCreationDate] = useState(new Date());
 
-
   useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/listBuildings`).then(res => {
+    axios.get(`http://localhost:8000/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     });
@@ -69,8 +69,8 @@ const UserProjectsList = () => {
     const formData = new FormData();
     formData.append('user_name', user_name);
     formData.append('user_type', user_type);
-    formData.append('user_email', user_email);
-    formData.append('user_password', user_password);
+    formData.append('email', email);
+    formData.append('password', password);
     formData.append('user_tel', user_tel);
     formData.append('user_nid', user_nid);
     formData.append('user_pre_address', user_pre_address);
@@ -87,7 +87,7 @@ const UserProjectsList = () => {
     formData.append('building_id', building_id);
 
 
-    axios.post(`https://bmsback.herokuapp.com/api/addUser`, formData).then(res => {
+    axios.post(`http://localhost:8000/api/auth/addUser`, formData).then(res => {
       console.log(res.data)
 
       if (res.data.status == 200) {
@@ -96,7 +96,7 @@ const UserProjectsList = () => {
         history.push('/apps/user/list');
 
       }
-   
+
 
 
     });
@@ -104,7 +104,7 @@ const UserProjectsList = () => {
   }
 
   return (
-    <Fragment>
+    <Col style={{ width: '70rem' }}>
       <Card>
         <CardHeader className='border-bottom'>
           <CardTitle>
@@ -124,7 +124,7 @@ const UserProjectsList = () => {
                     Upload
                     <div className='me-25'>
 
-                      <Input id='user_image' type='file' onChange={onChangePicture} onKeyDown={handleEnter}
+                      <Input id='owner-picture' type='file' onChange={onChangePicture} onKeyDown={handleEnter}
                         hidden accept='image/*' />
                     </div>
                   </Button>
@@ -199,10 +199,10 @@ const UserProjectsList = () => {
 
               </Col>
               <Col sm='6' className='mb-1'>
-                <Label className='form-label' for='user_email'>
+                <Label className='form-label' for='email'>
                   User Email
                 </Label>
-                <Input id='user_email' placeholder='User Email'
+                <Input id='email' placeholder='User Email'
                   onChange={(e) =>
                     setEmail(e.target.value)} />
 
@@ -210,10 +210,10 @@ const UserProjectsList = () => {
             </Row>
             <Row>
               <Col sm='6' className='mb-1'>
-                <Label className='form-label' for='user_password'>
+                <Label className='form-label' for='password'>
                   User Password
                 </Label>
-                <Input id='user_password' type='password' placeholder='user_password'
+                <Input id='password' type='password' placeholder='password'
                   onChange={(e) =>
                     setPassword(e.target.value)} />
               </Col>
@@ -243,16 +243,14 @@ const UserProjectsList = () => {
                 </Label>
                 <input type='text' id='user_per_address' onKeyDown={handleEnter} className="form-control"
                   onChange={(e) => setPermenantAdress(e.target.value)} placeholder="Permenant Address" /><br />
-
               </Col>
             </Row>
             <Row>
               <Col sm='6' className='mb-1'>
-                <Label className='form-label' for='user_date_creation'>
+                <Label className='form-label' for='user_date_creation' >
                   User Starting Date <span className='text-danger'>*</span>
                 </Label>
                 <input type="date" className='form-control' id='user_date_creation'
-
                   onChange={(e) => setCreationDate(e.target.value)}
 
                   dateFormat="yyyy-MM-dd"
@@ -277,10 +275,10 @@ const UserProjectsList = () => {
             </Row>
             <Row>
               <Col sm='6' className='mb-1'>
-                <Label className='form-label' for='user'>
+                <Label className='form-label' for='user_tel'>
                   Phone Number
                 </Label>
-                <PhoneInput placeholder="enter phone number"
+                <PhoneInput placeholder="enter phone number" id="user_tel"
                   value={user_tel} onChange={setTelephone} />
               </Col>
 
@@ -369,22 +367,25 @@ const UserProjectsList = () => {
                   <option value="security guard"> Security guard </option>
                   <option value="guard"> Guard </option>
                 </select>
+              </Col>
+
+              <Col sm='6' className='mb-1'>
+                <br />
+                <Button onClick={addUser} className='me-1' color='primary'>
+                  Add User
+                </Button>
+                <Button type='reset'  className='me-1' color='secondary' >
+                  Cancel
+                </Button>
 
               </Col>
 
             </Row>
-            <br />
-            <Button onClick={addUser} className='me-1' color='primary'>
-              Add User
-            </Button>
-            <Button color='secondary' outline>
-              Cancel
-            </Button>
+
           </Form>
         </CardBody>
       </Card>
-    </Fragment>
-  )
+    </Col>)
 }
 
 
