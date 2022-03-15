@@ -23,7 +23,7 @@ const VerticalMenuHeader = props => {
       axios.get(`http://localhost:8000/api/auth/user`).then(response => {
         setUserData(response.data)
        })
-  }, [menuHover, menuCollapsed,userData])
+  }, [menuHover, menuCollapsed])
 
   // ** Menu toggler component
   const Toggler = () => {

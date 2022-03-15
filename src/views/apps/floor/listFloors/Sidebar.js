@@ -10,13 +10,15 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 const SidebarNewFloor = ({ open, toggleSidebar }) => {
-  const [userData, setUserData]=useState([]);
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-      axios.get(`http://localhost:8000/api/auth/user`).then(response => {
-        setUserData(response.data)
-      })
-  }, [userData])
+    axios.get(`http://localhost:8000/api/auth/user`).then(response => {
+      setUserData(response.data)
+    })
+  })
+
+
   const [errorList, setError] = useState([]);
   const [floor_num, setFloornum] = useState("");
   const [floor_name, setFloorName] = useState("");
@@ -24,8 +26,8 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
   const [floor_area, setFloorArea] = useState("");
   const [building_id, setBuildingid] = useState("");
   const [floor_elevator, setFloorElevator] = useState("");
- 
-   const addFloor = (e) => {
+
+  const addFloor = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('floor_name', floor_name);
@@ -46,7 +48,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
         new Swal("All Fields are mandetory", "", "error");
         setError(res.data.errors);
       }
-      else if(res.data.status == 400) {
+      else if (res.data.status == 400) {
         new Swal("This Floor already existed", "", "error");
         setError(res.data.errors);
       }
@@ -71,8 +73,8 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='floor_num'>
               Floor Number <span className='text-danger'>*</span>
             </Label>
-            <input type='number' id='floor_num' className='form-control' onChange={(e) => setFloornum(e.target.value)}/>
-           
+            <input type='number' id='floor_num' className='form-control' onChange={(e) => setFloornum(e.target.value)} />
+
 
             <br />
           </Col>
@@ -84,8 +86,8 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='floor_name'>
               Floor Name <span className='text-danger'>*</span>
             </Label>
-            <input type='text' id='floor_name' className='form-control' onChange={(e) => setFloorName(e.target.value)}/>
-           
+            <input type='text' id='floor_name' className='form-control' onChange={(e) => setFloorName(e.target.value)} />
+
 
             <br />
           </Col>
@@ -94,7 +96,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
 
         <Row>
           <Col sm='12' className='mb-1'>
-        
+
 
 
             <Label className='form-label' for='floor_elevator'>
@@ -104,41 +106,41 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
               onChange={(e) =>
                 setFloorElevator(e.target.value)
               }>
-                
+              <option value=''> Select</option>
               <option value='1'>Disponible</option>
               <option value='0'>Non Disponible</option>
 
-             </select>
-           
-            <br/>
-          </Col>
-        </Row>
-        <Row>
-        <Row>
-          <Col sm='12' className='mb-1'>
-
-            <Label className='form-label' for='name'>
-              Floor Area <span className='text-danger'>*</span>
-            </Label>
-            <input type='number' id='floor_area' className='form-control' onChange={(e) => setFloorArea(e.target.value)}/>
-           
+            </select>
 
             <br />
           </Col>
-
         </Row>
         <Row>
-        <Col sm='12' className='mb-1'>
-        <Label className='form-label' for='floor_added_date'>Select Date </Label>
+          <Row>
+            <Col sm='12' className='mb-1'>
 
-           <input type="date" onChange={(e) => setDate(e.target.value)} value={floor_added_date} format="y-MM-dd h:mm:ss a" />
-          </Col>
-         </Row>
+              <Label className='form-label' for='name'>
+                Floor Area <span className='text-danger'>*</span>
+              </Label>
+              <input type='number' id='floor_area' className='form-control' onChange={(e) => setFloorArea(e.target.value)} />
+
+
+              <br />
+            </Col>
+
+          </Row>
+          <Row>
+            <Col sm='12' className='mb-1'>
+              <Label className='form-label' for='floor_added_date'>Select Date </Label>
+
+              <input type="date" onChange={(e) => setDate(e.target.value)} value={floor_added_date} format="yyyy-MM-dd" />
+            </Col>
+          </Row>
 
           <Col sm='12' className='mb-1'>
-            <Label className='form-label' for='building_id'>Building</Label>
-            <Input type='text' onChange={(e) => setBuildingid(e.target.value)}  id='building_id' defaultValue={(userData && userData?.buildings?.building_id)}/>
-           
+         
+            <input type='hidden' id='building_id' name='building_id' value={(userData && userData?.buildings?.building_id)} ref={() => setBuildingid(userData && userData?.buildings?.building_id)} />
+
           </Col>
         </Row>
         <Button onClick={addFloor} className='me-1' color='primary'>

@@ -87,7 +87,7 @@ const Login = () => {
           localStorage.setItem("user_name", response.data.user_name)
         
         
-          navigate.push(getHomeRouteForLoggedInUser(response.data.user_type));
+          navigate.push('/dashboard/ecommerce');
           toast.success(
             <ToastContent user_name={response.data.user_name || 'John Doe'} user_type={response.data.user_type || 'admin'} />,
             { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }
@@ -101,8 +101,6 @@ const Login = () => {
 
 
   };
-
-
   return (
     <div className='auth-wrapper auth-cover'>
       <Row className='auth-inner m-0'>
@@ -173,12 +171,12 @@ const Login = () => {
               <div className='alert-body font-small-2'>
                 <p>
                   <small className='me-50'>
-                    <span className='fw-bold'>Admin:</span> admin@demo.com | admin
+                    <span className='fw-bold'>S.Admin:</span> start-now@start-now.fr | Syrine004#*
                   </small>
                 </p>
                 <p>
                   <small className='me-50'>
-                    <span className='fw-bold'>Client:</span> client@demo.com | client
+                    <span className='fw-bold'>Admin:</span> syrine@start-now.tn | Syrine004#*
                   </small>
                 </p>
               </div>
@@ -209,7 +207,8 @@ const Login = () => {
                     <small>Forgot Password?</small>
                   </Link>
                 </div>
-                <input type='password' id='password' className="form-control"
+                <input type='password' id='password' className="form-control"  
+                
                   onChange={(e) => setPassword(e.target.value)} placeholder="Password" /><br />
               </div>
               <div className='form-check mb-1'>

@@ -42,6 +42,13 @@ const UsersList = () => {
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShow(false);
   const handleCloseEditModal = () => setShowModal(false);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const togglePassword = () => {
+    // When the handler is invoked
+
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
+  };
 
   async function handleShow(user_id) {
     setSelectedUser(user_id)
@@ -62,7 +69,6 @@ const UsersList = () => {
     console.warn(result) 
   
   }
-var CryptoJS = require("crypto-js");
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -156,9 +162,10 @@ var CryptoJS = require("crypto-js");
 
                 <td> <User size={14} />&nbsp;{item.user_name}</td>
                 <td> <Mail size={14} /> &nbsp;{item.email} </td>
-                <td> &nbsp;{item.password.replace(item.password, "**********")}
+                <td> &nbsp;{passwordShown ? item.password : item.password.replace(item.password, "**********")}
+                <span onClick={togglePassword}>
                 &nbsp;<Eye size={12} ></Eye>
-
+                </span>
 
 
 

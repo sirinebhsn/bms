@@ -77,6 +77,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     }
   }
 
+  
+
   const addUser = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -99,8 +101,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('user_date_creation', user_date_creation);
     formData.append('building_id', building_id);
 
-
-    axios.post(`https://bmsback.herokuapp.com/api/auth/addUser`, formData).then(res => {
+console.log(formData)
+    axios.post(`http://localhost:8000/api/auth/addUser`, formData).then(res => {
       console.log(res.data)
 
       if (res.data.status == 200) {
@@ -245,7 +247,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             </Label>
             <input type="date" className='form-control' id='user_date_creation'
 
-              defaultValue={new Date().toISOString().slice(0,10)}
               onChange={(e) => setCreationDate(e.target.value)}
 
               dateFormat="yyyy-MM-dd"
@@ -264,7 +265,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <input type='date' className='form-control'
               id='user_ending_date'
               onChange={(e) => setEndingDate(e.target.value)}
-              defaultValue={new Date().toISOString().slice(0,10)}
               dateFormat="yyyy-MM-dd"
 
 
