@@ -50,7 +50,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
   const date=`${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/listBuildings`).then(res => {
+    axios.get(`https://bms-back.start-now.fr/public/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     });
@@ -102,7 +102,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('building_id', building_id);
 
 console.log(formData)
-    axios.post(`http://localhost:8000/api/auth/addUser`, formData).then(res => {
+    axios.post(`https://bms-back.start-now.fr/public/api/auth/addUser`, formData).then(res => {
       console.log(res.data)
 
       if (res.data.status == 200) {

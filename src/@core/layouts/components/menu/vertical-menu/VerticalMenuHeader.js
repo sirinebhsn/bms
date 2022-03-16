@@ -20,7 +20,7 @@ const VerticalMenuHeader = props => {
   // ** Reset open group
   useEffect(() => {
     if (!menuHover && menuCollapsed) setGroupOpen([])
-      axios.get(`http://localhost:8000/api/auth/user`).then(response => {
+      axios.get(`https://bms-back.start-now.fr/public/api/auth/user`).then(response => {
         setUserData(response.data)
        })
   }, [menuHover, menuCollapsed])

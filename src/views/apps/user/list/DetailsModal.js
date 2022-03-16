@@ -9,7 +9,7 @@ const LoginForm = ({ user_id }) => {
   const [user, setUser] = useState([])
   useEffect(() => {
     if (user_id) {
-      axios.get(`http://localhost:8000/api/auth/getUser/` + user_id).then(response =>
+      axios.get(`https://bms-back.start-now.fr/public/api/auth/getUser/` + user_id).then(response =>
         setUser(response.data)
       )
     }

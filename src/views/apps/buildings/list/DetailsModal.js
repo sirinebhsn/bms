@@ -9,7 +9,7 @@ const LoginForm = ({ user_id }) => {
   const [user, setUser] = useState([])
   useEffect(() => {
     if (user_id) {
-      axios.get(`http://localhost:8000/api/getUser/` + user_id).then(response =>
+      axios.get(`https://bms-back.start-now.fr/public/api/getUser/` + user_id).then(response =>
         setUser(response.data)
       )
     }
@@ -26,7 +26,7 @@ const LoginForm = ({ user_id }) => {
           <div className='me-25'>
             <Row>
               <Col sm='4'>
-                <img className="center" style={{ width: 150, height: 150 }} src={"http://localhost:8000/" + user.user_image} /><br />
+                <img className="center" style={{ width: 150, height: 150 }} src={"https://bms-back.start-now.fr/public/" + user.user_image} /><br />
               </Col>
 
               <Col sm='6'>

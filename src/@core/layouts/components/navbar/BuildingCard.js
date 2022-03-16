@@ -8,7 +8,7 @@ const Building = () => {
   const [buildingList, setBuildingList] = useState([])
   useEffect(() => {
     
-      axios.get(`http://localhost:8000/api/listBuildings/` ).then(response =>
+      axios.get(`https://bms-back.start-now.fr/public/api/listBuildings/` ).then(response =>
         setBuildingList(response.data)
       )
     

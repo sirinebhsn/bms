@@ -13,7 +13,7 @@ const VerticalLayout = props => {
 
   // For ServerSide navigation
    useEffect(() => {
-    axios.get(`http://localhost:8000/api/all`).then(response =>
+    axios.get(`https://bms-back.start-now.fr/public/api/all`).then(response =>
 
      setMenuData(response.data)
     

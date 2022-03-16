@@ -76,7 +76,7 @@ const UserProjectsList = () => {
     formData.append('building_company_address', building_company_address);
     formData.append('building_rule', building_rule);
 
-    axios.post(`http://localhost:8000/api/addBuilding`, formData).then(res => {
+    axios.post(`https://bms-back.start-now.fr/public/api/addBuilding`, formData).then(res => {
       console.log(res.data)
 
       if (res.data.status == 200) {

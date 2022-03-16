@@ -77,8 +77,8 @@ const Login = () => {
     formData.append('email', email);
     formData.append('password', password);
 
-    axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
-      axios.post(`http://localhost:8000/api/auth/login`, formData).then(response => { 
+    axios.get('https://bms-back.start-now.fr/public/sanctum/csrf-cookie').then(() => {
+      axios.post(`https://bms-back.start-now.fr/public/api/auth/login`, formData).then(response => { 
     
         if (response.data.status == 200) {
           localStorage.setItem("accessToken", response.data.accessToken)
@@ -87,7 +87,7 @@ const Login = () => {
           localStorage.setItem("user_name", response.data.user_name)
         
         
-          navigate.push('/dashboard/ecommerce');
+          navigate.push('/dashboard');
           toast.success(
             <ToastContent user_name={response.data.user_name || 'John Doe'} user_type={response.data.user_type || 'admin'} />,
             { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }

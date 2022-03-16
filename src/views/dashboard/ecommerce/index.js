@@ -40,7 +40,7 @@ const EcommerceDashboard = () => {
     getUsers();
   }, [])
   async function getUsers() {
-    let result = await fetch("http://localhost:8000/api/countUsers");
+    let result = await fetch("https://bms-back.start-now.fr/public/api/countUsers");
     result = await result.json();
     setUser(result)
   }

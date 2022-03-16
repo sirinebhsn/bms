@@ -23,7 +23,7 @@ const EditModal = ({ user_id }) => {
   };
   useEffect(() => {
     if (user_id) {
-      axios.get(`http://localhost:8000/api/auth/getUser/` + user_id).then(response =>
+      axios.get(`https://bms-back.start-now.fr/public/api/auth/getUser/` + user_id).then(response =>
         setUser(response.data)
       )
     }
@@ -67,7 +67,7 @@ const EditModal = ({ user_id }) => {
 
     console.log(formData)
     if (user_id) {
-      axios.put(`http://localhost:8000/api/updateUser/${user_id}`, formData).then(response =>{
+      axios.put(`https://bms-back.start-now.fr/public/api/updateUser/${user_id}`, formData).then(response =>{
         console.log(response.data)
 
         if (response.data.status==200) {

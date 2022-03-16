@@ -46,7 +46,7 @@ const UsersList = () => {
     setSelectedUser(user_id)
     setShow(true)
     console.warn(user_id)
-    let result = await fetch("http://localhost:8000/api/getUser/" + user_id);
+    let result = await fetch("https://bms-back.start-now.fr/public/api/getUser/" + user_id);
     result = await result.json();
     console.warn(result)
 
@@ -56,7 +56,7 @@ const UsersList = () => {
     setSelectedUser(user_id)
     setShowModal(true)
     console.warn(user_id)
-    let result = await fetch("http://localhost:8000/api/getUser/" + user_id);
+    let result = await fetch("https://bms-back.start-now.fr/public/api/getUser/" + user_id);
     result = await result.json();
     console.warn(result) 
   
@@ -71,13 +71,13 @@ const UsersList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("http://localhost:8000/api/listUser");
+    let result = await fetch("https://bms-back.start-now.fr/public/api/listUser");
     result = await result.json();
     setData(result)
   }
 
   async function deleteOperation(user_id) {
-    let result = await fetch("http://localhost:8000/api/deleteUser/" + user_id, {
+    let result = await fetch("https://bms-back.start-now.fr/public/api/deleteUser/" + user_id, {
       method: "DELETE"
 
     });
@@ -108,7 +108,7 @@ const UsersList = () => {
   async function searchUser(key) {
     if(key){
     console.warn(key)
-    let result = await fetch("http://localhost:8000/api/searchUser/" + key);
+    let result = await fetch("https://bms-back.start-now.fr/public/api/searchUser/" + key);
     result = await result.json();
     console.warn(result)
     setData(result)
@@ -149,7 +149,7 @@ const UsersList = () => {
           {data.map((item) =>
             <tbody>
               <tr>
-                <td> <img style={{ width: 50, height: 50 }} src={"http://localhost:8000/" + item.user_image} /> </td>
+                <td> <img style={{ width: 50, height: 50 }} src={"https://bms-back.start-now.fr/public/" + item.user_image} /> </td>
 
                 <td> <User size={14} />&nbsp;{item.user_name}</td>
                 <td> <Mail size={14} /> &nbsp;{item.email} </td>

@@ -26,27 +26,27 @@ const StatsCard = ({ cols }) => {
   const[tenants, setTenant]=useState([]);
 
   async function getUsers(){
-      let result = await fetch("http://localhost:8000/api/countUsers");
+      let result = await fetch("https://bms-back.start-now.fr/public/api/countUsers");
       result = await result.json();
       setUsers(result)
   }
   async function getAdmins(){
-    let result = await fetch("http://localhost:8000/api/countAdmin");
+    let result = await fetch("https://bms-back.start-now.fr/public/api/countAdmin");
     result = await result.json();
     setAdmin(result)
 }
 async function getOwners(){
-  let result = await fetch("http://localhost:8000/api/countOwners");
+  let result = await fetch("https://bms-back.start-now.fr/public/api/countOwners");
   result = await result.json();
   setOwner(result)
 }
 async function getEmployees(){
-  let result = await fetch("http://localhost:8000/api/countEmployees");
+  let result = await fetch("https://bms-back.start-now.fr/public/api/countEmployees");
   result = await result.json();
   setEmp(result)
 }
 async function getTenants(){
-  let result = await fetch("http://localhost:8000/api/countTenants");
+  let result = await fetch("https://bms-back.start-now.fr/public/api/countTenants");
   result = await result.json();
   setTenant(result)
 }

@@ -23,7 +23,7 @@ const EditModal = ({ user_id }) => {
   };
   useEffect(() => {
     if (user_id) {
-      axios.get(`http://localhost:8000/api/getUser/` + user_id).then(response =>
+      axios.get(`https://bms-back.start-now.fr/public/api/getUser/` + user_id).then(response =>
         setUser(response.data)
       )
     }
@@ -54,7 +54,7 @@ const EditModal = ({ user_id }) => {
     formData.append('user_per_address', user_per_address);
     formData.append('user_image', user_image);
     if (user_id) {
-      axios.put(`http://localhost:8000/api/updateUser/` + user_id,formData).then(response =>{
+      axios.put(`https://bms-back.start-now.fr/public/api/updateUser/` + user_id,formData).then(response =>{
         if(response.data.status===200){
           new Swal("Success", "User Updated successfully");
           history.push('/apps/user/list')
@@ -129,7 +129,7 @@ const EditModal = ({ user_id }) => {
           <div className='d-flex align-items-end mt-75 ms-1'>
             <div>
               <div className="previewProfilePic">
-                <img className="owner-picture" style={{ width: 150, height: 150 }} src={"http://localhost:8000/" + user.user_image}/>
+                <img className="owner-picture" style={{ width: 150, height: 150 }} src={"https://bms-back.start-now.fr/public/" + user.user_image}/>
               </div>
               <br />
               <input id="user_image"   type="file" />

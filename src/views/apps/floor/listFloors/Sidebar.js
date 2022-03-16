@@ -13,7 +13,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/auth/user`).then(response => {
+    axios.get(`https://bms-back.start-now.fr/public/api/auth/user`).then(response => {
       setUserData(response.data)
     })
   })
@@ -37,7 +37,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
     formData.append('floor_added_date', floor_added_date);
     formData.append('building_id', building_id);
 
-    axios.post(`http://localhost:8000/api/addFloor`, formData).then(res => {
+    axios.post(`https://bms-back.start-now.fr/public/api/addFloor`, formData).then(res => {
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);

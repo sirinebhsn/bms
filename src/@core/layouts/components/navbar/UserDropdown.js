@@ -35,7 +35,7 @@ const UserDropdown = () => {
 
   function handleShow() {
     setShow(true)
-    axios.get(`http://localhost:8000/api/listBuildings`).then(res => {
+    axios.get(`https://bms-back.start-now.fr/public/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     }), []
@@ -44,11 +44,11 @@ const UserDropdown = () => {
   //** Get User Details from His accessToken
   useEffect(() => {
     if (isUserLoggedIn() !== null) {
-      axios.get(`http://localhost:8000/api/auth/user`).then(response => {
+      axios.get(`https://bms-back.start-now.fr/public/api/auth/user`).then(response => {
         setUserData(response.data)
       })
     }
-  }, [userData])
+  }, [])
 
   //** Vars
   const userAvatar = (userData && userData.avatar) || defaultAvatar
