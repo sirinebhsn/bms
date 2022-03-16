@@ -171,12 +171,12 @@ const Login = () => {
               <div className='alert-body font-small-2'>
                 <p>
                   <small className='me-50'>
-                    <span className='fw-bold'>S.Admin:</span> start-now@start-now.fr | Syrine004#*
+                    <span className='fw-bold'>S.Admin:</span> start-now@start-now.tn | Syrine004#*
                   </small>
                 </p>
                 <p>
                   <small className='me-50'>
-                    <span className='fw-bold'>Admin:</span> syrine@start-now.tn | Syrine004#*
+                    <span className='fw-bold'>Admin:</span> start@gmail.com | Syrine004#*
                   </small>
                 </p>
               </div>
