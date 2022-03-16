@@ -5,11 +5,12 @@ import { Card, CardBody, Col, Row } from "reactstrap";
 import './style.css'
 
 const LoginForm = ({ user_id }) => {
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   const [user, setUser] = useState([])
   useEffect(() => {
     if (user_id) {
-      axios.get(`https://bms-back.start-now.fr/public/api/auth/getUser/` + user_id).then(response =>
+      axios.get(`${API_ENDPOINT}/api/auth/getUser/` + user_id).then(response =>
         setUser(response.data)
       )
     }

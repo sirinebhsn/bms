@@ -10,6 +10,7 @@ import { getUser } from '../store'
 import { useEffect, useState } from 'react'
 
 const StatsCard = ({ cols }) => {
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   useEffect(() => {
     getUsers();
@@ -26,27 +27,27 @@ const StatsCard = ({ cols }) => {
   const[tenants, setTenant]=useState([]);
 
   async function getUsers(){
-      let result = await fetch("https://bms-back.start-now.fr/public/api/countUsers");
+      let result = await fetch(`${API_ENDPOINT}/api/countUsers`);
       result = await result.json();
       setUsers(result)
   }
   async function getAdmins(){
-    let result = await fetch("https://bms-back.start-now.fr/public/api/countAdmin");
+    let result = await fetch(`${API_ENDPOINT}/api/countAdmin`);
     result = await result.json();
     setAdmin(result)
 }
 async function getOwners(){
-  let result = await fetch("https://bms-back.start-now.fr/public/api/countOwners");
+  let result = await fetch(`${API_ENDPOINT}/api/countOwners`);
   result = await result.json();
   setOwner(result)
 }
 async function getEmployees(){
-  let result = await fetch("https://bms-back.start-now.fr/public/api/countEmployees");
+  let result = await fetch(`${API_ENDPOINT}/api/countEmployees`);
   result = await result.json();
   setEmp(result)
 }
 async function getTenants(){
-  let result = await fetch("https://bms-back.start-now.fr/public/api/countTenants");
+  let result = await fetch(`${API_ENDPOINT}/api/countTenants`);
   result = await result.json();
   setTenant(result)
 }

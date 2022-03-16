@@ -5,10 +5,11 @@ import { Card, CardBody, Col, Row } from "reactstrap";
 
 const Building = () => {
 
+   const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
   const [buildingList, setBuildingList] = useState([])
   useEffect(() => {
     
-      axios.get(`https://bms-back.start-now.fr/public/api/listBuildings/` ).then(response =>
+      axios.get(`${API_ENDPOINT}/api/listBuildings/` ).then(response =>
         setBuildingList(response.data)
       )
     

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import './style.css'
 
 const EditModal = ({ user_id }) => {
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   const [user, setUser] = useState([])
   const [imgData, setImgData] = useState('https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png');
@@ -23,7 +24,7 @@ const EditModal = ({ user_id }) => {
   };
   useEffect(() => {
     if (user_id) {
-      axios.get(`https://bms-back.start-now.fr/public/api/auth/getUser/` + user_id).then(response =>
+      axios.get(`${API_ENDPOINT}/api/auth/getUser/` + user_id).then(response =>
         setUser(response.data)
       )
     }
@@ -67,7 +68,7 @@ const EditModal = ({ user_id }) => {
 
     console.log(formData)
     if (user_id) {
-      axios.put(`https://bms-back.start-now.fr/public/api/updateUser/${user_id}`, formData).then(response =>{
+      axios.put(`${API_ENDPOINT}/api/updateUser/${user_id}`, formData).then(response =>{
         console.log(response.data)
 
         if (response.data.status==200) {

@@ -33,6 +33,7 @@ import Swal from 'sweetalert2'
 
 // ** Table Header
 const FloorList = () => {
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
@@ -42,7 +43,7 @@ const FloorList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bms-back.start-now.fr/public/api/listFloor");
+    let result = await fetch(`${API_ENDPOINT}/api/listFloor`);
     result = await result.json();
     setData(result)
   }

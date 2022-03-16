@@ -37,6 +37,8 @@ import EditModal from './EditModal'
 
 // ** Table Header
 const UsersList = () => {
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
+
   const [selectedUser, setSelectedUser] = useState();
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -54,7 +56,7 @@ const UsersList = () => {
     setSelectedUser(user_id)
     setShow(true)
     console.warn(user_id)
-    let result = await fetch("https://bms-back.start-now.fr/public/api/auth/getUser/" + user_id);
+    let result = await fetch(`${API_ENDPOINT}/api/auth/getUser/` + user_id);
     result = await result.json();
     console.warn(result)
 
@@ -64,7 +66,7 @@ const UsersList = () => {
     setSelectedUser(user_id)
     setShowModal(true)
     console.warn(user_id)
-    let result = await fetch("https://bms-back.start-now.fr/public/api/auth/getUser/" + user_id);
+    let result = await fetch(`${API_ENDPOINT}/api/auth/getUser/` + user_id);
     result = await result.json();
     console.warn(result) 
   
@@ -79,13 +81,13 @@ const UsersList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bms-back.start-now.fr/public/api/auth/listUser");
+    let result = await fetch(`${API_ENDPOINT}/api/auth/listUser`);
     result = await result.json();
     setData(result)
   }
 
   async function deleteOperation(user_id) {
-    let result = await fetch("https://bms-back.start-now.fr/public/api/deleteUser/" + user_id, {
+    let result = await fetch(`${API_ENDPOINT}/api/deleteUser/` + user_id, {
       method: "DELETE"
 
     });
@@ -116,7 +118,7 @@ const UsersList = () => {
   async function searchUser(key) {
     if(key){
     console.warn(key)
-    let result = await fetch("https://bms-back.start-now.fr/public/api/searchUser/" + key);
+    let result = await fetch(`${API_ENDPOINT}/api/searchUser/` + key);
     result = await result.json();
     console.warn(result)
     setData(result)

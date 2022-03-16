@@ -10,10 +10,12 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 const SidebarNewFloor = ({ open, toggleSidebar }) => {
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
+
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://bms-back.start-now.fr/public/api/auth/user`).then(response => {
+    axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
       setUserData(response.data)
     })
   })
@@ -37,7 +39,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
     formData.append('floor_added_date', floor_added_date);
     formData.append('building_id', building_id);
 
-    axios.post(`https://bms-back.start-now.fr/public/api/addFloor`, formData).then(res => {
+    axios.post(`${API_ENDPOINT}/api/addFloor`, formData).then(res => {
       if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         setError([]);

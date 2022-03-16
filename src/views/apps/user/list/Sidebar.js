@@ -23,6 +23,7 @@ import moment from "moment";
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const { t } = useTranslation()
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   const history = useHistory();
   const [buildingList, setBuildingList] = useState([]);
@@ -50,7 +51,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
   const date=`${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`
   useEffect(() => {
-    axios.get(`https://bms-back.start-now.fr/public/api/listBuildings`).then(res => {
+    axios.get(`${API_ENDPOINT}/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     });
@@ -102,7 +103,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('building_id', building_id);
 
 console.log(formData)
-    axios.post(`https://bms-back.start-now.fr/public/api/auth/addUser`, formData).then(res => {
+    axios.post(`${API_ENDPOINT}/api/auth/addUser`, formData).then(res => {
       console.log(res.data)
 
       if (res.data.status == 200) {

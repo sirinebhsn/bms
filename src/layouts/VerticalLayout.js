@@ -10,10 +10,11 @@ import { useEffect, useState } from 'react'
 const VerticalLayout = props => {
   const [menuData, setMenuData] = useState([])
   //const [children, setChildren] = useState([])
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   // For ServerSide navigation
    useEffect(() => {
-    axios.get(`https://bms-back.start-now.fr/public/api/all`).then(response =>
+    axios.get(`${API_ENDPOINT}/api/all`).then(response =>
 
      setMenuData(response.data)
     

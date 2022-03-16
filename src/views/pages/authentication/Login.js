@@ -69,6 +69,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useHistory()
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   const login = (e) => {
     // ** Hooks
@@ -77,8 +78,8 @@ const Login = () => {
     formData.append('email', email);
     formData.append('password', password);
 
-    axios.get('https://bms-back.start-now.fr/public/sanctum/csrf-cookie').then(() => {
-      axios.post(`https://bms-back.start-now.fr/public/api/auth/login`, formData).then(response => { 
+    axios.get(`${API_ENDPOINT}/sanctum/csrf-cookie`).then(() => {
+      axios.post(`${API_ENDPOINT}/api/auth/login`, formData).then(response => { 
     
         if (response.data.status == 200) {
           localStorage.setItem("accessToken", response.data.accessToken)

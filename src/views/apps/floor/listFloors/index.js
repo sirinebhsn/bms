@@ -15,12 +15,14 @@ import '@styles/react/apps/app-users.scss'
 import { useEffect, useState } from 'react'
 
 const FloorList = () => {
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
+
   const [data, setData] = useState([]);
   useEffect(() => {
     getFloors();
   }, [])
   async function getFloors() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/countFloors");
+    let result = await fetch(`${API_ENDPOINT}/api/countFloors`);
     result = await result.json();
     setData(result)
   }

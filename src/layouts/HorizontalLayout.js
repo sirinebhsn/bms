@@ -7,10 +7,11 @@ import navigation from '@src/navigation/horizontal'
 
 const HorizontalLayout = props => {
   const [menuData, setMenuData] = useState([])
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   // For ServerSide navigation
   useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/all`).then(response =>
+    axios.get(`${API_ENDPOINT}/api/all`).then(response =>
      setMenuData(response.data)
      )
    

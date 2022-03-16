@@ -32,10 +32,11 @@ const UserDropdown = () => {
   const [buildingList, setBuildingList] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   function handleShow() {
     setShow(true)
-    axios.get(`https://bms-back.start-now.fr/public/api/listBuildings`).then(res => {
+    axios.get(`${API_ENDPOINT}/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     }), []
@@ -44,7 +45,7 @@ const UserDropdown = () => {
   //** Get User Details from His accessToken
   useEffect(() => {
     if (isUserLoggedIn() !== null) {
-      axios.get(`https://bms-back.start-now.fr/public/api/auth/user`).then(response => {
+      axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
       })
     }
