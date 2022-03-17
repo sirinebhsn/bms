@@ -109,6 +109,7 @@
     "lint": "eslint src/**/*.js src/**/*.jsx",
     "lint:fix": "eslint src/**/*.js --fix",
     "heroku-postbuild": "npm run build"
+
   },
   "eslintConfig": {
     "extends": "react-app"

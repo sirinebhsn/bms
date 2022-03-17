@@ -73,7 +73,7 @@ const Login = () => {
 
   const login = (e) => {
     // ** Hooks
-    e.preventDefault();
+   e.preventDefault();
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);

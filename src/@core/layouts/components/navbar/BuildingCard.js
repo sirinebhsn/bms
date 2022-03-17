@@ -9,7 +9,7 @@ const Building = () => {
   const [buildingList, setBuildingList] = useState([])
   useEffect(() => {
     
-      axios.get(`${API_ENDPOINT}/api/listBuildings/` ).then(response =>
+      axios.get(`${API_ENDPOINT}/api/listBuildings` ).then(response =>
         setBuildingList(response.data)
       )
     
