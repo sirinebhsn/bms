@@ -8,4 +8,4 @@ import { createContextualCan } from '@casl/react'
 export const AbilityContext = createContext()
 
 // ** Init Can Context
-export const Can = createContextualCan(AbilityContext.Consumer)
+//export const Can = createContextualCan(AbilityContext.Consumer)

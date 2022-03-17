@@ -38,7 +38,10 @@ const NavbarBookmarks = props => {
 
   // ** ComponentDidMount
   useEffect(() => {
+    return () => { 
+
     dispatch(getBookmarks())
+    }
   }, [])
 
   // ** Loops through Bookmarks Array to return Bookmarks

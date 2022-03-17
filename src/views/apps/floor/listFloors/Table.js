@@ -28,11 +28,12 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Edit,Lock,Trash, User } from 'react-feather'
+import { Edit, Lock, Trash, User } from 'react-feather'
 import Swal from 'sweetalert2'
 
 // ** Table Header
 const FloorList = () => {
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
@@ -42,28 +43,10 @@ const FloorList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("http://localhost:8000/api/listFloor");
+    let result = await fetch(`${API_ENDPOINT}/api/listFloor`);
     result = await result.json();
     setData(result)
   }
-
-  async function deleteOperation(id) {
-    let result = await fetch("https://bmsback.herokuapp.com/api/deleteFloor/" + id, {
-      method: "DELETE"
-
-    });
-    result = await result.json()
-
-  }
-  async function search(key) {
-    console.warn(key)
-    let result = await fetch("https://bmsback.herokuapp.com/api/searchFloor/" + key);
-    result = await result.json();
-    console.warn(result)
-    setData(result)
-
-  }
-
 
   return (
     <Fragment>
@@ -71,7 +54,7 @@ const FloorList = () => {
         <CardHeader>
           <CardTitle tag='h4'>Floors List</CardTitle>
           <div className="col-sm-3">
-            <input type="text" onChange={(e) => search(e.target.value)} className="form-control" placeholder="Search Floor" />
+            <input type="text" onChange="" className="form-control" placeholder="Search Floor" />
 
           </div>
           <Button className='add-new-floor' color='primary' onClick={toggleSidebar}>
@@ -89,7 +72,7 @@ const FloorList = () => {
               <th> FLOOR BUILDING </th>
               <th> FLOOR ADDED DATE</th>
               <th>Actions </th>
-              
+              <th></th>
             </tr>
           </thead>
 
@@ -97,20 +80,35 @@ const FloorList = () => {
 
             <tbody>
               <tr>
-              <td> {item.floor_num}</td>
-              <td> {item.floor_name}</td>     
-              <td> {item.floor_elevator}</td>
-              <td> {item.floor_area}</td>
-              <td> {item.building_id}</td>
-              <td> {item.floor_added_date}</td>
-          <td>
-                  <span onClick={() => deleteOperation(item.id_floor)}>
+                <td> {item.floor_num}</td>
+                <td> {item.floor_name}</td>
+
+                <td>{item.floor_elevator == 0 &&
+                  <>
+                    <td> Non Disponible</td>
+
+                  </>
+
+                }
+                  {item.floor_elevator == 1 &&
+                    <>
+                      <td> Disponible</td>
+
+                    </>
+
+                  }  </td>
+                <td> {item.floor_area}</td>
+
+                <td> {item?.buildings?.building_name}</td>
+                <td> {item.floor_added_date}</td>
+                <td>
+                  <span >
                     <Trash size={20} color="red" />
                   </span>
                   &nbsp;&nbsp;
                   <Edit size={20} color="#F5CBA7" />
                   &nbsp;&nbsp;
-               
+
                 </td>
               </tr>
             </tbody>

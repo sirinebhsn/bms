@@ -32,7 +32,7 @@ const UserProjectsList = () => {
     formData.append('permenantAdress', permenantAdress);
     formData.append('file', file);
     console.log(formData)
-    let result = await fetch("http://localhost:8000/api/addOwner", {
+    let result = await fetch("https://bms-back.start-now.fr/public/api/addOwner", {
       method: 'POST',
       body: formData
     });

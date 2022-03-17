@@ -59,6 +59,8 @@ const UsersList = () => {
   }
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [password, setShowPassword] = useState(false)
+
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
   const [data, setData] = useState([]);
@@ -103,7 +105,7 @@ const UsersList = () => {
   async function search(key) {
     if(key){
     console.warn(key)
-    let result = await fetch("http://localhost:8000/api/search/" + key);
+    let result = await fetch("https://bmsback.herokuapp.com/api/search/" + key);
     result = await result.json();
     console.warn(result)
     setData(result)
@@ -117,13 +119,13 @@ const UsersList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Employees List</CardTitle>
+          <CardTitle tag='h4'>Owners List</CardTitle>
           <div className="col-sm-3">
             <input type="text" onChange={(e) => search(e.target.value)} className="form-control" placeholder="Search Owner" />
 
           </div>
           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New Employee
+            Add New Owner
           </Button>
           
         </CardHeader>
@@ -141,8 +143,34 @@ const UsersList = () => {
             </tr>
           </thead>
 
+          {data.map((item) =>
+            <tbody>
+              <tr>
+                <td> <img style={{ width: 50, height: 50 }} src={"https://bmsback.herokuapp.com/" + item.file_path} /> </td>
 
-          
+                <td> <User size={14} />&nbsp;{item.name}</td>
+                <td> <Mail size={14} /> &nbsp;{item.email} </td>
+                <td> <Lock size={14} color=" #273746 " /> &nbsp; {item.password}</td>
+                <td> <Phone size={14} color="green" />&nbsp; {item.telephone} </td>
+
+                <td>
+                  <span onClick={() => deleteOperation(item.id)}>
+                    <Trash size={20} color="red" />
+                  </span>
+                  &nbsp;&nbsp;
+                  <span onClick={() => handleShowModalEdit(item.id)}>
+
+                  <Edit size={20} color="#F5CBA7" />
+                  </span>
+                  &nbsp;&nbsp;
+                  <span onClick={() => handleShow(item.id)}>
+                    <Eye size={17}></Eye>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          )
+          }
 
         </Table>
       </Card>

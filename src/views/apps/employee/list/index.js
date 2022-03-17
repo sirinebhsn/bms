@@ -34,12 +34,19 @@ const UsersList = () => {
         <Col lg='6' sm='6'>
           <StatsHorizontal
             color='primary'
-            statTitle='Total Employees'
+            statTitle='Total Owners'
             icon={<Users size={20} />}
-            renderStats={<h3 className='fw-bolder mb-75'></h3>}
+            renderStats={<h3 className='fw-bolder mb-75'>{data}</h3>}
           />
         </Col>
-      
+        <Col lg='6' sm='6'>
+          <StatsHorizontal
+            color='danger'
+            statTitle='Top 5 Owners'
+            icon={<UserPlus size={20} />}
+            renderStats={<h3 className='fw-bolder mb-75'>4,567</h3>}
+          />
+        </Col>
       
       </Row>
       <Table />

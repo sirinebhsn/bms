@@ -12,7 +12,7 @@ import { AlertCircle, ArrowRight, Award, DollarSign, Eye, Heart, Home, List, Mes
 import { ThemeColors } from '@src/utility/context/ThemeColors'
 
 // ** Reactstrap Imports
-import { Row, Col} from 'reactstrap'
+import { Row, Col, Button, Nav, NavItem, NavLink} from 'reactstrap'
 
 // ** Demo Components
 import CardCongratulations from '@src/views/ui-elements/cards/advance/CardCongratulations'
@@ -30,36 +30,19 @@ import '@styles/base/pages/dashboard-ecommerce.scss'
 const EcommerceDashboard = () => {
   const { colors } = useContext(ThemeColors)
   const trackBgColor = '#e9ecef'
-  const [owner, setOwner] = useState([]);
+  const [user, setUser] = useState([]);
   const [floor, setFloor] = useState([]);
   const [unit, setUnit] = useState([]);
   const [employee, setEmployee] = useState([]);
 
+
   useEffect(() => {
-    getOwners();
-    getFloors();
-    getUnits();
-    getEmployees();
+    getUsers();
   }, [])
-  async function getOwners() {
-    let result = await fetch("http://localhost:8000/api/countOwners");
+  async function getUsers() {
+    let result = await fetch("https://bms-back.start-now.fr/public/api/countUsers");
     result = await result.json();
-    setOwner(result)
-  }
-  async function getFloors() {
-    let result = await fetch("http://localhost:8000/api/countFloors");
-    result = await result.json();
-    setFloor(result)
-  }
-  async function getUnits() {
-    let result = await fetch("http://localhost:8000/api/countUnit");
-    result = await result.json();
-    setUnit(result)
-  }
-  async function getEmployees() {
-    let result = await fetch("http://localhost:8000/api/countEmployees");
-    result = await result.json();
-    setEmployee(result)
+    setUser(result)
   }
 
 
@@ -73,16 +56,19 @@ const EcommerceDashboard = () => {
       <Row>
         {/* Stats With Icons */}
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Home size={24} color='red' />} color='info' stats={floor}
+          <StatsVertical icon={<Home size={24} color='red' />} color='info' stats="75"
             statTitle='Total Floor' >
           </StatsVertical>
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Monitor size={24} />} color='warning' stats={unit}
+          <StatsVertical icon={<Monitor size={24} />} color='warning' stats="60"
             statTitle='Total Units' />
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<User size={24} />} color='danger' stats={owner} statTitle='Total Owner' />
+          <StatsVertical icon={<User size={24} />} color='danger' stats={user} statTitle='Total Users' >
+  
+            </StatsVertical>
+            
         </Col>
         <Col xl='3' md='4' sm='6'>
           <StatsVertical icon={<Users size={24} />} color='primary' stats='0' statTitle='Total Tenant' />
@@ -92,7 +78,7 @@ const EcommerceDashboard = () => {
       </Row>
       <Row>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Users size={24} />} color='success' stats={employee} statTitle='Total Employees' />
+          <StatsVertical icon={<Users size={24} />} color='success' stats="80" statTitle='Total Employees' />
         </Col>
         <Col xl='3' md='4' sm='6'>
           <StatsVertical icon={<Users size={24} />} color='danger' stats='2.1k' statTitle='Total Committee' />

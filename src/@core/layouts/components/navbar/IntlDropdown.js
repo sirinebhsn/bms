@@ -18,8 +18,6 @@ const IntlDropdown = () => {
     ly: 'Arabic',
 
   }
-
-
   // ** Function to switch Language
   const handleLangUpdate = (e, lang) => {
     e.preventDefault()
@@ -53,7 +51,7 @@ const IntlDropdown = () => {
           <ReactCountryFlag className='country-flag' countryCode='pt' svg />
           <span className='ms-1'>Portuguese</span>
         </DropdownItem>
-        <DropdownItem href='/' tag='a' onClick={e => handleLangUpdate(e, 'ly')}>
+        <DropdownItem  id='countryCode' href='/' tag='a' onClick={e => handleLangUpdate(e, 'ly')} >
           <ReactCountryFlag className='country-flag' countryCode='ly' svg />
           <span className='ms-1'>Arabic</span>
 

@@ -88,7 +88,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Label className='form-label' for='floor'>Select Floor</Label>
             <select id='floor'  className='form-control' onChange={(e) => setFloor(e.target.value)}
             >
-
               <option>Select Unit</option>
               {floorList.map((item) => {
                 return (<option value={item.floor}>{item.floor_no}&nbsp;{item.dispo_ascenseur}&nbsp; with {item.long_escalier} Stair</option>

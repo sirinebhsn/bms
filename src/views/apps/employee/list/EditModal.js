@@ -1,15 +1,14 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import PhoneInput from "react-phone-number-input";
 import { Button, Card, CardBody, Col, Form, Input, Label, Row } from "reactstrap";
-import Swal from "sweetalert2";
 import './style.css'
 
-const EditModal = ({ id }) => {
+const EditModal  = async (e) => {
+  e.preventDefault();
+
     const [owner, setOwner] = useState()
     useEffect(async () => {
       if (id) {
-        let result = await fetch("https://bmsback.herokuapp.com/api/getOwner/" + id);
+        let result = await fetch("https://bmsbackendapp.herokuapp.com/api/getOwner/" + id);
         const response = await result.json();
         setOwner(response)
   
@@ -36,7 +35,7 @@ const EditModal = ({ id }) => {
     formData.append('permenantAdress', permenantAdress);
     formData.append('file', file);
    console.log(formData)
-   let result = await fetch("https://bmsback.herokuapp.com/api/updateOwner/"+id,{
+   let result = await fetch("https://bmsbackendapp.herokuapp.com/api/updateOwner/"+id,{
       method: 'PUT',
       body: formData
     });
@@ -121,7 +120,7 @@ const EditModal = ({ id }) => {
       <Label className='form-label' for='file'>
         Owner Picture<span className='text-danger'>*</span>
           </Label>
-      <img className="owner-picture" style={{ width: 150, height: 150 }} src={"http://localhost:8000/" + owner?.file_path} /><br /> 
+      <img className="owner-picture" style={{ width: 150, height: 150 }} src={"https://bmsbackendapp.herokuapp.com/" + owner?.file_path} /><br /> 
           <input type='file' className="form-control"
             placeholder="file" onChange={(e) => setFile(e.target.files[0])}
             /><br />
