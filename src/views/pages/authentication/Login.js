@@ -33,39 +33,75 @@ import '@styles/react/pages/page-authentication.scss'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
+const ToastContent = ({ user_name, user_type }) => (
+  <Fragment>
+    <div className='toastify-header'>
+      <div className='title-wrapper'>
+        <Avatar size='sm' color='success' icon={<Coffee size={12} />} />
+        <h6 className='toast-title fw-bold'>Welcome, {user_name}</h6>
+      </div>
+    </div>
+    <div className='toastify-body'>
+      {
+        user_type=='S' && 
+        <>
+        <span>You have successfully logged in as  Super admin user to BMS. </span>
 
+        </>
+      }
+      {
+        user_type=='a' && 
+        <>
+        <span>You have successfully logged in as an Admin user to BMS. </span>
+
+        </>
+      }
+    </div>
+  </Fragment>
+)
 const Login = () => {
   const { skin } = useSkin()
 
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
 
-  source = require(`@src/assets/images/pages/${illustration}`).default
+    source = require(`@src/assets/images/pages/${illustration}`).default
 
-  const[email, setEmail]=useState("");
-  const[password, setPassword]=useState("");  
- const  navigate= useHistory()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useHistory()
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
+
   const login = (e) => {
     // ** Hooks
-      e.preventDefault();
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('password', password);
-    axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() =>{
-          axios.post(`http://127.0.0.1:8000/api/auth/login`, formData).then(res => {
-            if (res.data.status == 401) {
-              new Swal("All Fields are mandetory", "", "error");
-            }
-            else{
-              new Swal("Success", res.data.message, "success");
-  
-              navigate.push('/dashboard/ecommerce');    
-            }
-  
-            });})
-      
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
 
-          }
-             
+    axios.get(`${API_ENDPOINT}/sanctum/csrf-cookie`).then(() => {
+      axios.post(`${API_ENDPOINT}/api/auth/login`, formData).then(response => { 
+    
+        if (response.data.status == 200) {
+          localStorage.setItem("accessToken", response.data.accessToken)
+          localStorage.setItem("email", response.data.email)
+          localStorage.setItem("password", response.data.password)
+          localStorage.setItem("user_name", response.data.user_name)
+        
+        
+          navigate.push('/dashboard');
+          toast.success(
+            <ToastContent user_name={response.data.user_name || 'John Doe'} user_type={response.data.user_type || 'admin'} />,
+            { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }
+          )
+        // console.log(response.data)
+        }
+   
+
+      });
+    })
+
+
+  };
   return (
     <div className='auth-wrapper auth-cover'>
       <Row className='auth-inner m-0'>
@@ -136,12 +172,12 @@ const Login = () => {
               <div className='alert-body font-small-2'>
                 <p>
                   <small className='me-50'>
-                    <span className='fw-bold'>Admin:</span> admin@demo.com | admin
+                    <span className='fw-bold'>S.Admin:</span> start-now@start-now.tn | Syrine004#*
                   </small>
                 </p>
                 <p>
                   <small className='me-50'>
-                    <span className='fw-bold'>Client:</span> client@demo.com | client
+                    <span className='fw-bold'>Admin:</span> start@gmail.com | Syrine004#*
                   </small>
                 </p>
               </div>
@@ -160,8 +196,8 @@ const Login = () => {
                 <Label className='form-label' for='email'>
                   Email
                 </Label>
-                <input type='email'   className="form-control"
-              onChange={(e) => setEmail(e.target.value)} placeholder="Email" /><br />
+                <input id='email' type='email' className="form-control"
+                  onChange={(e) => setEmail(e.target.value)} placeholder="Email" /><br />
               </div>
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
@@ -172,8 +208,9 @@ const Login = () => {
                     <small>Forgot Password?</small>
                   </Link>
                 </div>
-                <input type='password'   className="form-control"
-              onChange={(e) => setPassword(e.target.value)} placeholder="Email" /><br />
+                <input type='password' id='password' className="form-control"  
+                
+                  onChange={(e) => setPassword(e.target.value)} placeholder="Password" /><br />
               </div>
               <div className='form-check mb-1'>
                 <Input type='checkbox' id='remember-me' />
@@ -213,5 +250,5 @@ const Login = () => {
       </Row>
     </div>
   )
-                  }                  
+}
 export default Login
