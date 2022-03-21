@@ -14,13 +14,7 @@ const StatsVertical = ({ icon, color, stats, statTitle, className }) => {
         </div>
         <h2 className='fw-bolder'>{stats}</h2>
         <p className='card-text line-ellipsis'>{statTitle}</p>
-        <Nav>
-          <NavItem>
-            <NavLink href='/' active>
-              Active
-            </NavLink>
-          </NavItem>
-        </Nav>
+        
       </CardBody>
     </Card>
   )

@@ -63,6 +63,8 @@ const UserProjectsList = () => {
       event.preventDefault();
     }
   }
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
+
 
   const addUser = (e) => {
     e.preventDefault();
@@ -87,7 +89,7 @@ const UserProjectsList = () => {
     formData.append('building_id', building_id);
 
 
-    axios.post(`https://bms-back.start-now.fr/public/api/auth/addUser`, formData).then(res => {
+    axios.post(`${API_ENDPOINT}/api/auth/addUser`, formData).then(res => {
       console.log(res.data)
 
       if (res.data.status == 200) {

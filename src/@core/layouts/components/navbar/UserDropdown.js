@@ -45,12 +45,12 @@ const UserDropdown = () => {
   //** Get User Details from His accessToken
   useEffect(() => {
     if (isUserLoggedIn() !== null) {
+
+
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
-      })
-    }
-  }, [])
-
+      })}
+  },[])
   //** Vars
   const userAvatar = (userData && userData.avatar) || defaultAvatar
 
@@ -65,12 +65,20 @@ const UserDropdown = () => {
               <span className='user-status'>Super Admin</span>
 
             </>
-
+          // user_type== "a" For admin 
           }
           {
             userData && userData.user_type == 'a' &&
             <>
               <span className='user-status'>Admin</span>
+
+            </>
+
+          }
+           {
+            userData && userData.user_type == 'o' &&
+            <>
+              <span className='user-status'>Owner</span>
 
             </>
 
