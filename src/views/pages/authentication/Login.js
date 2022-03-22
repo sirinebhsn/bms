@@ -68,12 +68,9 @@ const Login = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [type, setType] = useState('');
 
   const navigate = useHistory()
-const getType=()=>{
 
-}
   const login = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -91,7 +88,7 @@ const getType=()=>{
           navigate.push('/dashboard');
           toast.success(
             <ToastContent user_name=
-            {response.data.user_name || 'John Doe'} user_type={response.data.user_type || 'admin'} />,
+              {response.data.user_name || 'John Doe'} user_type={response.data.user_type || 'admin'} />,
             { icon: false, transition: Slide, hideProgressBar: true, autoClose: 2000 }
           )
           // console.log(response.data)
@@ -228,16 +225,12 @@ const getType=()=>{
                 <input id='email' type='email' className="form-control"
                   onChange={(e) => setEmail(e.target.value)} placeholder="Email" /><br />
               </div>
-             
-              {email == 'Start-now@start-now.fr' &&
-                <>
-                <div className='mb-1'>
-                  <Label className='form-label' ></Label>
-                  <input className='form-control' placeholder='Building'></input>
+
+              <div className='mb-1'>
+                <Label className='form-label' ></Label>
+                <input className='form-control' placeholder='Building'></input>
               </div>
-                </>
-              
-              }
+
               <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
                   <Label className='form-label' for='password'>

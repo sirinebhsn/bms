@@ -64,7 +64,7 @@ const UnitList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Units List List</CardTitle>
+          <CardTitle tag='h4'>Units List </CardTitle>
           <div className="col-sm-3">
             <input type="text" onChange={(e) => search(e.target.value)} className="form-control" placeholder="Search Unit" />
 

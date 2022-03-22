@@ -6,43 +6,60 @@ import Sidebar from '@components/sidebar'
 
 // ** Reactstrap Imports
 import { Button, Label, Form, Row, Col } from 'reactstrap'
+import { isUserLoggedIn } from '@utils'
+
 import axios from 'axios';
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+
+  const [userData, setUserData] = useState([]);
   const [floorList, setFloorList] = useState([]);
+
+  /**  Get the Data of the Current User  **/
   useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/listFloor`).then(res => {
+    if (isUserLoggedIn() !== null) {
+      axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
+        setUserData(response.data)
+      })
+      axios.get(`${API_ENDPOINT}/api/listFloor`).then(res=>{
+        setFloorList(res.data)
+        
+      }
+        )
+    }
+  })
 
-      setFloorList(res.data);
+  /* *** Unit Fields Initial States *** */
+  const [unit_name, setName] = useState("");
+  const [building_id, setBuilding] = useState("");
+  const [floor_id, setFloor] = useState("");
+  const [unit_type, setUnitType] = useState("");
+  const [unit_status, setUnitStatus] = useState("");
+  const [unit_roomnumber, setUnitRoomNumber] = useState("");
+  const [unit_added_date, setUnitAddedDate] = useState("");
+  const [unit_image, setUnitImage] = useState([]);
+  const addUnit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('unit_name', unit_name);
+    formData.append('building_id', building_id);
+    formData.append('floor_id', floor_id);
+    formData.append('unit_type', unit_type);
+    formData.append('unit_status', unit_status);
+    formData.append('unit_roomnumber', unit_roomnumber);
+    formData.append('unit_added_date', unit_added_date);
+    formData.append('unit_image', unit_image);
+    console.log(formData)
+    axios.post(`${API_ENDPOINT}/api/addUnit`, formData).then(res => {
+      console.log(res.data)
+      new Swal("Success", "success");
+      window.location.reload()
+
+
+
     });
-  }, [])
-
-
-  const [unit_no, setUnitno] = useState("");
-  const [description_unit, setDescriptionUnit] = useState("");
-  const [floor, setFloor] = useState("");
-
-
-
- async function addUnit() {
-    console.warn(floor,unit_no,description_unit)
-    const formData= new FormData();
-  
-    formData.append('unit_no', unit_no);
-    formData.append('description_unit', description_unit);
-    formData.append('floor', floor);
-
-
-   console.log(formData)
-   let result = await fetch("https://bmsback.herokuapp.com/api/addUnit", {
-      method: 'POST',
-      body: formData
-    });
-
-    alert("Success")
-
   }
-
 
   return (
     <Sidebar
@@ -57,48 +74,63 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         <Row>
           <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='name'>
-              UNIT NO <span className='text-danger'>*</span>
+            <Label className='form-label' for='unit_name'>
+              UNIT NAME <span className='text-danger'>*</span>
             </Label>
             <input type='text' className="form-control"
-              onChange={(e) =>
-                setUnitno(e.target.value)
-              }
-              placeholder="Unit no" /><br />
-          </Col>
 
-        </Row> 
+              onChange={(e) => setName(e.target.value)} placeholder="Unit name" /><br />
+          </Col>
+          <Col sm='12' className='mb-1'>
+
+            <input type='hidden' id='building_id' name='building_id' value={(userData && userData?.buildings?.building_id)} ref={() => setBuilding(userData && userData?.buildings?.building_id)} />
+
+          </Col>
+        </Row>
         <Row>
           <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='description_unit'>
-              Description Unit <span className='text-danger'>*</span>
+            <Label className='form-label' for='unit_type'>
+              Unit type <span className='text-danger'>*</span>
             </Label>
             <input type='text' className="form-control"
-              onChange={(e) =>
-                setDescriptionUnit(e.target.value)
-              }
-              placeholder="Description Unit " /><br />
+
+              placeholder="Unit Type" onChange={(e) => setUnitType(e.target.value) } /><br />
           </Col>
 
-        </Row> 
+        </Row>
         <Row>
-          
           <Col sm='12' className='mb-1'>
-            <Label className='form-label' for='floor'>Select Floor</Label>
-            <select id='floor'  className='form-control' onChange={(e) => setFloor(e.target.value)}
+
+            <Label className='form-label' for='unit_type'>
+              Unit Status <span className='text-danger'>*</span>
+            </Label>
+            <select>
+              <option value="0"> Select Status 
+
+              </option>
+
+            </select>
+
+           <br />
+          </Col>
+
+        </Row>
+        <Row>
+
+          <Col sm='12' className='mb-1'>
+            <Label className='form-label' for='floor_id'>Select Floor</Label>
+            <select id='floor_id' className='form-control' onChange={(e) => setFloor(e.target.value)}
             >
-              <option>Select Unit</option>
-              {floorList.map((item) => {
-                return (<option value={item.floor}>{item.floor_no}&nbsp;{item.dispo_ascenseur}&nbsp; with {item.long_escalier} Stair</option>
-                )
+              {floorList.map((item)=>
+              <option value='floor_id'>{item.floor_name}</option>
+              
+              )}
 
-              })
-              }
             </select>
           </Col>
         </Row>
-        <Button onClick={addUnit} className='me-1' color='primary'>
+        <Button className='me-1' color='primary'>
           Submit
         </Button>
         <Button type='reset' color='secondary'>
