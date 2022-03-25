@@ -17,11 +17,12 @@ const VerticalMenuHeader = (props, building_id) => {
   //** Get User Details from His accessToken
 
   const [selectedBuilding, setSelectedBuilding] = useState();
+  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   // ** Reset open group
   useEffect(() => {
     if (!menuHover && menuCollapsed) setGroupOpen([])
-    axios.get(`http://localhost:8000/api/auth/user`).then(response => {
+    axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
       setUserData(response.data)
     })
   }, [menuHover, menuCollapsed])
