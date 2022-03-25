@@ -23,7 +23,7 @@ import moment from "moment";
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const { t } = useTranslation()
-  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
   const history = useHistory();
   const [buildingList, setBuildingList] = useState([]);
@@ -45,11 +45,11 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [user_member_type, setMembertype] = useState("");
   const [user_ending_date, setEndingDate] = useState(new Date());
   const [user_date_creation, setCreationDate] = useState(new Date());
-  
+
   const current = new Date();
   //const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
-  const date=`${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`
+  const date = `${current.getFullYear()}-${current.getMonth() + 1}-${current.getDate()}`
   useEffect(() => {
     axios.get(`${API_ENDPOINT}/api/listBuildings`).then(res => {
 
@@ -78,7 +78,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     }
   }
 
-  
+
 
   const addUser = (e) => {
     e.preventDefault();
@@ -102,15 +102,13 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('user_date_creation', user_date_creation);
     formData.append('building_id', building_id);
 
-console.log(formData)
+    console.log(formData)
     axios.post(`${API_ENDPOINT}/api/auth/addUser`, formData).then(res => {
       console.log(res.data)
+        new Swal("Success",  "success");
+        window.location.reload()
 
-      if (res.data.status == 200) {
-        new Swal("Success", res.data.message, "success");
-        history.push('./apps/user/list');
-
-      }
+      
 
     });
 
@@ -144,7 +142,7 @@ console.log(formData)
               <Col sm='6' className='mb-1'>
 
                 <Label className='form-label' for='building_id'>Select Building</Label>
-                <select disabled id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
+                <select disabled id='building_id'  className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                 >
 
 

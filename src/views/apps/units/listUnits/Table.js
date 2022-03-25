@@ -12,6 +12,10 @@ import {
   CardHeader,
   Table,
   Button,
+  InputGroup,
+  Input,
+  Row,
+  Col,
 
 } from 'reactstrap'
 // ** React Imports
@@ -23,27 +27,29 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Edit,Lock,Trash} from 'react-feather'
+import { Edit,Lock,Search,Trash} from 'react-feather'
 import Swal from 'sweetalert2'
+import { Link, NavLink } from 'react-router-dom'
 
 // ** Table Header
 const UnitList = () => {
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
   const [data, setData] = useState([]);
   useEffect(() => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/listUnit");
+    let result = await fetch(`${API_ENDPOINT}/api/listUnite`);
     result = await result.json();
     setData(result)
   }
 
   async function deleteOperation(id) {
-    let result = await fetch("https://bmsback.herokuapp.com/api/deleteUnit/" + id, {
+    let result = await fetch(`${API_ENDPOINT}/api/deleteUnit/` + id, {
       method: "DELETE"
 
     });
@@ -51,12 +57,16 @@ const UnitList = () => {
 
   }
   async function search(key) {
+    if(key){
     console.warn(key)
-    let result = await fetch("https://bmsback.herokuapp.com/api/Unit/" + key);
+    let result = await fetch(`${API_ENDPOINT}/api/searchUnit/` + key);
     result = await result.json();
     console.warn(result)
     setData(result)
-
+    }
+    else{
+      getData();
+    }
   }
 
 
@@ -64,11 +74,20 @@ const UnitList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Units List List</CardTitle>
-          <div className="col-sm-3">
-            <input type="text" onChange={(e) => search(e.target.value)} className="form-control" placeholder="Search Unit" />
-
-          </div>
+          <CardTitle tag='h4'>Units List </CardTitle>
+         
+      <Col className='mb-1' md='6' sm='12'>
+        <InputGroup onChange={(e) => search(e.target.value)}>
+          <Button color='primary' onClick={search} outline>
+            <Search size={12}  />
+          </Button>
+          <Input type='text' onChange={(e) => search(e.target.value)} placeholder='Search here' />
+          <Button color='primary' outline>
+            Search !
+          </Button>
+        </InputGroup>
+      </Col>
+    
           <Button className='add-new-floor' color='primary' onClick={toggleSidebar}>
             Add New Unit
           </Button>
@@ -77,10 +96,13 @@ const UnitList = () => {
         <Table>
           <thead>
             <tr>
-              <th> ID </th>
-              <th> Unit NO </th>
-              <th> Description </th>
+              <th> Unit Name </th>
+              <th> Building </th>
               <th> Floor </th>
+              <th> Status </th>
+              <th> Room Number </th>
+              <th> Type </th>
+              <th> Pictures </th>
               <th>Actions </th>
               
             </tr>
@@ -90,10 +112,16 @@ const UnitList = () => {
 
             <tbody>
               <tr>
-              <td> <Lock size={14} color=" #273746 " />  {item.id} </td>
-              <td> {item.unit_no}</td>
-              <td> {item.description_unit}</td>
-              <td> {item.floor}</td>
+              <td> {item.unit_name} </td>
+              <td> {item.building_id}</td>
+              <td> {item.floors.floor_name}</td>
+              <td> {item.unit_status}</td>
+              <td> {item.unit_roomnumber}</td>
+              <td> {item.unit_type}</td>
+              <td> <Link >See Pictures</Link></td>
+
+
+
 
                 <td>
                   <span onClick={() => deleteOperation(item.id)}>

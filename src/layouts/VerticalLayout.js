@@ -15,21 +15,18 @@ const VerticalLayout = props => {
   // For ServerSide navigation
    useEffect(() => {
     axios.get(`${API_ENDPOINT}/api/all`).then(response =>
-
      setMenuData(response.data)
-    
      )
    
    
   }, [])
-console.log(menuData)
+  console.log(menuData)
+
 
   return (
  
     <Layout menuData={menuData} {...props}>
       {props.children}
-
-
     </Layout>
   )
 }

@@ -15,12 +15,14 @@ import '@styles/react/apps/app-users.scss'
 import { useEffect, useState } from 'react'
 
 const FloorList = () => {
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+
   const [unit, setUnit] = useState([]);
   useEffect(() => {
     getUnits();
   }, [])
   async function getUnits() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/countUnit");
+    let result = await fetch(`${API_ENDPOINT}/api/countUnit`);
     result = await result.json();
     setUnit(result)
   }
@@ -39,7 +41,7 @@ const FloorList = () => {
         <Col lg='6' sm='6'>
           <StatsHorizontal
             color='success'
-            statTitle='Floors Dispo'
+            statTitle='Units Dispo'
             icon={<Home size={20} />}
             renderStats={<h3 className='fw-bolder mb-75'>19,860</h3>}
           />

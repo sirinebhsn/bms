@@ -141,7 +141,7 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/ecommerce/checkout'))
   },
   {
-    path: '/apps/user/list',
+    path: '/user/list',
     component: lazy(() => import('../../views/apps/user/list'))
   },
  
@@ -150,11 +150,11 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/employee/list'))
   },
   {
-    path: '/apps/floor/listFloors',
+    path: '/floor/listFloors',
     component: lazy(() => import('../../views/apps/floor/listFloors'))
   },
   {
-    path: '/apps/units/listUnits',
+    path: '/units/listUnits',
     component: lazy(() => import('../../views/apps/units/listUnits'))
   },
   {
@@ -163,10 +163,10 @@ const AppRoutes = [
     component: () => <Redirect to='/apps/user/view/1' />
   },
   {
-    path: '/apps/user/view/:id',
+    path: '/user/view/:id',
     component: lazy(() => import('../../views/apps/user/view')),
     meta: {
-      navLink: '/apps/user/view'
+      navLink: '/user/view'
     }
   },
   {

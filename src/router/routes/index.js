@@ -10,10 +10,10 @@ import ExtensionsRoutes from './Extensions'
 import PageLayoutsRoutes from './PageLayouts'
 
 // ** Document title
-const TemplateTitle = '%s- BMD Start Now'
+const TemplateTitle = '%s- BMS Start Now'
 
 // ** Default Route
-const DefaultRoute = '/dashboard/ecommerce'
+const DefaultRoute = '/dashboard'
 
 // ** Merge Routes
 const Routes = [
