@@ -46,31 +46,8 @@ const ProfileHeader = () => {
           </Button>
           <Collapse isOpen={isOpen} navbar>
             <div className='profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0'>
-              <Nav className='mb-0' pills>
-                <NavItem>
-                  <NavLink className='fw-bold' active>
-                    <span className='d-none d-md-block'>Feed</span>
-                    <Rss className='d-block d-md-none' size={14} />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className='fw-bold'>
-                    <span className='d-none d-md-block'>About</span>
-                    <Info className='d-block d-md-none' size={14} />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className='fw-bold'>
-                    <span className='d-none d-md-block'>Photos</span>
-                    <Image className='d-block d-md-none' size={14} />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className='fw-bold'>
-                    <span className='d-none d-md-block'>Friends</span>
-                    <Users className='d-block d-md-none' size={14} />
-                  </NavLink>
-                </NavItem>
+              <Nav className='mb-0' pills>      
+              
               </Nav>
               <Button color='primary'>
                 <Edit className='d-block d-md-none' size={14} />

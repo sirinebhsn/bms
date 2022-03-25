@@ -1,6 +1,6 @@
 // ** React Imports
 import { useContext, useEffect, useState } from 'react'
-
+import ApexDonutChart from '../../charts/apex/ApexDonutChart'
 // ** Icons Imports
 import { AlertCircle, ArrowRight, Award, DollarSign, Eye, Heart, Home, List, MessageSquare, Monitor, Settings, ShoppingBag, Truck, User, UserCheck, UserPlus, Users } from 'react-feather'
 
@@ -138,7 +138,11 @@ const EcommerceDashboard = () => {
           <StatsVertical icon={<AlertCircle size={24} />} color='danger' stats='2.1k' statTitle='Total Complain' />
         </Col>
       </Row>
-
+      <Row>
+        <Col xl='6' lg='12'>
+          <ApexDonutChart />
+        </Col>
+      </Row>
       <Row>
 
         <Col lg="6" xs="12">

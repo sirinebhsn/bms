@@ -1,4 +1,5 @@
 // ** Third Party Components
+import { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts'
 
 // ** Reactstrap Imports
@@ -12,6 +13,40 @@ const ApexRadiarChart = () => {
     series4: '#2b9bf4',
     series5: '#FFA1A1'
   }
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+
+  useEffect(() => {
+    getAdmins();
+    getTenants();
+    getOwners();
+    geteEmp()
+  }, [])
+  const [a, setA] = useState([]);
+  const [t, setTenant] = useState([]);
+  const [emp, setEmp] = useState([]);
+  const [o, setOwners] = useState([]);
+
+
+  async function getOwners() {
+    let result = await fetch(`${API_ENDPOINT}/api/percentageOwners`);
+    result = await result.json();
+    setOwners(result)
+  }
+  async function getAdmins() {
+    let result = await fetch(`${API_ENDPOINT}/api/percentageAdmins`);
+    result = await result.json();
+    setA(result)
+  }
+  async function geteEmp() {
+    let result = await fetch(`${API_ENDPOINT}/api/percentageEmp`);
+    result = await result.json();
+    setEmp(result)
+  }
+  async function getTenants() {
+    let result = await fetch(`${API_ENDPOINT}/api/percentageTenants`);
+    result = await result.json();
+    setTenant(result)
+  }
 
   // ** Chart Options
   const options = {
@@ -19,7 +54,7 @@ const ApexRadiarChart = () => {
       show: true,
       position: 'bottom'
     },
-    labels: ['Operational', 'Networking', 'Hiring', 'R&D'],
+    labels: ['Tenants', 'Owners', 'Employees', 'Admins'],
 
     colors: [donutColors.series1, donutColors.series5, donutColors.series3, donutColors.series2],
     dataLabels: {
@@ -47,9 +82,9 @@ const ApexRadiarChart = () => {
             total: {
               show: true,
               fontSize: '1.5rem',
-              label: 'Operational',
+              label: 'Users',
               formatter() {
-                return '31%'
+                return '100%'
               }
             }
           }
@@ -98,16 +133,17 @@ const ApexRadiarChart = () => {
   }
 
   // ** Chart Series
-  const series = [85, 16, 50, 50]
+  const series = [t, o, emp, a]
 
   return (
     <Card>
       <CardHeader>
         <div>
           <CardTitle className='mb-75' tag='h4'>
-            Expense Ratio
+            Users Ratio
           </CardTitle>
-          <CardSubtitle className='text-muted'>Spending on various categories</CardSubtitle>
+          <CardSubtitle className='text-muted'>
+            according to their roles</CardSubtitle>
         </div>
       </CardHeader>
       <CardBody>

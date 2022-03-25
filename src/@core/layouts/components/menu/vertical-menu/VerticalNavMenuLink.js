@@ -71,7 +71,7 @@ const VerticalNavMenuLink = ({
           }
         }}
       >
-        <Icon name={item.menu_icon} type={item.menu_icon_type}/>
+        <Icon name={item.menu_icon} type={item.menu_icon_type}  />
         {
           item.menu_icon=='' && item.menu_icon_type=='' &&
           <>

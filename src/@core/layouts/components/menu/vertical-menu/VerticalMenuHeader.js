@@ -25,7 +25,7 @@ const VerticalMenuHeader = (props, building_id) => {
       setUserData(response.data)
     })
   }, [menuHover, menuCollapsed])
-  async function handleShow(building_id) {
+ /* async function handleShow(building_id) {
     setSelectedBuilding(building_id)
     setShow(true)
     console.warn(building_id)
@@ -33,7 +33,7 @@ const VerticalMenuHeader = (props, building_id) => {
     result = await result.json();
     console.warn(result)
 
-  }
+  }*/
 
   // ** Menu toggler component
   const Toggler = () => {

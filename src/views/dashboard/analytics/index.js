@@ -79,7 +79,7 @@ const AnalyticsDashboard = () => {
       <Row>
         {/* Stats With Icons */}
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Home size={24} color='red' />} color='info' stats={floor}
+          <StatsVertical  icon={<Home size={24} color='red' />} color='info' stats={floor}
             statTitle='Total Floor' >
           </StatsVertical>
         </Col>

@@ -227,11 +227,6 @@ const Login = () => {
               </div>
 
               <div className='mb-1'>
-                <Label className='form-label' ></Label>
-                <input className='form-control' placeholder='Building'></input>
-              </div>
-
-              <div className='mb-1'>
                 <div className='d-flex justify-content-between'>
                   <Label className='form-label' for='password'>
                     Password

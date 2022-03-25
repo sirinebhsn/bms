@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { Calendar, Globe, Home, Lock, Mail, Map, MapPin, Phone, Smile, User } from "react-feather";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { Card, CardBody, Col, Row } from "reactstrap";
 import VerticalMenuHeader from "../menu/vertical-menu/VerticalMenuHeader";
 
 const Building = ({ building_id }) => {
+  const { t } = useTranslation()
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
   const [buildingList, setBuildingList] = useState([])
@@ -48,7 +50,7 @@ const Building = ({ building_id }) => {
                   <Col sm='4'>
 
                       <img onClick={() => handleShow(item.building_id)} style={{ width: 150, height: 150 }} src={item.building_image} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-                      <span><b>{item.building_name}</b>&nbsp;&nbsp;</span>
+                      <span><b>{t(item.building_name)}</b>&nbsp;&nbsp;</span>
 
 
                   </Col>
