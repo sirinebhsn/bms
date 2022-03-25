@@ -95,8 +95,6 @@ const Login = () => {
           )
         // console.log(response.data)
         }
-   
-
       });
     })
 
