@@ -164,8 +164,7 @@ const UsersList = () => {
 
                 <td> <User size={14} />&nbsp;{item.user_name}</td>
                 <td> <Mail size={14} /> &nbsp;{item.email} </td>
-                <td> &nbsp;{passwordShown ? item.password : item.password.replace(item.password, "**********")}
-                <span onClick={togglePassword}>
+                <td> &nbsp;{passwordShown ? item?.password : item?.password?.replace(item?.password, "**********")}  <span onClick={togglePassword}>
                 &nbsp;<Eye size={12} ></Eye>
                 </span>
 

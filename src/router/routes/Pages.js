@@ -59,7 +59,10 @@ const PagesRoutes = [
   {
     path: '/pages/reset-password-basic',
     component: lazy(() => import('../../views/pages/authentication/ResetPasswordBasic')),
-    layout: 'BlankLayout'
+    layout: 'BlankLayout',
+    meta: {
+      authRoute: true
+    }
   },
   {
     path: '/pages/reset-password-cover',

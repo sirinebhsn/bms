@@ -15,13 +15,28 @@ import { ChevronLeft } from 'react-feather'
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
+import { useState } from 'react'
+import axios from 'axios'
 
 const ForgotPassword = () => {
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+  const [email, setEmail] = useState('');
+  const login = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('email', email);
+      axios.post(`${API_ENDPOINT}/api/forgot-password`, formData).then(response => {
+
+        if (response.data.status == 200) {
+
+              console.log("success")
+        }})}
   // ** Hooks
   const { skin } = useSkin()
 
   const illustration = skin === 'dark' ? 'forgot-password-v2-dark.svg' : 'forgot-password-v2.svg',
     source = require(`@src/assets/images/pages/${illustration}`).default
+
 
   if (!isUserLoggedIn()) {
     return (
@@ -76,7 +91,7 @@ const ForgotPassword = () => {
                 </g>
               </g>
             </svg>
-            <h2 className='brand-text text-primary ms-1'>Vuexy</h2>
+            <h2 className='brand-text text-primary ms-1'></h2>
           </Link>
           <Col className='d-none d-lg-flex align-items-center p-5' lg='8' sm='12'>
             <div className='w-100 d-lg-flex align-items-center justify-content-center px-5'>
@@ -91,13 +106,13 @@ const ForgotPassword = () => {
               <CardText className='mb-2'>
                 Enter your email and we'll send you instructions to reset your password
               </CardText>
-              <Form className='auth-forgot-password-form mt-2' onSubmit={e => e.preventDefault()}>
+              <Form className='auth-forgot-password-form mt-2' onSubmit={login}>
                 <div className='mb-1'>
-                  <Label className='form-label' for='login-email'>
+                  <Label className='form-label' for='email'>
                     Email
                   </Label>
-                  <Input type='email' id='login-email' placeholder='john@example.com' autoFocus />
-                </div>
+                  <input id='email' type='email' className="form-control"
+                  onChange={(e) => setEmail(e.target.value)} placeholder="Email" />                </div>
                 <Button color='primary' block>
                   Send reset link
                 </Button>

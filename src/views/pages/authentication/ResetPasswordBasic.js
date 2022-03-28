@@ -1,5 +1,6 @@
 // ** React Imports
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { isUserLoggedIn } from '@utils'
 
 // ** Icons Imports
 import { ChevronLeft } from 'react-feather'
@@ -8,12 +9,38 @@ import { ChevronLeft } from 'react-feather'
 import InputPassword from '@components/input-password-toggle'
 
 // ** Reactstrap Imports
-import { Card, CardBody, CardTitle, CardText, Form, Label, Button } from 'reactstrap'
+import { Card, CardBody, CardTitle, CardText, Form, Label, Button, Input } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
+import { data } from 'jquery'
+import axios from 'axios'
 
 const ResetPasswordBasic = () => {
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+
+  const handleChangeInput= (e)=>{
+    const{name, value}= e.target;
+    setData({ ...data, [name]:value, err:"", success: ""});
+  };
+  const handleResetPass = async()=>{
+    if(password != password_confirmation)
+      return setData({ ...data, err: "Passwords did not Match", success: ""});
+      try{
+        const res= await axios.post(`${API_ENDPOINT}/api/reset-password`,{password},{
+            headers:{Authorization:token}
+
+        })
+        return setData({ ... data, err:'', success: res.data.msg})
+      }
+      catch(err){
+        err.response.data.msg && setData({...data, err:err.response.data.msg, success: ''})
+      }
+    
+  
+  }
+  if (!isUserLoggedIn()) {
+
   return (
     <div className='auth-wrapper auth-basic px-2'>
       <div className='auth-inner my-2'>
@@ -68,26 +95,33 @@ const ResetPasswordBasic = () => {
                   </g>
                 </g>
               </svg>
-              <h2 className='brand-text text-primary ms-1'>Vuexy</h2>
+              <h2 className='brand-text text-primary ms-1'>BMS</h2>
             </Link>
             <CardTitle tag='h4' className='mb-1'>
               Reset Password 🔒
             </CardTitle>
             <CardText className='mb-2'>Your new password must be different from previously used passwords</CardText>
-            <Form className='auth-reset-password-form mt-2' onSubmit={e => e.preventDefault()}>
+            <Form className='auth-reset-password-form mt-2' onSubmit={handleResetPass}>
+              
+            <div className='mb-1'>
+                <Label className='form-label' for='email'>
+                  Email
+                </Label>
+                <Input type='email' className='input-group-merge' id='email' autoFocus />
+              </div>
               <div className='mb-1'>
-                <Label className='form-label' for='new-password'>
+                <Label className='form-label' for='password'>
                   New Password
                 </Label>
-                <InputPassword className='input-group-merge' id='new-password' autoFocus />
+                <InputPassword className='input-group-merge' id='password' autoFocus />
               </div>
               <div className='mb-1'>
-                <Label className='form-label' for='confirm-password'>
+                <Label className='form-label' for='password_confirmation'>
                   Confirm Password
                 </Label>
-                <InputPassword className='input-group-merge' id='confirm-password' />
+                <InputPassword className='input-group-merge' id='password_confirmation' />
               </div>
-              <Button color='primary' block>
+              <Button color='primary' onClick={handleResetPass} block>
                 Set New Password
               </Button>
             </Form>
@@ -102,6 +136,10 @@ const ResetPasswordBasic = () => {
       </div>
     </div>
   )
-}
 
+}
+else {
+  return <Redirect to='/' />
+}
+}
 export default ResetPasswordBasic

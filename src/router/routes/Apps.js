@@ -3,6 +3,7 @@ import { lazy } from 'react'
 import { Redirect } from 'react-router-dom'
 
 const AppRoutes = [
+
   {
     path: '/apps/email',
     exact: true,
@@ -158,6 +159,14 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/units/listUnits'))
   },
   {
+    path: '/units/slider',
+    component: lazy(() => import('../../views/apps/units/listUnits/Slider')),
+    meta: {
+      navLink: '/units/slider'
+    }
+  },
+
+  {
     path: '/apps/user/view',
     exact: true,
     component: () => <Redirect to='/apps/user/view/1' />
@@ -169,6 +178,9 @@ const AppRoutes = [
       navLink: '/user/view'
     }
   },
+  
+  
+
   {
     path: '/apps/buildings/view',
     exact: true,

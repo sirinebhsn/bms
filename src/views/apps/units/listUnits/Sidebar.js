@@ -18,6 +18,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
   const [userData, setUserData] = useState([]);
   const [floorList, setFloorList] = useState([]);
+  const [typeData, setTypeData] = useState([]);
+
 
 
   /**  Get the Data of the Current User  **/
@@ -34,24 +36,25 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
       setFloorList(res.data);
     });
+    axios.get(`${API_ENDPOINT}/api/listUnitTypes`).then(resp => {
+
+      setTypeData(resp.data);
+    });
   }, [])
 
   /* *** Unit Fields Initial States *** */
   const [unit_name, setName] = useState("");
   const [building_id, setBuilding] = useState("");
   const [floor_id, setFloor] = useState("");
-  const [unit_type, setUnitType] = useState("");
+  const [type_id, setUnitType] = useState("");
   const [unit_status, setUnitStatus] = useState("");
   const [unit_roomnumber, setUnitRoomNumber] = useState("");
-  // const [unit_added_date, setUnitAddedDate] = useState("");
-  const [unit_added_date, setUnitAddedDate] = useState(new Date())
-
+  const [unit_added_date, setUnitAddedDate] = useState("");
   const [unit_pictures, setPictures] = useState([]);
 
   /*  const fileSelectedHandler = (e) => {
       setPictures(e.target.files)
     }*/
-
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: acceptedFiles => {
       setPictures([...unit_pictures, ...acceptedFiles.map(file => Object.assign(file))])
@@ -117,7 +120,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('unit_name', unit_name);
     formData.append('building_id', building_id);
     formData.append('floor_id', floor_id);
-    formData.append('unit_type', unit_type);
+    formData.append('type_id', type_id);
     formData.append('unit_status', unit_status);
     formData.append('unit_roomnumber', unit_roomnumber);
     formData.append('unit_added_date', unit_added_date);
@@ -127,12 +130,13 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     }
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/addUnite`, formData).then(res => {
+      if(res.data.status===200){
       console.log(res.data)
       new Swal("Success", "success");
       window.location.reload()
 
 
-
+      }
     });
   }
 
@@ -164,14 +168,20 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
         <br />
         <Row>
-          <Label className='form-label' for='unit_type'>Unit Type</Label>
-          <Input type='select' name='select' id='unit_type' onChange={(e) => setUnitType(e.target.value)}>
-            <option value="S+1">S+1</option>
-            <option value="S+2">S+2</option>
-            <option value="S+3">S+3</option>
-            <option value="Villa">Villa</option>
 
-          </Input>
+          <Label className='form-label' for='type_id'>Select Type</Label>
+          <select id='type_id' className='form-control' onChange={(e) => setUnitType(e.target.value)}
+          >
+
+
+            <option  >Select Type</option>
+            {typeData.map((item) => {
+              return (<option value={item.type_id}>{item.unit_type}</option>
+              )
+
+            })
+            }
+          </select>
         </Row>
         <br />
         <Row>
@@ -181,15 +191,22 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           </Label>
           <Input type='number' className="form-control"
 
-            placeholder="Room Number" onChange={(e) => setUnitRoomNumber(e.target.value)} /><br />
+            placeholder="Room Number" id='unit_roomnumber' onChange={(e) => setUnitRoomNumber(e.target.value)} /><br />
         </Row>
         <br />
         <Row>
 
-          <Label className='form-label' for='default-picker'>
-            Default
-          </Label>
-          <input type='date' className='form-control' id='unit_added_date' onChange={(e) => setUnitAddedDate(e.target.value)} />
+        <Label className='form-label' for='unit_added_date'>
+              Unit Added Date <span className='text-danger'>*</span>
+            </Label>
+            <input type="date" className='form-control' id='unit_added_date'
+
+              onChange={(e) => setUnitAddedDate(e.target.value)}
+
+              dateFormat="yyyy-MM-dd"
+
+
+            />
 
 
         </Row>

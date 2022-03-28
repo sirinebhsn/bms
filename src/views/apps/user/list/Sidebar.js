@@ -394,5 +394,4 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     </Sidebar >
   )
 }
-
 export default SidebarNewUsers
