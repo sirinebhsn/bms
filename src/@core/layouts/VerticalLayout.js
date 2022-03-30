@@ -46,6 +46,7 @@ const VerticalLayout = props => {
     footer,
     menuData,
     children,
+    thirdChild,
     routerProps,
     setLastLayout,
     currentActiveItem
@@ -200,7 +201,8 @@ const VerticalLayout = props => {
           )}
         </div>
       </Navbar>
-      {children}
+      {[children,
+      thirdChild]}
 
       {/* Vertical Nav Menu Overlay */}
       <div

@@ -201,6 +201,13 @@ const AppRoutes = [
     }
   },
   {
+    path: '/buildings/list',
+    component: lazy(() => import('../../views/apps/buildings/list')),
+    meta: {
+      navLink: '/buildings/list'
+    }
+  },
+  {
     path: '/apps/roles',
     component: lazy(() => import('../../views/apps/roles-permissions/roles'))
   },

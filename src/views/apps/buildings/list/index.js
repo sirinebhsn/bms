@@ -10,20 +10,21 @@ import { Row, Col } from 'reactstrap'
 import StatsHorizontal from '@components/widgets/stats/StatsHorizontal'
 
 // ** Icons Imports
-import { User, UserPlus, UserCheck, UserX, Users } from 'react-feather'
+import { User, UserPlus, UserCheck, UserX, Users, Codesandbox } from 'react-feather'
 
 // ** Styles
 import '@styles/react/apps/app-users.scss'
 import { useEffect, useState } from 'react'
 
 const UsersList = () => {
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    getUsers();
+    getBuildings();
   }, [])
-  async function getUsers() {
-    let result = await fetch("https://bms-back.start-now.fr/public/api/countUsers");
+  async function getBuildings() {
+    let result = await fetch(`${API_ENDPOINT}/api/countBuildings`);
     result = await result.json();
     setData(result)
   }
@@ -34,8 +35,8 @@ const UsersList = () => {
         <Col lg='6' sm='6'>
           <StatsHorizontal
             color='primary'
-            statTitle='Total Owners'
-            icon={<Users size={20} />}
+            statTitle='Total Buildings'
+            icon={<Codesandbox size={20} />}
             renderStats={<h3 className='fw-bolder mb-75'>{data}</h3>}
           />
         </Col>

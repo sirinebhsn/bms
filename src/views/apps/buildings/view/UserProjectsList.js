@@ -29,6 +29,7 @@ const UserProjectsList = () => {
   const [building_image, setImage] = useState("");
   const [building_status, setStatus] = useState("");
   const [building_company_name, setCompanyname] = useState("");
+  const [building_created_date, setCreatedDate] = useState("");
   const [building_company_phone, setCompanyphone] = useState("");
   const [building_company_address, setCompanyaddress] = useState("");
   const [building_rule, setRule] = useState("");
@@ -57,38 +58,46 @@ const UserProjectsList = () => {
       event.preventDefault();
     }
   }
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
   const addBuilding = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('building_name', building_name);
-    formData.append('building_email ', building_email);
+    formData.append('building_email', building_email);
     formData.append('building', building);
-    formData.append('building_address ', building_address);
+    formData.append('building_address', building_address);
     formData.append('building_security_guard_mobile', building_security_guard_mobile);
+    formData.append('building_created_date', building_created_date);
+
     formData.append('building_secrataty_mobile', building_secrataty_mobile);
     formData.append('building_moderator_mobile', building_moderator_mobile);
     formData.append('building_make_year', building_make_year);
-    formData.append('building_image ', building_image);
+    formData.append('building_image', building_image);
     formData.append('building_status', building_status);
     formData.append('building_company_name', building_company_name);
     formData.append('building_company_phone', building_company_phone);
     formData.append('building_company_address', building_company_address);
     formData.append('building_rule', building_rule);
 
-    axios.post(`https://bms-back.start-now.fr/public/api/addBuilding`, formData).then(res => {
+    axios.post(`${API_ENDPOINT}/api/addBuilding`, formData).then(res => {
       console.log(res.data)
+      if(res.data.status==200){
 
-      if (res.data.status == 200) {
         new Swal("Success", res.data.message, "success");
         history.push('/apps/buildings/list');
-
       }
+      console.log(formData);
+<row>
+  <col sm="4">
+    <button/>
+    </col>
+
+</row>
 
     });
 
   }
-
   return (
     <Col style={{ width: '70rem' }}>
       <Card>
@@ -97,27 +106,18 @@ const UserProjectsList = () => {
             <h1>Add New Building</h1></CardTitle>
         </CardHeader>
         <CardBody className='py-2 my-25'>
-          <Form className='mt-2 pt-50'>
+          <Form className='mt-2 pt-50' onSubmit={addBuilding}>
 
             <div className='d-flex'>
               <div className='me-25'>
                 <img className='rounded me-50' src={imgData} style={{ width: 100, height: 100 }} />
-
-              </div>
-              <div className='d-flex align-items-end mt-75 ms-1'>
-                <div>
-                  <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
-                    Upload
-                    <div className='me-25'>
-
-                      <Input id='owner-picture' type='file' onChange={onChangePicture} onKeyDown={handleEnter}
-                        hidden accept='image/*' />
-                    </div>
-                  </Button>
-                  <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
                 </div>
+
+                <input id="building_image" name='building_image' onKeyDown={handleEnter} type="file" onChange={onChangePicture} />
+
+              
               </div>
-            </div>
+            
             <br />
 
             <Row>
@@ -165,6 +165,21 @@ const UserProjectsList = () => {
               </Col>
             </Row>
             <Row>
+            <Col sm='12' className='mb-1'>
+            <Label className='form-label' for='building_created_date'>
+              Building Created Date <span className='text-danger'>*</span>
+            </Label>
+            <input type="date" className='form-control' id='building_created_date'
+
+              onChange={(e) => setCreatedDate(e.target.value)}
+
+              dateFormat="yyyy-MM-dd"
+
+
+            />
+          </Col>
+            </Row>
+            <Row>
 
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='building_security_guard_mobile'>
@@ -172,7 +187,7 @@ const UserProjectsList = () => {
                 </Label>
                 <InputGroup className='input-group-merge'>
                   <InputGroupText >TN(+216)</InputGroupText>
-                  <Cleave id='building_security_guard_mobile' className='form-control' placeholder='52 956 861' options={options}
+                  <input type='text' id='building_security_guard_mobile' className='form-control' placeholder='52 956 861' options={options}
                     onChange={(e) =>
                       setGuardmob(e.target.value)} />
                 </InputGroup>
@@ -184,7 +199,7 @@ const UserProjectsList = () => {
                 </Label>
                 <InputGroup className='input-group-merge'>
                   <InputGroupText>TN(+216)</InputGroupText>
-                  <Cleave id='building_secrataty_mobile' className='form-control' placeholder='52 956 861' options={options}
+                  <input type='text' id='building_secrataty_mobile' className='form-control' placeholder='52 956 861' options={options}
                     onChange={(e) =>
                       setSecratatymob(e.target.value)} />
                 </InputGroup>
@@ -199,7 +214,7 @@ const UserProjectsList = () => {
                 </Label>
                 <InputGroup className='input-group-merge'>
                   <InputGroupText>TN (+216)</InputGroupText>
-                  <Cleave id='building_moderator_mobile' className='form-control' placeholder='52 956 861' options={options}
+                  <input type='text' id='building_moderator_mobile' className='form-control' placeholder='52 956 861' options={options}
                     onChange={(e) =>
                       setModeratormob(e.target.value)} />
                 </InputGroup>
@@ -211,7 +226,7 @@ const UserProjectsList = () => {
                 </Label>
                 <InputGroup className='input-group-merge'>
                   <InputGroupText>TN (+216)</InputGroupText>
-                  <Cleave id='building_company_phone' className='form-control' placeholder='52 956 861' onChange={(e) =>
+                  <input type='text' id='building_company_phone' className='form-control' placeholder='52 956 861' onChange={(e) =>
                     setCompanyphone(e.target.value)} options={options} />
                 </InputGroup>
 

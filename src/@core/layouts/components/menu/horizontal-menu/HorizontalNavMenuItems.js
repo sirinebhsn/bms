@@ -17,8 +17,8 @@ const HorizontalNavMenuItems = props => {
   // ** Render Nav Items
   const RenderNavItems = props.items.map((item, index) => {
     const TagName = Components[resolveNavItemComponent(item)]
-    if (item.children) {
-      return canViewMenuGroup(item) && <TagName item={item} index={index} key={item.menu_id} {...props} />
+    if (item.children && item.thirdChild)  {
+      return canViewMenuGroup(item) && <TagName item={item} index={index} key={item.menu_parentid} {...props} />
     }
     return canViewMenuItem(item) && <TagName item={item} index={index} key={item.menu_id} {...props} />
   })

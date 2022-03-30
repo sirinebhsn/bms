@@ -6,7 +6,7 @@ import Sidebar from '@components/sidebar'
 import './style.css'
 
 // ** Reactstrap Imports
-import { Button, Label, Form, Row, Col, Input, DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle } from 'reactstrap'
+import { Button, Label, Form, Row, Col, Input, DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle, InputGroup, InputGroupText } from 'reactstrap'
 import PhoneInput from 'react-phone-number-input'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -22,36 +22,28 @@ import ReactCountryFlag from 'react-country-flag'
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const { t } = useTranslation()
 
-  const history = useHistory();
-  const [buildingList, setBuildingList] = useState([]);
-  const [errorList, setError] = useState([]);
-  const [user_name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user_tel, setTelephone] = useState("");
-  const [user_nid, setNid] = useState("");
-  const [user_pre_address, setPresentAdress] = useState("");
-  const [user_per_address, setPermenantAdress] = useState("");
-  const [user_image, setImage] = useState("");
-  const [building_id, setBuildingid] = useState("");
-  const [user_salary, setSalary] = useState("");
-  const [user_type, setType] = useState("");
-  const [user_status, setStatus] = useState("");
-  const [user_designation, setDesignation] = useState("");
-  const [user_currlang, setLang] = useState("");
-  const [user_member_type, setMembertype] = useState("");
-  const [user_ending_date, setEndingDate] = useState(new Date());
-  const [user_date_creation, setCreationDate] = useState(new Date());
+  const [building_name, setName] = useState("");
+  const [building_email, setEmail] = useState("");
+  const [building, setBuilding] = useState("");
+  const [building_address, setAddress] = useState("");
+  const [building_security_guard_mobile, setGuardmob] = useState("");
+  const [building_secrataty_mobile, setSecratatymob] = useState("");
+  const [building_moderator_mobile, setModeratormob] = useState("");
+  const [building_make_year, setYear] = useState("");
+  const [building_image, setImage] = useState("");
+  const [building_status, setStatus] = useState("");
+  const [building_company_name, setCompanyname] = useState("");
+  const [building_created_date, setCreatedDate] = useState("");
+  const [building_company_phone, setCompanyphone] = useState("");
+  const [building_company_address, setCompanyaddress] = useState("");
+  const [building_rule, setRule] = useState("");
+  const options = {
+    phone: true, phoneRegionCode: 'US'
+  }
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
 
-  useEffect(() => {
-    axios.get(`https://bms-back.start-now.fr/public/api/listBuildings`).then(res => {
-
-      setBuildingList(res.data);
-    });
-  }, [])
-
-  const [imgData, setImgData] = useState('https://cdn1.iconfinder.com/data/icons/avatar-3/512/Manager-512.png');
+  const [imgData, setImgData] = useState('https://image.geze.com/im/StageSpezial/pboxx-pixelboxx-619726/Des');
   const onChangePicture = e => {
     if (e.target.files[0]) {
       console.log("picture: ", e.target.files);
@@ -72,50 +64,49 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     }
   }
 
-  const addUser = (e) => {
+  const addBuilding = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('user_name', user_name);
-    formData.append('user_type', user_type);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('user_tel', user_tel);
-    formData.append('user_nid', user_nid);
-    formData.append('user_pre_address', user_pre_address);
-    formData.append('user_per_address', user_per_address);
-    formData.append('user_image', user_image);
-    formData.append('user_designation', user_designation);
-    formData.append('building_id', building_id);
-    formData.append('user_member_type', user_member_type);
-    formData.append('user_currlang', user_currlang);
-    formData.append('user_status', user_status);
-    formData.append('user_salary', user_salary);
-    formData.append('user_ending_date', user_ending_date);
-    formData.append('user_date_creation', user_date_creation);
-    formData.append('building_id', building_id);
+    formData.append('building_name', building_name);
+    formData.append('building_email', building_email);
+    formData.append('building', building);
+    formData.append('building_address', building_address);
+    formData.append('building_security_guard_mobile', building_security_guard_mobile);
+    formData.append('building_created_date', building_created_date);
 
+    formData.append('building_secrataty_mobile', building_secrataty_mobile);
+    formData.append('building_moderator_mobile', building_moderator_mobile);
+    formData.append('building_make_year', building_make_year);
+    formData.append('building_image', building_image);
+    formData.append('building_status', building_status);
+    formData.append('building_company_name', building_company_name);
+    formData.append('building_company_phone', building_company_phone);
+    formData.append('building_company_address', building_company_address);
+    formData.append('building_rule', building_rule);
 
-    axios.post(`https://bms-back.start-now.fr/public/api/auth/addUser`, formData).then(res => {
+    axios.post(`${API_ENDPOINT}/api/addBuilding`, formData).then(res => {
       console.log(res.data)
-
       if (res.data.status == 200) {
+
         new Swal("Success", res.data.message, "success");
-        setError([]);
-        history.push('/apps/user/list');
-
+        window.location.reload()
       }
-   
+      console.log(formData);
+      <row>
+        <col sm="4">
+          <button />
+        </col>
 
+      </row>
 
     });
 
   }
-
   return (
     <Sidebar
       size='lg'
       open={open}
-      title='Add New User'
+      title='Add New Building'
       headerClassName='mb-1'
       contentClassName='pt-0'
       toggleSidebar={toggleSidebar}
@@ -123,252 +114,168 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
       <Form className='mt-2 pt-50'>
 
         <Row>
-          <Col sm='6' className='mb-1'>
-            <Label className='form-label' for='user_type'>Select User</Label>
-            <select id='user_type' className='form-control' onChange={(e) => setType(e.target.value)}
-            >
-              <option>Select User</option>
-              <option value="a"> Admin </option>
-              <option value="o"> Owner </option>
-              <option value="e"> Employee </option>
-              <option value="t"> Tenant </option>
-            </select>
-          </Col>
-          {user_type != 'a' &&
-            <>
-              <Col sm='6' className='mb-1'>
-
-                <Label className='form-label' for='building_id'>Select Building</Label>
-                <select disabled id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
-                >
-
-
-                  <option  >Select BUILDING</option>
-                  {buildingList.map((item) => {
-                    return (<option value={item.building_id}>{item.building_name}</option>
-                    )
-
-                  })
-                  }
-                </select>
-
-              </Col>
-            </>}
-          {user_type == 'a' &&
-            <>
-              <Col sm='6' className='mb-1'>
-
-                <Label className='form-label' for='building_id'>Select Building</Label>
-                <select id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
-                >
-
-
-                  <option  >Select BUILDING</option>
-                  {buildingList.map((item) => {
-                    return (<option value={item.building_id}>{item.building_name}</option>
-                    )
-
-                  })
-                  }
-                </select>
-
-              </Col>
-            </>}
-
-        </Row>
-        <Row>
-          <Col sm='6' className='mb-1'>
-
-            <Label className='form-label' for='user_name'>
-              User Name <span className='text-danger'>*</span>
-            </Label>
-            <input id='user_name' type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setName(e.target.value)}
-              placeholder="User Name" /><br />
-          </Col>
-          <Col sm='6' className='mb-1'>
-
-            <Label className='form-label' for='email'>
-              Email <span className='text-danger'>*</span>
-            </Label>
-            <input type='email' id='email' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setEmail(e.target.value)} placeholder="Email" /><br />
-
-          </Col>
-        </Row>
-        <Row>
-          <Col sm='6' className='mb-1'>
-
-            <Label className='form-label' for='password'>
-              User Password <span className='text-danger'>*</span>
-            </Label>
-            <input type='password' id='password' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPassword(e.target.value)}
-              placeholder="User Password" /><br />
-          </Col>
-          <Col sm='6' className='mb-1'>
-
-            <Label className='form-label' for='user_nid'>
-              User Nid <span className='text-danger'>*</span>
-            </Label>
-            <input type='text' id='user_nid' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setNid(e.target.value)} placeholder="Type user NID here" /><br />
-
-          </Col>
-        </Row>
-        <Row>
-
-          <Col sm='6' className='mb-1'>
-
-            <Label className='form-label' for='user_pre_address'>
-              Present Address <span className='text-danger'>*</span>
-            </Label>
-            <input type='text' id='user_pre_address' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPresentAdress(e.target.value)}
-              placeholder="Present Address" /><br />
-          </Col>
-          <Col sm='6' className='mb-1'>
-
-            <Label className='form-label' for='user_per_address'>
-              Permenant Address <span className='text-danger'>*</span>
-            </Label>
-            <input type='text' id='user_per_address' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setPermenantAdress(e.target.value)} placeholder="Permenant Address" /><br />
-
-          </Col>
-        </Row>
-
-
-
-
-        <Row>
-          <Col sm='12' className='mb-1'>
-            <Label className='form-label' for='user_date_creation'>
-              User Starting Date <span className='text-danger'>*</span>
-            </Label>
-            <input type="date" className='form-control' id='user_date_creation'
-
-              onChange={(e) => setCreationDate(e.target.value)}
-         
-              dateFormat="yyyy-MM-dd"
-            
-              
-            />
-          </Col>
-
-        </Row>
-        <Row>
-   
-          <Col sm='12' className='mb-1'>
-            <Label className='form-label' for='user_ending_date'>
-              User Ending Date <span className='text-danger'>*</span>
-            </Label>
-            <input type='date' className='form-control'
-              id='user_ending_date' 
-              onChange={(e) => setEndingDate(e.target.value)}
-            
-              dateFormat="yyyy-MM-dd"
-
-            
-            />
-          </Col>
-        </Row>
-
-        <Row>
-          <Label className='form-label' for='user_tel'>
-            User Phone Number <span className='text-danger'>*</span>
+          <Label className='form-label' for='building_name'>
+            Building name
           </Label>
-          <PhoneInput 
-            id='user_tel'
-            onKeyDown={handleEnter} placeholder="enter phone number"
-            value={user_tel} onChange={setTelephone} />
+
+          <Input id='building_name' placeholder='Building Name'
+            onChange={(e) =>
+              setName(e.target.value)}
+          />
+        </Row><br />
+        <Row>
+          <Label className='form-label' for='building_email'>
+            Building Email
+          </Label>
+          <Input id='building_email' placeholder='Building Email'
+            onChange={(e) =>
+              setEmail(e.target.value)} />
+
+        </Row><br />
+        <Row>
+
+
+          <Label className='form-label' for='building'>
+            Building
+          </Label>
+
+          <Input type='text' id='building' placeholder='Building'
+            onChange={(e) =>
+              setBuilding(e.target.value)}
+          />
+        </Row><br />
+        <Row>
+
+          <Label className='form-label' for='building_address '>
+            Building Address
+          </Label>
+          <Input id='building_address' placeholder='Building Address'
+            onChange={(e) =>
+              setAddress(e.target.value)} />
+
+        </Row><br />
+        <Row>
+
+          <Label className='form-label' for='building_created_date'>
+            Building Created Date <span className='text-danger'>*</span>
+          </Label>
+          <input type="date" className='form-control' id='building_created_date'
+
+            onChange={(e) => setCreatedDate(e.target.value)}
+
+            dateFormat="yyyy-MM-dd"
+
+
+          />
+        </Row><br />
+        <Row>
+          <Label className='form-label' for='building_security_guard_mobile'>
+            Security Guard Phone number
+          </Label>
+          <InputGroup className='input-group-merge'>
+            <InputGroupText >TN(+216)</InputGroupText>
+            <input type='text' id='building_security_guard_mobile' className='form-control' placeholder='52 956 861' options={options}
+              onChange={(e) =>
+                setGuardmob(e.target.value)} />
+          </InputGroup><br />
+
+        </Row>
+
+        <Row>
+
+          <Label className='form-label' for='building_secrataty_mobile'>
+            Secrataty Phone number
+          </Label>
+          <InputGroup className='input-group-merge'>
+            <InputGroupText>TN(+216)</InputGroupText>
+            <input type='text' id='building_secrataty_mobile' className='form-control' placeholder='52 956 861' options={options}
+              onChange={(e) =>
+                setSecratatymob(e.target.value)} />
+          </InputGroup><br />
+        </Row>
+        <Row>
+
+          <Label className='form-label' for='building_moderator_mobile'>
+            Moderator Phone number
+          </Label>
+          <InputGroup className='input-group-merge'>
+            <InputGroupText>TN (+216)</InputGroupText>
+            <input type='text' id='building_moderator_mobile' className='form-control' placeholder='52 956 861' options={options}
+              onChange={(e) =>
+                setModeratormob(e.target.value)} />
+          </InputGroup><br />
+
+        </Row>
+        <Row>
+          <Label className='form-label' for='building_company_phone'>
+            Company Phone number
+          </Label>
+          <InputGroup className='input-group-merge'>
+            <InputGroupText>TN (+216)</InputGroupText>
+            <input type='text' id='building_company_phone' className='form-control' placeholder='52 956 861' onChange={(e) =>
+              setCompanyphone(e.target.value)} options={options} />
+          </InputGroup>
+        </Row><br />
+        <Row>
+          <Label className='form-label' for='building_make_year '>
+            Building Creation Year
+          </Label>
+          <Input id='building_make_year' defaultValue={new Date().getFullYear()}
+            onChange={(e) =>
+              setYear(e.target.value)} />
+
+        </Row><br />
+        <Row>
+          <Label className='form-label' for='building_status'>
+            Building Status<span className='text-danger'>*</span>
+          </Label>
+          <select id='building_status' className='form-control' onChange={(e) => setStatus(e.target.value)}
+          >
+            <option>Select Status</option>
+            <option value="1"> Active </option>
+            <option value="2"> Inactive </option>
+
+          </select>
+
+        </Row><br />
+        <Row>
+          <Label className='form-label' for='building_company_address'>
+            Building Company Address
+          </Label>
+
+          <Input id='building_company_address' placeholder='Building Company Address'
+            onChange={(e) =>
+              setCompanyaddress(e.target.value)}
+          />
+        </Row><br />
+
+        <Row>
+          <Label className='form-label' for='building_company_name'>
+            Company Name
+          </Label>
+
+          <Input id='building_company_name' placeholder='Building Company Name'
+            onChange={(e) =>
+              setCompanyname(e.target.value)}
+          />
+
         </Row> <br />
         <Row>
-          <Col sm='6' className='mb-1'>
-            <Label className='form-label' for='user_status'>
-              User Status<span className='text-danger'>*</span>
-            </Label>
-            <select id='user_status' className='form-control' onChange={(e) => setStatus(e.target.value)}
-            >
-              <option>Select Status</option>
-              <option value="1"> Active </option>
-              <option value="2"> Leave </option>
+          <Label className='form-label' for='building_rule'>
+            Building Rule
+          </Label>
 
-            </select>
+          <Input
+            type='textarea'
+            name='building_rule'
+            id='building_rule'
+            lder='Make Rules here'
+            style={{ minHeight: '100px' }}
+            onChange={(e) =>
+              setRule(e.target.value)}
+          />
+        </Row><br/>
 
-          </Col>
-          <Col>
-            <Label className='form-label' for='user_currlang'>
-            Currant Language <span className='text-danger'>*</span>
-            </Label> 
-            <select id='user_curr_lang' className='form-control' onChange={(e) => setLang(e.target.value)}
-            >
-              <option>Select Language</option>
-              <option value="English"> English </option>
-              <option value="French"> French </option>
-              <option value="German"> German </option>
-              <option value="Arabic"> Arabic </option>
-
-              
-
-            </select>
-
-
-          </Col>
-
-        </Row>
-        <Row>
-          <Col>
-
-            <Label className='form-label' for='user_designation'>
-              User Designation<span className='text-danger'>*</span>
-            </Label>
-            <textarea type='text' id='user_designation' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setDesignation(e.target.value)} placeholder="Designation" /><br />
-
-
-          </Col>
-        </Row>
-        <Row>
-          {user_type != 'e' &&
-            <>
-              <Col sm='6' className='mb-1'>
-
-                <Label className='form-label' for='user_salary'>
-                  User salary <span className='text-danger'>*</span>
-                </Label>
-                <input disabled type='number' id='user_salary' onKeyDown={handleEnter} className="form-control"
-                  onChange={(e) => setSalary(e.target.value)} placeholder="Emlployee salary" /><br />
-
-              </Col>
-            </>
-          }       {user_type == 'e' &&
-            <>
-              <Col sm='6' className='mb-1'>
-
-                <Label className='form-label' for='user_salary'>
-                  User salary <span className='text-danger'>*</span>
-                </Label>
-                <input type='number' id='user_salary' onKeyDown={handleEnter} className="form-control"
-                  onChange={(e) => setSalary(e.target.value)} placeholder="Emlployee salary" /><br />
-
-              </Col>
-            </>
-          }
-          <Col sm='6' className='mb-1'>
-
-            <Label className='form-label' for='user_member_type'>
-              User Member Type <span className='text-danger'>*</span>
-            </Label>
-            <select id='user_member_type' className='form-control' onChange={(e) => setMembertype(e.target.value)}
-            >
-              <option>Select User</option>
-              <option value="admin"> Admin </option>
-              <option value="worker"> Worker </option>
-              <option value="security guard"> Security guard </option>
-              <option value="guard"> Guard </option>
-            </select>
-
-          </Col>
-        </Row>
-   
         <div className='d-flex'>
           <div className='d-flex align-items-end mt-75 ms-1'>
             <div>
@@ -376,7 +283,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 <img className="owner-picture" style={{ width: 150, height: 150 }} src={imgData} />
               </div>
               <br />
-              <input id="user_image" onKeyDown={handleEnter} type="file" onChange={onChangePicture} />
+              <input id="building_image" onKeyDown={handleEnter} type="file" onChange={onChangePicture} />
 
               <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
             </div>
@@ -384,7 +291,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         </div>
         <br />
 
-        <Button onClick={addUser} className='me-1' color='primary'>
+        <Button onClick={addBuilding} className='me-1' color='primary'>
           Submit
         </Button>
         <Button type='reset' color='secondary'>

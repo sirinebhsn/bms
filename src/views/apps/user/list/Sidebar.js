@@ -100,15 +100,16 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('user_salary', user_salary);
     formData.append('user_ending_date', user_ending_date);
     formData.append('user_date_creation', user_date_creation);
-    formData.append('building_id', building_id);
 
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/auth/addUser`, formData).then(res => {
       console.log(res.data)
+
+      
         new Swal("Success",  "success");
         window.location.reload()
 
-      
+  console.log(formData)      
 
     });
 

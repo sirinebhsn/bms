@@ -16,7 +16,10 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  InputGroup,
+  Input,
+  Col
 
 } from 'reactstrap'
 // ** React Imports
@@ -28,7 +31,7 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Edit, Eye, Lock, Mail, Phone, Trash, User } from 'react-feather'
+import { Calendar, Clock, Edit, Eye, Lock, Mail, Phone, Search, Trash, User } from 'react-feather'
 import Swal from 'sweetalert2'
 import LoginForm from './DetailsModal'
 import UserInfoEdit from './UserInfoEdit'
@@ -36,16 +39,16 @@ import EditModal from './EditModal'
 
 // ** Table Header
 const UsersList = () => {
-  const [selectedUser, setSelectedUser] = useState();
+  const [selectedBuilding, setSeleectedBuilding] = useState();
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShow(false);
   const handleCloseEditModal = () => setShowModal(false);
 
-  async function handleShow(user_id) {
-    setSelectedUser(user_id)
+  async function handleShow(building_id) {
+    setSelectedUser(building_id)
     setShow(true)
-    console.warn(user_id)
+    console.warn(building_id)
     let result = await fetch("https://bms-back.start-now.fr/public/api/getUser/" + user_id);
     result = await result.json();
     console.warn(result)
@@ -61,6 +64,7 @@ const UsersList = () => {
     console.warn(result) 
   
   }
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -71,7 +75,7 @@ const UsersList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch("https://bms-back.start-now.fr/public/api/listUser");
+    let result = await fetch(`${API_ENDPOINT}/api/listBuildings`);
     result = await result.json();
     setData(result)
   }
@@ -105,15 +109,15 @@ const UsersList = () => {
 
     
   }
-  async function searchUser(key) {
-    if(key){
-    console.warn(key)
-    let result = await fetch("https://bms-back.start-now.fr/public/api/searchUser/" + key);
-    result = await result.json();
-    console.warn(result)
-    setData(result)
+  async function search(key) {
+    if (key) {
+      console.warn(key)
+      let result = await fetch(`${API_ENDPOINT}/api/searchBuilding/` + key);
+      result = await result.json();
+      console.warn(result)
+      setData(result)
     }
-    else{
+    else {
       getData();
     }
   }
@@ -122,13 +126,20 @@ const UsersList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Users List</CardTitle>
-          <div className="col-sm-3">
-            <input type="text" onChange={(e) => searchUser(e.target.value)} className="form-control" placeholder="Search User" />
-
-          </div>
+          <CardTitle tag='h4'>Buildings List</CardTitle>
+          <Col className='mb-1' md='6' sm='12'>
+            <InputGroup onChange={(e) => search(e.target.value)}>
+              <Button color='primary' onClick={search} outline>
+                <Search size={12} />
+              </Button>
+              <Input type='text' onChange={(e) => search(e.target.value)} placeholder='Search here' />
+              <Button color='primary' outline>
+                Search !
+              </Button>
+            </InputGroup>
+          </Col>
           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New User
+            Add New Building
           </Button>
           
         </CardHeader>
@@ -137,10 +148,10 @@ const UsersList = () => {
           <thead>
             <tr>
               <th> Picture </th>
-              <th> Name </th>
-              <th> Email</th>
-              <th> Password </th>
-              <th>  Phone Number </th>
+              <th> Building Name </th>
+              <th>Building Email</th>
+              <th> Building Phone Number </th>
+              <th>  Building Address </th>
               <th> Actions </th>
 
             </tr>
@@ -149,12 +160,13 @@ const UsersList = () => {
           {data.map((item) =>
             <tbody>
               <tr>
-                <td> <img style={{ width: 50, height: 50 }} src={"https://bms-back.start-now.fr/public/" + item.user_image} /> </td>
+                <td> <img style={{ width: 50, height: 50 }} src={item.building_image} /> </td>
 
-                <td> <User size={14} />&nbsp;{item.user_name}</td>
-                <td> <Mail size={14} /> &nbsp;{item.email} </td>
-                <td> <Lock size={14} color=" #273746 " /> &nbsp; {item.password}</td>
-                <td> <Phone size={14} color="green" />&nbsp; {item.user_tel} </td>
+                <td> <User size={14} />&nbsp;{item.building_name}</td>
+                <td> <Mail size={14} /> &nbsp;{item.building_email} </td>
+                <td> <Phone size={14} color="green" />&nbsp; {item.building_secrataty_mobile} </td>
+                <td> <Calendar size={14} color=" #273746 " /> &nbsp; {item.building_make_year}</td>
+
 
                 <td>
                   <span onClick={() => deleteOperation(item.user_id)}>
@@ -183,7 +195,7 @@ const UsersList = () => {
           <h1>User Details</h1>
         </ModalHeader>
         <ModalBody>
-          <LoginForm user_id={selectedUser} />
+          <LoginForm user_id={selectedBuilding} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleClose}>
@@ -196,7 +208,7 @@ const UsersList = () => {
           <h1>Edit User </h1>
         </ModalHeader>
         <ModalBody>
-          <EditModal user_id={selectedUser} />
+          <EditModal user_id={selectedBuilding} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleCloseEditModal}>

@@ -37,6 +37,7 @@ const HorizontalLayout = props => {
   // ** Props
   const {
     children,
+    thirdChild,
     navbar,
     menuData,
     footer,
@@ -184,7 +185,7 @@ const HorizontalLayout = props => {
         </div>
       ) : null}
 
-      {children}
+      {[children, thirdChild]}
       {themeConfig.layout.customizer === true ? (
         <Customizer
           skin={skin}

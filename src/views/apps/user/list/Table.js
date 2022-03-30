@@ -16,7 +16,8 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Col
 
 } from 'reactstrap'
 // ** React Imports
@@ -33,6 +34,7 @@ import Swal from 'sweetalert2'
 import LoginForm from './DetailsModal'
 import UserInfoEdit from './UserInfoEdit'
 import EditModal from './EditModal'
+import ReactPaginate from 'react-paginate';
 
 
 // ** Table Header
@@ -193,6 +195,29 @@ const UsersList = () => {
           }
 
         </Table>
+        <br/>
+        <br/>
+        <Col lg='6' md='6' sm='6' s>
+
+        <ReactPaginate
+          nextLabel=''
+          pageCount={5}
+          breakLabel='...'
+          previousLabel=''
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={2}
+          activeClassName='active'
+          pageClassName='page-item'
+          breakClassName='page-item'
+          nextLinkClassName='page-link'
+          pageLinkClassName='page-link'
+          breakLinkClassName='page-link'
+          nextClassName='page-item next'
+          previousLinkClassName='page-link'
+          previousClassName='page-item prev'
+          containerClassName='pagination react-paginate pagination-success'
+        />
+        </Col>
       </Card>
 
       <Modal isOpen={show}>

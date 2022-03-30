@@ -7,9 +7,6 @@ import Avatar from '@components/avatar'
 // ** Reactstrap Imports
 import { Card, CardBody, CardText } from 'reactstrap'
 
-// ** Images
-import decorationLeft from '@src/assets/images/elements/decore-left.png'
-import decorationRight from '@src/assets/images/elements/decore-right.png'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { isUserLoggedIn } from '@utils'
@@ -30,9 +27,7 @@ const CardCongratulations = () => {
   return (
     <Card className='card-congratulations'>
       <CardBody className='text-center'>
-        <img className='congratulations-img-left' src={decorationLeft} alt='decor-left' />
-        <img className='congratulations-img-right' src={decorationRight} alt='decor-right' />
-        <Avatar icon={<Award size={28} />} className='shadow' color='primary' size='xl' />
+        <Avatar icon={<Award size={10} />} className='shadow' color='primary' size='xs' />
         <div className='text-center'>
         {
             userData && userData.user_type == 'o' &&

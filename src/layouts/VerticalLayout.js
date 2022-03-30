@@ -27,6 +27,8 @@ const VerticalLayout = props => {
  
     <Layout menuData={menuData} {...props}>
       {props.children}
+
+      
     </Layout>
   )
 }

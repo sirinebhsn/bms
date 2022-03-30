@@ -19,6 +19,7 @@ import {
   Modal,
   ModalFooter,
   ModalBody,
+  ModalHeader,
 
 } from 'reactstrap'
 // ** React Imports
@@ -30,14 +31,13 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Edit, Lock, Search, Trash } from 'react-feather'
-import Swal from 'sweetalert2'
-import { Link, NavLink } from 'react-router-dom'
+import { Edit, Image, Lock, Search, Trash, X } from 'react-feather'
+
 import Slider from './Slider'
 
 // ** Table Header
 const UnitList = () => {
-  const [selectedUnit, setSelectedUnit] = useState();
+  const [selectedUnit, setSelectedUnit] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -132,7 +132,7 @@ const UnitList = () => {
                 <td> {item.unit_status}</td>
                 <td> {item.unit_roomnumber}</td>
                 <td> {item?.types?.unit_type}</td>
-                <td><Link to={'/units/slider/' + `${item.unit_id}`} onClick={() => handleShow(item.unit_id)} >See Pictures</Link></td>
+                <td><span onClick={() => handleShow(item.unit_id)} ><Image size={20} color="#F08080"/> </span></td>
 
 
 
@@ -153,8 +153,16 @@ const UnitList = () => {
 
 
         </Table>
+        <Modal isOpen={show}>
+     
+          <Slider unit_id={selectedUnit} >
+          <span onClick={handleClose}> <X/></span>
+          </Slider>
+      </Modal>
+
       </Card>
 
+  
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
 
     </Fragment>
