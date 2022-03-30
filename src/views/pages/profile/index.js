@@ -25,6 +25,8 @@ import ProfileFriendsSuggestions from './ProfileFriendsSuggestions'
 import '@styles/react/pages/page-profile.scss'
 
 const Profile = () => {
+  <script src="https://unpkg.com/react-image-crop/dist/ReactCrop.min.js"></script>
+
   // ** States
   const [block, setBlock] = useState(false)
 
