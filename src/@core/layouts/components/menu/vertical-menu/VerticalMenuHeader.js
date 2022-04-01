@@ -25,7 +25,7 @@ const VerticalMenuHeader = (props, building_id) => {
     axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
       setUserData(response.data)
     })
-  }, [menuHover, menuCollapsed])
+  }, [menuHover, menuCollapsed],[])
  /* async function handleShow(building_id) {
     setSelectedBuilding(building_id)
     setShow(true)

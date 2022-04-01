@@ -18,7 +18,7 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
     axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
       setUserData(response.data)
     })
-  })
+  },[])
 
 
   const [errorList, setError] = useState([]);

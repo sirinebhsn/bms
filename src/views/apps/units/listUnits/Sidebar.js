@@ -30,7 +30,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
-      })
+      }, [])
     }
     axios.get(`${API_ENDPOINT}/api/listFloor`).then(res => {
 
