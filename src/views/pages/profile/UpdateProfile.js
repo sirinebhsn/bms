@@ -21,7 +21,7 @@ const UpdateProfile = ({ user_id }) => {
       }
     };
     useEffect(() => {
-        axios.get(`${API_ENDPOINT}/api/auth/user/`).then(response =>
+        axios.get(`${API_ENDPOINT}/api/auth/user`).then(response =>
           setUser(response.data)
         )
       }, [])

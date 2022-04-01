@@ -2,8 +2,8 @@
 // ** React Imports
 import { Fragment, useEffect, useState } from 'react'
 
-
 import 'cleave.js/dist/addons/cleave-phone.us'
+import { toast } from 'react-toastify'
 
 // ** Reactstrap Imports
 import { Row, Col, Form, Card, Input, Label, Button, CardBody, CardTitle, CardHeader } from 'reactstrap'
@@ -12,9 +12,10 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import "../list/style.css"
 import { useHistory } from 'react-router-dom'
+import WarningToast from '../toasts/WarningToast'
+import ErrorToast from '../toasts/ErrorToast'
 
 const UserProjectsList = () => {
-
   const history = useHistory();
   const [buildingList, setBuildingList] = useState([]);
   const [errorList, setError] = useState([]);
@@ -37,7 +38,7 @@ const UserProjectsList = () => {
   const [user_date_creation, setCreationDate] = useState(new Date());
 
   useEffect(() => {
-    axios.get(`https://bms-back.start-now.fr/public/api/listBuildings`).then(res => {
+    axios.get(`${API_ENDPOINT}/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
     });
@@ -63,9 +64,7 @@ const UserProjectsList = () => {
       event.preventDefault();
     }
   }
-  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
-
-
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
   const addUser = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -98,8 +97,21 @@ const UserProjectsList = () => {
         history.push('/apps/user/list');
 
       }
+      if (res.data.status == 422) {
 
+      
+        return (
+          toast.warning(<WarningToast />, { icon: false, hideProgressBar: true })
+        )
 
+      }
+
+      if (res.data.status == 411) {
+      return(
+        toast.error(<ErrorToast />, { icon: false, hideProgressBar: true })
+      )
+
+      }
 
     });
 
@@ -376,7 +388,7 @@ const UserProjectsList = () => {
                 <Button onClick={addUser} className='me-1' color='primary'>
                   Add User
                 </Button>
-                <Button type='reset'  className='me-1' color='secondary' >
+                <Button type='reset' className='me-1' color='secondary' >
                   Cancel
                 </Button>
 

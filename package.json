@@ -17,7 +17,6 @@
     "@reduxjs/toolkit": "^1.2.5",
     "ag-grid-react": "^27.1.0",
     "animate.css": "^4.1.1",
-    "antd-img-crop": "^4.2.0",
     "apexcharts": "^3.29.0",
     "apexcharts-clevision": "^3.28.3",
     "axios": "^0.25.0",

@@ -78,8 +78,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     }
   }
 
-
-
   const addUser = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -103,13 +101,31 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/auth/addUser`, formData).then(res => {
-      console.log(res.data)
+ 
+      if(res.data.status==201){
+      new Swal("Success", "success");
+      window.location.reload()
 
-      
-        new Swal("Success",  "success");
-        window.location.reload()
+      }
+      if(res.data.status==422){
+        return(
+          <div>
+        <div className='toastify-header'>
+        <div className='title-wrapper'>
+          <Avatar size='sm' color='danger' icon={<X size={12} />} />
+          <h6 className='toast-title'>Error!</h6>
+        </div>
+        <small className='text-muted'>11 Min Ago</small>
+      </div>
+      <div className='toastify-body'>
+        <span role='img' aria-label='toast-text'>
+          👋 Jelly-o macaroon brownie tart ice cream croissant jelly-o apple pie.
+        </span>
+      </div>
+      </div>
+        )
+        }
 
-  console.log(formData)      
 
     });
 
@@ -143,7 +159,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               <Col sm='6' className='mb-1'>
 
                 <Label className='form-label' for='building_id'>Select Building</Label>
-                <select disabled id='building_id'  className='form-control' onChange={(e) => setBuildingid(e.target.value)}
+                <select disabled id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                 >
 
 

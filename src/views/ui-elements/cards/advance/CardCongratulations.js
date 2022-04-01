@@ -27,7 +27,7 @@ const CardCongratulations = () => {
   return (
     <Card className='card-congratulations'>
       <CardBody className='text-center'>
-        <Avatar icon={<Award size={10} />} className='shadow' color='primary' size='xs' />
+        <Avatar icon={<Award size={10} />} className='shadow' color='primary' size='sm' />
         <div className='text-center'>
         {
             userData && userData.user_type == 'o' &&

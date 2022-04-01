@@ -24,7 +24,7 @@ const Toastr = () => {
 
       <Row>
         <Col sm='12'>
-          <ToastrTypes />
+          <ToastrTypes/>
         </Col>
         <Col sm='12'>
           <ToastrPositions />

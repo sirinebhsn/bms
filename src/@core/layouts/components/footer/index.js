@@ -12,7 +12,7 @@ const Footer = () => {
         <span className='d-none d-sm-inline-block'>, All rights Reserved</span>
       </span>
       <span className='float-md-end d-none d-md-block'>
-        Hand-crafted & Made with
+        If Not Now Then When
         <Heart size={14} />
       </span>
     </p>

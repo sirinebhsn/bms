@@ -26,7 +26,7 @@ const IntlDropdown = () => {
 
   return (
     <UncontrolledDropdown href='/' tag='li' className='dropdown-language nav-item'>
-      <DropdownToggle href='/' tag='a' className='nav-link' onClick={e => e.preventDefault()}>
+        <DropdownToggle href='/' tag='a' className='nav-link' onClick={e => e.preventDefault()}>
         <ReactCountryFlag
           svg
           className='country-flag flag-icon'
