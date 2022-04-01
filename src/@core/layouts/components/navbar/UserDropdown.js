@@ -39,7 +39,7 @@ const UserDropdown = () => {
     axios.get(`${API_ENDPOINT}/api/listBuildings`).then(res => {
 
       setBuildingList(res.data);
-    }), []
+    },[])
   }
 
   //** Get User Details from His accessToken
@@ -49,7 +49,7 @@ const UserDropdown = () => {
 
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
-      })}
+      },[])}
   },[])
   //** Vars
   const userAvatar = (userData && userData.avatar) || defaultAvatar
