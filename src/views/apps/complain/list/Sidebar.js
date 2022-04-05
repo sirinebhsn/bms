@@ -37,7 +37,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [compl_phone, setComplPhone] = useState("");
   const [compl_solution, setSolution] = useState("");
   const [compl_job_status, setJobStatus] = useState("");
-  const [compl_assigned_id, setAssigned] = useState("");
+  const [compl_assigned_to, setAssigned] = useState("");
   const [compl_complainBy, setComplainBy] = useState("");
   const [userData, setUserData] = useState(null)
 
@@ -78,7 +78,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('building_id', building_id);
     formData.append('compl_name', compl_name);
     formData.append('compl_email', compl_email);
-    formData.append('compl_assigned_id', compl_assigned_id);
+    formData.append('compl_assigned_to', compl_assigned_to);
     formData.append('compl_date', compl_date);
     formData.append('compl_title', compl_title);
     formData.append('compl_description', compl_description);
@@ -132,12 +132,12 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Row>
           <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='compl_assigned_id'>Assigned To</Label>
-            <select id='compl_assigned_id' className='form-control' onChange={(e) => setAssigned(e.target.value)}
+            <Label className='form-label' for='compl_assigned_to'>Assigned To</Label>
+            <select id='compl_assigned_to' className='form-control' onChange={(e) => setAssigned(e.target.value)}
             >
               <option  >Select Employee</option>
               {EmpList.map((item) => {
-                return (<option value={compl_assigned_id}>{item.user_name}</option>
+                return (<option value={item.user_name}>{item.user_name}</option>
                 )
               })
               }
@@ -147,12 +147,12 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Row>
           <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='compl_assigned_id'>Accomplish By</Label>
+            <Label className='form-label' for='compl_complainBy'>Accomplish By</Label>
             <select id='compl_complainBy' className='form-control' onChange={(e) => setComplainBy(e.target.value)}
             >
               <option  >Select Employee</option>
               {EmpList.map((item) => {
-                return (<option value={compl_complainBy}>{item.user_name}</option>
+                return (<option value={item.user_name}>{item.user_name}</option>
                 )
               })
               }
