@@ -19,6 +19,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import ReactCountryFlag from 'react-country-flag'
 import Cleave from 'cleave.js/react'
 import moment from "moment";
+import { toast } from 'react-toastify'
+import WarningToast from '../toasts/WarningToast'
+import InfoToast from '../toasts/InfoToast'
 
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
@@ -103,26 +106,14 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     axios.post(`${API_ENDPOINT}/api/auth/addUser`, formData).then(res => {
  
       if(res.data.status==201){
-      new Swal("Success", "success");
+      new Swal("Success",res.data.message, "success");
       window.location.reload()
 
       }
-      if(res.data.status==422){
+      if(res.data.status==400){
         return(
-          <div>
-        <div className='toastify-header'>
-        <div className='title-wrapper'>
-          <Avatar size='sm' color='danger' icon={<X size={12} />} />
-          <h6 className='toast-title'>Error!</h6>
-        </div>
-        <small className='text-muted'>11 Min Ago</small>
-      </div>
-      <div className='toastify-body'>
-        <span role='img' aria-label='toast-text'>
-          👋 Jelly-o macaroon brownie tart ice cream croissant jelly-o apple pie.
-        </span>
-      </div>
-      </div>
+          toast.info(<InfoToast/>, { icon: false, hideProgressBar: true })
+          
         )
         }
 

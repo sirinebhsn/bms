@@ -25,6 +25,7 @@ const Slider = ({unit_id}) => {
         images={item.unit_pictures}
         showBullets={true}
         showNavs={true}
+        slideDuration={0.1}
       />
         )}
     </div>

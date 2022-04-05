@@ -17,6 +17,7 @@ import { ChevronLeft } from 'react-feather'
 import '@styles/react/pages/page-authentication.scss'
 import { useState } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const ForgotPassword = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
@@ -26,11 +27,10 @@ const ForgotPassword = () => {
     const formData = new FormData();
     formData.append('email', email);
       axios.post(`${API_ENDPOINT}/api/forgot-password`, formData).then(response => {
-
-        if (response.data.status == 200) {
+                new Swal("We Have Emailed You !")
 
               console.log("success")
-        }})}
+        })}
   // ** Hooks
   const { skin } = useSkin()
 

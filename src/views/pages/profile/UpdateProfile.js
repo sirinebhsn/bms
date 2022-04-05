@@ -27,16 +27,15 @@ const UpdateProfile = ({ user_id }) => {
       }, [])
    
     //console.log("User", user)
-  
-    const [user_name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [user_currlang, setCurrLang] = useState("");
-    const [user_tel, setTelephone] = useState("");
-    const [user_nid, setNid] = useState("");
-    const [user_pre_address, setPresentAdress] = useState("");
-    const [user_per_address, setPermenantAdress] = useState("");
-    const [user_image, setImage] = useState("");
-  
+
+    const [user_name, setName] = useState('') ;
+    const [user_currlang, setCurrLang] = useState('');
+    const [user_tel, setTelephone] = useState('');
+    const [user_nid, setNid] = useState('');
+    const [user_pre_address, setPresentAdress] = useState('');
+    const [user_per_address, setPermenantAdress] = useState('');
+    const [user_image, setImage] = '';
+
     //const [user_image, setImage] = useState("");
     const history=useHistory();
     const updateUser = (e) => {
@@ -50,7 +49,7 @@ const UpdateProfile = ({ user_id }) => {
       newForm.append('user_pre_address', user_pre_address);
       newForm.append('user_per_address', user_per_address);*/
       let formData = {
-        user_name : user_name,
+        user_name : user_name ,
         user_currlang : user_currlang,
         user_tel : user_tel,
         user_nid : user_nid,
@@ -61,10 +60,11 @@ const UpdateProfile = ({ user_id }) => {
       console.log(formData)
         axios.put(`${API_ENDPOINT}/api/updateUser/${user_id}`, formData).then(response =>{
           console.log(response.data)
+          if(response.data.status==true){            
   
             new Swal("Success", "User Updated successfully");
             window.location.reload()
-         
+          }
           }
         
         )
@@ -80,14 +80,15 @@ const UpdateProfile = ({ user_id }) => {
               <Col>
   
                 <Label for="user_name">User Name</Label>
-                <Input type="text"  id="user_name" defaultValue={user?.user_name} onChange={(e) => setName(e.target.value)}> </Input><br />
+                <Input type="text"  id="user_name" name="user_name" 
+                defaultValue={user?.user_name } onChange={(e) => setName(e.target.value)}> </Input><br />
   
               </Col>
          
               <Col>
           
           <Label for="user_currlang">User Current Language</Label>
-          <Input type="text" id="user_currlang" defaultValue={user?.user_currlang} onChange={(e) => setCurrLang(e.target.value)}>  </Input><br/>
+          <Input type="text" id="user_currlang"  onChange={(e) => setCurrLang(e.target.value)} defaultValue={user.user_currlang}>  </Input><br/>
           
           </Col>
   
@@ -96,13 +97,13 @@ const UpdateProfile = ({ user_id }) => {
               <Col>
   
                 <Label for="user_tel">Phone Number</Label>
-                <Input type="text" id="user_tel" defaultValue={user?.user_tel} onChange={(e) => setTelephone(e.target.value)} > </Input><br />
+                <Input type="text" id="user_tel" defaultValue={user.user_tel} onChange={(e) => setTelephone(e.target.value)} > </Input><br />
   
               </Col>
               <Col>
   
                 <Label for="user_nid">User NID</Label>
-                <Input type="text" id="user_nid" defaultValue={user?.user_nid} onChange={(e) => setNid(e.target.value)}>  </Input><br />
+                <Input type="text" id="user_nid" defaultValue={user.user_nid} onChange={(e) => setNid(e.target.value)}>  </Input><br />
   
               </Col>
   
@@ -111,13 +112,13 @@ const UpdateProfile = ({ user_id }) => {
             <Col>
           
           <Label for="user_pre_address"> Present Address</Label>
-          <Input type="text" id="user_pre_address" defaultValue={user?.user_pre_address} onChange={(e) => setPresentAdress(e.target.value)}> </Input><br/>
+          <Input type="text" id="user_pre_address" defaultValue={user.user_pre_address} onChange={(e) => setPresentAdress(e.target.value)}> </Input><br/>
           
           </Col>
           <Col>
           
           <Label for="user_per_address">User Permenant Address</Label>
-          <Input type="text"id="user_per_address" defaultValue={user?.user_per_address} onChange={(e) => setPermenantAdress(e.target.value)}>  </Input><br/>
+          <Input type="text"id="user_per_address" defaultValue={user.user_per_address} onChange={(e) => setPermenantAdress(e.target.value)}>  </Input><br/>
           
           </Col>
   

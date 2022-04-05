@@ -17,7 +17,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Col
+  Col,
+  InputGroup,
+  Input
 
 } from 'reactstrap'
 // ** React Imports
@@ -29,7 +31,7 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Edit, Eye, Lock, Mail, Phone, Trash, User } from 'react-feather'
+import { Calendar, Clock, Edit, Eye, Lock, Mail, Phone, Search, Trash, User } from 'react-feather'
 import Swal from 'sweetalert2'
 import LoginForm from './DetailsModal'
 import UserInfoEdit from './UserInfoEdit'
@@ -83,7 +85,7 @@ const UsersList = () => {
     getData();
   }, [])
   async function getData() {
-    let result = await fetch(`${API_ENDPOINT}/api/auth/listUser`);
+    let result = await fetch(`${API_ENDPOINT}/api/listVisitors`);
     result = await result.json();
     setData(result)
   }
@@ -135,13 +137,21 @@ const UsersList = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Users List</CardTitle>
-          <div className="col-sm-3">
-            <input type="text" onChange={(e) => searchUser(e.target.value)} className="form-control" placeholder="Search User" />
-
-          </div>
-          <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New User
+          <CardTitle tag='h4'>Visitors List</CardTitle>
+         
+          <Col className='mb-1' md='6' sm='12'>
+            <InputGroup onChange={(e) => searchUser(e.target.value)}>
+              <Button color='primary' onClick={searchUser} outline>
+                <Search size={12} />
+              </Button>
+              <Input type='text' onChange={(e) => searchUser(e.target.value)} placeholder='Search here' />
+              <Button color='primary' outline>
+                Search !
+              </Button>
+            </InputGroup>
+          </Col>
+           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
+            Add New Visitor
           </Button>
           
         </CardHeader>
@@ -149,11 +159,11 @@ const UsersList = () => {
         <Table>
           <thead>
             <tr>
-              <th> Picture </th>
-              <th> Name </th>
-              <th> Email</th>
-              <th> Password </th>
-              <th>  Phone Number </th>
+              <th> Visitor Name </th>
+              <th> Visitor Mobile </th>
+              <th> Issue Date</th>
+              <th> Int Time </th>
+              <th>  Out Time </th>
               <th> Actions </th>
 
             </tr>
@@ -162,18 +172,12 @@ const UsersList = () => {
           {data.map((item) =>
             <tbody>
               <tr>
-                <td> <img style={{ width: 50, height: 50 }} src={item.user_image} /> </td>
 
-                <td> <User size={14} />&nbsp;{item.user_name}</td>
-                <td> <Mail size={14} /> &nbsp;{item.email} </td>
-                <td> &nbsp;{passwordShown ? item?.password : item?.password?.replace(item?.password, "**********")}  <span onClick={togglePassword}>
-                &nbsp;<Eye size={12} ></Eye>
-                </span>
-
-
-
-</td>
-                <td> <Phone size={14} color="green" />&nbsp; {item.user_tel} </td>
+                <td> <User size={14} />&nbsp;{item.visit_name}</td>
+                <td> <Mail size={14} /> &nbsp;{item.visit_mobile} </td>
+                <td> <Calendar size={14}/>&nbsp; {item.visit_issue_date}  </td>
+                <td> <Clock size={14}/>&nbsp; {item.visit_inttime}  </td>
+                <td> <Clock size={14}/>&nbsp; {item.visit_outtime}  </td>
 
                 <td>
                   <span onClick={() => deleteOperation(item.user_id)}>

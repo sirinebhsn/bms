@@ -110,7 +110,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     });
 
     setPictures((previousImages) => previousImages.concat(imagesArray));
-    normalment rjaa3
   };*/
 
 
@@ -130,9 +129,9 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     }
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/addUnite`, formData).then(res => {
-      if(res.data.status===200){
+      if(res.data.status==200){
       console.log(res.data)
-      new Swal("Success", "success");
+      new Swal("Success", res.data.message, "success");
       window.location.reload()
 
 
