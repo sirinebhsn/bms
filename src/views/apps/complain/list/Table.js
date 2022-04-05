@@ -92,25 +92,39 @@ const UsersList = () => {
                 <td> <Phone size={14} />&nbsp; {item.compl_phone}  </td>
 
                 <td>
-                {item.compl_job_status=='0' &&
-<>
+                  {item.compl_job_status == '0' &&
+                    <>
 
-                  <Progress value="30" color='danger' striped='true' animated='true' style={{ width: 130, height: 15 }} />
-                  </>}
-                  {item.compl_job_status=='1' &&
+                      <Progress value="30" color='danger' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                    </>}
+                  {item.compl_job_status == '1' &&
 
-<>
+                    <>
 
-<Progress value="50" color='warning' striped='true' animated='true' style={{ width: 130, height: 15 }} />
-                  </>}
+                      <Progress value="50" color='warning' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                    </>}
+                  {item.compl_job_status == '2' &&
+
+                    <>
+
+                      <Progress value="80" color='primary' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                    </>}
+                  {item.compl_job_status == '3' &&
+
+                    <>
+
+                      <Progress value="100" color='info' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                    </>}
 
                 </td>
+                <td> <User size={14} />&nbsp; {item.compl_assigned_to}  </td>
+
 
 
               </tr>
             </tbody>
 
-          )}       
+          )}
 
         </Table>
         <br />
