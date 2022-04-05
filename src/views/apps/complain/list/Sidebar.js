@@ -184,8 +184,8 @@ camera.takeSnapshot();
                 <option>Select Status</option>
                 <option value="0"> Pending </option>
                 <option value="1"> In Progress </option>
-                <option value="e"> On Hold </option>
-                <option value="t"> Completed </option>
+                <option value="2"> On Hold </option>
+                <option value="3"> Completed </option>
               </select>
             </Col>
           </Row>
@@ -274,11 +274,7 @@ camera.takeSnapshot();
           </Col>
           <br />
        
-                  <Col>
-                  <Button onClick={openCam}>
-                    take Pic
-                  </Button>
-                    </Col>
+                 
           <Button onClick={addComplain} className='me-1' color='primary'>
             Submit
           </Button>
