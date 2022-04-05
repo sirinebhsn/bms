@@ -1,6 +1,6 @@
 // ** React Imports
 import Sidebar from './Sidebar'
-
+import './style.css'
 import { Fragment, useState } from 'react'
 
 import 'react-phone-number-input/style.css'
@@ -32,9 +32,19 @@ import { Search } from 'react-feather'
 
 
 // ** Table Header
-const UsersList = () => {
+const UsersList = ({done}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
+  const [style, setStyle] = React.useState({});
+	
+	setTimeout(() => {
+		const newStyle = {
+			opacity: 1,
+			width: `${done}%`
+		}
+		
+		setStyle(newStyle);
+	}, 200);
+	
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
   return (
@@ -70,6 +80,14 @@ const UsersList = () => {
               <th> Complain Status </th>
               <th> Employee </th>
               <th> Actions </th>
+
+            </tr>
+            <tr>
+<td>	<div className="progress">
+			<div className="progress-done" style={style}>
+				{done}%
+			</div>
+		</div></td>
 
             </tr>
           </thead>

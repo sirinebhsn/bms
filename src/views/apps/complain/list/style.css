@@ -1,108 +1,29 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css');
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-
-.center{
-    border-radius:50%;
-    }
-.owner-picture{
-    display:flex; 
-    Align-Items: center;
-    Justify-Content: center;
+* {
+	box-sizing: border-box;
 }
 
-.logo{
-    width: 20px ;
-}
-.logo img{
-    width: 20px;
-}
-.lang-menu {
-    width: 100px;
-    text-align: right;
-    font-weight: bold;
-    margin-top: 25px;
-    position: relative;
-}
-.lang-menu .selected-lang {
-    display: flex;   
-    justify-content: space-between;
-    line-height: 2;
-    cursor: pointer;
-}
-.selected-lang{
-    cursor: pointer;
-}
-.lang-menu .selected-lang:before {
-    content: '';
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    background-image: url(https://www.countryflags.io/us/flat/32.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.lang-menu ul {
-    margin: 0;
-    padding: 0;
-    display: none;
-    background-color: #fff;
-    border: 1px solid #f8f8f8;
-    position: absolute;
-    top: 45px;
-    right: 0px;
-    width: 125px;
-    border-radius: 5px;
-    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+.progress {
+	background-color: #d8d8d8;
+	border-radius: 20px;
+	position: relative;
+	margin: 15px 0;
+	height: 30px;
+	width: 300px;
 }
 
-
-.lang-menu ul li {
-    list-style: none;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-}
-
-.lang-menu ul li a {
-    text-decoration: none;
-    width: 125px;
-    padding: 5px 10px;
-    display: block;
-}
-
-.lang-menu ul li:hover {
-    background-color: #f2f2f2;
-}
-
-.lang-menu ul li a:before {
-    content: '';
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
-    margin-right: 10px;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.de:before {
-    background-image: url(https://www.countryflags.io/de/flat/32.png);
-}
-
-.en:before {
-    background-image: url(https://www.countryflags.io/us/flat/32.png);
-}
-.fr:before {
-    background-image: url(https://www.countryflags.io/fr/flat/32.png);
-}
-
-.ar:before {
-    background-image: url(https://www.countryflags.io/ae/flat/32.png);
-}
-
-
-.lang-menu:hover ul {
-    display: block;
+.progress-done {
+	background: linear-gradient(to left, #F2709C, #FF9472);
+	box-shadow: 0 3px 3px -5px #F2709C, 0 2px 5px #F2709C;
+	border-radius: 20px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 0;
+	opacity: 0;
+	transition: 1s ease 0.3s;
 }
