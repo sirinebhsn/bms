@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import Sidebar from '@components/sidebar'
 import './style.css'
 import camera from './camera.js'
+import { useDropzone } from 'react-dropzone'
 
 
 // ** Reactstrap Imports
