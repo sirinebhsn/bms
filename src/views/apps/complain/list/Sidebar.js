@@ -47,7 +47,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         setUserData(response.data)
       },[])}
       getData()
-      getEmployees
+      getEmployees()
 
   },[])
   async function getEmployees() {
