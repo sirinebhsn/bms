@@ -93,7 +93,6 @@ const UsersList = () => {
       method: "DELETE"
 
     });
-    result = await result.json()
 
     confirmAlert({
       title: 'Confirm to submit',
@@ -101,12 +100,15 @@ const UsersList = () => {
       buttons: [
         {
           label: 'Yes',
-          onClick: () => alert('Click Yes'),
+          onClick: () => deleteOperation(),
+          result : await result.json()
+
+          
 
         },
         {
           label: 'No',
-          onClick: () => alert('Click No')
+          onClick: () => getData()
         }
       ]
     });

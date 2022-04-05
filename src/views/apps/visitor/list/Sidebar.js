@@ -129,7 +129,7 @@ var current=new Date().toISOString();
                 Visitor Mobile <span className='text-danger'>*</span>
               </Label>
               <input type='text' id='visit_mobile' onKeyDown={handleEnter} className="form-control" onChange={(e) => setTelephone(e.target.value)}
-                placeholder="Visitor Mobile" /><br />
+                placeholder="Visitor Mobile" />
             </Col>
           </Row>
           <Row>

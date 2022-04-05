@@ -82,8 +82,15 @@ const UnitList = () => {
       getData();
     }
   }
+  const ModalConfig = [
 
-
+  {
+    id: 1,
+    title: 'Dark',
+    modalColor: 'modal-dark',
+    btnColor: 'dark'
+  }
+  ]
   return (
     <Fragment>
       <Card>
@@ -153,7 +160,9 @@ const UnitList = () => {
 
 
         </Table>
-        <Modal isOpen={show}>
+      
+        <Modal isOpen={show}
+                  >
      
           <Slider unit_id={selectedUnit} >
           <span onClick={handleClose}> <X/></span>
