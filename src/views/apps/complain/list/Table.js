@@ -1,7 +1,7 @@
 // ** React Imports
 import Sidebar from './Sidebar'
-import './style.css'
-import { Fragment, useState } from 'react'
+
+import { Fragment } from 'react'
 
 import 'react-phone-number-input/style.css'
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -15,7 +15,8 @@ import {
 
   Col,
   InputGroup,
-  Input
+  Input,
+  Progress
 
 } from 'reactstrap'
 // ** React Imports
@@ -32,19 +33,9 @@ import { Search } from 'react-feather'
 
 
 // ** Table Header
-const UsersList = ({done}) => {
+const UsersList = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [style, setStyle] = React.useState({});
-	
-	setTimeout(() => {
-		const newStyle = {
-			opacity: 1,
-			width: `${done}%`
-		}
-		
-		setStyle(newStyle);
-	}, 200);
-	
+
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
   return (
@@ -83,12 +74,11 @@ const UsersList = ({done}) => {
 
             </tr>
             <tr>
-<td>	<div className="progress">
-			<div className="progress-done" style={style}>
-				{done}%
-			</div>
-		</div></td>
-
+              <td>
+                <Progress animated:true
+                striped:true
+                color='warning'/>
+              </td>
             </tr>
           </thead>
 
