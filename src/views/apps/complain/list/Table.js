@@ -97,6 +97,13 @@ const UsersList = () => {
                   <Progress value="30" color='danger' striped='true' animated='true' style={{ width: 130, height: 15 }} />
                 </td>
                 </>}
+                {item.compl_job_status=='0' &&
+<>
+                <td>
+
+                  <Progress value="50" color='warning' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                </td>
+                </>}
 
               </tr>
             </tbody>
