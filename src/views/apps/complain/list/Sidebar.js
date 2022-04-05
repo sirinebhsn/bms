@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 // ** Custom Components
 import Sidebar from '@components/sidebar'
 import './style.css'
+import camera from './camera.js'
+
 
 // ** Reactstrap Imports
 import { Button, Label, Form, Row, Col, Input, DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle } from 'reactstrap'
@@ -46,11 +48,12 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     if (isUserLoggedIn() !== null) {
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
-      },[])}
-      getData()
-      getEmployees()
+      }, [])
+    }
+    getData()
+    getEmployees()
 
-  },[])
+  }, [])
   async function getEmployees() {
     let result = await fetch(`${API_ENDPOINT}/api/getEmployees`);
     result = await result.json();
@@ -70,7 +73,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
       event.preventDefault();
     }
   }
-
+  const openCam = () => {
+    camera.startCamera();
+camera.takeSnapshot();
+  }
   const addComplain = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -114,56 +120,56 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
       >
         <Form className='mt-2 pt-50'>
           <Row>
-          <Col sm='12' className='mb-1'>
+            <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='building_id'>Select Building</Label>
-            <select id='building_id' className='form-control' onChange={(e) => setBuidingId(e.target.value)}
-            >
-              <option  >Select Building</option>
-              {buildingList.map((item) => {
-                return (<option value={item.building_id}>{item.building_name}</option>
-                )
+              <Label className='form-label' for='building_id'>Select Building</Label>
+              <select id='building_id' className='form-control' onChange={(e) => setBuidingId(e.target.value)}
+              >
+                <option  >Select Building</option>
+                {buildingList.map((item) => {
+                  return (<option value={item.building_id}>{item.building_name}</option>
+                  )
 
-              })
-              }
-            </select>
+                })
+                }
+              </select>
             </Col>
           </Row>
           <Row>
-          <Col sm='12' className='mb-1'>
+            <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='compl_assigned_to'>Assigned To</Label>
-            <select id='compl_assigned_to' className='form-control' onChange={(e) => setAssigned(e.target.value)}
-            >
-              <option  >Select Employee</option>
-              {EmpList.map((item) => {
-                return (<option value={item.user_name}>{item.user_name}</option>
-                )
-              })
-              }
-            </select>
+              <Label className='form-label' for='compl_assigned_to'>Assigned To</Label>
+              <select id='compl_assigned_to' className='form-control' onChange={(e) => setAssigned(e.target.value)}
+              >
+                <option  >Select Employee</option>
+                {EmpList.map((item) => {
+                  return (<option value={item.user_name}>{item.user_name}</option>
+                  )
+                })
+                }
+              </select>
             </Col>
           </Row>
           <Row>
-          <Col sm='12' className='mb-1'>
+            <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='compl_complainBy'>Accomplish By</Label>
-            <select id='compl_complainBy' className='form-control' onChange={(e) => setComplainBy(e.target.value)}
-            >
-              <option  >Select Employee</option>
-              {EmpList.map((item) => {
-                return (<option value={item.user_name}>{item.user_name}</option>
-                )
-              })
-              }
-            </select>
+              <Label className='form-label' for='compl_complainBy'>Accomplish By</Label>
+              <select id='compl_complainBy' className='form-control' onChange={(e) => setComplainBy(e.target.value)}
+              >
+                <option  >Select Employee</option>
+                {EmpList.map((item) => {
+                  return (<option value={item.user_name}>{item.user_name}</option>
+                  )
+                })
+                }
+              </select>
             </Col>
           </Row>
           <Row>
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='compl_name'>
-               Name <span className='text-danger'>*</span>
+                Name <span className='text-danger'>*</span>
               </Label>
               <input id='compl_name' type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setComplName(e.target.value)}
                 placeholder=" Name" /><br />
@@ -171,23 +177,23 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
           </Row>
           <Row>
-          <Col sm='12' className='mb-1'>
-            <Label className='form-label' for='compl_job_status'>Select Status</Label>
-            <select id='compl_job_status' className='form-control' onChange={(e) => setJobStatus(e.target.value)}
-            >
-              <option>Select Status</option>
-              <option value="0"> Pending </option>
-              <option value="1"> In Progress </option>
-              <option value="e"> On Hold </option>
-              <option value="t"> Completed </option>
-            </select>
-          </Col>
+            <Col sm='12' className='mb-1'>
+              <Label className='form-label' for='compl_job_status'>Select Status</Label>
+              <select id='compl_job_status' className='form-control' onChange={(e) => setJobStatus(e.target.value)}
+              >
+                <option>Select Status</option>
+                <option value="0"> Pending </option>
+                <option value="1"> In Progress </option>
+                <option value="e"> On Hold </option>
+                <option value="t"> Completed </option>
+              </select>
+            </Col>
           </Row>
           <Row>
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='compl_title'>
-               Title <span className='text-danger'>*</span>
+                Title <span className='text-danger'>*</span>
               </Label>
               <input id='compl_title' type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setComplTitle(e.target.value)}
                 placeholder=" Title" /><br />
@@ -198,7 +204,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='compl_email'>
-               Email <span className='text-danger'>*</span>
+                Email <span className='text-danger'>*</span>
               </Label>
               <input id='compl_email' type='email' onKeyDown={handleEnter} className="form-control" onChange={(e) => setComplEmail(e.target.value)}
                 placeholder="Email" /><br />
@@ -215,7 +221,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 placeholder="Phone" />
             </Col>
           </Row>
-    
+
 
           <Row>
 
@@ -230,10 +236,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 options={{
                   dateFormat: 'Y-m-d',
                 }}
-                onChange = {(date) => {
+                onChange={(date) => {
                   setComplDate(date)
-              }
-            }
+                }
+                }
               />
             </Col>
           </Row>
@@ -241,33 +247,38 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Row>
             <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='compl_description'>
-              Description<span className='text-danger'>*</span>
-            </Label>
-            <textarea type='text' id='compl_desciption' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setComplDescription(e.target.value)} placeholder="Designation" />
+              <Label className='form-label' for='compl_description'>
+                Description<span className='text-danger'>*</span>
+              </Label>
+              <textarea type='text' id='compl_desciption' onKeyDown={handleEnter} className="form-control"
+                onChange={(e) => setComplDescription(e.target.value)} placeholder="Designation" />
             </Col>
 
           </Row>
           <Row>
             <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='compl_solution'>
-              Solution<span className='text-danger'>*</span>
-            </Label>
-            <textarea type='text' id='compl_solution' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setSolution(e.target.value)} placeholder="Solution" />
+              <Label className='form-label' for='compl_solution'>
+                Solution<span className='text-danger'>*</span>
+              </Label>
+              <textarea type='text' id='compl_solution' onKeyDown={handleEnter} className="form-control"
+                onChange={(e) => setSolution(e.target.value)} placeholder="Solution" />
             </Col>
 
           </Row>
 
           <Col sm='12' className='mb-1'>
-         
+
             <input type='hidden' id='user_id' name='user_id' value={(userData && userData.user_id)} ref={() => setUserId(userData && userData.user_id)} />
 
           </Col>
           <br />
-
+       
+                  <Col>
+                  <Button onClick={openCam}>
+                    take Pic
+                  </Button>
+                    </Col>
           <Button onClick={addComplain} className='me-1' color='primary'>
             Submit
           </Button>
