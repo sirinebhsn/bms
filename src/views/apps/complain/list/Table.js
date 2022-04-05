@@ -89,8 +89,8 @@ const UsersList = () => {
               <tr>
                 <td> <User size={14} />&nbsp;{item.compl_name}</td>
                 <td> <Mail size={14} /> &nbsp;{item.compl_email} </td>
-                <td> <Phone size={14} />&nbsp; {item.compl_mobile}  </td>
-{item.compl_status=='0' &&
+                <td> <Phone size={14} />&nbsp; {item.compl_phone}  </td>
+{item.compl_job_status=='0' &&
 <>
                 <td>
 
