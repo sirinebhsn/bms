@@ -8,7 +8,7 @@ import camera from './camera.js'
 
 
 // ** Reactstrap Imports
-import { Button, Label, Form, Row, Col, Input, DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle } from 'reactstrap'
+import { Button, Label, Form, Row, Col, Input, DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle, ListGroupItem, ListGroup } from 'reactstrap'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import "react-datetime/css/react-datetime.css";
@@ -18,6 +18,7 @@ import Flatpickr from 'react-flatpickr'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import { Fragment } from 'react'
 import { isUserLoggedIn } from '@utils'
+import { DownloadCloud, FileText, X } from 'react-feather'
 
 
 
@@ -41,7 +42,54 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [compl_job_status, setJobStatus] = useState("");
   const [compl_assigned_to, setAssigned] = useState("");
   const [compl_complainBy, setComplainBy] = useState("");
+  const [compl_pictures, setPictures] = useState([]);
+
   const [userData, setUserData] = useState(null)
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: acceptedFiles => {
+      setPictures([...compl_pictures, ...acceptedFiles.map(file => Object.assign(file))])
+    }
+  })
+
+  const renderFilePreview = file => {
+    if (file.type.startsWith('image')) {
+      return <img className='rounded' alt={file.name} src={URL.createObjectURL(file)} height='28' width='28' />
+    } else {
+      return <FileText size='28' />
+    }
+  }
+
+  const handleRemoveFile = file => {
+    const uploadedFiles = compl_pictures
+    const filtered = uploadedFiles.filter(i => i.name !== file.name)
+    setPictures([...filtered])
+  }
+  const renderFileSize = size => {
+    if (Math.round(size / 100) / 10 > 1000) {
+      return `${(Math.round(size / 100) / 10000).toFixed(1)} mb`
+    } else {
+      return `${(Math.round(size / 100) / 10).toFixed(1)} kb`
+    }
+  }
+  const fileList = compl_pictures.map((file, index) => (
+    <ListGroupItem key={`${file.name}-${index}`} className='d-flex align-items-center justify-content-between'>
+      <div className='file-details d-flex align-items-center'>
+        <div className='file-preview me-1'>{renderFilePreview(file)}</div>
+        <div>
+          <p className='file-name mb-0'>{file.name}</p>
+          <p className='file-size mb-0'>{renderFileSize(file.size)}</p>
+        </div>
+      </div>
+      <Button color='danger' outline size='sm' className='btn-icon' onClick={() => handleRemoveFile(file)}>
+        <X size={14} />
+      </Button>
+    </ListGroupItem>
+  ))
+
+  const handleRemoveAllFiles = () => {
+    setPictures([])
+  }
+
 
 
   useEffect(() => {
@@ -93,7 +141,10 @@ camera.takeSnapshot();
     formData.append('compl_solution', compl_solution);
     formData.append('compl_job_status', compl_job_status);
     formData.append('compl_complainBy', compl_complainBy);
-
+    for (let i = 0; i < compl_pictures.length; i++) {
+      console.log("compl_pictures[i]", compl_pictures[i])
+      formData.append('compl_pictures[]', compl_pictures[i])
+    }
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/addComplain`, formData).then(res => {
 
@@ -273,6 +324,30 @@ camera.takeSnapshot();
 
           </Col>
           <br />
+          <div {...getRootProps({ className: 'dropzone' })}>
+          <input {...getInputProps()} id='compl_pictures' />
+          <div className='d-flex align-items-center justify-content-center flex-column'>
+            <DownloadCloud size={64} />
+            <h5>Drop Pictures here or click to upload</h5>
+            <p className='text-secondary'>
+              Drop Pictures here or click{' '}
+              <a href='/' onClick={e => e.preventDefault()}>
+                browse
+              </a>{' '}
+              thorough your machine
+            </p>
+          </div>
+        </div>
+        {compl_pictures.length ? (
+          <Fragment>
+            <ListGroup className='my-2'>{fileList}</ListGroup>
+            <div className='d-flex justify-content-end'>
+              <Button className='me-1' color='danger' outline onClick={handleRemoveAllFiles}>
+                Remove All
+              </Button>
+            </div>
+          </Fragment>
+        ) : null}      <br />
        
                  
           <Button onClick={addComplain} className='me-1' color='primary'>
