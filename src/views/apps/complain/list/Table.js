@@ -90,20 +90,22 @@ const UsersList = () => {
                 <td> <User size={14} />&nbsp;{item.compl_name}</td>
                 <td> <Mail size={14} /> &nbsp;{item.compl_email} </td>
                 <td> <Phone size={14} />&nbsp; {item.compl_phone}  </td>
-{item.compl_job_status=='0' &&
-<>
-                <td>
 
-                  <Progress value="30" color='danger' striped='true' animated='true' style={{ width: 130, height: 15 }} />
-                </td>
-                </>}
+                <td>
                 {item.compl_job_status=='0' &&
 <>
-                <td>
 
-                  <Progress value="50" color='warning' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                  <Progress value="30" color='danger' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                  </>}
+                  {item.compl_job_status=='1' &&
+
+<>
+
+<Progress value="50" color='warning' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                  </>}
+
                 </td>
-                </>}
+
 
               </tr>
             </tbody>
