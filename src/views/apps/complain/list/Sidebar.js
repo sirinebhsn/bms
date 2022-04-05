@@ -85,7 +85,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('compl_phone', compl_phone);
     formData.append('compl_solution', compl_solution);
     formData.append('compl_job_status', compl_job_status);
-    formData.append('compl_type', compl_type);
+    //formData.append('compl_type', compl_type);
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/addComplain`, formData).then(res => {
 
