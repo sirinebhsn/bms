@@ -83,6 +83,8 @@ const Login = () => {
           localStorage.setItem("accessToken", response.data.accessToken)
           localStorage.setItem("email", response.data.email)
           localStorage.setItem("user_name", response.data.user_name)
+          localStorage.setItem("user_id", response.data.user_id)
+
 
 
           navigate.push('/dashboard');

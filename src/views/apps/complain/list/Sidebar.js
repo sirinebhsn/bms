@@ -263,7 +263,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
           <Col sm='12' className='mb-1'>
          
-            <input type='hidden' id='user_id' name='user_id' value={(userData && userData?.buildings?.user_id)} ref={() => setUserId(userData && userData?.user_id)} />
+            <input type='hidden' id='user_id' name='user_id' value={(userData && userData.user_id)} ref={() => setUserId(userData && userData.user_id)} />
 
           </Col>
           <br />
