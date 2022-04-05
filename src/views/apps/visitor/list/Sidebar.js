@@ -207,11 +207,8 @@ var current=new Date().toISOString();
                 className='form-control'
                 value={visit_issue_date}
                 id='visit_issue_date'
-                options={{
-                  dateFormat: 'Y-m-d',
-                }}
                 onChange = {(date) => {
-                  setIssueDate(date)
+                  setIssueDate(date)?.toISOString()
               }
             }
               />

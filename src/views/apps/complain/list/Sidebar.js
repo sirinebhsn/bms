@@ -37,7 +37,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [compl_phone, setComplPhone] = useState("");
   const [compl_solution, setSolution] = useState("");
   const [compl_job_status, setJobStatus] = useState("");
-  const [compl_type, setType] = useState("");
+  const [compl_assigned_id, setAssigned] = useState("");
+  const [compl_complainBy, setComplainBy] = useState("");
   const [userData, setUserData] = useState(null)
 
 
@@ -77,7 +78,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('building_id', building_id);
     formData.append('compl_name', compl_name);
     formData.append('compl_email', compl_email);
-    //formData.append('compl_assigned_id', compl_assigned_id);
+    formData.append('compl_assigned_id', compl_assigned_id);
     formData.append('compl_date', compl_date);
     formData.append('compl_title', compl_title);
     formData.append('compl_description', compl_description);
@@ -85,7 +86,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('compl_phone', compl_phone);
     formData.append('compl_solution', compl_solution);
     formData.append('compl_job_status', compl_job_status);
-    //formData.append('compl_type', compl_type);
+    formData.append('compl_complainBy', compl_complainBy);
+
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/addComplain`, formData).then(res => {
 
@@ -130,14 +132,28 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Row>
           <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='building_id'>Select Employee</Label>
-            <select id='user' className='form-control' onChange={(e) => setUserId(e.target.value)}
+            <Label className='form-label' for='compl_assigned_id'>Assigned To</Label>
+            <select id='compl_assigned_id' className='form-control' onChange={(e) => setAssigned(e.target.value)}
             >
               <option  >Select Employee</option>
               {EmpList.map((item) => {
-                return (<option value={item.user_id}>{item.user_name}</option>
+                return (<option value={compl_assigned_id}>{item.user_name}</option>
                 )
+              })
+              }
+            </select>
+            </Col>
+          </Row>
+          <Row>
+          <Col sm='12' className='mb-1'>
 
+            <Label className='form-label' for='compl_assigned_id'>Accomplish By</Label>
+            <select id='compl_complainBy' className='form-control' onChange={(e) => setComplainBy(e.target.value)}
+            >
+              <option  >Select Employee</option>
+              {EmpList.map((item) => {
+                return (<option value={compl_complainBy}>{item.user_name}</option>
+                )
               })
               }
             </select>
@@ -230,6 +246,17 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             </Label>
             <textarea type='text' id='compl_desciption' onKeyDown={handleEnter} className="form-control"
               onChange={(e) => setComplDescription(e.target.value)} placeholder="Designation" />
+            </Col>
+
+          </Row>
+          <Row>
+            <Col sm='12' className='mb-1'>
+
+            <Label className='form-label' for='compl_solution'>
+              Solution<span className='text-danger'>*</span>
+            </Label>
+            <textarea type='text' id='compl_solution' onKeyDown={handleEnter} className="form-control"
+              onChange={(e) => setSolution(e.target.value)} placeholder="Solution" />
             </Col>
 
           </Row>
