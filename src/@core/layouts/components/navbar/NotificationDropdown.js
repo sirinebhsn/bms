@@ -16,6 +16,8 @@ const NotificationDropdown = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
   const [data, setData] = useState([]);
+  const [count, setCount] = useState("");
+
   useEffect(() => {
     getData();
     getCount();
@@ -25,7 +27,6 @@ const NotificationDropdown = () => {
     result = await result.json();
     setData(result)
   }
-  const [count, setCount] = useState([]);
 
   async function getCount() {
     let result = await fetch(`${API_ENDPOINT}/api/countComplain`);
@@ -143,7 +144,7 @@ const NotificationDropdown = () => {
       <DropdownToggle tag='a' className='nav-link' href='/' onClick={e => e.preventDefault()}>
         <Bell size={21} />
         <Badge pill color='danger' className='badge-up'>
-          {{count}}
+          {count}
         </Badge>
       </DropdownToggle>
       <DropdownMenu end tag='ul' className='dropdown-menu-media mt-0'>
@@ -151,7 +152,7 @@ const NotificationDropdown = () => {
           <DropdownItem className='d-flex' tag='div' header>
             <h4 className='notification-title mb-0 me-auto'>Notifications</h4>
             <Badge tag='div' color='light-primary' pill>
-              {{count}} New
+              {count} New
             </Badge>
           </DropdownItem>
         </li>
