@@ -67,7 +67,7 @@ const UsersList = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Visitors List</CardTitle>
+          <CardTitle tag='h4'>Complains List</CardTitle>
 
           <Col className='mb-1' md='6' sm='12'>
             <InputGroup >
