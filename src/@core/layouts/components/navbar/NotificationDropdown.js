@@ -114,8 +114,10 @@ const NotificationDropdown = () => {
           wheelPropagation: false
         }}
       >
-        {data.map((item) => {
+        {data.map((item,index) => {
           return (
+            <a key={index} className='d-flex' href='/' onClick={e => e.preventDefault()}>
+
           
                   <Fragment>
                     <div className='me-1'>
@@ -124,17 +126,15 @@ const NotificationDropdown = () => {
                       />
                     </div>
                     <div className='list-item-body flex-grow-1'>
-                    <p className='media-heading'>
                     {item.compl_title}
-
-                      </p>
                      
                       <small className='notification-text'> {item?.users?.user_name}</small>
                     </div>
                   </Fragment>
-          )})}      
+      </a>    )})}      
       
       </PerfectScrollbar>
+      
     )}
   /*eslint-enable */
 
