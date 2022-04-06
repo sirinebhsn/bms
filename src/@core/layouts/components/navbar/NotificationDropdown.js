@@ -107,28 +107,21 @@ const NotificationDropdown = () => {
       >
         {data.map((item) => {
           return (
-            <a key={item.compl_id} className='d-flex' href='/' onClick={e => e.preventDefault()}>
-             
+          
                   <Fragment>
                     <div className='me-1'>
-                      <Avatar
-                     
+                      <img src={item?.users?.user_image}
                       />
                     </div>
                     <div className='list-item-body flex-grow-1'>
-                      {item.compl_title}
-                      <small className='notification-text'>{item.compl_description}</small>
+                      {item?.users?.user_name}
+                      <small className='notification-text'>{item.compl_title}</small>
                     </div>
                   </Fragment>
-                  <Fragment>
-                  
-                  </Fragment>
-            </a>
-          )
-        })}
+          )})}
+      
       </PerfectScrollbar>
-    )
-  }
+ )}
   /*eslint-enable */
 
   return (
