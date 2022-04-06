@@ -1,14 +1,28 @@
 // ** Custom Components
 import Avatar from '@components/avatar'
+import { useEffect, useState } from 'react'
 
 // ** Third Party Components
 import Chart from 'react-apexcharts'
 import { MoreVertical } from 'react-feather'
+import { Link } from 'react-router-dom'
 
 // ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
+import { Card, CardHeader, CardTitle, CardBody, CardFooter } from 'reactstrap'
 
 const CardEmployeesTasks = ({ colors, trackBgColor }) => {
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getData();
+  }, [])
+  async function getData() {
+    let result = await fetch(`${API_ENDPOINT}/api/getComplainByDate`);
+    result = await result.json();
+    setData(result)
+  }
+
   const employeesTasks = [
     {
       avatar: require('@src/assets/images/portrait/small/avatar-s-9.jpg').default,
@@ -240,29 +254,23 @@ const CardEmployeesTasks = ({ colors, trackBgColor }) => {
         }
       }
     }
-  
+
   ]
 
   const renderTasks = () => {
-    return employeesTasks.map(task => {
+    return data.map(task => {
       return (
-        <div key={task.title} className='employee-task d-flex justify-content-between align-items-center'>
+        <div key={task.compl_id} className='employee-task d-flex justify-content-between align-items-center'>
           <div className='d-flex'>
-            <Avatar imgClassName='rounded' className='me-75' img={task.avatar} imgHeight='42' imgWidth='42' />
+            <Avatar imgClassName='rounded' className='me-75' img={task?.users?.user_images} imgHeight='42' imgWidth='42' />
             <div className='my-auto'>
-              <h6 className='mb-0'>{task.title}</h6>
+              <h6 className='mb-0'>{task.compl_title}</h6>
               <small>{task.subtitle}</small>
             </div>
           </div>
           <div className='d-flex align-items-center'>
-            <small className='text-muted me-75'>{task.time}</small>
-            <Chart
-              options={task.chart.options}
-              series={task.chart.series}
-              type={task.chart.type}
-              height={task.chart.height}
-              width={task.chart.width}
-            />
+            <small className='text-muted me-75'>{task.compl_description}</small>
+
           </div>
         </div>
       )
@@ -272,10 +280,14 @@ const CardEmployeesTasks = ({ colors, trackBgColor }) => {
   return (
     <Card className='card-employee-task'>
       <CardHeader>
-        <CardTitle tag='h4'>Last 5 Visitors</CardTitle>
+        <CardTitle tag='h4'>Last 5 Complains</CardTitle>
         <MoreVertical size={18} className='cursor-pointer' />
       </CardHeader>
       <CardBody>{renderTasks()}</CardBody>
+      <CardFooter>
+        <div style={{ float: 'right' }} >
+          <Link to='/complain/list'> See More </Link>
+        </div></CardFooter>
     </Card>
   )
 }
