@@ -110,7 +110,8 @@ const NotificationDropdown = () => {
           
                   <Fragment>
                     <div className='me-1'>
-                      <img src={item?.users?.user_image}
+                      <Avatar
+                      img={item?.users?.user_image}
                       />
                     </div>
                     <div className='list-item-body flex-grow-1'>
@@ -118,10 +119,10 @@ const NotificationDropdown = () => {
                       <small className='notification-text'>{item.compl_title}</small>
                     </div>
                   </Fragment>
-          )})}
+          )})}      
       
       </PerfectScrollbar>
- )}
+    )}
   /*eslint-enable */
 
   return (
