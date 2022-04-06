@@ -262,7 +262,7 @@ const CardEmployeesTasks = ({ colors, trackBgColor }) => {
       return (
         <div key={task.compl_id} className='employee-task d-flex justify-content-between align-items-center'>
           <div className='d-flex'>
-            <Avatar imgClassName='rounded' className='me-75' img={task?.users?.user_images} imgHeight='42' imgWidth='42' />
+            <Avatar imgClassName='rounded' className='me-75' img={task?.users?.user_image} imgHeight='42' imgWidth='42' />
             <div className='my-auto'>
               <h6 className='mb-0'>{task.compl_title}</h6>
               <small>{task.subtitle}</small>
