@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -13,6 +13,17 @@ import { Bell, X, Check, AlertTriangle } from 'react-feather'
 import { Button, Badge, Input, DropdownMenu, DropdownItem, DropdownToggle, UncontrolledDropdown } from 'reactstrap'
 
 const NotificationDropdown = () => {
+  const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    getData();
+  }, [])
+  async function getData() {
+    let result = await fetch(`${API_ENDPOINT}/api/listComplain`);
+    result = await result.json();
+    setData(result)
+  }
   // ** Notification Array
   const notificationsArray = [
     {
@@ -94,46 +105,24 @@ const NotificationDropdown = () => {
           wheelPropagation: false
         }}
       >
-        {notificationsArray.map((item, index) => {
+        {data.map((item) => {
           return (
-            <a key={index} className='d-flex' href='/' onClick={e => e.preventDefault()}>
-              <div
-                className={classnames('list-item d-flex', {
-                  'align-items-start': !item.switch,
-                  'align-items-center': item.switch
-                })}
-              >
-                {!item.switch ? (
+            <a key={item.compl_id} className='d-flex' href='/' onClick={e => e.preventDefault()}>
+             
                   <Fragment>
                     <div className='me-1'>
                       <Avatar
-                        {...(item.img
-                          ? { img: item.img, imgHeight: 32, imgWidth: 32 }
-                          : item.avatarContent
-                          ? {
-                              content: item.avatarContent,
-                              color: item.color
-                            }
-                          : item.avatarIcon
-                          ? {
-                              icon: item.avatarIcon,
-                              color: item.color
-                            }
-                          : null)}
+                     
                       />
                     </div>
                     <div className='list-item-body flex-grow-1'>
-                      {item.title}
-                      <small className='notification-text'>{item.subtitle}</small>
+                      {item.compl_title}
+                      <small className='notification-text'>{item.compl_description}</small>
                     </div>
                   </Fragment>
-                ) : (
                   <Fragment>
-                    {item.title}
-                    {item.switch}
+                  
                   </Fragment>
-                )}
-              </div>
             </a>
           )
         })}
