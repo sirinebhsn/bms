@@ -16,7 +16,8 @@ import {
   Col,
   InputGroup,
   Input,
-  Progress
+  Progress,
+  Modal
 
 } from 'reactstrap'
 // ** React Imports
@@ -28,7 +29,8 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Mail, Phone, Search, User } from 'react-feather'
+import { Image, Mail, Phone, Search, User, X } from 'react-feather'
+import Slider from './Slider';
 
 
 
@@ -37,6 +39,18 @@ const UsersList = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [selectedComplain, setSelectedComplain] = useState([]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  async function handleShow(compl_id) {
+    setSelectedComplain(compl_id)
+    setShow(true)
+    console.warn(compl_id)
+    let result = await fetch(`${API_ENDPOINT}/api/getComplain/` + compl_id);
+    result = await result.json();
+    console.warn(result)
+
+  }
   const [data, setData] = useState([]);
   useEffect(() => {
     getData();
@@ -118,6 +132,8 @@ const UsersList = () => {
 
                 </td>
                 <td> <User size={14} />&nbsp; {item.compl_assigned_to}  </td>
+                <td><span onClick={() => handleShow(item.compl_id)} ><Image size={20} color="#F08080"/> </span></td>
+
 
 
 
@@ -127,6 +143,14 @@ const UsersList = () => {
           )}
 
         </Table>
+        
+        <Modal isOpen={show}
+                  >
+     
+          <Slider compl_id={selectedComplain} >
+          <span onClick={handleClose}> <X/></span>
+          </Slider>
+      </Modal>
         <br />
         <br />
 
