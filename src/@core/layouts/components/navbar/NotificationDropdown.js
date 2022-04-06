@@ -18,12 +18,21 @@ const NotificationDropdown = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     getData();
+    getCount();
   }, [])
   async function getData() {
     let result = await fetch(`${API_ENDPOINT}/api/listComplain`);
     result = await result.json();
     setData(result)
   }
+  const [count, setCount] = useState([]);
+
+  async function getCount() {
+    let result = await fetch(`${API_ENDPOINT}/api/countComplain`);
+    result = await result.json();
+    setCount(result)
+  }
+
   // ** Notification Array
   const notificationsArray = [
     {
@@ -134,7 +143,7 @@ const NotificationDropdown = () => {
       <DropdownToggle tag='a' className='nav-link' href='/' onClick={e => e.preventDefault()}>
         <Bell size={21} />
         <Badge pill color='danger' className='badge-up'>
-          5
+          {count}
         </Badge>
       </DropdownToggle>
       <DropdownMenu end tag='ul' className='dropdown-menu-media mt-0'>
@@ -142,7 +151,7 @@ const NotificationDropdown = () => {
           <DropdownItem className='d-flex' tag='div' header>
             <h4 className='notification-title mb-0 me-auto'>Notifications</h4>
             <Badge tag='div' color='light-primary' pill>
-              6 New
+              {count} New
             </Badge>
           </DropdownItem>
         </li>
