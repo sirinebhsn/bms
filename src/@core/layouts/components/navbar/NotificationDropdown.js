@@ -115,8 +115,12 @@ const NotificationDropdown = () => {
                       />
                     </div>
                     <div className='list-item-body flex-grow-1'>
-                      {item?.users?.user_name}
-                      <small className='notification-text'>{item.compl_title}</small>
+                    <p className='media-heading'>
+                    {item.compl_title}
+
+                      </p>
+                     
+                      <small className='notification-text'> {item?.users?.user_name}</small>
                     </div>
                   </Fragment>
           )})}      
