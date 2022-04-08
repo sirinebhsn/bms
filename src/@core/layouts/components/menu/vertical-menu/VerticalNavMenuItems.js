@@ -17,8 +17,8 @@ import axios from 'axios'
 const VerticalMenuNavItems = props => {
   const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
   const [userData, setUserData] = useState(null)
-  function timeout(ms){
-    return new Promise((resolve) =>setTimeout(resolve, ms))
+ const timeout=(ms)=>{
+    return new Promise((resolve) =>setTimeout(resolve(), ms))
   }
   useEffect(() => {
     getUser(); 
@@ -26,7 +26,6 @@ const VerticalMenuNavItems = props => {
   const getUser = async()=>{
     await timeout(1000)
     if (isUserLoggedIn() !== null) {
-
     axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
       setUserData(response.data)
   } )}}

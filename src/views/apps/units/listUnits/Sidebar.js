@@ -25,23 +25,35 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   /**  Get the Data of the Current User  **/
 
   useEffect(() => {
+   
+    getUser()
+    getFloor()
+    getUnits()
+  
+  }, [])
+  const timeout=(ms)=>{
+    return new Promise((resolve) =>setTimeout(resolve(), ms))
+  }
+  const  getUser=async()=>{
+    await timeout(1000)
     if (isUserLoggedIn() !== null) {
-
-
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
-      }, [])
+      })}
     }
-    axios.get(`${API_ENDPOINT}/api/listFloor`).then(res => {
+const getFloor=()=>{
+  axios.get(`${API_ENDPOINT}/api/listFloor`).then(res => {
 
-      setFloorList(res.data);
-    });
-    axios.get(`${API_ENDPOINT}/api/listUnitTypes`).then(resp => {
+    setFloorList(res.data);
+  });
+}
+const getUnits=()=>{
+  axios.get(`${API_ENDPOINT}/api/listUnitTypes`).then(resp => {
 
-      setTypeData(resp.data);
-    });
-  }, [])
+    setTypeData(resp.data);
+  });
 
+}
   /* *** Unit Fields Initial States *** */
   const [unit_name, setName] = useState("");
   const [building_id, setBuilding] = useState("");

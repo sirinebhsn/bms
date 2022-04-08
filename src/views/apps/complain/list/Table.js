@@ -17,7 +17,10 @@ import {
   InputGroup,
   Input,
   Progress,
-  Modal
+  Modal,
+  ModalFooter,
+  ModalBody,
+  ModalHeader
 
 } from 'reactstrap'
 // ** React Imports
@@ -29,9 +32,10 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Image, Mail, Phone, Search, User, X } from 'react-feather'
+import { Edit, Image, Mail, Phone, Search, User, X } from 'react-feather'
 import Slider from './Slider';
 import { Link } from 'react-router-dom';
+import EditModal from './EditModal';
 
 
 
@@ -42,12 +46,26 @@ const UsersList = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedComplain, setSelectedComplain] = useState([]);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const [showModal, setShowModal] = useState(false);
+ 
+  const handleClose = () => {
+    setShow(false);
+    setShowModal(false)
+  }
   async function handleShow(compl_id) {
     setSelectedComplain(compl_id)
     setShow(true)
     console.warn(compl_id)
     let result = await fetch(`${API_ENDPOINT}/api/getComplain/` + compl_id);
+    result = await result.json();
+    console.warn(result)
+
+  }
+  async function handleShowModalEdit(compl_id) {
+    setSelectedComplain(compl_id)
+    setShowModal(true)
+    console.warn(compl_id)
+    let result = await fetch(`${API_ENDPOINT}/api/getComplainById/` + compl_id);
     result = await result.json();
     console.warn(result)
 
@@ -94,7 +112,7 @@ const UsersList = () => {
               <th> Complain Email </th>
               <th> Complain Phone</th>
               <th> Complain Status </th>
-              <th> Employee </th>
+              <th> Pictures </th>
               <th> Actions </th>
 
             </tr>
@@ -132,9 +150,14 @@ const UsersList = () => {
 
                 </td>
                 <td> <User size={14} />&nbsp; {item.compl_assigned_to}  </td>
-                <td><span onClick={() => handleShow(item.compl_id)} ><Image size={20} color="#F08080"/> </span></td>
+                <td><span onClick={() => handleShow(item.compl_id)} ><Image size={20} color="#F08080" /> </span></td>
 
+                <td>
+                  <span onClick={() => handleShowModalEdit(item.compl_id)}>
 
+                    <Edit size={20} color="#A1B1B6" />
+                  </span>
+                </td>
 
 
               </tr>
@@ -143,14 +166,29 @@ const UsersList = () => {
           )}
 
         </Table>
-        
-        <Modal isOpen={show}
-                  >
-     <Button color='dark' onClick={handleClose} outline>
-        </Button> 
+
+        <Modal
+          isOpen={show}
+        >
+          <ModalHeader style={{ width: '800px', height: '0px' }} toggle={() => setShow(false)} />
           <Slider compl_id={selectedComplain} >
           </Slider>
-      </Modal>
+        </Modal>
+        <Modal isOpen={showModal}
+        >
+          <ModalHeader>
+            <h1>Edit Complain </h1>
+          </ModalHeader>
+          <ModalBody>
+            <EditModal compl_id={selectedComplain} />
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="danger" onClick={handleClose}>
+              Close
+            </Button>
+
+          </ModalFooter>
+        </Modal>
         <br />
         <br />
 

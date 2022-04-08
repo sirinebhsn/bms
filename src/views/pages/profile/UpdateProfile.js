@@ -21,10 +21,18 @@ const UpdateProfile = ({ user_id }) => {
     }
   };
   useEffect(() => {
+    getUser()
+  
+  }, [])
+  const timeout=(ms)=>{
+    return new Promise((resolve) =>setTimeout(resolve(), ms))
+  }
+  const getUser=async()=>{
+    timeout(1000)
     axios.get(`${API_ENDPOINT}/api/auth/user`).then(response =>
       setUser(response.data)
     )
-  }, [])
+  }
 
   //console.log("User", user)
 
@@ -34,7 +42,7 @@ const UpdateProfile = ({ user_id }) => {
   const [user_nid, setNid] = useState('');
   const [user_pre_address, setPresentAdress] = useState('');
   const [user_per_address, setPermenantAdress] = useState('');
-  const [user_image, setImage] = '';
+ 
  /* const updateUser = () => {
     let formData = {
       user_name: user_name,

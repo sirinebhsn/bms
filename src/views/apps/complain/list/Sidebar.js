@@ -91,18 +91,23 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     setPictures([])
   }
 
-
+  const timeout=(ms)=>{
+    return new Promise((resolve) =>setTimeout(resolve(), ms))
+  }
 
   useEffect(() => {
-    if (isUserLoggedIn() !== null) {
-      axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
-        setUserData(response.data)
-      }, [])
-    }
+    getUser();
     getData()
     getEmployees()
 
   }, [])
+  const getUser = async()=>{
+    await timeout(1000)
+    if (isUserLoggedIn() !== null) {
+
+    axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
+      setUserData(response.data)
+  } )}}
   async function getEmployees() {
     let result = await fetch(`${API_ENDPOINT}/api/getEmployees`);
     result = await result.json();
@@ -124,7 +129,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   }
   const openCam = () => {
     camera.startCamera();
-camera.takeSnapshot();
+    camera.takeSnapshot();
   }
   const addComplain = (e) => {
     e.preventDefault();
@@ -326,31 +331,31 @@ camera.takeSnapshot();
           </Col>
           <br />
           <div {...getRootProps({ className: 'dropzone' })}>
-          <input {...getInputProps()} id='compl_pictures' />
-          <div className='d-flex align-items-center justify-content-center flex-column'>
-            <DownloadCloud size={64} />
-            <h5>Drop Pictures here or click to upload</h5>
-            <p className='text-secondary'>
-              Drop Pictures here or click{' '}
-              <a href='/' onClick={e => e.preventDefault()}>
-                browse
-              </a>{' '}
-              thorough your machine
-            </p>
-          </div>
-        </div>
-        {compl_pictures.length ? (
-          <Fragment>
-            <ListGroup className='my-2'>{fileList}</ListGroup>
-            <div className='d-flex justify-content-end'>
-              <Button className='me-1' color='danger' outline onClick={handleRemoveAllFiles}>
-                Remove All
-              </Button>
+            <input {...getInputProps()} id='compl_pictures' />
+            <div className='d-flex align-items-center justify-content-center flex-column'>
+              <DownloadCloud size={64} />
+              <h5>Drop Pictures here or click to upload</h5>
+              <p className='text-secondary'>
+                Drop Pictures here or click{' '}
+                <a href='/' onClick={e => e.preventDefault()}>
+                  browse
+                </a>{' '}
+                thorough your machine
+              </p>
             </div>
-          </Fragment>
-        ) : null}      <br />
-       
-                 
+          </div>
+          {compl_pictures.length ? (
+            <Fragment>
+              <ListGroup className='my-2'>{fileList}</ListGroup>
+              <div className='d-flex justify-content-end'>
+                <Button className='me-1' color='danger' outline onClick={handleRemoveAllFiles}>
+                  Remove All
+                </Button>
+              </div>
+            </Fragment>
+          ) : null}      <br />
+
+
           <Button onClick={addComplain} className='me-1' color='primary'>
             Submit
           </Button>

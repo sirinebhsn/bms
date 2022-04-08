@@ -20,15 +20,21 @@ const ProfileHeader = () => {
 
   const toggle = () => setIsOpen(!isOpen)
   useEffect(() => {
+    getUser()
+  }, [])
+  const timeout = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve(), ms))
+  }
+  const getUser = async () => {
+    await timeout(1000)
     if (isUserLoggedIn() !== null) {
-
-
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setData(response.data)
         setCropData(response?.data && response?.data?.user_image)
       })
     }
-  }, [])
+
+  }
   const [imgData, setImgData] = useState();
 
   const [cropData, setCropData] = useState();

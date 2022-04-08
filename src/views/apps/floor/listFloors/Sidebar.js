@@ -13,13 +13,18 @@ const SidebarNewFloor = ({ open, toggleSidebar }) => {
   const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   const [userData, setUserData] = useState([]);
-
+  const timeout=(ms)=>{
+    return new Promise((resolve) =>setTimeout(resolve(), ms))
+  }
   useEffect(() => {
-    axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
-      setUserData(response.data)
-    })
+    getUser()
   },[])
-
+const getUser= async()=>{
+  await timeout(1000)
+  axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
+    setUserData(response.data)
+  })
+}
 
   const [errorList, setError] = useState([]);
   const [floor_num, setFloornum] = useState("");

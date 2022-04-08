@@ -41,14 +41,21 @@ const UserDropdown = () => {
       setBuildingList(res.data);
     },[])
   }
-
+  const timeout=(ms)=>{
+    return new Promise((resolve) =>setTimeout(resolve(), ms))
+  }
   //** Get User Details from His accessToken
   useEffect(() => {
+    getUser()
+ 
+  },[])
+  const getUser=async()=>{
+    await timeout(1000)
     if (isUserLoggedIn() !== null) {
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
-      },[])}
-  },[])
+      })}
+  }
   //** Vars
   const userAvatar = (userData && userData.avatar) || defaultAvatar
 

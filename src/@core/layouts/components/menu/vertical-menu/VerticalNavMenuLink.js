@@ -9,8 +9,7 @@ import { useTranslation } from 'react-i18next'
 // ** Reactstrap Imports
 import { Badge } from 'reactstrap'
 import Icon from 'react-remixicon'
-import axios from 'axios'
-import { isUserLoggedIn } from '@utils'
+
 
 
 const VerticalNavMenuLink = ({
