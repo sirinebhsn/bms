@@ -31,6 +31,7 @@ import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Image, Mail, Phone, Search, User, X } from 'react-feather'
 import Slider from './Slider';
+import { Link } from 'react-router-dom';
 
 
 
@@ -102,8 +103,7 @@ const UsersList = () => {
             <tbody>
               <tr>
                 <td> <User size={14} />&nbsp;{item.compl_name}</td>
-                <td> <Mail size={14} /> &nbsp;{item.compl_email} </td>
-                <td> <Phone size={14} />&nbsp; {item.compl_phone}  </td>
+                <td><Link to='/apps/email'> <Mail size={14} /></Link> &nbsp;{item.compl_email} </td>
 
                 <td>
                   {item.compl_job_status == '0' &&
@@ -127,7 +127,7 @@ const UsersList = () => {
 
                     <>
 
-                      <Progress value="100" color='info' striped='true' animated='true' style={{ width: 130, height: 15 }} />
+                      <Progress value="100" color='success' striped='true' animated='true' style={{ width: 130, height: 15 }} />
                     </>}
 
                 </td>
@@ -146,9 +146,9 @@ const UsersList = () => {
         
         <Modal isOpen={show}
                   >
-     
+     <Button color='dark' onClick={handleClose} outline>
+        </Button> 
           <Slider compl_id={selectedComplain} >
-          <span onClick={handleClose}> <X/></span>
           </Slider>
       </Modal>
         <br />

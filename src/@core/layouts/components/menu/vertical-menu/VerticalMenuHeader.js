@@ -9,14 +9,13 @@ import { Disc, X, Circle } from 'react-feather'
 import themeConfig from '@configs/themeConfig'
 import axios from 'axios'
 
-const VerticalMenuHeader = (props, building_id) => {
+const VerticalMenuHeader = (props) => {
   // ** Props
   const { menuCollapsed, setMenuCollapsed, setMenuVisibility, setGroupOpen, menuHover } = props
   const [userData, setUserData] = useState(null)
 
   //** Get User Details from His accessToken
 
-  const [selectedBuilding, setSelectedBuilding] = useState();
   const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
   // ** Reset open group

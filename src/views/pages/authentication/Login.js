@@ -84,6 +84,8 @@ const Login = () => {
           localStorage.setItem("email", response.data.email)
           localStorage.setItem("user_name", response.data.user_name)
           localStorage.setItem("user_id", response.data.user_id)
+          localStorage.setItem("user_type", response.data.user_type)
+
 
 
 

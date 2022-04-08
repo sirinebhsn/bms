@@ -45,8 +45,6 @@ const UserDropdown = () => {
   //** Get User Details from His accessToken
   useEffect(() => {
     if (isUserLoggedIn() !== null) {
-
-
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
       },[])}

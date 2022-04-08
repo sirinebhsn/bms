@@ -53,7 +53,7 @@ const CardTransactions = () => {
   return (
     <Card className='card-transaction'>
       <CardHeader>
-        <CardTitle tag='h4'>Last 5 Visitors</CardTitle>
+        <CardTitle tag='h4'>Last Visitors</CardTitle>
         <Icon.MoreVertical size={18} className='cursor-pointer' />
       </CardHeader>
       <CardBody>{renderTransactions()}

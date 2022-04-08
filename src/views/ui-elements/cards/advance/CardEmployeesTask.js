@@ -12,6 +12,7 @@ import { Card, CardHeader, CardTitle, CardBody, CardFooter } from 'reactstrap'
 
 const CardEmployeesTasks = ({ colors, trackBgColor }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+  const MAX_LENGTH = 30;
 
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -262,14 +263,15 @@ const CardEmployeesTasks = ({ colors, trackBgColor }) => {
       return (
         <div key={task.compl_id} className='employee-task d-flex justify-content-between align-items-center'>
           <div className='d-flex'>
-            <Avatar imgClassName='rounded' className='me-75' img={task?.users?.user_image} imgHeight='42' imgWidth='42' />
+            <Avatar imgClassName='rounded' className='me-75' img={task.users?.user_image} imgHeight='42' imgWidth='42' />
             <div className='my-auto'>
               <h6 className='mb-0'>{task.compl_title}</h6>
-              <small>{task.subtitle}</small>
+              <small>{task.users?.user_name}</small>
             </div>
           </div>
+         
           <div className='d-flex align-items-center'>
-            <small className='text-muted me-75'>{task.compl_description}</small>
+            <small className='text-muted me-75'> {`${task.compl_description.substring(0, MAX_LENGTH)}...`}</small>
 
           </div>
         </div>
@@ -280,7 +282,7 @@ const CardEmployeesTasks = ({ colors, trackBgColor }) => {
   return (
     <Card className='card-employee-task'>
       <CardHeader>
-        <CardTitle tag='h4'>Last 5 Complains</CardTitle>
+        <CardTitle tag='h4'>Last Complains</CardTitle>
         <MoreVertical size={18} className='cursor-pointer' />
       </CardHeader>
       <CardBody>{renderTasks()}</CardBody>
