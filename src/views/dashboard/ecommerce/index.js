@@ -35,7 +35,6 @@ const EcommerceDashboard = () => {
   useEffect(() => {
     getUsers();
     getAdmins();
-    getOwners();
     getEmployees();
     getTenants();
     getFloors();
@@ -43,7 +42,6 @@ const EcommerceDashboard = () => {
   }, [])
   const [users, setUsers] = useState([]);
   const [admins, setAdmin] = useState([]);
-  const [owners, setOwner] = useState([]);
   const [employees, setEmp] = useState([]);
   const [tenants, setTenant] = useState([]);
   const [floors, setFloor] = useState([]);
@@ -59,11 +57,7 @@ const EcommerceDashboard = () => {
     result = await result.json();
     setAdmin(result)
   }
-  async function getOwners() {
-    let result = await fetch(`${API_ENDPOINT}/api/countOwners`);
-    result = await result.json();
-    setOwner(result)
-  }
+
   async function getEmployees() {
     let result = await fetch(`${API_ENDPOINT}/api/countEmployees`);
     result = await result.json();

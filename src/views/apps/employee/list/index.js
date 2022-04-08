@@ -18,16 +18,7 @@ import { useEffect, useState } from 'react'
 
 const UsersList = () => {
 
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    getOwners();
-  }, [])
-  async function getOwners() {
-    let result = await fetch("https://bmsback.herokuapp.com/api/countOwners");
-    result = await result.json();
-    setData(result)
-  }
-
+ 
   return (
     <div className='app-user-list'>
       <Row>
@@ -36,7 +27,7 @@ const UsersList = () => {
             color='primary'
             statTitle='Total Owners'
             icon={<Users size={20} />}
-            renderStats={<h3 className='fw-bolder mb-75'>{data}</h3>}
+            renderStats={<h3 className='fw-bolder mb-75'></h3>}
           />
         </Col>
         <Col lg='6' sm='6'>

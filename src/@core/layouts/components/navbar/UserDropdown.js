@@ -26,7 +26,6 @@ import Building from './BuildingCard'
 const UserDropdown = () => {
   // ** Store Vars
   const dispatch = useDispatch()
-
   // ** State
   const [userData, setUserData] = useState(null)
   const [buildingList, setBuildingList] = useState([]);
@@ -37,9 +36,8 @@ const UserDropdown = () => {
   function handleShow() {
     setShow(true)
     axios.get(`${API_ENDPOINT}/api/listBuildings`).then(res => {
-
-      setBuildingList(res.data);
-    },[])
+    setBuildingList(res.data);
+    })
   }
   const timeout=(ms)=>{
     return new Promise((resolve) =>setTimeout(resolve(), ms))
@@ -47,7 +45,6 @@ const UserDropdown = () => {
   //** Get User Details from His accessToken
   useEffect(() => {
     getUser()
- 
   },[])
   const getUser=async()=>{
     await timeout(1000)

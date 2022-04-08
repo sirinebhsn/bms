@@ -24,8 +24,8 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [file, setFile] = useState("");
   const [unit, setUnit] = useState("");
 
-  useEffect(() => {
-    axios.get(`https://bmsback.herokuapp.com/api/listUnit`).then(res => {
+/*  useEffect(() => {
+    axios.get(`${API}/api/listUnite`).then(res => {
 
       setUnitList(res.data);
     });
@@ -103,8 +103,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
       headerClassName='mb-1'
       contentClassName='pt-0'
       toggleSidebar={toggleSidebar}
-    >
-      <Form className='mt-2 pt-50'>
+    >     <Form className='mt-2 pt-50'>
         <Row>
           <Col sm='6' className='mb-1'>
 
@@ -222,6 +221,9 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         </Button>
       </Form>
     </Sidebar>
+  )*/
+  return(
+    <h1>hello</h1>
   )
 }
 

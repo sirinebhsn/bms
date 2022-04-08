@@ -32,39 +32,7 @@ import Sales3 from '../../ui-elements/cards/analytics/Sales3'
 
 
 const AnalyticsDashboard = () => {
-  const [owner, setOwner] = useState([]);
-  const [floor, setFloor] = useState([]);
-  const [unit, setUnit] = useState([]);
-  const [employee, setEmployee] = useState([]);
-
-  useEffect(() => {
-    getOwners();
-    getFloors();
-    getUnits();
-    getEmployees();
-  }, [])
-  async function getOwners() {
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/countOwners");
-    result = await result.json();
-    setOwner(result)
-  }
-  async function getFloors() {
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/countFloors");
-    result = await result.json();
-    setFloor(result)
-  }
-  async function getUnits() {
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/countUnit");
-    result = await result.json();
-    setUnit(result)
-  }
-  async function getEmployees() {
-    let result = await fetch("https://bmsbackendapp.herokuapp.com/api/countEmployees");
-    result = await result.json();
-    setEmployee(result)
-  }
-
-
+ 
   // ** Context
   const { colors } = useContext(ThemeColors)
   const trackBgColor = '#e9ecef'
@@ -79,16 +47,16 @@ const AnalyticsDashboard = () => {
       <Row>
         {/* Stats With Icons */}
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical  icon={<Home size={24} color='red' />} color='info' stats={floor}
+          <StatsVertical  icon={<Home size={24} color='red' />} color='info'
             statTitle='Total Floor' >
           </StatsVertical>
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Monitor size={24} />} color='warning' stats={unit}
+          <StatsVertical icon={<Monitor size={24} />} color='warning' 
             statTitle='Total Units' />
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<User size={24} />} color='danger' stats={owner}statTitle='Total Owners' />
+          <StatsVertical icon={<User size={24} />} color='danger' statTitle='Total Owners' />
         </Col>
         <Col xl='3' md='4' sm='6'>
           <StatsVertical icon={<Users size={24} />} color='primary' stats='26.8' statTitle='Total Tenant' />
