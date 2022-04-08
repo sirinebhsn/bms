@@ -11,14 +11,16 @@ const HorizontalLayout = props => {
 
   // For ServerSide navigation
   useEffect(() => {
-    axios.get(`${API_ENDPOINT}/api/all`).then(response =>
-     setMenuData(response.data)
-     )
+    getMenu()
    
    
   }, [])
-  console.log(menuData)
+const getMenu=()=>{
+  axios.get(`${API_ENDPOINT}/api/all`).then(response =>
+    setMenuData(response.data)
+    )
 
+}
   return (
     <Layout menuData={menuData} {...props} >
             {props.children}
