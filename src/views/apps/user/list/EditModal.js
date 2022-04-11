@@ -101,7 +101,6 @@ const EditModal = ({ user_id }) => {
 
             </Col>
 
-
           </Row>
           <Row>
             <Col>

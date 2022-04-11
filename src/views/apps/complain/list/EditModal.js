@@ -217,9 +217,7 @@ const EditModal = ({ compl_id }) => {
                 className='form-control'
                 defaultValue={complain.compl_date}
                 id='compl_date'
-                options={{
-                  dateFormat: 'Y-m-d',
-                }}
+              
                 onChange={(date) => {
                   setDate(date)
                 }

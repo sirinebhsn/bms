@@ -13,6 +13,14 @@
 	height: 30px;
 	width: 300px;
 }
+.small{
+	margin-left: 40%;
+}
+.grid-container-element { 
+	display: grid;
+	width: 100%;
+	grid-template-columns: 100px 2fr;
+} 
 
 .progress-done {
 	background: linear-gradient(to left, #F2709C, #FF9472);

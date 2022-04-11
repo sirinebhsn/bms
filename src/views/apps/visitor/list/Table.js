@@ -95,7 +95,6 @@ const UsersList = () => {
       method: "DELETE"
 
     });
-    result = await result.json()
 
     getData();
 
@@ -168,7 +167,7 @@ const UsersList = () => {
                       type: "warning",
                       showCancelButton: true,
                       confirmButtonColor: "#DD6B55",
-                      isConfirmed: <button onClick={()=>deleteOperation(item.visit_name)}/>,
+                      isConfirmed: <button onClick={()=>deleteOperation(item.id)}/>,
                       closeOnConfirm: false
                     })  }} >
                     <Trash2 size={20} color="red" />

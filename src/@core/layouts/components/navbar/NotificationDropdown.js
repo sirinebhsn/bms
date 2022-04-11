@@ -5,7 +5,6 @@ import { Fragment, useEffect, useState } from 'react'
 import Avatar from '@components/avatar'
 
 // ** Third Party Components
-import classnames from 'classnames'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { Bell, X, Check, AlertTriangle } from 'react-feather'
 
