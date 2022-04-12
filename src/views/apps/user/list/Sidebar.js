@@ -11,16 +11,11 @@ import PhoneInput from 'react-phone-number-input'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import "react-datetime/css/react-datetime.css";
-import Datetime from 'react-datetime';
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-import DatePicker from 'react-datepicker'
-import "react-datepicker/dist/react-datepicker.css";
-import ReactCountryFlag from 'react-country-flag'
-import Cleave from 'cleave.js/react'
-import moment from "moment";
+
+
 import { toast } from 'react-toastify'
-import WarningToast from '../toasts/WarningToast'
 import InfoToast from '../toasts/InfoToast'
 
 

@@ -48,6 +48,12 @@ const UsersList = () => {
   const handleClose = () => setShow(false);
   const handleCloseEditModal = () => setShowModal(false);
   const [passwordShown, setPasswordShown] = useState(false);
+  
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
+
+  const [data, setData] = useState([]);
   const togglePassword = () => {
     // When the handler is invoked
 
@@ -75,11 +81,6 @@ const UsersList = () => {
 
   }
 
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
-
-  const [data, setData] = useState([]);
   useEffect(() => {
     getData();
   }, [])

@@ -42,8 +42,6 @@ const Pricing = () => {
       {data !== null && faq !== null ? (
         <Fragment>
           <PricingCards data={data} duration={duration} />
-          <PricingTrial />
-          <PricingFaqs data={faq} />
         </Fragment>
       ) : null}
     </div>

@@ -174,6 +174,13 @@ const AppRoutes = [
       navLink: '/units/slider'
     }
   },
+  {
+    path: '/complain/details/:compl_id',
+    component: lazy(() => import('../../views/pages/pricing')),
+    meta: {
+      navLink: '/complain/details'
+    }
+  },
 
   {
     path: '/apps/user/view',
