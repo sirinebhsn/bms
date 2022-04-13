@@ -45,6 +45,8 @@ const NotificationDropdown = () => {
     setStatus(result)
   }
  function getComplain(compl_id) {
+  setShow(true)
+
     axios.get(`${API_ENDPOINT}/api/getComp/${compl_id}`).then(
       setSelectedComplain(compl_id)
 
@@ -59,6 +61,7 @@ const NotificationDropdown = () => {
     )
     console.warn(status_id)
   }
+ 
   async function getCount() {
     let result = await fetch(`${API_ENDPOINT}/api/countComplain`);
     result = await result.json();
@@ -225,7 +228,7 @@ const NotificationDropdown = () => {
                 </div>
                 <Modal isOpen={show}>
                   <ModalBody>
-                    <StatusDetails status_id={selectedStatus}/>
+                    <StatusDetails compl_id={selectedComplain} status_id={selectedStatus}/>
                   </ModalBody>
                 </Modal>
               </Fragment>

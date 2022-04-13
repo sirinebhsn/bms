@@ -3,21 +3,32 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Card, CardBody, Progress } from "reactstrap";
 
-const StatusDetails = ({ status_id }) => {
+const StatusDetails = ({ status_id,compl_id }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
   const history=useHistory();
   const [status, setStatus] = useState([])
+  const [complain, setComplain] = useState([])
+  function getComplain() {
+    if (compl_id) {
+      axios.get(`${API_ENDPOINT}/api/getComp/`+compl_id).then(response =>
+        setComplain(response.data)
+      )
+    }
+  }
   const[compl_job_status, setComplId]=useState("")
   useEffect(() => {
     if (status_id) {
-      axios.get(`${API_ENDPOINT}/api/getStatus/` + status_id).then(response =>
+      axios.get(`${API_ENDPOINT}/api/getStatus/`+status_id).then(response =>
         setStatus(response.data)
       )
     }
+    getComplain()
 
  }, [])
-  const updateInfo = async () => {
-    await axios.put(`${API_ENDPOINT}/api/updateStatus/${compl_id}`, {
+ console.log(status_id)
+ async function updateInfo () {
+
+    await axios.put(`${API_ENDPOINT}/api/updateComplain/`+ compl_id, {
     
       compl_job_status: compl_job_status ? compl_job_status : complain.compl_job_status,
 
@@ -31,6 +42,7 @@ const StatusDetails = ({ status_id }) => {
     }
     )
   }
+  console.log(compl_id)
   const handleUpdate = (e) => {
     e.preventDefault();
 
@@ -38,7 +50,6 @@ const StatusDetails = ({ status_id }) => {
       updateInfo();
 
   }
-
   return (
 
     <Card>
