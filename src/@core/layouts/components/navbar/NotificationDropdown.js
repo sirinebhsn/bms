@@ -46,7 +46,6 @@ const NotificationDropdown = () => {
   }
  function getComplain(compl_id) {
   setShow(true)
-
     axios.get(`${API_ENDPOINT}/api/getComp/${compl_id}`).then(
       setSelectedComplain(compl_id)
 
@@ -213,8 +212,9 @@ const NotificationDropdown = () => {
                 </div>
                 <div className='me-1'>
                   <span onClick={()=>getStatusById(item.status_id)}>
+                  <span onClick={()=>getComplain(item.compl_id)}>
                   {item?.users?.user_name}
-                  </span>
+                  </span></span>
                 </div>
                 <div className='me-1'>
                   {item.compl_status == '0' &&
