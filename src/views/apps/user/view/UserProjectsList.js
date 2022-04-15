@@ -14,8 +14,10 @@ import "../list/style.css"
 import { useHistory } from 'react-router-dom'
 import WarningToast from '../toasts/WarningToast'
 import ErrorToast from '../toasts/ErrorToast'
+import { useTranslation } from 'react-i18next'
 
 const UserProjectsList = () => {
+  const {t}= useTranslation()
   const history = useHistory();
   const [buildingList, setBuildingList] = useState([]);
   const [errorList, setError] = useState([]);
@@ -122,7 +124,7 @@ const UserProjectsList = () => {
       <Card>
         <CardHeader className='border-bottom'>
           <CardTitle>
-            <h1>Add New User</h1></CardTitle>
+            <h1>{t('Add New User')}</h1></CardTitle>
         </CardHeader>
         <CardBody className='py-2 my-25'>
           <Form className='mt-2 pt-50'>
@@ -135,14 +137,14 @@ const UserProjectsList = () => {
               <div className='d-flex align-items-end mt-75 ms-1'>
                 <div>
                   <Button tag={Label} className='mb-75 me-75' size='sm' color='primary'>
-                    Upload
+                    {t('Upload')}
                     <div className='me-25'>
 
                       <Input id='owner-picture' type='file' onChange={onChangePicture} onKeyDown={handleEnter}
                         hidden accept='image/*' />
                     </div>
                   </Button>
-                  <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+                  <p className='mb-0'>{t('Allowed JPG, GIF or PNG. Max size of 800kB')}</p>
                 </div>
               </div>
             </div>
@@ -152,23 +154,23 @@ const UserProjectsList = () => {
                 <Label className='form-label' for='user_type'>Select User</Label>
                 <select id='user_type' className='form-control' onChange={(e) => setType(e.target.value)}
                 >
-                  <option>Select User</option>
-                  <option value="a"> Admin </option>
-                  <option value="o"> Owner </option>
-                  <option value="e"> Employee </option>
-                  <option value="t"> Tenant </option>
+                  <option>{t('Select User')}</option>
+                  <option value="a"> {t('Admin')} </option>
+                  <option value="o"> {t('Owner')} </option>
+                  <option value="e"> {t('Employee')} </option>
+                  <option value="t"> {t('Tenant')} </option>
                 </select>
               </Col>
               {user_type != 'a' &&
                 <>
                   <Col sm='6' className='mb-1'>
 
-                    <Label className='form-label' for='building_id'>Select Building</Label>
+                    <Label className='form-label' for='building_id'>{t('Select Building')}</Label>
                     <select disabled id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                     >
 
 
-                      <option  >Select BUILDING</option>
+                      <option  >{t('Select BUILDING')}</option>
                       {buildingList.map((item) => {
                         return (<option value={item.building_id}>{item.building_name}</option>
                         )
@@ -183,12 +185,12 @@ const UserProjectsList = () => {
                 <>
                   <Col sm='6' className='mb-1'>
 
-                    <Label className='form-label' for='building_id'>Select Building</Label>
+                    <Label className='form-label' for='building_id'>{t('Select Building')}</Label>
                     <select id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                     >
 
 
-                      <option  >Select BUILDING</option>
+                      <option  >{t('Select BUILDING')}</option>
                       {buildingList.map((item) => {
                         return (<option value={item.building_id}>{item.building_name}</option>
                         )
@@ -203,10 +205,10 @@ const UserProjectsList = () => {
             <Row>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='user_name'>
-                  User name
+                  {t('User Name')}
                 </Label>
 
-                <Input id='user_name' placeholder='user Name'
+                <Input id='user_name' placeholder={t('User Name')}
                   onChange={(e) =>
                     setName(e.target.value)}
                 />
@@ -214,9 +216,9 @@ const UserProjectsList = () => {
               </Col>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='email'>
-                  User Email
+                  {t('Email')}
                 </Label>
-                <Input id='email' placeholder='User Email'
+                <Input id='email' placeholder={t('Email')}
                   onChange={(e) =>
                     setEmail(e.target.value)} />
 
@@ -225,17 +227,17 @@ const UserProjectsList = () => {
             <Row>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='password'>
-                  User Password
+                  {t('User Password')}
                 </Label>
-                <Input id='password' type='password' placeholder='password'
+                <Input id='password' type='password' placeholder={t('Password')}
                   onChange={(e) =>
                     setPassword(e.target.value)} />
               </Col>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='user_nid'>
-                  User NID
+                 {t('NID')}
                 </Label>
-                <Input id='user_nid' name='user_nid' placeholder='User NID'
+                <Input id='user_nid' name='user_nid' placeholder={t('NID')}
                   onChange={(e) =>
                     setNid(e.target.value)} />
               </Col>
@@ -245,24 +247,24 @@ const UserProjectsList = () => {
               <Col sm='6' className='mb-1'>
 
                 <Label className='form-label' for='user_pre_address'>
-                  Present Address <span className='text-danger'>*</span>
+                  {t('Present Address')} <span className='text-danger'>*</span>
                 </Label>
                 <input type='text' id='user_pre_address' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPresentAdress(e.target.value)}
-                  placeholder="Present Address" /><br />
+                  placeholder={t("Present Address")} /><br />
               </Col>
               <Col sm='6' className='mb-1'>
 
                 <Label className='form-label' for='user_per_address'>
-                  Permenant Address <span className='text-danger'>*</span>
+                  {t('Permenant Address')} <span className='text-danger'>*</span>
                 </Label>
                 <input type='text' id='user_per_address' onKeyDown={handleEnter} className="form-control"
-                  onChange={(e) => setPermenantAdress(e.target.value)} placeholder="Permenant Address" /><br />
+                  onChange={(e) => setPermenantAdress(e.target.value)} placeholder={t("Permenant Address")} /><br />
               </Col>
             </Row>
             <Row>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='user_date_creation' >
-                  User Starting Date <span className='text-danger'>*</span>
+                  {t("Starting Date")} <span className='text-danger'>*</span>
                 </Label>
                 <input type="date" className='form-control' id='user_date_creation'
                   onChange={(e) => setCreationDate(e.target.value)}
@@ -274,7 +276,7 @@ const UserProjectsList = () => {
               </Col>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='user_ending_date'>
-                  User Ending Date <span className='text-danger'>*</span>
+                  {t('Ending Date')} <span className='text-danger'>*</span>
                 </Label>
                 <input type="date" className='form-control' id='user_ending_date'
 
@@ -290,21 +292,21 @@ const UserProjectsList = () => {
             <Row>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='user_tel'>
-                  Phone Number
+                  {t('Phone Number')}
                 </Label>
-                <PhoneInput placeholder="enter phone number" id="user_tel"
+                <PhoneInput placeholder={t("enter phone number")} id="user_tel"
                   value={user_tel} onChange={setTelephone} />
               </Col>
 
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='user_status'>
-                  User Status<span className='text-danger'>*</span>
+                  {t('User Status')}<span className='text-danger'>*</span>
                 </Label>
                 <select id='user_status' className='form-control' onChange={(e) => setStatus(e.target.value)}
                 >
-                  <option>Select Status</option>
-                  <option value="1"> Active </option>
-                  <option value="2"> Leave </option>
+                  <option>{t('Select Status')}</option>
+                  <option value="1"> {t('Active')} </option>
+                  <option value="2"> {t('Leave')} </option>
 
                 </select>
 
@@ -313,27 +315,25 @@ const UserProjectsList = () => {
             <Col>
 
               <Label className='form-label' for='user_designation'>
-                User Designation<span className='text-danger'>*</span>
+                {t('User Designation')}<span className='text-danger'>*</span>
               </Label>
               <textarea type='text' id='user_designation' onKeyDown={handleEnter} className="form-control"
-                onChange={(e) => setDesignation(e.target.value)} placeholder="Designation" /><br />
+                onChange={(e) => setDesignation(e.target.value)} placeholder={t("Designation")} /><br />
 
 
             </Col>
             <Row>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' for='user_currlang'>
-                  Currant Language <span className='text-danger'>*</span>
+                  {t('Current Language')} <span className='text-danger'>*</span>
                 </Label>
                 <select id='user_curr_lang' className='form-control' onChange={(e) => setLang(e.target.value)}
                 >
-                  <option>Select Language</option>
-                  <option value="English"> English </option>
-                  <option value="French"> French </option>
-                  <option value="German"> German </option>
-                  <option value="Arabic"> Arabic </option>
-
-
+                  <option>{t('Select Language')}</option>
+                  <option value="English"> {t('English')} </option>
+                  <option value="French"> {t('French')} </option>
+                  <option value="German"> {t('German')} </option>
+                  <option value="Arabic"> {t('Arabic')} </option>
 
                 </select>
 
@@ -344,10 +344,10 @@ const UserProjectsList = () => {
                   <Col sm='6' className='mb-1'>
 
                     <Label className='form-label' for='user_salary'>
-                      User salary <span className='text-danger'>*</span>
+                      {t('Employee salary')} <span className='text-danger'>*</span>
                     </Label>
                     <input disabled type='number' id='user_salary' onKeyDown={handleEnter} className="form-control"
-                      onChange={(e) => setSalary(e.target.value)} placeholder="Emlployee salary" /><br />
+                      onChange={(e) => setSalary(e.target.value)} placeholder={t("Employee salary")} /><br />
 
                   </Col>
                 </>
@@ -356,10 +356,10 @@ const UserProjectsList = () => {
                   <Col sm='6' className='mb-1'>
 
                     <Label className='form-label' for='user_salary'>
-                      User salary <span className='text-danger'>*</span>
+                      {t('Employee salary')} <span className='text-danger'>*</span>
                     </Label>
                     <input type='number' id='user_salary' onKeyDown={handleEnter} className="form-control"
-                      onChange={(e) => setSalary(e.target.value)} placeholder="Emlployee salary" /><br />
+                      onChange={(e) => setSalary(e.target.value)} placeholder={t("Employee salary")} /><br />
 
                   </Col>
                 </>
@@ -371,25 +371,25 @@ const UserProjectsList = () => {
               <Col sm='6' className='mb-1'>
 
                 <Label className='form-label' for='user_member_type'>
-                  User Member Type <span className='text-danger'>*</span>
+                  {t('User Member Type')} <span className='text-danger'>*</span>
                 </Label>
                 <select id='user_member_type' className='form-control' onChange={(e) => setMembertype(e.target.value)}
                 >
-                  <option>Select User</option>
-                  <option value="admin"> Admin </option>
-                  <option value="worker"> Worker </option>
-                  <option value="security guard"> Security guard </option>
-                  <option value="guard"> Guard </option>
+                  <option>{t('Select User')}</option>
+                  <option value="admin"> {t('Admin')} </option>
+                  <option value="worker"> {t('Worker')} </option>
+                  <option value="security guard"> {t('Security guard')} </option>
+                  <option value="guard"> {t('Guard')} </option>
                 </select>
               </Col>
 
               <Col sm='6' className='mb-1'>
                 <br />
                 <Button onClick={addUser} className='me-1' color='primary'>
-                  Add User
+                  {t('Add User')}
                 </Button>
                 <Button type='reset' className='me-1' color='secondary' >
-                  Cancel
+                  {t('Cancel')}
                 </Button>
 
               </Col>

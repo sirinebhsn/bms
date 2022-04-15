@@ -10,10 +10,11 @@ import { Card, CardHeader, CardTitle, CardBody, CardFooter } from 'reactstrap'
 import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 import UnitList from '../../../apps/units/listUnits/Table'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const CardTransactions = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+const {t}= useTranslation()
   const [data, setData] = useState([]);
   useEffect(() => {
     getData();
@@ -53,14 +54,14 @@ const CardTransactions = () => {
   return (
     <Card className='card-transaction'>
       <CardHeader>
-        <CardTitle tag='h4'>Last Visitors</CardTitle>
+        <CardTitle tag='h4'>{t('Last Visitors')}</CardTitle>
         <Icon.MoreVertical size={18} className='cursor-pointer' />
       </CardHeader>
       <CardBody>{renderTransactions()}
       </CardBody>
       <CardFooter>
         <div  style={{float: 'right'}} >
-      <Link to='/visitor/list'> See More </Link>
+      <Link to='/visitor/list'> {t('See More')} </Link>
 </div>
       </CardFooter>
     </Card>

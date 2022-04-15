@@ -15,10 +15,11 @@ import { User, UserPlus, UserCheck, UserX, Users, Codesandbox } from 'react-feat
 // ** Styles
 import '@styles/react/apps/app-users.scss'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const UsersList = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+  const {t}= useTranslation()
   const [data, setData] = useState([]);
   useEffect(() => {
     getBuildings();
@@ -35,19 +36,12 @@ const UsersList = () => {
         <Col lg='6' sm='6'>
           <StatsHorizontal
             color='primary'
-            statTitle='Total Buildings'
+            statTitle={t('Total Buildings')}
             icon={<Codesandbox size={20} />}
             renderStats={<h3 className='fw-bolder mb-75'>{data}</h3>}
           />
         </Col>
-        <Col lg='6' sm='6'>
-          <StatsHorizontal
-            color='danger'
-            statTitle='Top 5 Owners'
-            icon={<UserPlus size={20} />}
-            renderStats={<h3 className='fw-bolder mb-75'>4,567</h3>}
-          />
-        </Col>
+     
       
       </Row>
       <Table />

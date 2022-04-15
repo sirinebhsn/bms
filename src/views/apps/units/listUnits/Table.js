@@ -34,9 +34,11 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Edit, Image, Lock, Search, Trash, X } from 'react-feather'
 
 import Slider from './Slider'
+import { useTranslation } from 'react-i18next'
 
 // ** Table Header
 const UnitList = () => {
+  const {t}= useTranslation()
   const [selectedUnit, setSelectedUnit] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -95,36 +97,36 @@ const UnitList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Units List </CardTitle>
+          <CardTitle tag='h4'> {t('Units List')} </CardTitle>
 
           <Col className='mb-1' md='6' sm='12'>
             <InputGroup onChange={(e) => search(e.target.value)}>
               <Button color='primary' onClick={search} outline>
                 <Search size={12} />
               </Button>
-              <Input type='text' onChange={(e) => search(e.target.value)} placeholder='Search here' />
+              <Input type='text' onChange={(e) => search(e.target.value)} placeholder={t('Search here')} />
               <Button color='primary' outline>
-                Search !
+                {t('Search !')}
               </Button>
             </InputGroup>
           </Col>
 
-          <Button className='add-new-floor' color='primary' onClick={toggleSidebar}>
-            Add New Unit
+          <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
+            {t('Add New Unit')}
           </Button>
         </CardHeader>
 
         <Table>
           <thead>
             <tr>
-              <th> Unit Name </th>
-              <th> Building </th>
-              <th> Floor </th>
-              <th> Status </th>
-              <th> Room Number </th>
-              <th> Type </th>
-              <th> Pictures </th>
-              <th>Actions </th>
+              <th> {t('UNIT NAME')}</th>
+              <th> {t('BUILDING')} </th>
+              <th> {t('FLOOR')} </th>
+              <th> {t('STATUS')} </th>
+              <th> {t('ROOM NUMBER')} </th>
+              <th> {t('TYPE')} </th>
+              <th> {t('PICTURES')} </th>
+              <th> {t('ACTIONS')} </th>
 
             </tr>
           </thead>

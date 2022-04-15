@@ -14,6 +14,7 @@ import { Button, Badge, Input, DropdownMenu, DropdownItem, DropdownToggle, Uncon
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import StatusDetails from './StatusDetails'
+import { useTranslation } from 'react-i18next'
 
 const NotificationDropdown = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
@@ -25,7 +26,7 @@ const NotificationDropdown = () => {
   const [status, setStatus] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState([]);
   const [show, setShow] = useState(false);
-
+  const {t}= useTranslation()
 
   useEffect(() => {
     getData();
@@ -258,16 +259,18 @@ const NotificationDropdown = () => {
           <DropdownMenu end tag='ul' className='dropdown-menu-media mt-0'>
             <li className='dropdown-menu-header'>
               <DropdownItem className='d-flex' tag='div' header>
-                <h4 className='notification-title mb-0 me-auto'>Notifications</h4>
+                <h4 className='notification-title mb-0 me-auto'> 
+                {t('Notifications')}
+                 </h4>
                 <Badge tag='div' color='light-primary' pill>
-                  {count} New
+                  {count} {t('New')}
                 </Badge>
               </DropdownItem>
             </li>
             {renderNotificationItems()}
             <li className='dropdown-menu-footer'>
               <Button color='primary' block>
-                Read all notifications
+               {t('Read all notifications')}
               </Button>
             </li>
 

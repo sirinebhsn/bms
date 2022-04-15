@@ -22,6 +22,7 @@ import { UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem, Modal
 import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 import axios from 'axios'
 import Building from './BuildingCard'
+import { useTranslation } from 'react-i18next'
 
 const UserDropdown = () => {
   // ** Store Vars
@@ -30,6 +31,7 @@ const UserDropdown = () => {
   const [userData, setUserData] = useState(null)
   const [buildingList, setBuildingList] = useState([]);
   const [show, setShow] = useState(false);
+  const { t } = useTranslation()
   const handleClose = () => setShow(false);
   const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
 
@@ -64,7 +66,7 @@ const UserDropdown = () => {
           {
             userData && userData.user_type == 'S' &&
             <>
-              <span className='user-status'>Super Admin</span>
+              <span className='user-status'>{t('Super Admin')}</span>
 
             </>
           // user_type== "a" For admin 
@@ -72,7 +74,7 @@ const UserDropdown = () => {
           {
             userData && userData.user_type == 'a' &&
             <>
-              <span className='user-status'>Admin</span>
+              <span className='user-status'>{t('Admin')}</span>
 
             </>
 
@@ -80,7 +82,7 @@ const UserDropdown = () => {
            {
             userData && userData.user_type == 'o' &&
             <>
-              <span className='user-status'>Owner</span>
+              <span className='user-status'>{t('Owner')}</span>
 
             </>
 
@@ -94,14 +96,14 @@ const UserDropdown = () => {
       <DropdownMenu end>
         <DropdownItem tag={Link} to='/pages/profile'>
           <User size={14} className='me-75' />
-          <span className='align-middle'>Profile</span>
+          <span className='align-middle'>{t('Profile')}</span>
         </DropdownItem>
         {
           userData && userData.user_type == 'S' &&
           <>
             <DropdownItem >
               <Home size={14} className='me-75' />
-              <span className='align-middle' onClick={() => handleShow(buildingList)}>Buildings</span>
+              <span className='align-middle' onClick={() => handleShow(buildingList)}>{t('Buildings')}</span>
             </DropdownItem>
           </>
         }
@@ -128,7 +130,7 @@ const UserDropdown = () => {
         </DropdownItem>
         <DropdownItem tag={Link} to='/login' onClick={() => dispatch(handleLogout())}>
           <Power size={14} className='me-75' />
-          <span className='align-middle'>Logout</span>
+          <span className='align-middle'>{('Logout')}</span>
         </DropdownItem>
       </DropdownMenu>
       <Modal isOpen={show}>

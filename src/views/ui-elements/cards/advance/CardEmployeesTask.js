@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 // ** Third Party Components
 import Chart from 'react-apexcharts'
 import { MoreVertical } from 'react-feather'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 // ** Reactstrap Imports
@@ -13,7 +14,7 @@ import { Card, CardHeader, CardTitle, CardBody, CardFooter } from 'reactstrap'
 const CardEmployeesTasks = ({ colors, trackBgColor }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
   const MAX_LENGTH = 30;
-
+  const {t}= useTranslation()
   const [data, setData] = useState([]);
   useEffect(() => {
     getData();
@@ -282,13 +283,13 @@ const CardEmployeesTasks = ({ colors, trackBgColor }) => {
   return (
     <Card className='card-employee-task'>
       <CardHeader>
-        <CardTitle tag='h4'>Last Complains</CardTitle>
+        <CardTitle tag='h4'>{t('Last Complains')}</CardTitle>
         <MoreVertical size={18} className='cursor-pointer' />
       </CardHeader>
       <CardBody>{renderTasks()}</CardBody>
       <CardFooter>
         <div style={{ float: 'right' }} >
-          <Link to='/complain/list'> See More </Link>
+          <Link to='/complain/list'> {t('See More')} </Link>
         </div></CardFooter>
     </Card>
   )

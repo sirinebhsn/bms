@@ -17,7 +17,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Col
+  Col,
+  Input,
+  InputGroup
 
 } from 'reactstrap'
 // ** React Imports
@@ -29,12 +31,13 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Edit, Eye, Lock, Mail, Phone, Trash, User } from 'react-feather'
+import { Edit, Eye, Lock, Mail, Phone, Search, Trash, User } from 'react-feather'
 import Swal from 'sweetalert2'
 import LoginForm from './DetailsModal'
 import UserInfoEdit from './UserInfoEdit'
 import EditModal from './EditModal'
 import ReactPaginate from 'react-paginate';
+import { useTranslation } from 'react-i18next';
 
 
 // ** Table Header
@@ -48,7 +51,7 @@ const UsersList = () => {
   const handleClose = () => setShow(false);
   const handleCloseEditModal = () => setShowModal(false);
   const [passwordShown, setPasswordShown] = useState(false);
-  
+  const {t}= useTranslation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
@@ -139,13 +142,20 @@ const UsersList = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Users List</CardTitle>
-          <div className="col-sm-3">
-            <input type="text" onChange={(e) => searchUser(e.target.value)} className="form-control" placeholder="Search User" />
-
-          </div>
+          <CardTitle tag='h4'>{t('Users List')}</CardTitle>
+          <Col className='mb-1' md='6' sm='12'>
+            <InputGroup onChange={(e) => searchUser(e.target.value)}>
+              <Button color='primary' onClick={searchUser} outline>
+                <Search size={12} />
+              </Button>
+              <Input type='text' onChange={(e) => searchUser(e.target.value)} placeholder={t('Search here')} />
+              <Button color='primary' outline>
+                {t('Search !')}
+              </Button>
+            </InputGroup>
+          </Col>
           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New User
+            {t('Add New User')}
           </Button>
 
         </CardHeader>
@@ -153,12 +163,12 @@ const UsersList = () => {
         <Table>
           <thead>
             <tr>
-              <th> Picture </th>
-              <th> Name </th>
-              <th> Email</th>
-              <th> Password </th>
-              <th>  Phone Number </th>
-              <th> Actions </th>
+              <th> {t('PICTURE')} </th>
+              <th> {t('NAME')} </th>
+              <th> {t('EMAIL')}</th>
+              <th> {t('PASSWORD')} </th>
+              <th>  {t('PHONE NUMBER')} </th>
+              <th> {t('ACTIONS')} </th>
 
             </tr>
           </thead>
@@ -205,27 +215,27 @@ const UsersList = () => {
 
       <Modal isOpen={show}>
         <ModalHeader>
-          <h1>User Details</h1>
+          <h1> {t('User Details')}</h1>
         </ModalHeader>
         <ModalBody>
           <LoginForm user_id={selectedUser} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleClose}>
-            Close
+            {t('Close')}
           </Button>
         </ModalFooter>
       </Modal>
       <Modal isOpen={showModal}>
         <ModalHeader>
-          <h1>Edit User </h1>
+          <h1>{t('Edit User')} </h1>
         </ModalHeader>
         <ModalBody>
           <EditModal user_id={selectedUser} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleCloseEditModal}>
-            Close
+            {t('Close')}
           </Button>
         </ModalFooter>
       </Modal>

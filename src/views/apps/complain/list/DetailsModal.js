@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 import { AlignLeft, Calendar, Eye, Globe, Home, Lock, Mail, Map, MapPin, Package, Phone, PhoneCall, Settings, Smile, User, UserCheck } from "react-feather";
+import { useTranslation } from "react-i18next";
 import { Card, CardBody, Col, Progress, Row } from "reactstrap";
 import './style.css'
 
 const ComplainDetails = ({ compl_id }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+  const {t}=useTranslation()
   const [complain, setComplain] = useState([])
   useEffect(() => {
     if (compl_id) {
@@ -32,12 +33,12 @@ const ComplainDetails = ({ compl_id }) => {
         <br />
         <Row>
           <Col>
-            <p><h4>Email : &nbsp; <Mail color="red" size={17} />  {complain?.compl_email}</h4></p>
+            <p><h4>{t('Email')} : &nbsp; <Mail color="red" size={17} />  {complain?.compl_email}</h4></p>
           </Col>
           <Col>
             <div className="grid-container-element" >
 
-              <p><h4>Status : &nbsp;<Package color="blue" size={17} /></h4></p>
+              <p><h4>{t('Complain Status')} : &nbsp;<Package color="blue" size={17} /></h4></p>
               {complain.compl_job_status == '0' &&
                 <>
 
@@ -58,12 +59,12 @@ const ComplainDetails = ({ compl_id }) => {
         <Row>
 
           <Col>
-            <p><h4> Assigned To : &nbsp; <User color="SlateBlue" size={17} /> {complain?.compl_assigned_to}</h4></p>
+            <p><h4>{t('Assigned To')} : &nbsp; <User color="SlateBlue" size={17} /> {complain?.compl_assigned_to}</h4></p>
 
 
           </Col>
           <Col>
-            <p><h4> Completed By : &nbsp; <UserCheck color="SlateBlue" size={17} /> {complain?.compl_complainBy}</h4></p>
+            <p><h4> {t('Completed By')} : &nbsp; <UserCheck color="SlateBlue" size={17} /> {complain?.compl_complainBy}</h4></p>
 
 
           </Col>
@@ -72,12 +73,12 @@ const ComplainDetails = ({ compl_id }) => {
         <Row>
 
           <Col>
-            <p><h4> Date : &nbsp;<Calendar color="Orange" size={17} /> {complain?.compl_date}</h4></p>
+            <p><h4> {t('Date Of Complain')} : &nbsp;<Calendar color="Orange" size={17} /> {complain?.compl_date}</h4></p>
 
 
           </Col>
           <Col>
-            <p><h4> Phone : &nbsp; <Phone color="MediumSeaGreen" size={17} /> {complain?.compl_phone}</h4></p>
+            <p><h4> {t('Phone Number')} : &nbsp; <Phone color="MediumSeaGreen" size={17} /> {complain?.compl_phone}</h4></p>
 
 
           </Col>
@@ -87,29 +88,16 @@ const ComplainDetails = ({ compl_id }) => {
         <Row>
 
           <Col>
-            <p><h4 > Complainer : &nbsp; <User color="DodgerBlue" size={17} /> {complain?.compl_name}</h4></p>
+            <p><h4 > {t('Complainer')} : &nbsp; <User color="DodgerBlue" size={17} /> {complain?.compl_name}</h4></p>
 
 
           </Col>
 
           <Col>
-            <p><h4> Solution : &nbsp;&nbsp; <Settings color="BlueViolet" size={17} /> {complain?.compl_solution}</h4></p>
+            <p><h4> {t('Solution')} : &nbsp;&nbsp; <Settings color="BlueViolet" size={17} /> {complain?.compl_solution}</h4></p>
           </Col>
         </Row>
-
-
-
-
-
-
-
-
-
         <br />
-
-
-
-
 
       </CardBody>
 

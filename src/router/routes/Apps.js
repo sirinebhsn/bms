@@ -164,14 +164,31 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/floor/listFloors'))
   },
   {
+    path: '/apps/floor/view',
+    exact: true,
+    component: () => <Redirect to='/apps/floor/view/1' />
+  },
+  {
+    path: '/floor/view/:id',
+    component: lazy(() => import('../../views/apps/floor/view')),
+    meta: {
+      navLink: '/floor/view'
+    }
+  },
+  {
     path: '/units/listUnits',
     component: lazy(() => import('../../views/apps/units/listUnits'))
   },
   {
-    path: '/units/slider',
-    component: lazy(() => import('../../views/apps/units/listUnits/Slider')),
+    path: '/apps/units/view',
+    exact: true,
+    component: () => <Redirect to='/apps/units/view/1' />
+  },
+  {
+    path: '/units/view/:id',
+    component: lazy(() => import('../../views/apps/units/view')),
     meta: {
-      navLink: '/units/slider'
+      navLink: '/units/view'
     }
   },
   {

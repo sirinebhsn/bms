@@ -12,10 +12,11 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 import { DownloadCloud, FileText, X } from 'react-feather'
 import { useDropzone } from 'react-dropzone'
+import { useTranslation } from 'react-i18next';
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+  const {t}= useTranslation()
   const [userData, setUserData] = useState([]);
   const [floorList, setFloorList] = useState([]);
   const [typeData, setTypeData] = useState([]);
@@ -170,22 +171,22 @@ const getUnits=()=>{
         <Row>
 
           <Label className='form-label' for='unit_name'>
-            UNIT NAME <span className='text-danger'>*</span>
+           {t('UNIT NAME')} <span className='text-danger'>*</span>
           </Label>
           <input type='text' className="form-control"
 
-            onChange={(e) => setName(e.target.value)} placeholder="Unit name" /><br />
+            onChange={(e) => setName(e.target.value)} placeholder={t("Unit name")} /><br />
         </Row>
 
         <br />
         <Row>
 
-          <Label className='form-label' for='type_id'>Select Type</Label>
+          <Label className='form-label' for='type_id'>{t('Select Type')}</Label>
           <select id='type_id' className='form-control' onChange={(e) => setUnitType(e.target.value)}
           >
 
 
-            <option  >Select Type</option>
+            <option  >{t('Select Type')}</option>
             {typeData.map((item) => {
               return (<option value={item.type_id}>{item.unit_type}</option>
               )
@@ -198,17 +199,17 @@ const getUnits=()=>{
         <Row>
 
           <Label className='form-label' for='unit_roomnumber'>
-            Room Number<span className='text-danger'>*</span>
+            {t('Room Number')}<span className='text-danger'>*</span>
           </Label>
           <Input type='number' className="form-control"
 
-            placeholder="Room Number" id='unit_roomnumber' onChange={(e) => setUnitRoomNumber(e.target.value)} /><br />
+            placeholder={t("Room Number")} id='unit_roomnumber' onChange={(e) => setUnitRoomNumber(e.target.value)} /><br />
         </Row>
         <br />
         <Row>
 
         <Label className='form-label' for='unit_added_date'>
-              Unit Added Date <span className='text-danger'>*</span>
+              {t('Unit Added Date')} <span className='text-danger'>*</span>
             </Label>
             <input type="date" className='form-control' id='unit_added_date'
 
@@ -227,12 +228,12 @@ const getUnits=()=>{
         <Row>
 
           <Label className='form-label' for='unit_status'>
-            Unit Status <span className='text-danger'>*</span>
+            {t('Unit Status')} <span className='text-danger'>*</span>
           </Label>
           <select className='form-control' onChange={(e) => setUnitStatus(e.target.value)}>
-            <option value="0"> Select Status
+            <option value="0"> {t('Select Status')}
             </option>
-            <option value="1"> Active</option>
+            <option value="1"> {t('Active')}</option>
 
           </select>
 
@@ -241,12 +242,12 @@ const getUnits=()=>{
         <br />
         <Row>
 
-          <Label className='form-label' for='floor_id'>Select Floor</Label>
+          <Label className='form-label' for='floor_id'>{t('Select Floor')}</Label>
           <select id='floor_id' className='form-control' onChange={(e) => setFloor(e.target.value)}
           >
 
 
-            <option  >Select Floor</option>
+            <option  >{t('Select Floor')}</option>
             {floorList.map((item) => {
               return (<option value={item.floor_id}>{item.floor_name}</option>
               )
@@ -263,13 +264,13 @@ const getUnits=()=>{
           <input {...getInputProps()} id='unit_pictures' />
           <div className='d-flex align-items-center justify-content-center flex-column'>
             <DownloadCloud size={64} />
-            <h5>Drop Pictures here or click to upload</h5>
+            <h5> {t('Drop Pictures here or click to upload')}</h5>
             <p className='text-secondary'>
-              Drop Pictures here or click{' '}
+             {t('Drop Pictures here or click')}{' '}
               <a href='/' onClick={e => e.preventDefault()}>
-                browse
+               {t('browse')}
               </a>{' '}
-              thorough your machine
+              {t('thorough your machine')}
             </p>
           </div>
         </div>
@@ -278,17 +279,17 @@ const getUnits=()=>{
             <ListGroup className='my-2'>{fileList}</ListGroup>
             <div className='d-flex justify-content-end'>
               <Button className='me-1' color='danger' outline onClick={handleRemoveAllFiles}>
-                Remove All
+                {t('Remove All')}
               </Button>
             </div>
           </Fragment>
         ) : null}      <br />
 
         <Button onClick={addUnit} sh className='me-1' color='primary'>
-          Submit
+          {t('Add Unit')}
         </Button>
         <Button type='reset' color='secondary'>
-          Cancel
+         {t('Cancel')}
         </Button>
       </Form>
     </Sidebar>

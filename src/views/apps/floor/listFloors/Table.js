@@ -16,7 +16,10 @@ import {
   Form,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  InputGroup,
+  Input,
+  Col
 
 } from 'reactstrap'
 // ** React Imports
@@ -28,13 +31,14 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Edit, Lock, Trash, User } from 'react-feather'
+import { Edit, Lock, Search, Trash, User } from 'react-feather'
 import Swal from 'sweetalert2'
+import { useTranslation } from 'react-i18next'
 
 // ** Table Header
 const FloorList = () => {
   const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
-
+  const{t}= useTranslation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
@@ -47,31 +51,50 @@ const FloorList = () => {
     result = await result.json();
     setData(result)
   }
+  async function search(key) {
+    if (key) {
+      console.warn(key)
+      let result = await fetch(`${API_ENDPOINT}/api/searchFloor/` + key);
+      result = await result.json();
+      console.warn(result)
+      setData(result)
+    }
+    else {
+      getData();
+    }
+  }
 
   return (
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Floors List</CardTitle>
-          <div className="col-sm-3">
-            <input type="text" onChange="" className="form-control" placeholder="Search Floor" />
-
-          </div>
+          <CardTitle tag='h4'>{t('Floors List')}</CardTitle>
+          <Col className='mb-1' md='6' sm='12'>
+            <InputGroup onChange={(e) => search(e.target.value)}>
+              <Button color='primary' onClick={search} outline>
+                <Search size={12} />
+              </Button>
+              <Input type='text' onChange={(e) => search(e.target.value)} placeholder={t('Search here')} />
+              <Button color='primary' outline>
+                {t('Search !')}
+              </Button>
+            </InputGroup>
+          </Col>
           <Button className='add-new-floor' color='primary' onClick={toggleSidebar}>
-            Add New Floor
+           {t('Add New Floor')}
           </Button>
         </CardHeader>
 
         <Table>
           <thead>
             <tr>
-              <th> FLOOR NUM </th>
-              <th> FLOOR Name </th>
-              <th> FLOOR ELEVATOR </th>
-              <th> FLOOR AREA </th>
-              <th> FLOOR BUILDING </th>
-              <th> FLOOR ADDED DATE</th>
-              <th>Actions </th>
+              <th> {t('FLOOR NUM')} </th>
+              <th> {t('FLOOR Name')} </th>
+              <th> {t('FLOOR ELEVATOR')} </th>
+              <th> {t('FLOOR AREA')} </th>
+              <th> {t('FLOOR BUILDING')} </th>
+              <th> {t('FLOOR ADDED DATE')}</th>
+              <th>{t('ACTIONS')} </th>
               <th></th>
             </tr>
           </thead>
@@ -85,19 +108,19 @@ const FloorList = () => {
 
                 <td>{item.floor_elevator == 0 &&
                   <>
-                    <td> Non Disponible</td>
+                    <td>{t('Not Available')}</td>
 
                   </>
 
                 }
                   {item.floor_elevator == 1 &&
                     <>
-                      <td> Disponible</td>
+                      <td> {t('Available')}</td>
 
                     </>
 
                   }  </td>
-                <td> {item.floor_area}</td>
+                <td> {item.floor_area}.m</td>
 
                 <td> {item?.buildings?.building_name}</td>
                 <td> {item.floor_added_date}</td>

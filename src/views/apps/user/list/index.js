@@ -8,10 +8,11 @@ import Avatar from '@components/avatar'
 import { Card, CardHeader, CardTitle, CardBody, CardText, Row, Col } from 'reactstrap'
 import { getUser } from '../store'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const StatsCard = ({ cols }) => {
   const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
-
+  const {t}= useTranslation()
   useEffect(() => {
     getUsers();
     getAdmins();
@@ -54,31 +55,31 @@ async function getTenants(){
   const data = [
     {
       title: users ,
-      subtitle: 'Total Users',
+      subtitle: t('Total Users'),
       color: 'light-primary',
       icon: <TrendingUp size={24} />
     },
     {
       title: admins,
-      subtitle: 'Total Admins',
+      subtitle: t('Total Admins'),
       color: 'light-info',
       icon: <UserCheck size={24} />
     },
     {
       title: owners,
-      subtitle: 'Total Owners',
+      subtitle: t('Total Owners'),
       color: 'light-danger',
       icon: <Home size={24} />
     },
     {
       title: employees ,
-      subtitle: 'Total Employees',
+      subtitle: t('Total Employees'),
       color: 'light-success',
       icon: <User size={24} />
     },
     {
       title: tenants ,
-      subtitle: 'Total Tenants',
+      subtitle: t('Total Tenants'),
       color: 'light-success',
       icon: <Users size={24} />
     }
@@ -104,7 +105,7 @@ async function getTenants(){
   return (
     <Card className='card-statistics'>
       <CardHeader>
-        <CardTitle tag='h4'>Statistics</CardTitle>
+        <CardTitle tag='h4'>{t('Statistics')}</CardTitle>
       </CardHeader>
       <CardBody className='statistics-body'>
         <Row>{renderData()}</Row>

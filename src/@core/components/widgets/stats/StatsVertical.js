@@ -1,11 +1,13 @@
 // ** Third Party Components
 import PropTypes from 'prop-types'
-import { Nav, NavItem, NavLink } from 'reactstrap'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 // ** Reactstrap Imports
 import { Card, CardBody } from 'reactstrap'
 
-const StatsVertical = ({ icon, color, stats, statTitle, className }) => {
+const StatsVertical = ({ icon, color, stats, statTitle, className, link }) => {
+  const {t}= useTranslation()
   return (
     <Card className='text-center' >
       <CardBody className={className}>
@@ -14,6 +16,7 @@ const StatsVertical = ({ icon, color, stats, statTitle, className }) => {
         </div>
         <h2 className='fw-bolder'>{stats}</h2>
         <p className='card-text line-ellipsis'>{statTitle}</p>
+        <Link to={link}><p> {t('See More')}</p> </Link>
         
       </CardBody>
     </Card>
@@ -29,5 +32,6 @@ StatsVertical.propTypes = {
   color: PropTypes.string.isRequired,
   stats: PropTypes.string.isRequired,
   statTitle: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
 
 }

@@ -16,8 +16,6 @@ import Flatpickr from 'react-flatpickr'
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import { Fragment } from 'react'
 
-
-
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const { t } = useTranslation()
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
@@ -87,7 +85,7 @@ var current=new Date().toISOString();
       <Sidebar
         size='sm'
         open={open}
-        title='Add New Visitor'
+        title={t('Add New Visitor')}
         headerClassName='mb-1'
         contentClassName='pt-0'
         toggleSidebar={toggleSidebar}
@@ -96,12 +94,12 @@ var current=new Date().toISOString();
           <Row>
           <Col sm='12' className='mb-1'>
 
-            <Label className='form-label' for='unit_id'>Select Unit</Label>
+            <Label className='form-label' for='unit_id'>{t('Select Unit')}</Label>
             <select id='unit_id' className='form-control' onChange={(e) => setUnitId(e.target.value)}
             >
 
 
-              <option  >Select Unit</option>
+              <option  >{t('Select Unit')}</option>
               {UnitList.map((item) => {
                 return (<option value={item.unit_id}>{item.unit_name}</option>
                 )
@@ -115,10 +113,10 @@ var current=new Date().toISOString();
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='visit_name'>
-                Visitor Name <span className='text-danger'>*</span>
+                {t('Visitor Name')} <span className='text-danger'>*</span>
               </Label>
               <input id='visit_name' type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setName(e.target.value)}
-                placeholder="User Name" /><br />
+                placeholder={t("Visitor Name")} /><br />
             </Col>
 
           </Row>
@@ -126,19 +124,19 @@ var current=new Date().toISOString();
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='visit_mobile'>
-                Visitor Mobile <span className='text-danger'>*</span>
+                {t('Visitor Mobile')} <span className='text-danger'>*</span>
               </Label>
               <input type='text' id='visit_mobile' onKeyDown={handleEnter} className="form-control" onChange={(e) => setTelephone(e.target.value)}
-                placeholder="Visitor Mobile" />
+                placeholder={t("Visitor Mobile")}/>
             </Col>
           </Row>
           <Row>
               <Col sm='12' className='mb-1'>
               <Label className='form-label' for='sexe'>
-            Sexe <span className='text-danger'>*</span>
+            {t('Sexe')} <span className='text-danger'>*</span>
           </Label>
           <select className='form-control' onChange={(e) => setSexe(e.target.value)}>
-          <option value=""> Select 
+          <option value=""> {t('Select')} 
             </option>
             <option value="m"> Male
             </option>
@@ -154,7 +152,7 @@ var current=new Date().toISOString();
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='visit_inttime'>
-                Visitor Int Time <span className='text-danger'>*</span>
+                {t('Visitor Entry Time')} <span className='text-danger'>*</span>
               </Label>
               <br />
               <Flatpickr
@@ -177,7 +175,7 @@ var current=new Date().toISOString();
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='visit_outtime'>
-                Visitor Out Time <span className='text-danger'>*</span>
+                {t('Visitor Out Time')} <span className='text-danger'>*</span>
               </Label>
               <br />
               <Flatpickr
@@ -201,7 +199,7 @@ var current=new Date().toISOString();
 
             <Col sm='12' className='mb-1'>
               <Label className='form-label' for='visit_issue_date'>
-                Visit Issue Date <span className='text-danger'>*</span>
+                {t('Visit Issue Date')} <span className='text-danger'>*</span>
               </Label>
               <Flatpickr
                 className='form-control'
@@ -214,16 +212,12 @@ var current=new Date().toISOString();
               />
             </Col>
           </Row>
-
-
-
           <br />
-
           <Button onClick={addUser} className='me-1' color='primary'>
-            Submit
+            {t('Add Visitor')}
           </Button>
           <Button type='reset' color='secondary'>
-            Cancel
+            {t('Cancel')}
           </Button>
         </Form>
       </Sidebar >

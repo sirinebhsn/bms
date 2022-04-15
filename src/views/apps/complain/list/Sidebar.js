@@ -37,7 +37,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [compl_description, setComplDescription] = useState("");
   const [building_id, setBuidingId] = useState("");
   const [compl_title, setComplTitle] = useState("");
-  const [compl_date, setComplDate] = useState(new Date().toISOString());
+  const [compl_date, setComplDate] = useState(""); 
   const [compl_phone, setComplPhone] = useState("");
   const [compl_solution, setSolution] = useState("");
   const [compl_job_status, setJobStatus] = useState("");
@@ -170,7 +170,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
       <Sidebar
         size='lg'
         open={open}
-        title='Add New Visitor'
+        title={t('Add New Complain')}
         headerClassName='mb-1'
         contentClassName='pt-0'
         toggleSidebar={toggleSidebar}
@@ -179,10 +179,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Row>
             <Col sm='12' className='mb-1'>
 
-              <Label className='form-label' for='building_id'>Select Building</Label>
+              <Label className='form-label' for='building_id'>{t('Select Building')}</Label>
               <select id='building_id' className='form-control' onChange={(e) => setBuidingId(e.target.value)}
               >
-                <option  >Select Building</option>
+                <option  >{t('Select Building')}</option>
                 {buildingList.map((item) => {
                   return (<option value={item.building_id}>{item.building_name}</option>
                   )
@@ -195,10 +195,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Row>
             <Col sm='12' className='mb-1'>
 
-              <Label className='form-label' for='compl_assigned_to'>Assigned To</Label>
+              <Label className='form-label' for='compl_assigned_to'>{t('Assigned To')}</Label>
               <select id='compl_assigned_to' className='form-control' onChange={(e) => setAssigned(e.target.value)}
               >
-                <option  >Select Employee</option>
+                <option  >{t('Select Employee')}</option>
                 {EmpList.map((item) => {
                   return (<option value={item.user_name}>{item.user_name}</option>
                   )
@@ -210,10 +210,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Row>
             <Col sm='12' className='mb-1'>
 
-              <Label className='form-label' for='compl_complainBy'>Accomplish By</Label>
+              <Label className='form-label' for='compl_complainBy'>{t('Completed By')}</Label>
               <select id='compl_complainBy' className='form-control' onChange={(e) => setComplainBy(e.target.value)}
               >
-                <option  >Select Employee</option>
+                <option>{t('Select Employee')}</option>
                 {EmpList.map((item) => {
                   return (<option value={item.user_name}>{item.user_name}</option>
                   )
@@ -226,19 +226,19 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='compl_name'>
-                Name <span className='text-danger'>*</span>
+                {t('Complainer Name')} <span className='text-danger'>*</span>
               </Label>
               <input id='compl_name' type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setComplName(e.target.value)}
-                placeholder=" Name" /><br />
+                placeholder={t("Complainer Name")} /><br />
             </Col>
 
           </Row>
           <Row>
             <Col sm='12' className='mb-1'>
-              <Label className='form-label' for='compl_job_status'>Select Status</Label>
+              <Label className='form-label' for='compl_job_status'>{t('Select Status')}</Label>
               <select id='compl_job_status' className='form-control' onChange={(e) => setJobStatus(e.target.value)}
               >
-                <option>Select Status</option>
+                <option>{t('Select Status')}</option>
                 <option value="0"> Pending </option>
                 <option value="1"> In Progress </option>
                 <option value="2"> On Hold </option>
@@ -261,10 +261,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='compl_email'>
-                Email <span className='text-danger'>*</span>
+                {t('Email')} <span className='text-danger'>*</span>
               </Label>
               <input id='compl_email' type='email' onKeyDown={handleEnter} className="form-control" onChange={(e) => setComplEmail(e.target.value)}
-                placeholder="Email" /><br />
+                placeholder={t("Email")} /><br />
             </Col>
 
           </Row>
@@ -272,10 +272,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='compl_phone'>
-                Phone <span className='text-danger'>*</span>
+                {t('Phone Number')} <span className='text-danger'>*</span>
               </Label>
               <input type='text' id='compl_phone' onKeyDown={handleEnter} className="form-control" onChange={(e) => setComplPhone(e.target.value)}
-                placeholder="Phone" />
+                placeholder={t("Phone Number")} />
             </Col>
           </Row>
 
@@ -284,14 +284,16 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
             <Col sm='12' className='mb-1'>
               <Label className='form-label' for='compl_date'>
-                Date <span className='text-danger'>*</span>
+                {t('Date Of Complain')} <span className='text-danger'>*</span>
               </Label>
               <Flatpickr
                 className='form-control'
                 value={compl_date}
                 id='compl_date'
                 options={{
-                  dateFormat: 'Y-m-d',
+                  format: "Y-m-d",
+                  altFormat: "Y-m-d",
+                  altInput: true
                 }}
                 onChange={(date) => {
                   setComplDate(date)
@@ -301,14 +303,15 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             </Col>
           </Row>
 
+
           <Row>
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='compl_description'>
-                Description<span className='text-danger'>*</span>
+                {t('Description')}<span className='text-danger'>*</span>
               </Label>
               <textarea type='text' id='compl_desciption' onKeyDown={handleEnter} className="form-control"
-                onChange={(e) => setComplDescription(e.target.value)} placeholder="Designation" />
+                onChange={(e) => setComplDescription(e.target.value)} placeholder={t("Description")} />
             </Col>
 
           </Row>
@@ -316,10 +319,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <Col sm='12' className='mb-1'>
 
               <Label className='form-label' for='compl_solution'>
-                Solution<span className='text-danger'>*</span>
+                {t('Solution')}<span className='text-danger'>*</span>
               </Label>
               <textarea type='text' id='compl_solution' onKeyDown={handleEnter} className="form-control"
-                onChange={(e) => setSolution(e.target.value)} placeholder="Solution" />
+                onChange={(e) => setSolution(e.target.value)} placeholder={t("Solution")}/>
             </Col>
 
           </Row>
@@ -334,13 +337,13 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <input {...getInputProps()} id='compl_pictures' />
             <div className='d-flex align-items-center justify-content-center flex-column'>
               <DownloadCloud size={64} />
-              <h5>Drop Pictures here or click to upload</h5>
+              <h5>{t('Drop Pictures here or click to upload')}</h5>
               <p className='text-secondary'>
-                Drop Pictures here or click{' '}
+                {t('Drop Pictures here or click')}{' '}
                 <a href='/' onClick={e => e.preventDefault()}>
-                  browse
+                  {t('browse')}
                 </a>{' '}
-                thorough your machine
+                {t('through your machine')}
               </p>
             </div>
           </div>
@@ -349,7 +352,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               <ListGroup className='my-2'>{fileList}</ListGroup>
               <div className='d-flex justify-content-end'>
                 <Button className='me-1' color='danger' outline onClick={handleRemoveAllFiles}>
-                  Remove All
+                  {t('Remove All')}
                 </Button>
               </div>
             </Fragment>
@@ -357,10 +360,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
 
           <Button onClick={addComplain} className='me-1' color='primary'>
-            Submit
+            {t('Add Complain')}
           </Button>
           <Button type='reset' color='secondary'>
-            Cancel
+            {('Cancel')}
           </Button>
         </Form>
       </Sidebar >

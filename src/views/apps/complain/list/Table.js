@@ -38,13 +38,14 @@ import { Link } from 'react-router-dom';
 import EditModal from './EditModal';
 import ComplainDetails from './DetailsModal';
 import Swal from 'sweetalert2';
+import { useTranslation } from 'react-i18next';
 
 
 
 // ** Table Header
 const UsersList = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+  const {t}= useTranslation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedComplain, setSelectedComplain] = useState([]);
   const [show, setShow] = useState(false);
@@ -123,21 +124,21 @@ const UsersList = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Complains List</CardTitle>
+          <CardTitle tag='h4'>{t('Complains List')}</CardTitle>
 
           <Col className='mb-1' md='6' sm='12'>
             <InputGroup onChange={(e) => searchComplain(e.target.value)} >
               <Button color='primary' onChange={(e) => searchComplain(e.target.value)}  outline >
                 <Search size={12} />
               </Button>
-              <Input type='text' placeholder='Search here' onChange={(e) => searchComplain(e.target.value)}  />
+              <Input type='text' placeholder={t('Search here')} onChange={(e) => searchComplain(e.target.value)}  />
               <Button color='primary' onChange={(e) => searchComplain(e.target.value)}  outline>
-                Search !
+                {t('Search !')}
               </Button>
             </InputGroup>
           </Col>
           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New Complain
+            {t('Add New Complain')}
           </Button>
 
         </CardHeader>
@@ -145,12 +146,12 @@ const UsersList = () => {
         <Table>
           <thead>
             <tr>
-              <th> Complain Name </th>
-              <th> Complain Email </th>
-              <th> Complain Phone</th>
-              <th> Complain Status </th>
-              <th> Pictures </th>
-              <th> Actions </th>
+              <th> {t('COMPLAINER NAME')} </th>
+              <th> {t('COMPLAINER EMAIL')} </th>
+              <th> {t('COMPLAINER PHONE')}</th>
+              <th> {t('COMPLAIN STATUS')} </th>
+              <th> {('PICTURES')} </th>
+              <th> {t('ACTIONS')}</th>
 
             </tr>
           </thead>
@@ -230,14 +231,14 @@ const UsersList = () => {
         <Modal isOpen={showModal}
         >
           <ModalHeader>
-            <h1>Edit Complain </h1>
+            <h1>{t('Edit Complain')} </h1>
           </ModalHeader>
           <ModalBody>
             <EditModal compl_id={selectedComplain} />
           </ModalBody>
           <ModalFooter>
             <Button variant="danger" onClick={handleClose}>
-              Close
+              {t('Close')}
             </Button>
 
           </ModalFooter>
@@ -248,14 +249,14 @@ const UsersList = () => {
 
       <Modal isOpen={showDetails}  size='lg'>
         <ModalHeader>
-          <h1>Complain Details</h1>
+          <h1>{t('Complain Details')}</h1>
         </ModalHeader>
         <ModalBody>
           <ComplainDetails compl_id={selectedComplain} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleClose}>
-            Close 
+            {t('Close')} 
           </Button>
         </ModalFooter>
       </Modal>

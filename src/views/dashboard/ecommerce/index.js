@@ -26,12 +26,13 @@ import CardTransactions from '../../ui-elements/cards/advance/CardTransactions'
 import Sales3 from '../../ui-elements/cards/analytics/Sales3'
 // ** Styles
 import '@styles/base/pages/dashboard-ecommerce.scss'
+import { useTranslation } from 'react-i18next'
 
 const EcommerceDashboard = () => {
   const { colors } = useContext(ThemeColors)
   const trackBgColor = '#e9ecef'
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+  const { t } = useTranslation()
   useEffect(() => {
     getUsers();
     getAdmins();
@@ -85,51 +86,51 @@ const EcommerceDashboard = () => {
         {/* Stats With Icons */}
         <Col xl='3' md='4' sm='6'>
           <StatsVertical icon={<Home size={24} color='red' />} color='info' stats={floors}
-            statTitle='Total Floor' >
+            statTitle={t('Total Floor')}  link='/floor/listFloors'>
           </StatsVertical>
         </Col>
         <Col xl='3' md='4' sm='6'>
           <StatsVertical icon={<Monitor size={24} />} color='warning' stats="60"
-            statTitle='Total Units' />
+            statTitle={t('Total Units')} link='/units/listUnits'/>
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<User size={24} />} color='danger' stats={users} statTitle='Total Users' >
+          <StatsVertical icon={<User size={24} />} color='danger' stats={users} statTitle={t('Total Users')}link='/user/list' >
 
           </StatsVertical>
 
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Users size={24} />} color='primary' stats={tenants} statTitle='Total Tenant' />
+          <StatsVertical icon={<Users size={24} />} color='primary' stats={tenants} statTitle={t('Total Tenant')}link='/' />
         </Col>
 
         {/* Stats With Icons */}
       </Row>
       <Row>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Users size={24} />} color='success' stats={employees} statTitle='Total Employees' />
+          <StatsVertical icon={<Users size={24} />} color='success' stats={employees} statTitle={t('Total Employees')} link='/employee/list' />
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Users size={24} />} color='danger' stats={admins} statTitle='Total Admins' />
+          <StatsVertical icon={<Users size={24} />} color='danger' stats={admins} statTitle={t('Total Admins')} link='/'/>
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<DollarSign size={24} />} color='success' stats='689' statTitle='Total Rent' />
+          <StatsVertical icon={<DollarSign size={24} />} color='success' stats='689' statTitle={t('Total Rent')} link='/'/>
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Settings size={24} />} color='danger' stats='2.1k' statTitle='Total Maintenance' />
+          <StatsVertical icon={<Settings size={24} />} color='danger' stats='2.1k' statTitle={t('Total Maintenance')} link='/'/>
         </Col>
       </Row>
       <Row>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<Users size={24} />} color='success' stats='689' statTitle='Total Fund' />
+          <StatsVertical icon={<Users size={24} />} color='success' stats='689' statTitle={t('Total Fund')} link='/'/>
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<DollarSign size={24} />} color='danger' stats='2.1k' statTitle='Owner Utility' />
+          <StatsVertical icon={<DollarSign size={24} />} color='danger' stats='2.1k' statTitle={t('Owner Utility')} link='/'/>
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<DollarSign size={24} />} color='success' stats='689' statTitle='Employee Salary' />
+          <StatsVertical icon={<DollarSign size={24} />} color='success' stats='689' statTitle={t('Employee Salary')}link='/' />
         </Col>
         <Col xl='3' md='4' sm='6'>
-          <StatsVertical icon={<AlertCircle size={24} />} color='danger' stats='2.1k' statTitle='Total Complain' />
+          <StatsVertical icon={<AlertCircle size={24} />} color='danger' stats='2.1k' statTitle={t('Total Complain')} link='/complain/list'/>
         </Col>
       </Row>
       <Row>

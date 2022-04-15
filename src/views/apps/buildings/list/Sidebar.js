@@ -106,7 +106,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     <Sidebar
       size='lg'
       open={open}
-      title='Add New Building'
+      title={t('Add New Building')}
       headerClassName='mb-1'
       contentClassName='pt-0'
       toggleSidebar={toggleSidebar}
@@ -115,19 +115,19 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
         <Row>
           <Label className='form-label' for='building_name'>
-            Building name
+            {t('BUILDING NAME')}
           </Label>
 
-          <Input id='building_name' placeholder='Building Name'
+          <Input id='building_name' placeholder={t('BUILDING NAME')}
             onChange={(e) =>
               setName(e.target.value)}
           />
         </Row><br />
         <Row>
           <Label className='form-label' for='building_email'>
-            Building Email
+            {t('EMAIL')}
           </Label>
-          <Input id='building_email' placeholder='Building Email'
+          <Input id='building_email' placeholder={t('EMAIL')}
             onChange={(e) =>
               setEmail(e.target.value)} />
 
@@ -136,10 +136,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
 
           <Label className='form-label' for='building'>
-            Building
+            {t('BUILDING')}
           </Label>
 
-          <Input type='text' id='building' placeholder='Building'
+          <Input type='text' id='building' placeholder={t('BUILDING')}
             onChange={(e) =>
               setBuilding(e.target.value)}
           />
@@ -147,9 +147,9 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         <Row>
 
           <Label className='form-label' for='building_address '>
-            Building Address
+            {t('BUILDING ADDRESS')}
           </Label>
-          <Input id='building_address' placeholder='Building Address'
+          <Input id='building_address' placeholder={t('BUILDING ADDRESS')}
             onChange={(e) =>
               setAddress(e.target.value)} />
 
@@ -157,7 +157,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         <Row>
 
           <Label className='form-label' for='building_created_date'>
-            Building Created Date <span className='text-danger'>*</span>
+            {t('BUILDING CREATED DATE')} <span className='text-danger'>*</span>
           </Label>
           <input type="date" className='form-control' id='building_created_date'
 
@@ -170,7 +170,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         </Row><br />
         <Row>
           <Label className='form-label' for='building_security_guard_mobile'>
-            Security Guard Phone number
+            {t('Security Guard Phone number')}
           </Label>
           <InputGroup className='input-group-merge'>
             <InputGroupText >TN(+216)</InputGroupText>
@@ -180,11 +180,11 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           </InputGroup><br />
 
         </Row>
-
+<br/>
         <Row>
 
           <Label className='form-label' for='building_secrataty_mobile'>
-            Secrataty Phone number
+            {t('Secratary Phone number')}
           </Label>
           <InputGroup className='input-group-merge'>
             <InputGroupText>TN(+216)</InputGroupText>
@@ -193,10 +193,11 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 setSecratatymob(e.target.value)} />
           </InputGroup><br />
         </Row>
+        <br/>
         <Row>
 
           <Label className='form-label' for='building_moderator_mobile'>
-            Moderator Phone number
+            {t('Moderator Phone number')}
           </Label>
           <InputGroup className='input-group-merge'>
             <InputGroupText>TN (+216)</InputGroupText>
@@ -206,9 +207,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           </InputGroup><br />
 
         </Row>
+        <br/>
         <Row>
           <Label className='form-label' for='building_company_phone'>
-            Company Phone number
+            {t('Company Phone number')}
           </Label>
           <InputGroup className='input-group-merge'>
             <InputGroupText>TN (+216)</InputGroupText>
@@ -218,7 +220,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         </Row><br />
         <Row>
           <Label className='form-label' for='building_make_year '>
-            Building Creation Year
+            {t('Building Creation Year')}
           </Label>
           <Input id='building_make_year' defaultValue={new Date().getFullYear()}
             onChange={(e) =>
@@ -227,23 +229,23 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         </Row><br />
         <Row>
           <Label className='form-label' for='building_status'>
-            Building Status<span className='text-danger'>*</span>
+            {t('Building Status')}<span className='text-danger'>*</span>
           </Label>
           <select id='building_status' className='form-control' onChange={(e) => setStatus(e.target.value)}
           >
-            <option>Select Status</option>
-            <option value="1"> Active </option>
-            <option value="2"> Inactive </option>
+            <option>{t('Select Status')}</option>
+            <option value="1"> {t('Active')} </option>
+            <option value="2"> {t('Inactive')} </option>
 
           </select>
 
         </Row><br />
         <Row>
           <Label className='form-label' for='building_company_address'>
-            Building Company Address
+            {t('Building Company Address')}
           </Label>
 
-          <Input id='building_company_address' placeholder='Building Company Address'
+          <Input id='building_company_address' placeholder={t('Building Company Address')}
             onChange={(e) =>
               setCompanyaddress(e.target.value)}
           />
@@ -251,10 +253,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
         <Row>
           <Label className='form-label' for='building_company_name'>
-            Company Name
+            {t('Building Company Name')}
           </Label>
 
-          <Input id='building_company_name' placeholder='Building Company Name'
+          <Input id='building_company_name' placeholder={t('Building Company Name')}
             onChange={(e) =>
               setCompanyname(e.target.value)}
           />
@@ -262,19 +264,19 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         </Row> <br />
         <Row>
           <Label className='form-label' for='building_rule'>
-            Building Rule
+            {t('Building Rule')}
           </Label>
 
           <Input
             type='textarea'
             name='building_rule'
             id='building_rule'
-            lder='Make Rules here'
+            lder={t('Make Rules here')}
             style={{ minHeight: '100px' }}
             onChange={(e) =>
               setRule(e.target.value)}
           />
-        </Row><br/>
+        </Row><br />
 
         <div className='d-flex'>
           <div className='d-flex align-items-end mt-75 ms-1'>
@@ -285,17 +287,17 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               <br />
               <input id="building_image" onKeyDown={handleEnter} type="file" onChange={onChangePicture} />
 
-              <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+              <p className='mb-0'>{t('Allowed JPG, GIF or PNG. Max size of 800kB')}</p>
             </div>
           </div>
         </div>
         <br />
 
         <Button onClick={addBuilding} className='me-1' color='primary'>
-          Submit
+          {t('Add Building')}
         </Button>
         <Button type='reset' color='secondary'>
-          Cancel
+          {t('Cancel')}
         </Button>
       </Form>
     </Sidebar >

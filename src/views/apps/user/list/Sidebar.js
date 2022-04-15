@@ -43,7 +43,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [user_member_type, setMembertype] = useState("");
   const [user_ending_date, setEndingDate] = useState(new Date());
   const [user_date_creation, setCreationDate] = useState(new Date());
-
   const current = new Date();
   //const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
 
@@ -121,7 +120,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     <Sidebar
       size='lg'
       open={open}
-      title='Add New User'
+      title= {t('Add New User')}
       headerClassName='mb-1'
       contentClassName='pt-0'
       toggleSidebar={toggleSidebar}
@@ -130,26 +129,26 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
         <Row>
           <Col sm='6' className='mb-1'>
-            <Label className='form-label' for='user_type'>Select User</Label>
+            <Label className='form-label' for='user_type'>{t('Select User')}</Label>
             <select id='user_type' className='form-control' onChange={(e) => setType(e.target.value)}
             >
-              <option>Select User</option>
-              <option value="a"> Admin </option>
-              <option value="o"> Owner </option>
-              <option value="e"> Employee </option>
-              <option value="t"> Tenant </option>
+              <option>{t('Select User')}</option>
+              <option value="a"> {t('Admin')} </option>
+              <option value="o"> {t('Owner')} </option>
+              <option value="e"> {t('Employee')} </option>
+              <option value="t"> {t('Tenant')} </option>
             </select>
           </Col>
           {user_type != 'a' &&
             <>
               <Col sm='6' className='mb-1'>
 
-                <Label className='form-label' for='building_id'>Select Building</Label>
+                <Label className='form-label' for='building_id'>{t('Select Building')}</Label>
                 <select disabled id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                 >
 
 
-                  <option  >Select BUILDING</option>
+                  <option>{t('Select BUILDING')}</option>
                   {buildingList.map((item) => {
                     return (<option value={item.building_id}>{item.building_name}</option>
                     )
@@ -164,10 +163,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <>
               <Col sm='6' className='mb-1'>
 
-                <Label className='form-label' for='building_id'>Select Building</Label>
+                <Label className='form-label' for='building_id'>{t('Select Building')}</Label>
                 <select id='building_id' className='form-control' onChange={(e) => setBuildingid(e.target.value)}
                 >
-                  <option  >Select BUILDING</option>
+                  <option>{t('Select BUILDING')}</option>
                   {buildingList.map((item) => {
                     return (<option value={item.building_id}>{item.building_name}</option>
                     )
@@ -184,18 +183,18 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='user_name'>
-              User Name <span className='text-danger'>*</span>
+              {t('User Name')} <span className='text-danger'>*</span>
             </Label>
             <input id='user_name' type='text' onKeyDown={handleEnter} className="form-control" onChange={(e) => setName(e.target.value)}
-              placeholder="User Name" /><br />
+              placeholder={t("User Name")} /><br />
           </Col>
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='email'>
-              Email <span className='text-danger'>*</span>
+              {t('Email')} <span className='text-danger'>*</span>
             </Label>
             <input type='email' id='email' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setEmail(e.target.value)} placeholder="Email" /><br />
+              onChange={(e) => setEmail(e.target.value)} placeholder={t("Email")} /><br />
 
           </Col>
         </Row>
@@ -203,18 +202,18 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='password'>
-              User Password <span className='text-danger'>*</span>
+              {t('User Password')} <span className='text-danger'>*</span>
             </Label>
             <input type='password' id='password' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPassword(e.target.value)}
-              placeholder="User Password" /><br />
+              placeholder={t("User Password")} /><br />
           </Col>
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='user_nid'>
-              User Nid <span className='text-danger'>*</span>
+              {t('User Nid')} <span className='text-danger'>*</span>
             </Label>
             <input type='text' id='user_nid' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setNid(e.target.value)} placeholder="Type user NID here" /><br />
+              onChange={(e) => setNid(e.target.value)} placeholder={t("Type user NID here")} /><br />
 
           </Col>
         </Row>
@@ -223,18 +222,18 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='user_pre_address'>
-              Present Address <span className='text-danger'>*</span>
+              {t('Present Address')} <span className='text-danger'>*</span>
             </Label>
             <input type='text' id='user_pre_address' onKeyDown={handleEnter} className="form-control" onChange={(e) => setPresentAdress(e.target.value)}
-              placeholder="Present Address" /><br />
+              placeholder={t("Present Address")} /><br />
           </Col>
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='user_per_address'>
-              Permenant Address <span className='text-danger'>*</span>
+              {t('Permenant Address')} <span className='text-danger'>*</span>
             </Label>
             <input type='text' id='user_per_address' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setPermenantAdress(e.target.value)} placeholder="Permenant Address" /><br />
+              onChange={(e) => setPermenantAdress(e.target.value)} placeholder={t("Permenant Address")} /><br />
 
           </Col>
         </Row>
@@ -245,7 +244,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
         <Row>
           <Col sm='12' className='mb-1'>
             <Label className='form-label' for='user_date_creation'>
-              User Starting Date <span className='text-danger'>*</span>
+              {t('User Starting Date')} <span className='text-danger'>*</span>
             </Label>
             <input type="date" className='form-control' id='user_date_creation'
 
@@ -262,7 +261,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
           <Col sm='12' className='mb-1'>
             <Label className='form-label' for='user_ending_date'>
-              User Ending Date <span className='text-danger'>*</span>
+              {t('User Ending Date')} <span className='text-danger'>*</span>
             </Label>
             <input type='date' className='form-control'
               id='user_ending_date'
@@ -276,38 +275,38 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
         <Row>
           <Label className='form-label' for='user_tel'>
-            User Phone Number <span className='text-danger'>*</span>
+            {t('Phone Number')} <span className='text-danger'>*</span>
           </Label>
           <PhoneInput
             id='user_tel'
-            onKeyDown={handleEnter} placeholder="enter phone number"
+            onKeyDown={handleEnter} placeholder={t("enter phone number")}
             value={user_tel} onChange={setTelephone} />
         </Row> <br />
         <Row>
           <Col sm='6' className='mb-1'>
             <Label className='form-label' for='user_status'>
-              User Status<span className='text-danger'>*</span>
+              {t('User Status')}<span className='text-danger'>*</span>
             </Label>
             <select id='user_status' className='form-control' onChange={(e) => setStatus(e.target.value)}
             >
-              <option>Select Status</option>
-              <option value="1"> Active </option>
-              <option value="2"> Leave </option>
+              <option>{t('Select Status')}</option>
+              <option value="1"> {t('Active')} </option>
+              <option value="2"> {t('Leave')} </option>
 
             </select>
 
           </Col>
           <Col>
             <Label className='form-label' for='user_currlang'>
-              Currant Language <span className='text-danger'>*</span>
+              {t('Current Language')} <span className='text-danger'>*</span>
             </Label>
             <select id='user_curr_lang' className='form-control' onChange={(e) => setLang(e.target.value)}
             >
-              <option>Select Language</option>
-              <option value="English"> English </option>
-              <option value="French"> French </option>
-              <option value="German"> German </option>
-              <option value="Arabic"> Arabic </option>
+              <option>{t('Select Language')}</option>
+              <option value="English"> {t('English')} </option>
+              <option value="French"> {t('French')} </option>
+              <option value="German"> {t('German')} </option>
+              <option value="Arabic"> {('Arabic')} </option>
 
 
 
@@ -321,10 +320,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Col>
 
             <Label className='form-label' for='user_designation'>
-              User Designation<span className='text-danger'>*</span>
+              {t('User Designation')}<span className='text-danger'>*</span>
             </Label>
             <textarea type='text' id='user_designation' onKeyDown={handleEnter} className="form-control"
-              onChange={(e) => setDesignation(e.target.value)} placeholder="Designation" /><br />
+              onChange={(e) => setDesignation(e.target.value)} placeholder={t("Designation")} /><br />
 
 
           </Col>
@@ -335,10 +334,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               <Col sm='6' className='mb-1'>
 
                 <Label className='form-label' for='user_salary'>
-                  User salary <span className='text-danger'>*</span>
+                  {t('Employee salary')} <span className='text-danger'>*</span>
                 </Label>
                 <input disabled type='number' id='user_salary' onKeyDown={handleEnter} className="form-control"
-                  onChange={(e) => setSalary(e.target.value)} placeholder="Emlployee salary" /><br />
+                  onChange={(e) => setSalary(e.target.value)} placeholder={t("Employee salary")} /><br />
 
               </Col>
             </>
@@ -347,10 +346,10 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               <Col sm='6' className='mb-1'>
 
                 <Label className='form-label' for='user_salary'>
-                  User salary <span className='text-danger'>*</span>
+                 {t('Employee salary')} <span className='text-danger'>*</span>
                 </Label>
                 <input type='number' id='user_salary' onKeyDown={handleEnter} className="form-control"
-                  onChange={(e) => setSalary(e.target.value)} placeholder="Emlployee salary" /><br />
+                  onChange={(e) => setSalary(e.target.value)} placeholder= {t('Employee salary')} /><br />
 
               </Col>
             </>
@@ -358,15 +357,15 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Col sm='6' className='mb-1'>
 
             <Label className='form-label' for='user_member_type'>
-              User Member Type <span className='text-danger'>*</span>
+              {t('User Member Type')} <span className='text-danger'>*</span>
             </Label>
             <select id='user_member_type' className='form-control' onChange={(e) => setMembertype(e.target.value)}
             >
-              <option>Select User</option>
-              <option value="admin"> Admin </option>
-              <option value="worker"> Worker </option>
-              <option value="security guard"> Security guard </option>
-              <option value="guard"> Guard </option>
+              <option>{t('Select User')}</option>
+              <option value="admin"> {t('Admin')} </option>
+              <option value="worker"> {t('Worker')} </option>
+              <option value="security guard">{('Security guard')} </option>
+              <option value="guard"> {t('Guard')} </option>
             </select>
 
           </Col>
@@ -381,17 +380,17 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
               <br />
               <input id="user_image" onKeyDown={handleEnter} type="file" onChange={onChangePicture} />
 
-              <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+              <p className='mb-0'>{t('Allowed JPG, GIF or PNG. Max size of 800kB')}</p>
             </div>
           </div>
         </div>
         <br />
 
         <Button onClick={addUser} className='me-1' color='primary'>
-          Submit
+            {t('Add User')}
         </Button>
         <Button type='reset' color='secondary'>
-          Cancel
+          {t('Cancel')}
         </Button>
       </Form>
     </Sidebar >

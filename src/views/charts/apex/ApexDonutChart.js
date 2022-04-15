@@ -1,6 +1,7 @@
 // ** Third Party Components
 import { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts'
+import { useTranslation } from 'react-i18next'
 
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, CardSubtitle } from 'reactstrap'
@@ -14,7 +15,7 @@ const ApexRadiarChart = () => {
     series5: '#FFA1A1'
   }
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+  const {t}= useTranslation()
   useEffect(() => {
     getAdmins();
     getTenants();
@@ -22,7 +23,7 @@ const ApexRadiarChart = () => {
     geteEmp()
   }, [])
   const [a, setA] = useState([]);
-  const [t, setTenant] = useState([]);
+  const [ten, setTenant] = useState([]);
   const [emp, setEmp] = useState([]);
   const [o, setOwners] = useState([]);
 
@@ -54,7 +55,7 @@ const ApexRadiarChart = () => {
       show: true,
       position: 'bottom'
     },
-    labels: ['Tenants', 'Owners', 'Employees', 'Admins'],
+    labels: [t('Tenants'), t('Owners'), t('Employees'), t('Admins')],
 
     colors: [donutColors.series1, donutColors.series5, donutColors.series3, donutColors.series2],
     dataLabels: {
@@ -82,7 +83,7 @@ const ApexRadiarChart = () => {
             total: {
               show: true,
               fontSize: '1.5rem',
-              label: 'Users',
+              label: t("Users"),
               formatter() {
                 return '100%'
               }
@@ -133,17 +134,17 @@ const ApexRadiarChart = () => {
   }
 
   // ** Chart Series
-  const series = [t, o, emp, a]
+  const series = [ten, o, emp, a]
 
   return (
     <Card>
       <CardHeader>
         <div>
           <CardTitle className='mb-75' tag='h4'>
-            Users Ratio
+            {t('Users Ratio')}
           </CardTitle>
           <CardSubtitle className='text-muted'>
-            according to their roles</CardSubtitle>
+           {t('according to their roles')}</CardSubtitle>
         </div>
       </CardHeader>
       <CardBody>

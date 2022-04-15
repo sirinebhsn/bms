@@ -36,6 +36,7 @@ import Swal from 'sweetalert2'
 import LoginForm from './DetailsModal'
 import UserInfoEdit from './UserInfoEdit'
 import EditModal from './EditModal'
+import { useTranslation } from 'react-i18next';
 
 // ** Table Header
 const UsersList = () => {
@@ -44,7 +45,7 @@ const UsersList = () => {
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShow(false);
   const handleCloseEditModal = () => setShowModal(false);
-
+  const {t}= useTranslation()
   async function handleShow(building_id) {
     setSelectedUser(building_id)
     setShow(true)
@@ -126,20 +127,20 @@ const UsersList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Buildings List</CardTitle>
+          <CardTitle tag='h4'>{t('Buildings List')}</CardTitle>
           <Col className='mb-1' md='6' sm='12'>
             <InputGroup onChange={(e) => search(e.target.value)}>
               <Button color='primary' onClick={search} outline>
                 <Search size={12} />
               </Button>
-              <Input type='text' onChange={(e) => search(e.target.value)} placeholder='Search here' />
+              <Input type='text' onChange={(e) => search(e.target.value)} placeholder={t('Search here')} />
               <Button color='primary' outline>
-                Search !
+                {t('Search !')}
               </Button>
             </InputGroup>
           </Col>
           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New Building
+            {t('Add New Building')}
           </Button>
           
         </CardHeader>
@@ -147,12 +148,12 @@ const UsersList = () => {
         <Table>
           <thead>
             <tr>
-              <th> Picture </th>
-              <th> Building Name </th>
-              <th>Building Email</th>
-              <th> Building Phone Number </th>
-              <th>  Building Address </th>
-              <th> Actions </th>
+              <th> {t('PICTURE')} </th>
+              <th> {t('BUILDING NAME')} </th>
+              <th> {t('EMAIL')}</th>
+              <th> {t('BUILDING PHONE NUMBER')} </th>
+              <th>  {t('BUILDING ADDRESS')} </th>
+              <th> {t('ACTIONS')} </th>
 
             </tr>
           </thead>
@@ -192,27 +193,27 @@ const UsersList = () => {
 
       <Modal isOpen={show}>
         <ModalHeader>
-          <h1>User Details</h1>
+          <h1>{t('Building Details')}</h1>
         </ModalHeader>
         <ModalBody>
           <LoginForm user_id={selectedBuilding} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleClose}>
-            Close 
+            {t('Close')} 
           </Button>
         </ModalFooter>
       </Modal>
       <Modal isOpen={showModal}>
         <ModalHeader>
-          <h1>Edit User </h1>
+          <h1>{t('Edit Building')} </h1>
         </ModalHeader>
         <ModalBody>
           <EditModal user_id={selectedBuilding} />
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleCloseEditModal}>
-            Close 
+            {t('Close')} 
           </Button>
         </ModalFooter>
       </Modal>

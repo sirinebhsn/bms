@@ -13,10 +13,6 @@ import {
   CardHeader,
   Table,
   Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Col,
   InputGroup,
   Input
@@ -37,12 +33,13 @@ import LoginForm from './DetailsModal'
 import UserInfoEdit from './UserInfoEdit'
 import EditModal from './EditModal'
 import ReactPaginate from 'react-paginate';
+import { useTranslation } from 'react-i18next';
 
 
 // ** Table Header
 const UsersList = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+  const{t}= useTranslation()
   const [selectedUser, setSelectedUser] = useState();
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -117,21 +114,21 @@ const UsersList = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Visitors List</CardTitle>
+          <CardTitle tag='h4'>{t('Visitors List')}</CardTitle>
 
           <Col className='mb-1' md='6' sm='12'>
             <InputGroup onChange={(e) => searchVisitor(e.target.value)}>
               <Button color='primary' onClick={searchVisitor} outline>
                 <Search size={12} />
               </Button>
-              <Input type='text' onChange={(e) => searchVisitor(e.target.value)} placeholder='Search here' />
+              <Input type='text' onChange={(e) => searchVisitor(e.target.value)} placeholder={t('Search here')} />
               <Button color='primary' outline>
-                Search !
+                {t('Search !')}
               </Button>
             </InputGroup>
           </Col>
           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New Visitor
+            {t('Add New Visitor')}
           </Button>
 
         </CardHeader>
@@ -139,12 +136,12 @@ const UsersList = () => {
         <Table>
           <thead>
             <tr>
-              <th> Visitor Name </th>
-              <th> Visitor Mobile </th>
-              <th> Issue Date</th>
-              <th> Int Time </th>
-              <th>  Out Time </th>
-              <th> Actions </th>
+              <th> {t('VISITOR NAME')} </th>
+              <th> {('VISITOR MOBILE')} </th>
+              <th> {t('ISSUE DATE')}</th>
+              <th> {t('Entry Time')} </th>
+              <th>  {t('OUT TIME')}</th>
+              <th> {t('ACTIONS')} </th>
 
             </tr>
           </thead>

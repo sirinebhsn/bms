@@ -1,12 +1,14 @@
 // ** Third Party Components
 import Chart from 'react-apexcharts'
 import { Settings } from 'react-feather'
+import { useTranslation } from 'react-i18next'
 
 // ** Reactstrap Imports
 import { Card, CardHeader, CardTitle, CardBody, CardText } from 'reactstrap'
 import { BarChart } from 'recharts'
 
 const Sales3 = props => {
+    const{t}= useTranslation()
     const options = {
         chart: {
             toolbar: { show: false },
@@ -68,7 +70,7 @@ const Sales3 = props => {
             axisTicks: {
                 show: false
             },
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            categories: [t('Jan'), t('Feb'), t('Mar'), t('Apr'), t('May'), t('Jun'), t('July'), t('Aug'), t('Sep'), t('Oct'), t('Nov'), t('Dec')],
             axisBorder: {
                 show: false
             },
@@ -93,7 +95,7 @@ const Sales3 = props => {
     },
         series = [
             {
-                name: '  Monthly Deposit Bill Graph For Year 2022',
+                name: t('Monthly Deposit Bill Graph For Year 2022'),
                 data: [140, 180, 150, 205, 160, 295, 125, 255, 205, 305, 240, 295]
             }
         ]
@@ -102,7 +104,7 @@ const Sales3 = props => {
             <CardHeader className='align-items-start'>
                 <div>
                     <CardTitle className='mb-25' tag='h4'>
-                        Monthly Tenant Rent Graph For Year 2022
+                        {t('Monthly Tenant Rent Graph For Year 2022')}
 
                     </CardTitle>
                 </div>
