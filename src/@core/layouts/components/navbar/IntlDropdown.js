@@ -5,7 +5,28 @@ import ReactCountryFlag from 'react-country-flag'
 // ** Reactstrap Imports
 import { UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap'
 
-const IntlDropdown = () => {
+const IntlDropdown = (props) => {
+  const {
+    isRtl,
+    setIsRtl,
+    isHidden,
+    setLayout,
+    navbarType,
+    footerType,
+    transition,
+    navbarColor,
+    setIsHidden,
+    contentWidth,
+    menuCollapsed,
+    setLastLayout,
+    setTransition,
+    setNavbarType,
+    setFooterType,
+    setNavbarColor,
+    setContentWidth,
+    setMenuCollapsed
+
+  }=props
   // ** Hooks
   const { i18n } = useTranslation()
   const{t}= useTranslation()
@@ -22,6 +43,9 @@ const IntlDropdown = () => {
   const handleLangUpdate = (e, lang) => {
     e.preventDefault()
     i18n.changeLanguage(lang)
+    if(lang=='ly'){
+      setIsRtl==true
+    }
   }
 
   return (
@@ -49,11 +73,11 @@ const IntlDropdown = () => {
         </DropdownItem>
         <DropdownItem href='/' tag='a' onClick={e => handleLangUpdate(e, 'pt')}>
           <ReactCountryFlag className='country-flag' countryCode='pt' svg />
-          <span className='ms-1'>Portuguese</span>
+          <span className='ms-1'>{t('Portuguese')}</span>
         </DropdownItem>
-        <DropdownItem  id='countryCode' href='/' tag='a' onClick={e => handleLangUpdate(e, 'ly')} >
+        <DropdownItem  id='countryCode' href='/' tag='a' onClick={e => handleLangUpdate(e, 'ly')} name='RTL' checked={isRtl} onChange={() => setIsRtl(true)}>
           <ReactCountryFlag className='country-flag' countryCode='ly' svg />
-          <span className='ms-1'>Arabic</span>
+          <span className='ms-1'>{t('Arabic')}</span>
 
         </DropdownItem>
       </DropdownMenu>

@@ -111,16 +111,16 @@ const UserProjectsList = () => {
         <CardBody className='py-2 my-25'>
           <Form className='mt-2 pt-50'>
             <Row>
-
+       
               <Col sm='6' className='mb-1'>
                 <DropdownTreeSelect style={{width:'400'}} data={unitList}
-                onAction={() => handleShow(unit_id={selectedUnit})}
-                onChange={onChange}  mode='radioSelect' 
+                onChange={onChange}      
+              mode='radioSelect' 
                  />
-              </Col>
-            </Row>
+                 </Col>
 
-
+                 
+          </Row>
             <Row>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' >Select Owner</Label>

@@ -80,7 +80,7 @@ const Login = () => {
 
     tableValues:
     {
-      email: 'start-now@start-now.fr',
+      email: 'start-now@start-now.tn',
       password: 'Syrine004#*'
     }
 
