@@ -6,27 +6,35 @@ import { handleRTL } from '@store/layout'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const useRTL = () => {
+
   // ** Store Vars
   const dispatch = useDispatch()
   const isRtl = useSelector(state => state.layout.isRTL)
 
   // ** Return a wrapped version of useState's setter function
+  const item = localStorage.getItem('i18nextLng')
+
   const setValue = value => {
     dispatch(handleRTL(value))
   }
-   const item=window.localStorage.getItem('i18nextLng')
+
+
+
 
   useEffect(() => {
     // ** Get HTML Tag
-    const element = document.getElementsByTagName('html')[0]
 
+    const element = document.getElementsByTagName('html')[0]
     // ** If isRTL then add attr dir='rtl' with HTML else attr dir='ltr'
-    if (item=='ly') {
+    if (isRtl && item=='ly') {
+        //window.location.reload()
       element.setAttribute('dir', 'rtl')
-    } else {
+ 
+
+    } else if(item !='ly') {
       element.setAttribute('dir', 'ltr')
     }
-  }, [isRtl])
+  }, [isRtl,item])
 
-  return [isRtl, setValue]
+  return [isRtl , setValue,item]
 }

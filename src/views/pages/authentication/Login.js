@@ -1,40 +1,22 @@
 // ** React Imports
-import { useContext, Fragment, useState, useEffect } from 'react'
+import { Fragment, useState} from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 // ** Custom Hooks
 import { useSkin } from '@hooks/useSkin'
-import useJwt from '@src/auth/jwt/useJwt'
-import { signin } from './userActions/userActions';
+
 
 // ** Third Party Components
-import { useDispatch, useSelector } from 'react-redux'
 import { toast, Slide } from 'react-toastify'
-import { useForm, Controller, set } from 'react-hook-form'
-import { Facebook, Twitter, Mail, GitHub, HelpCircle, Coffee } from 'react-feather'
+import { Coffee } from 'react-feather'
 
-// ** Actions
-import { handleLogin } from '@store/authentication'
-
-// ** Context
-import { AbilityContext } from '@src/utility/context/Can'
-
-// ** Custom Components
-import Avatar from '@components/avatar'
-import InputPasswordToggle from '@components/input-password-toggle'
-
-// ** Utils
-import { getHomeRouteForLoggedInUser } from '@utils'
 
 // ** Reactstrap Imports
-import { Row, Col, Form, Input, Label, Alert, Button, CardText, CardTitle, UncontrolledTooltip, Table, Card, CardHeader, Container } from 'reactstrap'
+import { Row, Col, Form, Input, Label, Button, CardText, CardTitle, Table,Container } from 'reactstrap'
 
 // ** Styles
 import '@styles/react/pages/page-authentication.scss'
-import Swal from 'sweetalert2'
 import axios from 'axios'
-import { useTranslation } from 'react-i18next';
-import { Tab } from 'bootstrap';
 
 const ToastContent = ({ user_name, user_type }) => (
   <Fragment>
@@ -209,7 +191,7 @@ const Login = () => {
             </Form>
             <br />
             <br />
-            <Container fluid="lg">
+            <Container >
               <Table hover bordered responsive >
                 <thead>
                   <tr>
@@ -236,10 +218,9 @@ const Login = () => {
                 </tbody>
               </Table>
             </Container>
-
+            </Col>
           </Col>
 
-        </Col>
 
       </Row>
 

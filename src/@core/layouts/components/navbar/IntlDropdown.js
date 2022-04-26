@@ -5,28 +5,7 @@ import ReactCountryFlag from 'react-country-flag'
 // ** Reactstrap Imports
 import { UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle } from 'reactstrap'
 
-const IntlDropdown = (props) => {
-  const {
-    isRtl,
-    setIsRtl,
-    isHidden,
-    setLayout,
-    navbarType,
-    footerType,
-    transition,
-    navbarColor,
-    setIsHidden,
-    contentWidth,
-    menuCollapsed,
-    setLastLayout,
-    setTransition,
-    setNavbarType,
-    setFooterType,
-    setNavbarColor,
-    setContentWidth,
-    setMenuCollapsed
-
-  }=props
+const IntlDropdown = () => {
   // ** Hooks
   const { i18n } = useTranslation()
   const{t}= useTranslation()
@@ -43,9 +22,7 @@ const IntlDropdown = (props) => {
   const handleLangUpdate = (e, lang) => {
     e.preventDefault()
     i18n.changeLanguage(lang)
-    if(lang=='ly'){
-      setIsRtl==true
-    }
+   localStorage.setItem('i18nextLng',lang)
   }
 
   return (
@@ -54,7 +31,8 @@ const IntlDropdown = (props) => {
         <ReactCountryFlag
           svg
           className='country-flag flag-icon'
-          countryCode={i18n.language === 'en' ? 'us' : i18n.language}
+          countryCode={i18n.language === 'en' ? 'us' : i18n.language }
+
         />
         <span className='selected-language'>{langObj[i18n.language]}</span>
       </DropdownToggle>
@@ -75,8 +53,8 @@ const IntlDropdown = (props) => {
           <ReactCountryFlag className='country-flag' countryCode='pt' svg />
           <span className='ms-1'>{t('Portuguese')}</span>
         </DropdownItem>
-        <DropdownItem  id='countryCode' href='/' tag='a' onClick={e => handleLangUpdate(e, 'ly')} name='RTL' checked={isRtl} onChange={() => setIsRtl(true)}>
-          <ReactCountryFlag className='country-flag' countryCode='ly' svg />
+        <DropdownItem  id='countryCode' href='/' tag='a' onClick={e => handleLangUpdate(e, 'ly')} >
+          <ReactCountryFlag className='country-flag' countryCode='LY' svg />
           <span className='ms-1'>{t('Arabic')}</span>
 
         </DropdownItem>

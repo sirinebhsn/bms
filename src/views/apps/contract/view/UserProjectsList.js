@@ -11,7 +11,6 @@ import 'react-dropdown-tree-select/dist/styles.css'
 import "../list/style.css"
 import axios from 'axios'
 import { useTranslation } from 'react-i18next'
-import "./index.css";
 
 const assignObjectPaths = (obj, stack) => {
   Object.keys(obj).forEach(k => {
@@ -113,7 +112,7 @@ const UserProjectsList = () => {
             <Row>
        
               <Col sm='6' className='mb-1'>
-                <DropdownTreeSelect style={{width:'400'}} data={unitList}
+                <DropdownTreeSelect data={unitList}
                 onChange={onChange}      
               mode='radioSelect' 
                  />

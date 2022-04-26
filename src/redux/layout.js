@@ -11,9 +11,10 @@ const initialMenuCollapsed = () => {
 }
 
 const initialDirection = () => {
-  const item = window.localStorage.getItem('direction')
-  //** Parse stored json or if none return initialValue
+  const item = window.localStorage.getItem('direction') 
+   //** Parse stored json or if none return initialValue
   return item ? JSON.parse(item) : themeConfig.layout.isRTL
+
 }
 
 const initialSkin = () => {
@@ -41,6 +42,9 @@ export const layoutSlice = createSlice({
     handleRTL: (state, action) => {
       state.isRTL = action.payload
       window.localStorage.setItem('direction', JSON.stringify(action.payload))
+      window.localStorage.setItem('i18nextLng', JSON.stringify(action.payload))
+
+
     },
     handleSkin: (state, action) => {
       state.skin = action.payload
@@ -73,7 +77,6 @@ export const layoutSlice = createSlice({
     },
     handleRouterTransition: (state, action) => {
       state.routerTransition = action.payload
-
     }
   }
 })
