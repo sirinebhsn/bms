@@ -164,8 +164,6 @@ const NotificationDropdown = () => {
         {data.map((item, index) => {
           return (
             <a key={index} className='d-flex' href='/' onClick={e => e.preventDefault()}>
-
-
               <Fragment>
                 <div className='me-1'>
 
@@ -207,11 +205,11 @@ const NotificationDropdown = () => {
               <Fragment>
                 <div className='me-1'>
 
-                  <Avatar
+                  <Avatar style={{Height: 32, Width: 32}}
                     img={item?.users?.user_image}
                   />
                 </div>
-                <div className='me-1'>
+                <div className='list-item-body flex-grow-1'>
                   <span onClick={()=>getStatusById(item.status_id)}>
                   <span onClick={()=>getComplain(item.compl_id)}>
                   {item?.users?.user_name}

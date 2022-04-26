@@ -15,7 +15,10 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  InputGroup,
+  Input,
+  Col
 
 } from 'reactstrap'
 // ** React Imports
@@ -27,13 +30,14 @@ import '@styles/react/pages/modal-create-app.scss'
 // ** Styles
 import '@styles/react/libs/react-select/_react-select.scss'
 import '@styles/react/libs/tables/react-dataTable-component.scss'
-import { Edit, Eye, Lock, Mail, Phone, Trash, User } from 'react-feather'
+import { Edit, Eye, Lock, Mail, Phone, Search, Trash, User } from 'react-feather'
+import { useTranslation } from 'react-i18next'
 
 // ** Table Header
 const UsersList = () => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
+  const{t}= useTranslation()
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
   const [data, setData] = useState([]);
@@ -50,13 +54,20 @@ const UsersList = () => {
     <Fragment>
       <Card>
         <CardHeader>
-          <CardTitle tag='h4'>Employees List</CardTitle>
-          <div className="col-sm-3">
-            <input type="text"className="form-control" placeholder="Search Owner" />
-
-          </div>
+          <CardTitle tag='h4'>{t('Employees List')}</CardTitle>
+          <Col className='mb-1' md='6' sm='12'>
+            <InputGroup>
+              <Button color='primary'  outline>
+                <Search size={12} />
+              </Button>
+              <Input type='text' placeholder={t('Search here')} />
+              <Button color='primary' outline>
+                {t('Search !')}
+              </Button>
+            </InputGroup>
+          </Col>
           <Button className='add-new-user' color='primary' onClick={toggleSidebar}>
-            Add New Employee
+            {t('Add New Employee')}
           </Button>
           
         </CardHeader>
@@ -64,12 +75,12 @@ const UsersList = () => {
         <Table>
           <thead>
             <tr>
-              <th> Picture </th>
-              <th> Name </th>
-              <th> Email</th>
-              <th> Password </th>
-              <th>  Phone Number </th>
-              <th> Actions </th>
+              <th> {t('PICTURE')} </th>
+              <th> {t('NAME')} </th>
+              <th> {t('EMAIL')}</th>
+              <th> {t('PASSWORD')} </th>
+              <th>  {t('PHONE NUMBER')} </th>
+              <th> {t('ACTIONS')} </th>
 
             </tr>
           </thead>
@@ -105,11 +116,8 @@ const UsersList = () => {
 
         </Table>
       </Card>
-
- 
-    
+  
      <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
-
     </Fragment>
 
   )

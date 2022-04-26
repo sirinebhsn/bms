@@ -15,8 +15,10 @@ import { User, UserPlus, UserCheck, UserX, Users } from 'react-feather'
 // ** Styles
 import '@styles/react/apps/app-users.scss'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const UsersList = () => {
+  const{t}=useTranslation()
 
  
   return (
@@ -25,7 +27,7 @@ const UsersList = () => {
         <Col lg='6' sm='6'>
           <StatsHorizontal
             color='primary'
-            statTitle='Total Owners'
+            statTitle={t('Total Employees')}
             icon={<Users size={20} />}
             renderStats={<h3 className='fw-bolder mb-75'></h3>}
           />
@@ -33,7 +35,7 @@ const UsersList = () => {
         <Col lg='6' sm='6'>
           <StatsHorizontal
             color='danger'
-            statTitle='Top 5 Owners'
+            statTitle={t('Top 5 Employees')}
             icon={<UserPlus size={20} />}
             renderStats={<h3 className='fw-bolder mb-75'>4,567</h3>}
           />

@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-  const {t}= useTranslation()
+  const { t } = useTranslation()
   const [userData, setUserData] = useState([]);
   const [floorList, setFloorList] = useState([]);
   const [typeData, setTypeData] = useState([]);
@@ -26,35 +26,36 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   /**  Get the Data of the Current User  **/
 
   useEffect(() => {
-   
+
     getUser()
     getFloor()
     getUnits()
-  
+
   }, [])
-  const timeout=(ms)=>{
-    return new Promise((resolve) =>setTimeout(resolve(), ms))
+  const timeout = (ms) => {
+    return new Promise((resolve) => setTimeout(resolve(), ms))
   }
-  const  getUser=async()=>{
+  const getUser = async () => {
     await timeout(1000)
     if (isUserLoggedIn() !== null) {
       axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
         setUserData(response.data)
-      })}
+      })
     }
-const getFloor=()=>{
-  axios.get(`${API_ENDPOINT}/api/listFloor`).then(res => {
+  }
+  const getFloor = () => {
+    axios.get(`${API_ENDPOINT}/api/listFloor`).then(res => {
 
-    setFloorList(res.data);
-  });
-}
-const getUnits=()=>{
-  axios.get(`${API_ENDPOINT}/api/listUnitTypes`).then(resp => {
+      setFloorList(res.data);
+    });
+  }
+  const getUnits = () => {
+    axios.get(`${API_ENDPOINT}/api/listUnitTypes`).then(resp => {
 
-    setTypeData(resp.data);
-  });
+      setTypeData(resp.data);
+    });
 
-}
+  }
   /* *** Unit Fields Initial States *** */
   const [unit_name, setName] = useState("");
   const [building_id, setBuilding] = useState("");
@@ -64,6 +65,8 @@ const getUnits=()=>{
   const [unit_roomnumber, setUnitRoomNumber] = useState("");
   const [unit_added_date, setUnitAddedDate] = useState("");
   const [unit_pictures, setPictures] = useState([]);
+  const [unit_rent_per_month, setRent] = useState("")
+
 
   /*  const fileSelectedHandler = (e) => {
       setPictures(e.target.files)
@@ -136,16 +139,18 @@ const getUnits=()=>{
     formData.append('unit_status', unit_status);
     formData.append('unit_roomnumber', unit_roomnumber);
     formData.append('unit_added_date', unit_added_date);
+    formData.append('unit_rent_per_month', unit_rent_per_month);
+
     for (let i = 0; i < unit_pictures.length; i++) {
       console.log("unit_pictures[i]", unit_pictures[i])
       formData.append('unit_pictures[]', unit_pictures[i])
     }
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/addUnite`, formData).then(res => {
-      if(res.data.status==200){
-      console.log(res.data)
-      new Swal("Success", res.data.message, "success");
-      window.location.reload()
+      if (res.data.status == 200) {
+        console.log(res.data)
+        new Swal("Success", res.data.message, "success");
+        window.location.reload()
 
 
       }
@@ -171,7 +176,7 @@ const getUnits=()=>{
         <Row>
 
           <Label className='form-label' for='unit_name'>
-           {t('UNIT NAME')} <span className='text-danger'>*</span>
+            {t('UNIT NAME')} <span className='text-danger'>*</span>
           </Label>
           <input type='text' className="form-control"
 
@@ -208,17 +213,32 @@ const getUnits=()=>{
         <br />
         <Row>
 
-        <Label className='form-label' for='unit_added_date'>
-              {t('Unit Added Date')} <span className='text-danger'>*</span>
-            </Label>
-            <input type="date" className='form-control' id='unit_added_date'
+          <Label className='form-label' for='unit_added_date'>
+            {t('Unit Added Date')} <span className='text-danger'>*</span>
+          </Label>
+          <input type="date" className='form-control' id='unit_added_date'
 
-              onChange={(e) => setUnitAddedDate(e.target.value)}
+            onChange={(e) => setUnitAddedDate(e.target.value)}
 
-              dateFormat="yyyy-MM-dd"
+            dateFormat="yyyy-MM-dd"
 
 
-            />
+          />
+
+
+        </Row>
+        <Row>
+
+          <Label className='form-label' for='unit_rent_per_month'>
+            {t('Rent Per Month')} <span className='text-danger'>*</span>
+          </Label>
+          <input type="number" className='form-control' id='unit_rent_per_month'
+
+            onChange={(e) => setRent(e.target.value)}
+
+
+
+          />
 
 
         </Row>
@@ -266,9 +286,9 @@ const getUnits=()=>{
             <DownloadCloud size={64} />
             <h5> {t('Drop Pictures here or click to upload')}</h5>
             <p className='text-secondary'>
-             {t('Drop Pictures here or click')}{' '}
+              {t('Drop Pictures here or click')}{' '}
               <a href='/' onClick={e => e.preventDefault()}>
-               {t('browse')}
+                {t('browse')}
               </a>{' '}
               {t('thorough your machine')}
             </p>
@@ -289,7 +309,7 @@ const getUnits=()=>{
           {t('Add Unit')}
         </Button>
         <Button type='reset' color='secondary'>
-         {t('Cancel')}
+          {t('Cancel')}
         </Button>
       </Form>
     </Sidebar>

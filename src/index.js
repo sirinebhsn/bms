@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 // ** Redux Imports
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
-import 'react-phone-number-input/style.css'
+//import 'react-phone-number-input/style.css'
 
 // ** Intl, CASL & ThemeColors Context
 import ability from './configs/acl/ability'

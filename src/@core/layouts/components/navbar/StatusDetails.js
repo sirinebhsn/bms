@@ -9,7 +9,6 @@ const StatusDetails = ({ status_id,compl_id }) => {
   const [status, setStatus] = useState([])
   const [complain, setComplain] = useState([])
   function getComplain() {
-  foreach(status_id==compl_id)
   
       axios.get(`${API_ENDPOINT}/api/getComp/`+compl_id).then(response =>
         setComplain(response.data)

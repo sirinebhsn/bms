@@ -1,4 +1,5 @@
 // ** React Imports
+// ** React Imports
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
@@ -46,7 +47,6 @@ const VerticalLayout = props => {
     footer,
     menuData,
     children,
-    thirdChild,
     routerProps,
     setLastLayout,
     currentActiveItem
@@ -91,21 +91,14 @@ const VerticalLayout = props => {
   //** This function will detect the Route Change and will hide the menu on menu item click
   useEffect(() => {
     if (menuVisibility && windowWidth < 1200) {
-      return () => { 
-
       setMenuVisibility(false)
-      }
     }
   }, [location])
 
   //** Sets Window Size & Layout Props
   useEffect(() => {
-
     if (window !== undefined) {
-      return () => { 
-
       window.addEventListener('resize', handleWindowWidth)
-      }
     }
   }, [windowWidth])
 
@@ -201,8 +194,7 @@ const VerticalLayout = props => {
           )}
         </div>
       </Navbar>
-      {[children,
-      thirdChild]}
+      {children}
 
       {/* Vertical Nav Menu Overlay */}
       <div

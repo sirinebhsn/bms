@@ -9,7 +9,7 @@ import { Disc, X, Circle } from 'react-feather'
 import themeConfig from '@configs/themeConfig'
 import axios from 'axios'
 
-const VerticalMenuHeader = (props) => {
+const VerticalMenuHeader = (props,building_id ) => {
   // ** Props
   const { menuCollapsed, setMenuCollapsed, setMenuVisibility, setGroupOpen, menuHover } = props
   const [userData, setUserData] = useState(null)
@@ -23,8 +23,9 @@ const VerticalMenuHeader = (props) => {
     if (!menuHover && menuCollapsed) setGroupOpen([])
     axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
       setUserData(response.data)
-    })
+    },[])
   }, [menuHover, menuCollapsed],[])
+const data=localStorage.getItem("building_id", building_id)
  /* async function handleShow(building_id) {
     setSelectedBuilding(building_id)
     setShow(true)
@@ -62,7 +63,7 @@ const VerticalMenuHeader = (props) => {
     <div className='navbar-header'>
       <ul className='nav navbar-nav flex-row'>
         <li className='nav-item me-auto'>
-          {userData && userData.user_type == ('a' || 'o')
+          {userData && userData.user_type == ('a' || 'o' )
             &&
             <>
               <NavLink to='/' className='navbar-brand'>
@@ -73,7 +74,7 @@ const VerticalMenuHeader = (props) => {
                 <h2 className='brand-text mb-0'>{(userData && userData.buildings.building_name)}</h2>
               </NavLink>
             </>}
-          {userData && userData.user_type == 'S'
+           {userData && userData.user_type == 'S'
             &&
             <>
               <NavLink to='/' className='navbar-brand'>
@@ -84,11 +85,20 @@ const VerticalMenuHeader = (props) => {
                 <h2 className='brand-text mb-0'>BMS</h2>
 
               </NavLink>
-            </>}
+  </>}
+          {userData && userData.user_type == 'S' &&
+              <NavLink to='/' className='navbar-brand'>
+              <span className='brand-logo'>
+
+                <img src={(userData && userData.buildings.building_image)} width='40' height='50' />
+              </span>
+              <h2 className='brand-text mb-0'>{(userData && userData.buildings.building_name)}</h2>
+            </NavLink>            
+}      
         </li>
         <li className='nav-item nav-toggle'>
           <div className='nav-link modern-nav-toggle cursor-pointer'>
-            <Toggler />
+            <Toggler/>
             <X onClick={() => setMenuVisibility(false)} className='toggle-icon icon-x d-block d-xl-none' size={20} />
           </div>
         </li>

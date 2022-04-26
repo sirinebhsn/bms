@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { Button, Card, CardBody, Col, Form, Input, Label, Row } from "reactstrap";
 import Swal from "sweetalert2";
 
 const UpdateProfile = ({ user_id }) => {
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
-
+  const {t}= useTranslation()
   const [user, setUser] = useState([])
   const [imgData, setImgData] = useState('https://cdn.pixabay.com/photo/2018/08/28/12/41/avatar-3637425__340.png');
   const onChangePicture = e => {
@@ -102,7 +103,7 @@ const updateInfo= async()=>{
           <Row>
             <Col>
 
-              <Label for="user_name">User Name</Label>
+              <Label for="user_name">{t('User Name')}</Label>
               <input type="text" id="user_name" name="user_name" className="form-control"
                 defaultValue={user?.user_name} onChange={(e) => setName(e.target.value)} /><br />
 
@@ -110,7 +111,7 @@ const updateInfo= async()=>{
 
             <Col>
 
-              <Label for="user_currlang">User Current Language</Label>
+              <Label for="user_currlang">{t('Current Language')}</Label>
               <input type="text" name="user_currlang" id="user_currlang" className="form-control"
                 onChange={(e) => setCurrLang(e.target.value)} defaultValue={user.user_currlang} /><br />
 
@@ -120,13 +121,13 @@ const updateInfo= async()=>{
           <Row>
             <Col>
 
-              <Label for="user_tel">Phone Number</Label>
+              <Label for="user_tel">{t('Phone Number')}</Label>
               <input type="text" name="user_tel" className="form-control" id="user_tel" defaultValue={user.user_tel} onChange={(e) => setTelephone(e.target.value)} /><br />
 
             </Col>
             <Col>
 
-              <Label for="user_nid">User NID</Label>
+              <Label for="user_nid">{t('NID')}</Label>
               <input type="text" name="user_nid" className="form-control" id="user_nid" defaultValue={user.user_nid} onChange={(e) => setNid(e.target.value)} /><br />
 
             </Col>
@@ -135,13 +136,13 @@ const updateInfo= async()=>{
           <Row>
             <Col>
 
-              <Label for="user_pre_address"> Present Address</Label>
+              <Label for="user_pre_address"> {t('Present Address')}</Label>
               <input type="text" name="user_pre_address" className="form-control" id="user_pre_address" defaultValue={user.user_pre_address} onChange={(e) => setPresentAdress(e.target.value)} /><br />
 
             </Col>
             <Col>
 
-              <Label for="user_per_address">User Permenant Address</Label>
+              <Label for="user_per_address">{t('User Permenant Address')}</Label>
               <input type="text" name="user_per_address" className="form-control" id="user_per_address" defaultValue={user.user_per_address} onChange={(e) => setPermenantAdress(e.target.value)} /><br />
 
             </Col>
@@ -157,7 +158,7 @@ const updateInfo= async()=>{
                 <br />
                 <input id="user_image" type="file" onChange={onChangePicture} />
 
-                <p className='mb-0'>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+                <p className='mb-0'>{t('Allowed JPG, GIF or PNG. Max size of 800kB')}</p>
               </div>
             </div>
           </div>
@@ -165,7 +166,7 @@ const updateInfo= async()=>{
 
 
           <Button color='primary' onClick={handleUpdate} className='me-1'>
-            Edit
+            {t('Edit')}
           </Button>
 
         </Form>

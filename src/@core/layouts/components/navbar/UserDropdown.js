@@ -31,6 +31,9 @@ const UserDropdown = () => {
   const [userData, setUserData] = useState(null)
   const [buildingList, setBuildingList] = useState([]);
   const [show, setShow] = useState(false);
+  useEffect(() => {
+    getUser()
+  },[])
   const { t } = useTranslation()
   const handleClose = () => setShow(false);
   const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
@@ -44,10 +47,7 @@ const UserDropdown = () => {
   const timeout=(ms)=>{
     return new Promise((resolve) =>setTimeout(resolve(), ms))
   }
-  //** Get User Details from His accessToken
-  useEffect(() => {
-    getUser()
-  },[])
+
   const getUser=async()=>{
     await timeout(1000)
     if (isUserLoggedIn() !== null) {
@@ -138,7 +138,7 @@ const UserDropdown = () => {
           <h1>Buildings</h1>
         </ModalHeader>
         <ModalBody>
-          <Building />
+          <Building/>
         </ModalBody>
         <ModalFooter>
           <Button variant="danger" onClick={handleClose}>

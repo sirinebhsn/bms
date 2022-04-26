@@ -106,3 +106,7 @@
 .lang-menu:hover ul {
     display: block;
 }
+.phone{
+  border: none;
+  outline: none;
+}

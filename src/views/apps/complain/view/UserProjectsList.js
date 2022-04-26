@@ -10,7 +10,7 @@ import { Row, Col, Form, Card, Input, Label, Button, CardBody, CardTitle, CardHe
 import PhoneInput from 'react-phone-number-input'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import "../list/style.css"
+import "../list/style.scss"
 import { useHistory } from 'react-router-dom'
 import WarningToast from '../toasts/WarningToast'
 import ErrorToast from '../toasts/ErrorToast'

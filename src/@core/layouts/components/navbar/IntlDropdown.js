@@ -49,11 +49,11 @@ const IntlDropdown = () => {
         </DropdownItem>
         <DropdownItem href='/' tag='a' onClick={e => handleLangUpdate(e, 'pt')}>
           <ReactCountryFlag className='country-flag' countryCode='pt' svg />
-          <span className='ms-1'>{t('Portuguese')}</span>
+          <span className='ms-1'>Portuguese</span>
         </DropdownItem>
         <DropdownItem  id='countryCode' href='/' tag='a' onClick={e => handleLangUpdate(e, 'ly')} >
           <ReactCountryFlag className='country-flag' countryCode='ly' svg />
-          <span className='ms-1'>{t('Arabic')}</span>
+          <span className='ms-1'>Arabic</span>
 
         </DropdownItem>
       </DropdownMenu>

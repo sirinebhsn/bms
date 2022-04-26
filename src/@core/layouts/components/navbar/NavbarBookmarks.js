@@ -23,11 +23,12 @@ import {
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
 import { getBookmarks, updateBookmarked, handleSearchQuery } from '@store/navbar'
+import { useTranslation } from 'react-i18next'
 
 const NavbarBookmarks = props => {
   // ** Props
   const { setMenuVisibility } = props
-
+ const {t}= useTranslation()
   // ** State
   const [value, setValue] = useState('')
   const [openSearch, setOpenSearch] = useState(false)
@@ -38,10 +39,7 @@ const NavbarBookmarks = props => {
 
   // ** ComponentDidMount
   useEffect(() => {
-    return () => { 
-
     dispatch(getBookmarks())
-    }
   }, [])
 
   // ** Loops through Bookmarks Array to return Bookmarks
@@ -54,7 +52,7 @@ const NavbarBookmarks = props => {
             <NavItem key={item.target} className='d-none d-lg-block'>
               <NavLink tag={Link} to={item.link} id={item.target}>
                 <IconTag className='ficon' />
-                <UncontrolledTooltip target={item.target}>{item.title}</UncontrolledTooltip>
+                <UncontrolledTooltip target={item.target}>{t(item.title)}</UncontrolledTooltip>
               </NavLink>
             </NavItem>
           )
@@ -82,7 +80,7 @@ const NavbarBookmarks = props => {
                     return (
                       <DropdownItem tag={Link} to={item.link} key={item.id}>
                         <IconTag className='me-50' size={14} />
-                        <span className='align-middle'>{item.title}</span>
+                        <span className='align-middle'>{t(item.title)}</span>
                       </DropdownItem>
                     )
                   })
@@ -160,7 +158,7 @@ const NavbarBookmarks = props => {
           </NavLink>
           <div className={classnames('bookmark-input search-input', { show: openSearch })}>
             <div className='bookmark-input-icon'>
-              <Icon.Search size={14} />
+              <Icon.Star size={14} />
             </div>
             {openSearch && store.suggestions.length ? (
               <Autocomplete
@@ -209,7 +207,7 @@ const NavbarBookmarks = props => {
                       >
                         <div className='d-flex justify-content-start align-items-center overflow-hidden'>
                           <IconTag size={17.5} className='me-75' />
-                          <span className='text-truncate'>{item.title}</span>
+                          <span className='text-truncate'>{t(item.title)}</span>
                         </div>
                       </Link>
                       <Icon.Star

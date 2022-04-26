@@ -96,6 +96,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     formData.append('user_ending_date', user_ending_date);
     formData.append('user_date_creation', user_date_creation);
 
+
     console.log(formData)
     axios.post(`${API_ENDPOINT}/api/auth/addUser`, formData).then(res => {
  
@@ -250,7 +251,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
 
               onChange={(e) => setCreationDate(e.target.value)}
 
-              dateFormat="yyyy-MM-dd"
+              dateformat="yyyy-MM-dd"
 
 
             />
@@ -266,7 +267,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
             <input type='date' className='form-control'
               id='user_ending_date'
               onChange={(e) => setEndingDate(e.target.value)}
-              dateFormat="yyyy-MM-dd"
+              dateformat="yyyy-MM-dd"
 
 
             />
@@ -277,10 +278,13 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
           <Label className='form-label' for='user_tel'>
             {t('Phone Number')} <span className='text-danger'>*</span>
           </Label>
+          <div  className='phone'>
           <PhoneInput
             id='user_tel'
             onKeyDown={handleEnter} placeholder={t("enter phone number")}
-            value={user_tel} onChange={setTelephone} />
+            value={user_tel} onChange={setTelephone}
+          />
+          </div>
         </Row> <br />
         <Row>
           <Col sm='6' className='mb-1'>

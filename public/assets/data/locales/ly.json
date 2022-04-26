@@ -252,6 +252,11 @@
 "Building Creation Year": "سنة إنشاء المبنى",
 "Building Status": "حالة المبنى",
 "Building Company Name": "اسم شركة البناء",
-"Building Rule": "قواعد المبنى"
+"Building Rule": "قواعد المبنى",
+"Welcome Super Admin": "مرحبًا بالمسؤول المتميز",
+"Edit": "تعديل",
+"Add New Employee": "اضافة موظف جديد",
+"Tenants List": "قائمة المستأجرين",
+"Add New Tenant": "إضافة مستأجر جديد"
 
 }

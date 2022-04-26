@@ -2,13 +2,14 @@
 
 //Template config options
 const themeConfig = {
+
   app: {
     appName: 'START NOW',
     appLogoImage: require('@src/assets/images/logo/logo-startnow.png').default
   },
   layout: {
     isRTL: false,
-    skin: 'light', // light, dark, bordered, semi-dark
+    skin: 'bordered', // light, dark, bordered, semi-dark
     routerTransition: 'fadeIn', // fadeIn, fadeInLeft, zoomIn, none or check this for more transition https://animate.style/
     type: 'vertical', // vertical, horizontal
     contentWidth: 'boxed', // full, boxed

@@ -33,6 +33,11 @@ const EcommerceDashboard = () => {
   const trackBgColor = '#e9ecef'
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
   const { t } = useTranslation()
+  const [users, setUsers] = useState([]);
+  const [admins, setAdmin] = useState([]);
+  const [employees, setEmp] = useState([]);
+  const [tenants, setTenant] = useState([]);
+  const [floors, setFloor] = useState([]);
   useEffect(() => {
     getUsers();
     getAdmins();
@@ -41,11 +46,7 @@ const EcommerceDashboard = () => {
     getFloors();
 
   }, [])
-  const [users, setUsers] = useState([]);
-  const [admins, setAdmin] = useState([]);
-  const [employees, setEmp] = useState([]);
-  const [tenants, setTenant] = useState([]);
-  const [floors, setFloor] = useState([]);
+
 
 
   async function getUsers() {

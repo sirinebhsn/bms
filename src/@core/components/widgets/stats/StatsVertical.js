@@ -9,7 +9,7 @@ import { Card, CardBody } from 'reactstrap'
 const StatsVertical = ({ icon, color, stats, statTitle, className, link }) => {
   const {t}= useTranslation()
   return (
-    <Card className='text-center' >
+    <Card className='text-center'>
       <CardBody className={className}>
         <div className={`avatar p-50 m-0 mb-1 ${color ? `bg-light-${color}` : 'bg-light-primary'}`}>
           <div className='avatar-content'>{icon}</div>

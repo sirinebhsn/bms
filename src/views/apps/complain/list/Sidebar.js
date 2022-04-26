@@ -21,6 +21,7 @@ import { Fragment } from 'react'
 import { isUserLoggedIn } from '@utils'
 import { DownloadCloud, FileText, X } from 'react-feather'
 
+import moment from "moment";
 
 
 const SidebarNewUsers = ({ open, toggleSidebar }) => {
@@ -37,15 +38,20 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
   const [compl_description, setComplDescription] = useState("");
   const [building_id, setBuidingId] = useState("");
   const [compl_title, setComplTitle] = useState("");
-  const [compl_date, setComplDate] = useState(""); 
+  const [compl_date, setComplDate] = useState(moment().format("DD-MM-YYYY")); 
   const [compl_phone, setComplPhone] = useState("");
   const [compl_solution, setSolution] = useState("");
   const [compl_job_status, setJobStatus] = useState("");
   const [compl_assigned_to, setAssigned] = useState("");
   const [compl_complainBy, setComplainBy] = useState("");
   const [compl_pictures, setPictures] = useState([]);
-
   const [userData, setUserData] = useState(null)
+  useEffect(() => {
+    getUser();
+    getData()
+    getEmployees()
+
+  }, [])
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: acceptedFiles => {
       setPictures([...compl_pictures, ...acceptedFiles.map(file => Object.assign(file))])
@@ -95,12 +101,7 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
     return new Promise((resolve) =>setTimeout(resolve(), ms))
   }
 
-  useEffect(() => {
-    getUser();
-    getData()
-    getEmployees()
 
-  }, [])
   const getUser = async()=>{
     await timeout(1000)
     if (isUserLoggedIn() !== null) {
@@ -290,11 +291,6 @@ const SidebarNewUsers = ({ open, toggleSidebar }) => {
                 className='form-control'
                 value={compl_date}
                 id='compl_date'
-                options={{
-                  format: "Y-m-d",
-                  altFormat: "Y-m-d",
-                  altInput: true
-                }}
                 onChange={(date) => {
                   setComplDate(date)
                 }

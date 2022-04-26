@@ -73,6 +73,7 @@ export const layoutSlice = createSlice({
     },
     handleRouterTransition: (state, action) => {
       state.routerTransition = action.payload
+
     }
   }
 })

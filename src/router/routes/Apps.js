@@ -160,6 +160,10 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/employee/list'))
   },
   {
+    path: '/tenant/list',
+    component: lazy(() => import('../../views/apps/tenant/list'))
+  },
+  {
     path: '/floor/listFloors',
     component: lazy(() => import('../../views/apps/floor/listFloors'))
   },
@@ -212,6 +216,9 @@ const AppRoutes = [
     }
   },
   
+
+
+  
   
 
   {
@@ -226,6 +233,25 @@ const AppRoutes = [
     component: lazy(() => import('../../views/apps/buildings/view')),
     meta: {
       navLink: '/buildings/view'
+    }
+  },
+  {
+    path: '/apps/contract/view',
+    exact: true,
+    component: () => <Redirect to='/apps/contract/view/1' />
+  },
+  {
+    path: '/apps/contract/view/:id',
+    component: lazy(() => import('../../views/apps/contract/view')),
+    meta: {
+      navLink: '/apps/contract/view'
+    }
+  },
+  {
+    path: '/apps/contract/view',
+    component: lazy(() => import('../../views/apps/contract/view')),
+    meta: {
+      navLink: '/contract/view'
     }
   },
   {

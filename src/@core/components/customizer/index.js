@@ -58,6 +58,11 @@ const Customizer = props => {
         checked: skin === 'light'
       },
       {
+        name: 'success',
+        label: 'Success',
+        checked: skin === 'success'
+      },
+      {
         name: 'bordered',
         label: 'Bordered',
         checked: skin === 'bordered'
@@ -258,7 +263,7 @@ const Customizer = props => {
           <div className='form-switch mb-2 ps-0'>
             <div className='d-flex'>
               <p className='fw-bold me-auto mb-0'>RTL</p>
-              <Input type='switch' id='rtl' name='RTL' checked={isRtl} onChange={() => setIsRtl(!isRtl)} />
+              <Input type='switch' id='rtl' name='RTL' checked={isRtl} onChange={() => setIsRtl(isRtl)} />
             </div>
           </div>
 

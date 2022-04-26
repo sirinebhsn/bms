@@ -1,4 +1,4 @@
-// ** I18n Imports
+/// ** I18n Imports
 import i18n from 'i18next'
 import Backend from 'i18next-xhr-backend'
 import { initReactI18next } from 'react-i18next'
@@ -15,7 +15,6 @@ i18n
   // Enables the hook initialization module
   .use(initReactI18next)
   .init({
-    
     lng: 'en',
     backend: {
       /* translation file path */

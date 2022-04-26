@@ -38,7 +38,7 @@ import { useTranslation } from 'react-i18next'
 
 // ** Table Header
 const UnitList = () => {
-  const {t}= useTranslation()
+  const { t } = useTranslation()
   const [selectedUnit, setSelectedUnit] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -86,12 +86,12 @@ const UnitList = () => {
   }
   const ModalConfig = [
 
-  {
-    id: 1,
-    title: 'Dark',
-    modalColor: 'modal-dark',
-    btnColor: 'dark'
-  }
+    {
+      id: 1,
+      title: 'Dark',
+      modalColor: 'modal-dark',
+      btnColor: 'dark'
+    }
   ]
   return (
     <Fragment>
@@ -141,7 +141,7 @@ const UnitList = () => {
                 <td> {item.unit_status}</td>
                 <td> {item.unit_roomnumber}</td>
                 <td> {item?.types?.unit_type}</td>
-                <td><span onClick={() => handleShow(item.unit_id)} ><Image size={20} color="#F08080"/> </span></td>
+                <td><span onClick={() => handleShow(item.unit_id)} ><Image size={20} color="#F08080" /> </span></td>
 
 
 
@@ -162,18 +162,18 @@ const UnitList = () => {
 
 
         </Table>
-      
-        <Modal isOpen={show}
-                  >
-     
+
+        <Modal isOpen={show}>
+          <ModalHeader style={{ width: '800px', height: '0px' }} toggle={() => setShow(false)} />
+
           <Slider unit_id={selectedUnit} >
-          <span onClick={handleClose}> <X/></span>
+            <span onClick={handleClose}> <X /></span>
           </Slider>
-      </Modal>
+        </Modal>
 
       </Card>
 
-  
+
       <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
 
     </Fragment>

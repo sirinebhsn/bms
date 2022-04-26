@@ -34,9 +34,7 @@ import '@styles/react/libs/tables/react-dataTable-component.scss'
 import { Edit, Eye, Lock, Mail, Phone, Search, Trash, User } from 'react-feather'
 import Swal from 'sweetalert2'
 import LoginForm from './DetailsModal'
-import UserInfoEdit from './UserInfoEdit'
 import EditModal from './EditModal'
-import ReactPaginate from 'react-paginate';
 import { useTranslation } from 'react-i18next';
 
 
