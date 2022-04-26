@@ -9,6 +9,7 @@ import { useSkin } from '@hooks/useSkin'
 // ** Third Party Components
 import { toast, Slide } from 'react-toastify'
 import { Coffee } from 'react-feather'
+import Avatar from '@components/avatar'
 
 
 // ** Reactstrap Imports
