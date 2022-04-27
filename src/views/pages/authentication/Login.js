@@ -61,12 +61,16 @@ const Login = () => {
 
   const state = {
 
-    tableValues:
+    tableValues:[
+    {
+      email: 'start-now@start-now.tn',
+      password: 'Syrine004#*'
+    },
     {
       email: 'start-now@start-now.tn',
       password: 'Syrine004#*'
     }
-
+  ]
   }
 
 
@@ -93,6 +97,8 @@ const Login = () => {
           localStorage.setItem("user_name", response.data.user_name)
           localStorage.setItem("user_id", response.data.user_id)
           localStorage.setItem("user_type", response.data.user_type)
+          localStorage.setItem("building_id", response.data.building_id)
+
           navigate.push('/dashboard');
           toast.success(
             <ToastContent user_name=
@@ -203,11 +209,13 @@ const Login = () => {
 
                   </tr>
                 </thead>
+                {(state.tableValues).map((el)=>
+
                 <tbody>
                   <tr>
 
-                    <td >{`${state.tableValues.email.substring(0, MAX_LENGTH)}...`}</td>
-                    <td >{`${state.tableValues.password.substring(0, MAX_LENGTH)}...`}</td>
+                    <td >{el.email}</td>
+                    <td >{`${el.password.substring(0, MAX_LENGTH)}...`}</td>
                     <td> S.Admin</td>
                     <td>  <Button onClick={updateFormFromTable} tag={Label} className='mb-75 me-75' size='sm' color='primary'>
                       Click here
@@ -217,6 +225,7 @@ const Login = () => {
 
 
                 </tbody>
+                )}
               </Table>
             </Container>
             </Col>

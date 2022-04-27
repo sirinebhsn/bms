@@ -22,16 +22,14 @@ const NotificationDropdown = () => {
   const [count, setCount] = useState("");
   const [countStatus, setCountStatus] = useState("");
   const [selectedComplain, setSelectedComplain] = useState([]);
-  const [userData, setUserData] = useState([]);
   const [status, setStatus] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState([]);
   const [show, setShow] = useState(false);
   const {t}= useTranslation()
-
+  const user_type=window.localStorage.getItem('user_type')
   useEffect(() => {
     getData();
     getCount();
-    getUser();
     getStatus();
     getCountStatus();
   }, [])
@@ -72,13 +70,7 @@ const NotificationDropdown = () => {
     result = await result.json();
     setCountStatus(result)
   }
-  function getUser() {
-    if (isUserLoggedIn() !== null) {
-      axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
-        setUserData(response.data)
-      })
-    }
-  }
+ 
 
   // ** Notification Array
   const notificationsArray = [
@@ -242,7 +234,7 @@ const NotificationDropdown = () => {
   /*eslint-enable */
   return (
     <UncontrolledDropdown tag='li' className='dropdown-notification nav-item me-25'>
-      {userData.user_type == 'e' &&
+      {user_type == 'e' &&
         <>
           <DropdownToggle tag='a' className='nav-link' href='/' onClick={e => e.preventDefault()}>
 
@@ -274,7 +266,7 @@ const NotificationDropdown = () => {
 
           </DropdownMenu>
         </>}
-      {userData.user_type == 'a' &&
+      {user_type == 'a' &&
         <>
           <DropdownToggle tag='a' className='nav-link' href='/' onClick={e => e.preventDefault()}>
 

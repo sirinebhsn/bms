@@ -133,7 +133,7 @@ const UserDropdown = () => {
           <span className='align-middle'>{('Logout')}</span>
         </DropdownItem>
       </DropdownMenu>
-      <Modal isOpen={show}>
+      <Modal size='lg' isOpen={show}>
         <ModalHeader>
           <h1>Buildings</h1>
         </ModalHeader>

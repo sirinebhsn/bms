@@ -23,7 +23,7 @@ const assignObjectPaths = (obj, stack) => {
 };
 let listUnitsData = []
 
-const UserProjectsList = () => {
+const UserProjectsList = (unit_id) => {
 
 
   const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
@@ -42,13 +42,14 @@ const UserProjectsList = () => {
     getTenant()
     getUnit()
     getPeriods()
+
   }, [])
   useEffect(() => {
     if (objectPathsAssigned) {
       setUnitList(listUnitsData)
     }
   }, [objectPathsAssigned])
-  async function handleShow(unit_id) {
+  async function handleShow() {
     setSelectedUnit(unit_id)
     console.warn(unit_id)
     let result = await fetch(`${API_ENDPOINT}/api/getUnit/` + unit_id);
@@ -110,16 +111,17 @@ const UserProjectsList = () => {
         <CardBody className='py-2 my-25'>
           <Form className='mt-2 pt-50'>
             <Row>
-       
+
               <Col sm='6' className='mb-1'>
                 <DropdownTreeSelect data={unitList}
-                onChange={onChange}      
-              mode='radioSelect' 
-                 />
-                 </Col>
+                  onChange={onChange}
+                  mode='radioSelect'
+                 onClick={()=>handleShow(unit_id)}
+                />
+              </Col>
 
-                 
-          </Row>
+
+            </Row>
             <Row>
               <Col sm='6' className='mb-1'>
                 <Label className='form-label' >Select Owner</Label>
@@ -191,7 +193,7 @@ const UserProjectsList = () => {
                 <Label className='form-label'>
                   Contract Rent Per Period
                 </Label>
-                <Input placeholder='Contract Rent Per Period' />
+                <Input placeholder='Contract Rent Per Period' unit_id={selectedUnit} value={unit_id} />
 
               </Col>
             </Row>

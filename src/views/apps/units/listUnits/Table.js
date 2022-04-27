@@ -41,6 +41,9 @@ const UnitList = () => {
   const { t } = useTranslation()
   const [selectedUnit, setSelectedUnit] = useState([]);
   const [show, setShow] = useState(false);
+  const [data, setData] = useState([]);
+  const [all, setAll] = useState([]);
+  const user_type= window.localStorage.getItem('user_type')
   const handleClose = () => setShow(false);
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
@@ -54,16 +57,21 @@ const UnitList = () => {
     console.warn(result)
 
   }
-  const [data, setData] = useState([]);
   useEffect(() => {
     getData();
+    getAll();
   }, [])
   async function getData() {
-    let result = await fetch(`${API_ENDPOINT}/api/listUnite`);
+    const building_id=window.localStorage.getItem('building_id')
+    let result = await fetch(`${API_ENDPOINT}/api/list/` +building_id);
     result = await result.json();
     setData(result)
   }
-
+  async function getAll() {
+    let result = await fetch(`${API_ENDPOINT}/api/listAll`);
+    result = await result.json();
+    setAll(result)
+  }
   async function deleteOperation(id) {
     let result = await fetch(`${API_ENDPOINT}/api/deleteUnit/` + id, {
       method: "DELETE"
@@ -130,7 +138,8 @@ const UnitList = () => {
 
             </tr>
           </thead>
-
+{user_type=="a" &&
+<>
           {data.map((item) =>
 
             <tbody>
@@ -159,8 +168,38 @@ const UnitList = () => {
             </tbody>
           )
           }
+</>}
+{user_type=="S" &&
+<>
+          {all.map((item) =>
+
+            <tbody>
+              <tr>
+                <td> {item.unit_name} </td>
+                <td> {item?.buildings?.building_name}</td>
+                <td> {item.floor_id}</td>
+                <td> {item.unit_status}</td>
+                <td> {item.unit_roomnumber}</td>
+                <td> {item?.types?.unit_type}</td>
+                <td><span onClick={() => handleShow(item.unit_id)} ><Image size={20} color="#F08080" /> </span></td>
 
 
+
+
+                <td>
+                  <span onClick={() => deleteOperation(item.id)}>
+                    <Trash size={20} color="red" />
+                  </span>
+                  &nbsp;&nbsp;
+                  <Edit size={20} color="#F5CBA7" />
+                  &nbsp;&nbsp;
+
+                </td>
+              </tr>
+            </tbody>
+          )
+          }
+</>}
         </Table>
 
         <Modal isOpen={show}>

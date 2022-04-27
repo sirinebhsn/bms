@@ -9,27 +9,12 @@ import {
   canViewMenuGroup,
   resolveVerticalNavMenuItemComponent as resolveNavItemComponent
 } from '@layouts/utils'
-import { useEffect, useState } from 'react'
-import { isUserLoggedIn } from '@utils'
 
-import axios from 'axios'
 
 const VerticalMenuNavItems = props => {
-  const API_ENDPOINT =process.env.REACT_APP_API_ENDPOINT
-  const [userData, setUserData] = useState(null)
-  useEffect(() => {
-    getUser(); 
-  },[])
- const timeout=(ms)=>{
-    return new Promise((resolve) =>setTimeout(resolve(), ms))
-  }
-  const getUser = async()=>{
-    await timeout(1000)
-    if (isUserLoggedIn() !== null) {
-    axios.get(`${API_ENDPOINT}/api/auth/user`).then(response => {
-      setUserData(response.data)
-  } )}}
-
+  
+  const it=window.localStorage.getItem('user_type')
+ 
   // ** Components Object
   const Components = {
     VerticalNavMenuLink,
@@ -40,8 +25,9 @@ const VerticalMenuNavItems = props => {
 
   // ** Render Nav Menu Items
   const RenderNavItems = props.items.map((item, index) => {
-    if(userData && userData.user_type == 'a' &&  item.menu_admin=='1'  ||userData && userData.user_type == 'S' &&  item.menu_superuser=='1' 
-    || userData && userData.user_type == 'o' && item.menu_owner == '1')
+
+    if(it == 'a' &&  item.menu_admin=='1'  ||it == 'S' &&  item.menu_superuser=='1' 
+    || it == 'o' && item.menu_owner == '1')
    
   {  const TagName = Components[resolveNavItemComponent(item)]
     if (item.children )  {

@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 // ** Store & Actions
 import { handleRTL } from '@store/layout'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export const useRTL = () => {
 
@@ -27,9 +28,8 @@ export const useRTL = () => {
     const element = document.getElementsByTagName('html')[0]
     // ** If isRTL then add attr dir='rtl' with HTML else attr dir='ltr'
     if (isRtl && item=='ly') {
-        //window.location.reload()
+      <Link to='/dashboard'/>
       element.setAttribute('dir', 'rtl')
- 
 
     } else if(item !='ly') {
       element.setAttribute('dir', 'ltr')
